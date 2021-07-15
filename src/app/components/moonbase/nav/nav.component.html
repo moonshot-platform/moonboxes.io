@@ -39,15 +39,7 @@
             <!-- <a [routerLink]="['']">Jim</a> -->
         </ul>
         <div class="block flex-center">
-            <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-               <title>Combined Shape</title>
-               <desc>Created with Sketch.</desc>
-               <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                   <path
-                       d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                       id="Combined-Shape" fill="#000000"></path>
-               </g>
-           </svg>
+
         </div>
     </nav>
     <div class="inner flex-space-between align-start mt20" style="margin-top: 0px;position: absolute;bottom: -60px;width: 100%;">
@@ -57,7 +49,16 @@
                 <div class="flex1 no-padding" style="border-bottom: 61px solid #d5a642; border-left: 60px solid transparent; border-right: 60px solid transparent; height: 0; color: black;">
                     <ul class="justify-around">
                         <li *ngFor="let item of navSubItems">
-                            <img class="nav-bar-sub-item" src="{{item.icon}}">
+                            <div class="tooltip">
+                                <img class="nav-bar-sub-item" src="{{item.icon}}">
+                                <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}" (mouseleave)="this.isTooltipActive = true">
+                                    <div class="row">
+                                        <img class="close-button" (click)="closeTooltip()" src="assets/media/icons/moonbase/nav/close.svg">
+                                        <p>{{item.tooltip}}</p>
+                                    </div>
+                                    <i></i>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
