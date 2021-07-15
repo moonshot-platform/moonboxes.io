@@ -181,6 +181,110 @@ nav {
     transform: scaleY(-1);
 }
 
+.tooltip {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+}
+
+.tooltip .bottom {
+    min-width: 270px;
+    top: -20px;
+    left: 50%;
+    transform: translate(-65%, -100%) scaleY(-1) scaleX(-1);
+    padding: 20px 20px;
+    color: white;
+    background-color: black;
+    font-weight: normal;
+    font-size: 13px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 99999999;
+    box-sizing: border-box;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.8s;
+    font-family: $primary-font;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.69;
+    letter-spacing: normal;
+    text-align: left;
+    -webkit-transition: .5s all;
+    -webkit-transition-delay: .3s;
+    -moz-transition: .5s all;
+    -moz-transition-delay: .3s;
+    -ms-transition: .5s all;
+    -ms-transition-delay: .3s;
+    -o-transition: .5s all;
+    -o-transition-delay: .3s;
+    transition: .5s all;
+    transition-delay: .3s;
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        /* align children centered vertically */
+        align-items: flex-start;
+        /* align children centered horizontally */
+        .close-button {
+            position: relative;
+            top: -20px;
+            cursor: pointer;
+            display: flex;
+            height: 24px;
+            width: 24px;
+            filter: brightness(0) invert(1);
+            margin-right: 20px;
+        }
+    }
+}
+
+.close-tooltip {
+    visibility: hidden !important;
+    //opacity: 0 !important;
+    -webkit-transition-delay: -1s !important;
+    -moz-transition-delay: -1s !important;
+    -ms-transition-delay: -1s !important;
+    -o-transition-delay: -1s !important;
+    transition-delay: -1s !important;
+}
+
+.tooltip:hover .bottom {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.tooltip .bottom i {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -52px;
+    width: 24px;
+    height: 12px;
+    overflow: hidden;
+    transform: scaleY(-1);
+}
+
+.tooltip .bottom i::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(-1);
+    background-color: black;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+}
+
 .flex-space-between {
     max-width: 100%;
 }
