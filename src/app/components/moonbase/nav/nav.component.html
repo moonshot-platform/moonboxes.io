@@ -32,7 +32,7 @@
             <span></span>
         </div>
         <ul class="menubar flex">
-            <li *ngFor="let item of navItems" [ngClass]="{'nav-item': this.router.url == item.path}">
+            <li *ngFor="let item of navItems" [ngClass]="{'nav-item': item.allPaths.includes(this.router.url)}">
                 <a [routerLink]="[item.path]" routerLinkActive="router-link-active">{{item.name}}
           </a>
             </li>

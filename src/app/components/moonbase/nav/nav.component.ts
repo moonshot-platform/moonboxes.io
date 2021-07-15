@@ -13,15 +13,26 @@ export class NavComponent implements OnInit {
   public navItems: any[] = [
     {
       'name': 'MoonBoxes',
-      'path': '/moonbase'
+      'path': '/moonbase',
+      'allPaths': [
+        '/moonbase',
+        '/buy_moonbase',
+        '/prize_pool'
+      ]
     },
     {
       'name': 'MoonLottery',
-      'path': '/history'
+      'path': '/history',
+      'allPaths': [
+        '/history'
+      ]
     },
     {
       'name': 'MoonArcade',
-      'path': '/community'
+      'path': '/community',
+      'allPaths': [
+        '/community'
+      ]
     }
   ];
 
