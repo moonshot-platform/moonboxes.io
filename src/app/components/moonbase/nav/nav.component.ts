@@ -36,6 +36,34 @@ export class NavComponent implements OnInit {
     }
   ];
 
+  public navSubItems: any[] = [
+    {
+      'icon' : 'assets/media/icons/moonbase/nav/moon.svg',
+      'alt' : 'moon',
+      'tooltip-text' : 'This is your inventory, an overview of rare NFTs you’ve won.'
+    },
+    {
+      'icon' : 'assets/media/icons/moonbase/nav/diamond.svg',
+      'alt' : 'diamond',
+      'tooltip-text' : 'This is your inventory, an overview of rare NFTs you’ve won.'
+    },
+    {
+      'icon' : 'assets/media/icons/moonbase/nav/folder.svg',
+      'alt' : 'folder',
+      'tooltip-text' : 'This is your inventory, an overview of rare NFTs you’ve won.'
+    },
+    {
+      'icon' : 'assets/media/icons/moonbase/nav/lock.svg',
+      'alt' : 'lock',
+      'tooltip-text' : 'This is your inventory, an overview of rare NFTs you’ve won.'
+    },
+    {
+      'icon' : 'assets/media/icons/moonbase/nav/info.svg',
+      'alt' : 'info',
+      'tooltip-text' : 'This is your inventory, an overview of rare NFTs you’ve won.'
+    }
+  ];
+
   constructor(public router:Router) { }
 
   ngOnInit(): void {
