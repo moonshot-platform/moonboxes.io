@@ -4,9 +4,8 @@
             <a class="flex-center" [routerLink]="['']">
                 <!-- <img class="logo" src="assets/media/images/logo.png" alt="moonshot logo"> -->
 
-                
-<svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;width: 25px;" xml:space="preserve">
+
+                <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;width: 25px;" xml:space="preserve">
 <g>
 	<path d="M2,37c0,0,4.2-0.4,6.1-2.4c1.9-2,1.9-3.7,0.9-4.7c-0.4-0.4-1-0.7-1.6-0.7c-0.9,0-2,0.5-3.1,1.7C2.3,32.9,2,37,2,37"/>
 	<path d="M35.8,1.4c0-0.2-0.1-0.3-0.4-0.3c-0.6-0.1-2.6-0.2-4.8,0.1c-2.2,0.3-2.2,0.4-3.3,0.8c-1.2,0.4-2.4,0.9-3.5,1.5
@@ -39,14 +38,15 @@
         </div>
 
         <ul class="menubar flex">
-            <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'"
-                    [routerLink]="[item.path]">{{item.name}}</a></li>
+            <li *ngFor="let item of navItems" [ngClass]="{'nav-item': this.router.url == item.path}">
+                <a [routerLink]="[item.path]" routerLinkActive="router-link-active">{{item.name}}
+                </a>
+            </li>
             <!-- <a [routerLink]="['']">Jim</a> -->
         </ul>
         <div class="block flex-center">
 
-            <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink">
+            <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>Combined Shape</title>
                 <desc>Created with Sketch.</desc>
                 <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -57,19 +57,15 @@
             </svg>
         </div>
     </nav>
-    <div class="inner flex-space-between align-start mt20"
-        style="margin-top: 0px;position: absolute;bottom: -60px;width: 100%;">
+    <div class="inner flex-space-between align-start mt20" style="margin-top: 0px;position: absolute;bottom: -60px;width: 100%;">
         <div class="info flex3">
             <div class="shape text-center bottom flex ph50" style="transform: rotate(180deg);">
                 <div class="flex1 no-padding"></div>
-                <div class="flex1 no-padding"
-                    style="border-bottom: 61px solid #d5a642; border-left: 60px solid transparent; border-right: 60px solid transparent; height: 0; color: black;">
+                <div class="flex1 no-padding" style="border-bottom: 61px solid #d5a642; border-left: 60px solid transparent; border-right: 60px solid transparent; height: 0; color: black;">
                     <ul class="justify-around">
                         <li>
 
-                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38"
-                                style="enable-background:new 0 0 38 38;" xml:space="preserve">
+                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;" xml:space="preserve">
                                 <g>
                                     <g>
                                         <g>
@@ -97,9 +93,7 @@
                         </li>
                         <li>
 
-                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38"
-                                style="enable-background:new 0 0 38 38;" xml:space="preserve">
+                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;" xml:space="preserve">
                                 <g>
                                     <g>
                                         <path d="M30.6,16H28v-5.5c0-5-4-9-9-9s-9,4-9,9V16H7.4c-1.4,0-2.5,1.1-2.5,2.5v15.6c0,1.4,1.1,2.5,2.5,2.5h23.3
@@ -135,9 +129,7 @@
                         </li>
                         <li>
 
-                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 44 38"
-                                style="enable-background:new 0 0 44 38;" xml:space="preserve">
+                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 44 38" style="enable-background:new 0 0 44 38;" xml:space="preserve">
                                 <g>
                                     <path
                                         d="M4.7,1c-2,0-3.6,1.6-3.6,3.6v26.8c0,3.1,2.5,5.7,5.7,5.7h30.5c3.1,0,5.7-2.5,5.7-5.7V12.4c0-3.1-2.5-5.7-5.7-5.7H23.9
@@ -149,9 +141,7 @@
                         </li>
                         <li>
 
-                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 45 38"
-                                style="enable-background:new 0 0 45 38;" xml:space="preserve">
+                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 45 38" style="enable-background:new 0 0 45 38;" xml:space="preserve">
                                 <g transform="translate(0,-952.36218)">
                                     <g>
                                         <path
@@ -175,9 +165,7 @@
                         </li>
                         <li>
 
-                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38"
-                                style="enable-background:new 0 0 38 38;" xml:space="preserve">
+                            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 38 38" style="enable-background:new 0 0 38 38;" xml:space="preserve">
                                 <g>
                                     <g>
                                         <path
