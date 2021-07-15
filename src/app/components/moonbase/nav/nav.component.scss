@@ -175,6 +175,12 @@ nav {
     border-bottom: 4px solid black !important;
 }
 
+.nav-bar-sub-item {
+    height: 36px;
+    width: 36px;
+    transform: scaleY(-1);
+}
+
 .flex-space-between {
     max-width: 100%;
 }
