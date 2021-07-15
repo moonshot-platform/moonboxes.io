@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-nav',
@@ -66,13 +67,17 @@ export class NavComponent implements OnInit {
     }
   ];
 
-  constructor(public router:Router) { }
+  constructor(public router:Router,private location: Location) { }
 
   ngOnInit(): void {
   }
 
   closeTooltip(){
     this.isTooltipActive = false;
+  }
+  closeMoonbase(){
+    //this.location.back(); 
+    this.router.navigateByUrl('/')
   }
 
 }
