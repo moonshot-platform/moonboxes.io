@@ -1,5 +1,4 @@
 @import "includes";
-
 .landing.flex {
     width: calc(100vw - 4rem);
     z-index: 2;
@@ -7,11 +6,13 @@
     background: $primary;
     height: $full;
 }
+
 .inner {
     margin: 0 3rem 3rem;
     background: #0f0f0f;
     width: 100%;
 }
+
 .left-corner {
     clip-path: polygon(0 0, 0% 100%, 100% 100%);
     position: absolute;
@@ -22,6 +23,7 @@
     border: none;
     left: 47px;
 }
+
 .right-corner {
     clip-path: polygon(100% 100%, 0 100%, 100% 0);
     position: absolute;
@@ -38,38 +40,43 @@
 }
 
 .shape {
-   background-color: #d7b13e;
-   position: relative;
-   width: 100%;
-   height: -webkit-fill-available;
-   -webkit-clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
-   clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
-   align-items: center;
+    background-color: $primary;
+    position: relative;
+    width: 100%;
+    height: -webkit-fill-available;
+    -webkit-clip-path: polygon(8% -5px, 92% -5px, 100% 100%, 0px 100%, 0 100%);
+    clip-path: polygon(8% -5px, 92% -5px, 100% 100%, 0px 100%, 0 100%);
+    align-items: center;
 }
+
 .shape::before {
-   content: '';
-   width: 100%;
-   height: inherit;
-   -webkit-clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
-   clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
-   background: #0f0f0f;
-   display: block;
-   position: absolute;
-   top: 1px;
-   z-index: -1;
-   left: 1px;
+    content: '';
+    height: 70px;
+    -webkit-clip-path: polygon(8% -5px, 92% -5px, 100% 100%, 0px 100%, 0 100%);
+    clip-path: polygon(8% -5px, 92% -5px, 100% 88%, 90% 90%, -8px 100%);
+    background: black;
+    display: block;
+    position: absolute;
+    top: 1px;
+    z-index: -1;
+    left: 1px;
+    right: 1px;
+    //bottom: 5px;
 }
 
 .h-100 {
-   height: 100%;
+    height: 100%;
 }
+
 .pt-5 {
-   padding-top: 3rem;
+    padding-top: 3rem;
 }
+
 .normal_text {
-   line-height: 22px;
-   font-weight: normal;
+    line-height: 22px;
+    font-weight: normal;
 }
+
 .box {
     margin-top: 2px;
     position: absolute;
@@ -77,37 +84,46 @@
     width: calc(100vw - 16rem);
     left: 3rem;
 }
+
 .down_box {
-   border-bottom: 61px solid #d5a642;
-   border-left: 60px solid transparent;
-   border-right: 60px solid transparent;
-   height: 0;color:black
+    border-bottom: 61px solid #d5a642;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    height: 0;
+    color: black
 }
+
 .mt-15 {
-   margin-top: 15px;
+    margin-top: 15px;
 }
+
 .d_flex_content_between {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .prize_pool {
-   display: flex;
-   flex-direction: column;
-   align-items: baseline;
-   justify-content: space-between;
-   flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+    flex: 1;
 }
+
 .pt-0 {
     padding-top: 0;
 }
+
 .img-fluid {
-   max-width: 100%;
-   height: auto;
+    max-width: 100%;
+    height: auto;
 }
+
 .relative {
-   position: relative;
+    position: relative;
 }
+
 .mb0 {
-   margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
