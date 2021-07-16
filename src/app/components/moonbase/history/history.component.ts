@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare let particlesJS: any;
 
 @Component({
   selector: 'app-history',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class HistoryComponent implements OnInit {
 
   static readonly routeName: string = 'history';
-  constructor() { }
+  constructor() {
+    particlesJS.load('moonbase-particles', 'assets/json/particlesjs-config.json');
+   }
 
   ngOnInit(): void {
   }
