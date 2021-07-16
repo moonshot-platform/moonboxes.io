@@ -24,7 +24,7 @@ section.navigation {
         text-decoration: none;
     }
     .logo {
-        height: toRem(80px);
+        height: toRem(40px);
         margin-right: 10px;
     }
     p {
@@ -56,6 +56,7 @@ section.navigation {
 nav {
     @extend %max-width-center;
     align-items: initial;
+    margin-bottom: 20px;
     ul {
         // width: inherit;
         justify-content: center;
