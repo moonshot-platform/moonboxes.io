@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+declare let particlesJS: any;
 
 @Component({
   selector: 'app-prize-pool',
@@ -8,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
 export class PrizePoolComponent implements OnInit {
 
   static readonly routeName: string = 'prize_pool';
-  constructor() { }
+  constructor() {
+    particlesJS.load('moonbase-particles', 'assets/json/particlesjs-config.json');
+   }
 
   ngOnInit(): void {
   }

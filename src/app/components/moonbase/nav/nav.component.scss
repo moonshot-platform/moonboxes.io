@@ -8,8 +8,8 @@ section.navigation {
     box-shadow: 0 4px 12px 0 #00000000;
     box-sizing: border-box;
     position: fixed;
-    width: calc(100% - #{$sidebar-width});
-    left: 0;
+    width: calc(100% - #{2*$sidebar-width});
+    left: $sidebar-width;
     right: $sidebar-width;
     z-index: 1000;
     display: flex;

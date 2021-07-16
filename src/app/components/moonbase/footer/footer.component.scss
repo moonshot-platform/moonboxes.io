@@ -1,6 +1,6 @@
 @import "includes";
 .landing.flex {
-    width: calc(100vw - 4rem);
+    width: calc(100vw - 5rem);
     z-index: 2;
     position: relative;
     background: $primary;
@@ -9,7 +9,7 @@
 
 .inner {
     margin: 0 3rem 3rem;
-    background: #0f0f0f;
+    //background: #0f0f0f;
     width: 100%;
 }
 
@@ -82,7 +82,7 @@
     position: absolute;
     bottom: 0px;
     width: calc(100vw - 16rem);
-    left: 3rem;
+    //left: 3rem;
 }
 
 .down_box {

@@ -8,31 +8,45 @@
 }
 
 .inner {
-    margin: 0 3rem 3rem;
-    background: #0f0f0f;
+    margin-top: 0px;
+    margin-left: 80px;
+    margin-right: 80px;
+    margin-bottom: 50px;
+    //background: #0f0f0f;
     width: 100%;
+    z-index: 3;
+}
+
+#moonbase-particles {
+    height: calc(100% - 48px);
+    width: calc(100% - 230px);
+    background-color: black !important;
+    position: fixed;
+    z-index: -91;
+    top: 0;
+    right: 110px;
 }
 
 .left-corner {
     clip-path: polygon(0 0, 0% 100%, 100% 100%);
     position: absolute;
     bottom: 47px;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     background: #d5a642;
     border: none;
-    left: 47px;
+    left: 107px;
 }
 
 .right-corner {
     clip-path: polygon(100% 100%, 0 100%, 100% 0);
     position: absolute;
     bottom: 47px;
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
     background: #d5a642;
     border: none;
-    right: 47px;
+    right: 46px;
 }
 
 .text-inherit {
