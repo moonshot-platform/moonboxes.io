@@ -16,6 +16,16 @@ section.navigation {
     justify-content: center;
 }
 
+.minus570 {
+    width: calc((100% - 570px)/2);
+    height: 80px;
+}
+
+.sub-item-container {
+    width: 570px;
+    height: 80px;
+}
+
 .logo-container {
     // width: 270px;
     border-top: 6px solid $primary;
@@ -25,7 +35,10 @@ section.navigation {
     }
     .logo {
         height: toRem(40px);
-        margin-right: 10px;
+        cursor: pointer;
+        /* &:hover {
+            filter: brightness(0) invert(1);
+        } */
     }
     p {
         font-size: 20px;
@@ -35,6 +48,9 @@ section.navigation {
             color: $primary;
             font-weight: $medium;
         }
+        /*  &:hover {
+            color: white;
+        } */
     }
 }
 
@@ -240,7 +256,20 @@ nav {
             width: 24px;
             filter: brightness(0) invert(1);
             margin-right: 20px;
+            &:hover {
+                filter: brightness(0) invert(1);
+            }
         }
+    }
+}
+
+.close-moonbase {
+    cursor: pointer;
+    display: flex;
+    height: 36px;
+    width: 36px;
+    &:hover {
+        filter: brightness(0) invert(1);
     }
 }
 
@@ -289,6 +318,33 @@ nav {
 .flex-space-between {
     max-width: 100%;
 }
+
+
+/* .shape {
+    //background-color: yellow;
+    position: relative;
+    width: 100%;
+    height: -webkit-fill-available;
+    -webkit-clip-path: polygon(11% 0px, 89% 0px, 100% 100%, 10px 100%, 10px 100%);
+    clip-path: polygon(11% 0px, 89% 0px, 100% 100%, 10px 100%, 10px 100%);
+    align-items: center;
+}
+
+.shape::before {
+    content: '';
+    height: 80px;
+    -webkit-clip-path: polygon(11% 0px, 89% 0px, 100% 100%, 10px 100%, 10px 100%);
+    clip-path: polygon(11% 0px, 89% 0px, 100% 100%, 10px 100%, 10px 100%);
+    //background: black;
+    display: block;
+    position: absolute;
+    top: 1px;
+    z-index: -1;
+    left: 1px;
+    right: 1px;
+    //bottom: 5px;
+}
+ */
 
 @media only screen and (max-width: $md-header) {
     ul {
