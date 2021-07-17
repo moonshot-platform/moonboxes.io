@@ -60,8 +60,10 @@ section.navigation {
 
 .justify-around {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     padding-top: 1rem;
+    width: 360px;
+    margin-left: 23px;
 }
 
 .justify-around svg {
@@ -77,14 +79,14 @@ nav {
         // width: inherit;
         justify-content: center;
         margin-left: -120px;
-        padding-bottom: 0rem;
+        width: 360px;
         border-bottom: 2px solid black;
         li {
             border-top: 1px solid $primary;
             padding-top: 14px;
             padding-bottom: 18px;
             margin: 0 toEm(12.5px);
-            width: auto;
+            width: 100%;
             &:last-child {
                 margin-right: 0;
             }
@@ -196,6 +198,10 @@ nav {
     height: 36px;
     width: 36px;
     transform: scaleY(-1);
+    margin-left: 45px;
+    &:last-child {
+        margin: 0px;
+    }
 }
 
 .tooltip {
@@ -208,7 +214,7 @@ nav {
     min-width: 270px;
     top: -20px;
     left: 50%;
-    transform: translate(-65%, -100%) scaleY(-1) scaleX(-1);
+    transform: translate(-57%, -100%) scaleY(-1) scaleX(-1);
     padding: 20px 20px;
     color: white;
     background-color: black;
