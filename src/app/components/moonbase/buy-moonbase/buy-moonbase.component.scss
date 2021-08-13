@@ -91,6 +91,9 @@
 .flex-column {
     flex-direction: column;
 }
+.scroller > .desktop-only.h-100 {
+    padding-top: 16rem !important;
+}
 
 @media only screen and (max-width: $md-header) {
     .none {

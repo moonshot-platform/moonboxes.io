@@ -1,3 +1,4 @@
+import { UpcomingComponent } from './components/moonbase/upcoming/upcoming.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LandingComponent } from './components/landing/landing.component';
@@ -8,6 +9,7 @@ import { MoonbaseComponent } from './components/moonbase/moonbase.component';
 import { BuyMoonbaseComponent } from './components/moonbase/buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './components/moonbase/prize-pool/prize-pool.component';
 import { HistoryComponent } from './components/moonbase/history/history.component';
+import { InventoryComponent } from './components/moonbase/inventory/inventory.component';
 
 const routes: Routes = [
   {
@@ -41,6 +43,14 @@ const routes: Routes = [
   {
     path: HistoryComponent.routeName,
     component: HistoryComponent
+  },
+  {
+    path: InventoryComponent.routeName,
+    component: InventoryComponent
+  },
+  {
+    path: UpcomingComponent.routeName,
+    component: UpcomingComponent
   },
 //   {
 //     path: 'moonbase',

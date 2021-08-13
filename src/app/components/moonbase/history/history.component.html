@@ -4,11 +4,10 @@
         <div class="left-corner"></div>
         <div class="right-corner"></div>
 
-
         <app-nav></app-nav>
 
-        <section class="pt-5 h-100 inner flex-space-between align-items-center">
-            <div class="inner mb0 flex-space-between align-start">
+        <section class="scroller">
+            <div class="pt-5 h-100 flex-space-between align-items-center">
                 <div class="flex1 flex-column flex-center">
                     <div class="table-responsive">
                         <table class="table">
@@ -23,23 +22,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>001</td>
-                                    <td>Gold</td>
-                                    <td>04/07/2021 | 16:15:26</td>
-                                    <td>1</td>
+                                <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: p }">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.BetTier}}</td>
+                                    <td>{{item.DateNFT}}</td>
+                                    <td>{{item.total}}</td>
                                     <td>14849534</td>
-                                    <td>-</td>
+                                    <td>
+                                        <button class="button" (click)="ClaimNft(item)" *ngIf="!item.isClaimed">
+                                            Claim
+                                        </button>
+                                        <span *ngIf="item.isClaimed">
+                                            -
+                                        </span>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
+                        <pagination-controls class="my-pagination" (pageChange)="p = $event"
+		[maxSize]="8"></pagination-controls>
                     </div>
                 </div>
             </div>
         </section>
 
+<<<<<<< Updated upstream
         <app-moonbase-footer></app-moonbase-footer>
 
+=======
+            <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
+     
+>>>>>>> Stashed changes
     </div>
     <app-sidebar></app-sidebar>
 </section>
