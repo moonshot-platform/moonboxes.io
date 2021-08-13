@@ -110,4 +110,9 @@ export class TokenomicsService {
       formatAmount(amount: any) {
           return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
+
+      async getBalanceForUser()
+      {
+        
+      }
 }

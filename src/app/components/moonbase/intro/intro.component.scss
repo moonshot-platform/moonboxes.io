@@ -1,4 +1,5 @@
 @import "includes";
+<<<<<<< Updated upstream
 .intro {
     width: 100%;
     height: 100%;
@@ -16,10 +17,42 @@
 
 .text-inherit {
     text-transform: inherit;
+=======
+
+.text-inherit {
+    text-transform: inherit;
 }
 
-.h-100 {
-    height: 100%;
+.scroller {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+    margin-bottom: 150px;
+    margin-top: 100px;
+    height: max-content;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 250px);
+}
+
+.scroller::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #090d16;
+    border-radius: 10px;
+}
+
+.scroller::-webkit-scrollbar
+{
+	width: 6px;
+    border-radius: 10px;
+	background-color: #090d16;
+>>>>>>> Stashed changes
+}
+
+.scroller::-webkit-scrollbar-thumb
+{
+	background-color: transparent;
 }
 
 .pt-5 {
@@ -31,6 +64,7 @@
     font-weight: normal;
 }
 
+<<<<<<< Updated upstream
 .box {
     margin-top: 22px;
     position: absolute;
@@ -38,6 +72,8 @@
     width: calc(100vw - 16rem);
 }
 
+=======
+>>>>>>> Stashed changes
 .down_box {
     border-bottom: 61px solid #d5a642;
     border-left: 60px solid transparent;
@@ -68,6 +104,7 @@
     padding-top: 0;
 }
 
+<<<<<<< Updated upstream
 .landing>.inner {
     padding-bottom: 3rem;
     padding-right: 3rem;
@@ -75,4 +112,47 @@
 
 .border-bottom-three {
     border-bottom: 3px solid #d5a642;
+=======
+.border-bottom-three {
+    border-bottom: 3px solid #d5a642;
+}
+
+@media only screen and (max-width: $md-header) {
+    .d-xs-flex a {
+        min-width: 185px;
+    }
+
+    .flex-xs-col .bottom-only {
+        border-bottom: none !important;
+    }
+
+    .px-3 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .d-xs-flex a.outlined-button {
+        min-width: 155px;
+    }
+
+    .d-xs-flex a.back_btn {
+        min-width: 140px;
+    }
+
+    .d-xs-flex {
+        justify-content: space-between;
+    }
+    .scroller {
+        overflow: auto;
+        padding-bottom: 160px;
+        margin-top: 100px;
+        padding-top: 100px;
+        height: -webkit-max-content;
+        height: -moz-max-content;
+        height: max-content;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+    }
+>>>>>>> Stashed changes
 }

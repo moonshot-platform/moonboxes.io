@@ -21,6 +21,7 @@ section.navigation {
     height: 80px;
 }
 
+<<<<<<< Updated upstream
 .sub-item-container {
     width: 570px;
     height: 80px;
@@ -51,6 +52,48 @@ section.navigation {
         /*  &:hover {
             color: white;
         } */
+=======
+section.navigation {
+  // @include paddingInside(15px);
+  padding: 0.9375rem 3rem;
+  padding-bottom: 0;
+  background-color: $primary;
+  // background: rgba($color: #000000, $alpha: 0.5);
+  box-shadow: 0 4px 12px 0 #00000000;
+  box-sizing: border-box;
+  position: fixed;
+  width: calc(100% - #{$sidebar-width});
+  height: 70px;
+  left: 0;
+  right: $sidebar-width;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+}
+
+.logo-container {
+  // width: 270px;
+  border-top: 6px solid $primary;
+  padding: 0.5rem 0;
+
+  a {
+    text-decoration: none;
+  }
+
+  .logo {
+    height: toRem(80px);
+    margin-right: 10px;
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: $semi-bold;
+    color: black;
+
+    >span {
+      color: $primary;
+      font-weight: $medium;
+>>>>>>> Stashed changes
     }
 }
 
@@ -72,6 +115,7 @@ section.navigation {
 }
 
 nav {
+<<<<<<< Updated upstream
     @extend %max-width-center;
     align-items: initial;
     margin-bottom: 20px;
@@ -101,6 +145,39 @@ nav {
                     color: $white;
                 }
             }
+=======
+  @extend %max-width-center;
+  align-items: initial;
+
+  ul {
+    // width: inherit;
+    justify-content: center;
+    margin-left: -120px;
+    padding-bottom: 0rem;
+    border-bottom: 4px solid #9f7c31;
+
+    li {
+      border-top: 1px solid $primary;
+      padding-top: 14px;
+      padding-bottom: 18px;
+      margin: 0 toEm(12.5px);
+      width: auto;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      a {
+        color: $body-bg-color;
+        font-family: $primary-font;
+        font-size: $primary-fs;
+        font-weight: $semi-bold;
+        text-transform: capitalize;
+        text-decoration: none;
+
+        &:hover {
+          color: $white;
+>>>>>>> Stashed changes
         }
     }
     .mob-menu {
@@ -185,10 +262,17 @@ nav {
     }
 }
 
+<<<<<<< Updated upstream
 .menubar.flex li {
     margin-left: 0em !important;
     border-bottom: 4px solid transparent;
 }
+=======
+      >span {
+        border-radius: 50%;
+        transition-delay: 200ms;
+        transition: 0.5s cubic-bezier(0.8, 0.5, 0.2, 1.4);
+>>>>>>> Stashed changes
 
 .nav-item {
     border-bottom: 4px solid black !important;
@@ -269,6 +353,7 @@ nav {
     }
 }
 
+<<<<<<< Updated upstream
 .close-moonbase {
     cursor: pointer;
     display: flex;
@@ -276,9 +361,66 @@ nav {
     width: 36px;
     &:hover {
         filter: brightness(0) invert(1);
+=======
+    >span {
+      width: 5px;
+      height: 5px;
+      background-color: #fff;
+      display: block;
+      border-radius: 50%;
+      position: absolute;
+
+      &:nth-child(1) {
+        left: 0;
+        top: 0;
+      }
+
+      &:nth-child(2) {
+        left: 12px;
+        top: 0;
+      }
+
+      &:nth-child(3) {
+        right: 0;
+        top: 0;
+      }
+
+      &:nth-child(4) {
+        left: 0;
+        top: 12px;
+      }
+
+      &:nth-child(5) {
+        position: absolute;
+        left: 12px;
+        top: 12px;
+      }
+
+      &:nth-child(6) {
+        right: 0px;
+        top: 12px;
+      }
+
+      &:nth-child(7) {
+        left: 0px;
+        bottom: 0px;
+      }
+
+      &:nth-child(8) {
+        position: absolute;
+        left: 12px;
+        bottom: 0px;
+      }
+
+      &:nth-child(9) {
+        right: 0px;
+        bottom: 0px;
+      }
+>>>>>>> Stashed changes
     }
 }
 
+<<<<<<< Updated upstream
 .close-tooltip {
     visibility: hidden !important;
     //opacity: 0 !important;
@@ -319,6 +461,12 @@ nav {
     transform: translate(-50%, -50%) rotate(45deg) scaleY(-1);
     background-color: black;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+=======
+.menubar.flex li:first-child {
+  border-bottom: 4px solid #000;
+  margin-left: 0em !important;
+  margin-bottom: -3px;
+>>>>>>> Stashed changes
 }
 
 .flex-space-between {
@@ -326,6 +474,7 @@ nav {
 }
 
 
+<<<<<<< Updated upstream
 /* .shape {
     //background-color: yellow;
     position: relative;
@@ -349,6 +498,48 @@ nav {
     left: 1px;
     right: 1px;
     //bottom: 5px;
+=======
+  nav>div.mob-menu {
+    display: block;
+  }
+
+  section.navigation {
+    width: 100%;
+  }
+
+  .footer_menu {
+    bottom: 0;
+
+    svg path {
+      fill: #000;
+    }
+  }
+
+  .wallet_block {
+    background: #ca8e0f;
+    width: 4rem;
+    height: 70px;
+    margin: -1rem;
+    svg {
+      width: 55px;
+    }
+  }
+
+  .shape_down_box {
+    border-bottom: 75px solid #d5a642;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    height: 0;
+    color: black;
+    bottom: 70px;
+    position: fixed;
+    text-align: center;
+    line-height: 25px;
+  }
+  .mt-15 {
+    margin-top: 15px;
+  }
+>>>>>>> Stashed changes
 }
  */
 

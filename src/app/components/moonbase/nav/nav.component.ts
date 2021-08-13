@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+<<<<<<< Updated upstream
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
+=======
+import { MatDialog } from '@angular/material/dialog';
+import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-nav',
@@ -67,11 +72,16 @@ export class NavComponent implements OnInit {
     }
   ];
 
+<<<<<<< Updated upstream
   constructor(public router:Router,private location: Location) { }
+=======
+  constructor(public dialog: MatDialog) { }
+>>>>>>> Stashed changes
 
   ngOnInit(): void {
   }
 
+<<<<<<< Updated upstream
   closeTooltip(){
     this.isTooltipActive = false;
   }
@@ -80,4 +90,19 @@ export class NavComponent implements OnInit {
     this.router.navigateByUrl('/')
   }
 
+=======
+  openDialog(): void {
+    console.log("sai")
+    let dialogRef = this.dialog.open(ConnetwalletComponent, {
+      width: 'auto',
+      // data: { name: this.name, animal: this.animal }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+    });
+  }
+  
+>>>>>>> Stashed changes
 }

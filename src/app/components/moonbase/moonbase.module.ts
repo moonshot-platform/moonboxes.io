@@ -13,6 +13,12 @@ import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
+import { ConnetwalletComponent } from './connetwallet/connetwallet.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { InventoryComponent } from './inventory/inventory.component';
+import { FooterCountComponent } from './footer-count/footer-count.component';
+import { ModalForTransactionComponent } from './modal-for-transaction/modal-for-transaction.component';
+import { UpcomingComponent } from './upcoming/upcoming.component';
 
 
 @NgModule({
@@ -23,7 +29,12 @@ import { HistoryComponent } from './history/history.component';
     FooterComponent,
     BuyMoonbaseComponent,
     PrizePoolComponent,
-    HistoryComponent
+    HistoryComponent,
+    ConnetwalletComponent,
+    InventoryComponent,
+    FooterCountComponent,
+    ModalForTransactionComponent,
+    UpcomingComponent
   ],
   imports: [
     MatIconModule,
@@ -31,7 +42,8 @@ import { HistoryComponent } from './history/history.component';
     NgParticlesModule,
     MoonbaseRoutingModule,
     NavModule,
-    FormsModule
+    FormsModule,
+    NgxPaginationModule
   ]
 })
 export class MoonbaseModule { }

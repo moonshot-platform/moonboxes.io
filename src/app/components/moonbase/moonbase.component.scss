@@ -3,28 +3,17 @@
     width: calc(100vw - 4rem);
     z-index: 2;
     position: relative;
-    background: $primary;
+   //  background: transparent;
     height: $full;
 }
 
 .inner {
-    margin-top: 0px;
-    margin-left: 80px;
-    margin-right: 80px;
-    margin-bottom: 50px;
-    //background: #0f0f0f;
+   //  margin: 0 3rem 3rem;
+   //  background: #0f0f0f;
+    margin: 0;
     width: 100%;
-    z-index: 3;
-}
-
-#moonbase-particles {
-    height: calc(100% - 48px);
-    width: calc(100% - 230px);
-    background-color: black !important;
-    position: fixed;
-    z-index: -91;
-    top: 0;
-    right: 110px;
+    border: 48px solid;
+    border-top: 0;
 }
 
 .left-corner {
@@ -64,18 +53,23 @@
 }
 
 .shape::before {
-    content: '';
-    height: 70px;
-    -webkit-clip-path: polygon(8% -5px, 92% -5px, 100% 100%, 0px 100%, 0 100%);
-    clip-path: polygon(8% -5px, 92% -5px, 100% 88%, 90% 90%, -8px 100%);
-    background: black;
-    display: block;
-    position: absolute;
-    top: 1px;
-    z-index: -1;
-    left: 1px;
-    right: 1px;
-    //bottom: 5px;
+   content: '';
+   width: 100%;
+   height: inherit;
+   -webkit-clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
+   // clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+   clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
+   background: #090d16;
+   display: block;
+   position: absolute;
+   top: 1px;
+   z-index: -1;
+   left: 1px;
+}
+@media (min-width: 1600px) {
+   .shape::before {
+      border-top: 1px solid;
+   }
 }
 
 .h-100 {
@@ -95,8 +89,8 @@
     margin-top: 2px;
     position: absolute;
     bottom: 0px;
-    width: calc(100vw - 16rem);
-    left: 3rem;
+    width: calc(100vw - 10rem);
+    left: 0rem;
 }
 
 .down_box {
@@ -139,5 +133,47 @@
 }
 
 .mb0 {
-    margin-bottom: 0 !important;
+   margin-bottom: 0 !important;
 }
+
+
+
+
+// Responsive Menu for global
+@media only screen and (max-width: $md-header) {
+.inner {
+   border: 0;
+}
+   .navigation {
+     nav,
+     .res_class {
+       display: none;
+     }
+   }
+ 
+   .landing.flex {
+      width: 100vw;
+   }
+   .res_menu {
+     .box {
+       display: flex;
+       justify-content: space-between;
+       flex: 1;
+       align-items: center;
+       svg {
+         width: 30px;
+       }
+     }
+   }
+ 
+   section.navigation {
+     padding: 1rem !important;
+     align-items: center;
+   }
+ 
+   .p34 {
+     font-size: 24px;
+   }
+   
+ }
+ 
