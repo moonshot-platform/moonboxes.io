@@ -1,0 +1,185 @@
+<section class="landing flex">
+  <div class="inner">
+    <div class="left-corner desktop-only"></div>
+    <div class="right-corner desktop-only"></div>
+    <app-nav></app-nav>
+
+    <section class="scroller">
+      <div class="desktop-only pt-5 h-100 flex1 align-items-center flex-col justify-center">
+
+        <!-- <div>
+          <div class="flex flex-center mb50">
+            <p *ngIf="inventoryList===undefined || inventoryList?.length==0">You don't have any
+              MoonBoxes yet</p>
+            <div class="flex1 flex-center flex-column"
+              *ngFor="let item of inventoryList  | paginate: { itemsPerPage: 4, currentPage: p }">
+              <div class="relative">
+                <img src="{{item.logo_path}}" class="img-fluid" alt="">
+              </div>
+              <div class="text-center">
+                <p class="p-white-span-primary p16d14m  mb10 mt10">{{item.name}}</p>
+                <p class="p-white-span-primary p16d14m mb10">Rarity : {{item.rarity}}</p>
+                <p class="p-white-span-primary p16d14m mb10">Total : {{item.total}}</p>
+              </div>
+            </div>
+          </div>
+          <pagination-controls *ngIf="inventoryList!==undefined || inventoryList?.length > 0" class="my-pagination" (pageChange)="p = $event" [maxSize]="8"></pagination-controls>
+        </div> -->
+
+
+        <div class="flex m-3">
+          <div class="flex flex1 border-box p-3">
+            <div class="flex1 flex-column flex-center">
+              <div class="p-3 border-box">
+                <div class="relative">
+                  <img src="./../../../../assets/media/images/moonbox/wood.png" class="img-fluid" alt="">
+                </div>
+                <!-- <div class="text-center">
+                  <p class="p-white-span-primary p16d14m  mb10 mt10">Test</p>
+                  <p class="p-white-span-primary p16d14m mb10">Rarity: Tier 1</p>
+                  <p class="p-white-span-primary p16d14m mb10">Total: 1</p>
+                </div> -->
+              </div>
+            </div>
+            <div class="flex1 flex-column flex-center">
+              <div class="text-center">
+                <div class="text-center">
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex1 flex-column flex-center">
+              <div class="text-center">
+                <div class="text-center">
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                </div>
+              </div>
+            </div>
+           
+            <!-- <div class="flex flex-center mb50">
+            <p *ngIf="inventoryList===undefined || inventoryList?.length==0">You don't have any
+              MoonBoxes yet</p>
+            <div class="flex1 flex-center flex-column"
+              *ngFor="let item of inventoryList  | paginate: { itemsPerPage: 4, currentPage: p }">
+              <div class="relative">
+                <img src="{{item.logo_path}}" class="img-fluid" alt="">
+              </div>
+              <div class="text-center">
+                <p class="p-white-span-primary p16d14m  mb10 mt10">{{item.name}}</p>
+                <p class="p-white-span-primary p16d14m mb10">Rarity : {{item.rarity}}</p>
+                <p class="p-white-span-primary p16d14m mb10">Total : {{item.total}}</p>
+              </div>
+            </div>
+          </div>
+          <pagination-controls *ngIf="inventoryList!==undefined || inventoryList?.length > 0" class="my-pagination" (pageChange)="p = $event" [maxSize]="8"></pagination-controls> -->
+          </div>
+         
+          <div class="flex flex1 border-box p-3">
+            <div class="flex1 flex-column flex-center">
+              <div class="p-3 border-box">
+                <div class="relative">
+                  <img src="./../../../../assets/media/images/moonbox/wood.png" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div>
+            <div class="flex1 flex-column flex-center">
+              <div class="text-center">
+                <div class="text-center">
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="flex1 flex-column flex-center">
+              <div class="text-center">
+                <div class="text-center">
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                  <p class="p16d14m mb10">Rarity: Tier</p>
+                </div>
+              </div>
+            </div>
+            
+           
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mobile-only flex-col flex1 align-center justify-center px-3">
+        <div class="flex1 flex-column flex-center">
+          <div class="p-3 border-box">
+            <div class="relative">
+              <img src="./../../../../assets/media/images/moonbox/wood.png" class="img-fluid" alt="">
+            </div>
+            <!-- <div class="text-center">
+              <p class="p-white-span-primary p16d14m  mb10 mt10">Test</p>
+              <p class="p-white-span-primary p16d14m mb10">Rarity: Tier 1</p>
+              <p class="p-white-span-primary p16d14m mb10">Total: 1</p>
+            </div> -->
+          </div>
+        </div>
+        <div class="flex1 flex-column flex-center">
+          <div class="pt10 pb10">
+            <div class="text-center">
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+            </div>
+          </div>
+        </div>
+        <div class="flex1 flex-column flex-center">
+          <div class="pt10 pb10">
+            <div class="text-center">
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+              <p class="p16d14m mb10">Rarity: Tier</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </section>
+
+    <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
+  </div>
+  <app-sidebar></app-sidebar>
+</section>

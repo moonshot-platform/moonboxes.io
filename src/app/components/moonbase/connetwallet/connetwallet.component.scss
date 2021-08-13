@@ -1,0 +1,17 @@
+@import "includes";
+
+.img-small {
+    width: 70px;
+    height: 70px;
+}
+.connect_popup {
+    background: #090d16;
+    border-top: 6px solid #d5a642;
+}
+.border-thick:hover {
+    border-bottom: 4px solid #d5a642;
+}
+.border-thick {
+    cursor: pointer;
+    border-bottom: 4px solid transparent;
+}
