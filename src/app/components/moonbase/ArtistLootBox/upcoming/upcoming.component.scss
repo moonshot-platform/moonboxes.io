@@ -1,0 +1,57 @@
+@import "includes";
+
+.flex-column.flex-center.p-3 {
+  background: #12192a;
+  border-radius: 4px;
+}
+.p-3 {
+  padding: 1rem;
+}
+.inner img.square-box {
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 100%;
+  object-fit: cover;
+}
+.scroller > .desktop-only.h-100 {
+  align-self: flex-start;
+}
+.grid-3 {
+  background: #184ac1;
+  border-radius: 4px;
+  margin: 10px;
+  flex-basis: calc(33.333% - 60px);
+}
+.nft_img {
+    padding: 0;
+    background: #090d16;
+    border-radius: 4px;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    flex-flow: column;
+}
+.upcoming .full_banner {
+  height: calc(100% - 8px);
+  min-width: 100%;
+}
+.w100 {
+  width: 100%;
+}
+.align-self
+{
+  align-self : flex-start
+}
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: $md-header) {
+  .scroller > div {
+    align-self: flex-start;
+  }
+  .upcoming {
+    flex-flow: column;
+  }
+}

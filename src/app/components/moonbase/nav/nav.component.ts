@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-import { Router } from '@angular/router';
-import { Location } from '@angular/common'
-=======
 import { MatDialog } from '@angular/material/dialog';
 import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
->>>>>>> Stashed changes
+import { HttpApiService } from 'src/app/services/http-api.service';
+import { WalletConnectService } from 'src/app/services/wallet-connect.service';
+import { TokenomicsService } from 'src/app/services/tokenomics.service';
 
 @Component({
   selector: 'app-nav',
@@ -13,86 +11,53 @@ import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-
-  public open = false;
-
-  public isTooltipActive = true;
-
+  data: any;
+  isConnected:boolean = false;
+  balanceOfMoon: any=0;
+  moonCountData: any;
+  menuItem = false;
   public navItems: any[] = [
     {
       'name': 'MoonBoxes',
-      'path': '/moonbase',
-      'allPaths': [
-        '/moonbase',
-        '/buy_moonbase',
-        '/prize_pool'
-      ]
+      'path': '/moonbase'
     },
     {
       'name': 'MoonLottery',
       'path': '/history',
-      'allPaths': [
-        '/history'
-      ]
+      // 'path': '/moonpaper'
     },
     {
       'name': 'MoonArcade',
-      'path': '/community',
-      'allPaths': [
-        '/community'
-      ]
+      'path': '/community'
     }
   ];
 
-  public navSubItems: any[] = [
-    {
-      'icon' : 'assets/media/icons/moonbase/nav/moon.svg',
-      'alt' : 'moon',
-      'tooltip' : 'This is your inventory, an overview of rare NFTs you’ve won.'
-    },
-    {
-      'icon' : 'assets/media/icons/moonbase/nav/diamond.svg',
-      'alt' : 'diamond',
-      'tooltip' : 'This is your inventory, an overview of rare NFTs you’ve won.'
-    },
-    {
-      'icon' : 'assets/media/icons/moonbase/nav/folder.svg',
-      'alt' : 'folder',
-      'tooltip' : 'This is your inventory, an overview of rare NFTs you’ve won.'
-    },
-    {
-      'icon' : 'assets/media/icons/moonbase/nav/lock.svg',
-      'alt' : 'lock',
-      'tooltip' : 'This is your inventory, an overview of rare NFTs you’ve won.'
-    },
-    {
-      'icon' : 'assets/media/icons/moonbase/nav/info.svg',
-      'alt' : 'info',
-      'tooltip' : 'This is your inventory, an overview of rare NFTs you’ve won.'
-    }
-  ];
+  public open = false;
 
-<<<<<<< Updated upstream
-  constructor(public router:Router,private location: Location) { }
-=======
-  constructor(public dialog: MatDialog) { }
->>>>>>> Stashed changes
+  constructor(public dialog: MatDialog,private walletConnectService:WalletConnectService,
+    private httpApi:HttpApiService, private tokenomicsService: TokenomicsService) { }
 
   ngOnInit(): void {
+    this.walletConnectService.init();
+
+    setTimeout(async() => {
+      await this.walletConnectService.getData().subscribe((data)=>{
+        this.data=data;
+      });
+      
+      if(this.data!==undefined && this.data.address!=undefined)
+      {
+        this.isConnected=true;
+        this.getMoonShootBalance();
+      }
+      else
+      {
+        this.balanceOfMoon="Awaiting Connection";
+      }
+    },1000);
   }
 
-<<<<<<< Updated upstream
-  closeTooltip(){
-    this.isTooltipActive = false;
-  }
-  closeMoonbase(){
-    //this.location.back(); 
-    this.router.navigateByUrl('/')
-  }
-
-=======
   openDialog(): void {
-    console.log("sai")
     let dialogRef = this.dialog.open(ConnetwalletComponent, {
       width: 'auto',
       // data: { name: this.name, animal: this.animal }
@@ -104,5 +69,29 @@ export class NavComponent implements OnInit {
     });
   }
   
->>>>>>> Stashed changes
+  getMoonShootBalance()
+  {
+    this.walletConnectService.getBalanceOfUser(this.data.address)
+    .then((response:any)=>
+    {
+      this.balanceOfMoon=response>0 ? response/1e9 : 0;
+    })
+
+   
+  }
+  
+  toggleTokenomics() {
+    this.open = false;
+    this.tokenomicsService.onToggle(false);
+    alert('ge');
+  }
+
+  menuopen() {
+    this.menuItem = true;
+  }
+  
+  closeMenu() {
+    this.menuItem = false;
+  }
+
 }

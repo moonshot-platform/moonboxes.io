@@ -1,0 +1,162 @@
+<section class="landing flex">
+  <div class="inner">
+    <div class="left-corner desktop-only"></div>
+    <div class="right-corner desktop-only"></div>
+    <app-nav></app-nav>
+
+    <section class="scroller">
+      <div class="pt-5 flex1 h-100 flex-space-between align-self">
+        <div class="flex-col flex1">
+        <div class="flex flex-col flex2">
+          <div class="flex">
+            <div class="flex1 flex flex-col">
+              <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10">Upcoming Drops </p>
+            </div>
+          </div>
+          <div class="upcoming flex flex-wrap wrap justify-space-between">
+            <div *ngFor="let item of listOfArtistUpcoming" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+              <div class="flex1 nft_img">
+                <div class="text-center">
+                  <div class="flex align-left flex-col mb10 mt10">
+                    <p class="p24d18m color-white orbitron">{{item.name}}</p>
+                    <p class="color-primary">{{item.ArtistName}}</p>
+                  </div>
+                </div>
+                <div class="flex-column flex-center">
+                  <div class="relative full_banner"><img src="{{item.filePath}}" alt=""
+                      class="img-fluid square-box"></div>
+                </div>
+                
+              </div>
+              <div class="flex flex-col flex1 w100 mt10">
+                <div class="flex justify-center">
+                  <div class="flex align-center"
+                    style="padding: 10px;border: 1px solid;border-radius: 30px;margin: .5rem;justify-content: center;">
+                    <div class="round-mini-button"
+                      style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: red; border: 1px solid red;">
+                    </div>
+                    <p class="color-primary flex">
+                      <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                    </p>
+                    <div class="round-mini-button"
+                      style="width: 30px; height: 30px; margin-left: 10px; font-size: 10px;">
+                      <mat-icon role="img" fontset="material-icons" aria-hidden="true"
+                        ng-reflect-font-set="material-icons" data-mat-icon-type="font"
+                        class="mat-icon notranslate color-primary material-icons mat-icon-no-color">done</mat-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex justify-space-between">
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Mint Price</p>
+                    <p class="p24d18m color-white orbitron">{{item.minPrice}}</p>
+                  </div>
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Max Supply</p>
+                    <p class="p24d18m color-white orbitron">{{item.supply}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col flex2">
+          <div class="flex">
+            <div class="flex1 flex flex-col">
+              <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10">Live Drops </p>
+            </div>
+          </div>
+          <div class="upcoming flex flex-wrap wrap justify-space-between">
+            <div *ngFor="let item of listOfArtistUpcoming" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+              <div class="flex1 nft_img">
+                <div class="text-center">
+                  <div class="flex align-left flex-col mb10 mt10">
+                    <p class="p24d18m color-white orbitron">{{item.name}}</p>
+                    <p class="color-primary">{{item.ArtistName}}</p>
+                  </div>
+                </div>
+                <div class="flex-column flex-center">
+                  <div class="relative full_banner"><img src="{{item.filePath}}" alt=""
+                      class="img-fluid square-box"></div>
+                </div>
+                
+              </div>
+              <div class="flex flex-col flex1 w100 mt10">
+                <div class="flex justify-center">
+                  <div class="flex align-center"
+                    style="padding: 10px;border: 1px solid;border-radius: 30px;margin: .5rem;justify-content: center;">
+                    <div class="round-mini-button"
+                      style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: red; border: 1px solid red;">
+                    </div>
+                    <p class="color-primary flex">
+                      <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                    </p>
+                    <div class="round-mini-button"
+                      style="width: 30px; height: 30px; margin-left: 10px; font-size: 10px;">
+                      <mat-icon role="img" fontset="material-icons" aria-hidden="true"
+                        ng-reflect-font-set="material-icons" data-mat-icon-type="font"
+                        class="mat-icon notranslate color-primary material-icons mat-icon-no-color">done</mat-icon>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex justify-space-between">
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Mint Price</p>
+                    <p class="p24d18m color-white orbitron">{{item.minPrice}}</p>
+                  </div>
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Max Supply</p>
+                    <p class="p24d18m color-white orbitron">{{item.supply}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col flex2">
+          <div class="flex">
+            <div class="flex1 flex flex-col">
+              <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10">Recent Drops </p>
+            </div>
+          </div>
+          <div class="upcoming flex flex-wrap wrap justify-space-between">
+            <div *ngFor="let item of listOfArtistCollection" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+              <div class="flex1 nft_img">
+                <div class="text-center">
+                  <div class="flex align-left flex-col mb10 mt10">
+                    <p class="p24d18m color-white orbitron">{{item.name}}</p>
+                    <p class="color-primary">{{item.ArtistName}}</p>
+                  </div>
+                </div>
+                <div class="flex-column flex-center">
+                  <div class="relative full_banner"><img src="{{item.filePath}}" alt=""
+                      class="img-fluid square-box"></div>
+                </div>
+                
+              </div>
+              <div class="flex flex-col flex1 w100 mt10">
+                
+                <div class="flex justify-space-between">
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Mint Price</p>
+                    <p class="p24d18m color-white orbitron">{{item.minPrice}}</p>
+                  </div>
+                  <div class="flex align-center flex-col">
+                    <p class="color-primary">Max Supply</p>
+                    <p class="p24d18m color-white orbitron">{{item.supply}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div>
+        </div>
+      </div>
+      </div>
+
+      </section>
+
+    <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
+  </div>
+  <app-sidebar></app-sidebar>
+</section>

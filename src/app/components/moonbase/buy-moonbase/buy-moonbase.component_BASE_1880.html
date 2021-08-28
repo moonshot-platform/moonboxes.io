@@ -1,0 +1,203 @@
+  <section class="landing flex">
+  <div class="inner">
+    <div class="left-corner desktop-only"></div>
+    <div class="right-corner desktop-only"></div>
+    <app-nav></app-nav>
+
+
+
+    <section class="scroller">
+      <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center">
+
+        <div class="flex1 flex-column flex-center">
+          <div class="relative">
+
+            <img src="./../../../../assets/media/images/moonbox/wood.png" class="img-fluid" alt="">
+            <img *ngIf="!isConnected" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+          </div>
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m  mb10 mt10">Bronze</p>
+            <p class="p-white-span-primary p16d14m mb10">0.5B</p>
+            <div class="border plus_minus flex mb20"  *ngIf="inputnumber[1]>0">
+
+              <button class="flex1 toggle-less" (click)="minus(1)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+              <div class="flex1 border_left_right">
+                <input type="text" class="form-control" [(ngModel)]="inputnumber[1]">
+              </div>
+              <button class="flex1 toggle-more" (click)="plus(1)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+            </div>
+            <div class=" plus_minus flex mb20 justify-center"  *ngIf="inputnumber[1]==0">
+              Sold Out
+            </div>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(1)">Buy</a>
+
+            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+
+          </div>
+        </div>
+        <div class="flex1 flex-center flex-column">
+          <div class="relative">
+            <img src="./../../../../assets/media/images/moonbox/silver.png" class="img-fluid" alt="">
+            <img *ngIf="!isConnected" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+          </div>
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m mb10 mt10">Silver</p>
+            <p class="p-white-span-primary p16d14m mb10">1B</p>
+            <div class="border plus_minus flex mb20"  *ngIf="inputnumber[2]>0">
+
+              <button class="flex1 toggle-less" (click)="minus(2)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+              <div class="flex1 border_left_right">
+                <input type="text" class="form-control" [(ngModel)]="inputnumber[2]">
+              </div>
+              <button class="flex1 toggle-more" (click)="plus(2)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+            </div>
+            <div class=" plus_minus flex mb20 justify-center"  *ngIf="inputnumber[2]==0">
+              Sold Out
+            </div>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(2)">Buy</a>
+            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+
+          </div>
+        </div>
+        <div class="flex1 flex-column flex-center">
+          <div class="relative">
+            <img src="./../../../../assets/media/images/moonbox/gold.png" class="img-fluid" alt="">
+            <img *ngIf="!isConnected" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+          </div>
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m  mb10 mt10">Gold</p>
+            <p class="p-white-span-primary p16d14m mb10">2B</p>
+            <div class="border plus_minus flex mb20"  *ngIf="inputnumber[3]>0">
+
+              <button class="flex1 toggle-less" (click)="minus(3)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+              <div class="flex1 border_left_right">
+                <input type="text" class="form-control" [(ngModel)]="inputnumber[3]">
+              </div>
+              <button class="flex1 toggle-more" (click)="plus(3)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+            </div>
+            <div class=" plus_minus flex mb20 justify-center"  *ngIf="inputnumber[3]==0">
+              Sold Out
+            </div>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(3)">Buy</a>
+            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+
+          </div>
+        </div>
+        <div class="flex1 flex-center flex-column">
+          <div class="relative">
+            <img src="./../../../../assets/media/images/moonbox/diamond.png" class="img-fluid" alt="">
+            <img *ngIf="!isConnected" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+          </div>
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m mb10 mt10">Diamond</p>
+            <p class="p-white-span-primary p16d14m mb10">10B</p>
+            <div class="border plus_minus flex mb20"  *ngIf="inputnumber[4]>0">
+
+              <button class="flex1 toggle-less" (click)="minus(4)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+              <div class="flex1 border_left_right">
+                <input type="text" class="form-control" [(ngModel)]="inputnumber[4]">
+              </div>
+              <button class="flex1 toggle-more" (click)="plus(4)">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                  width="11" height="14" viewBox="0 0 11 14">
+                  <path fill="#fff"
+                    d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
+                </svg>
+              </button>
+            </div>
+            <div class=" plus_minus flex mb20 justify-center"  *ngIf="inputnumber[4]==0">
+              Sold Out
+            </div>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(4)">Buy</a>
+            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+
+          </div>
+        </div>
+      </div>
+
+      <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100">
+        <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
+          <div class="round-mini-button" (click)="prev()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
+          </div>
+          <img src={{shirts[current].img}} alt="moonticket" />
+
+          <div class="round-mini-button" (click)="next()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
+          </div>
+        </div>
+
+        <div class="flex-col text-center">
+          <p class="p-white-span-primary p16d14m  mb10 mt10">{{shirts[current].name}}</p>
+          <p class="p-white-span-primary p16d14m mb10">{{shirts[current].value}}</p>
+          <div class="border plus_minus flex mb20">
+            <button class="flex1 toggle-less" (click)="minus(current)">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="11" height="14" viewBox="0 0 11 14">
+                <path fill="#fff"
+                  d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
+              </svg>
+            </button>
+            <div class="flex1 border_left_right">
+              <input type="text" class="form-control" [(ngModel)]="inputnumber[current]">
+            </div>
+            <button class="flex1 toggle-more" (click)="plus(current)">
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                width="11" height="14" viewBox="0 0 11 14">
+                <path fill="#fff"
+                  d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
+              </svg>
+            </button>
+          </div>
+          <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(current)">Buy</a>
+          <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+        </div>
+      </div>
+    </section>
+
+   <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
+  </div>
+  <app-sidebar></app-sidebar>
+</section>
