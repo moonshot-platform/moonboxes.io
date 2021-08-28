@@ -1,9 +1,26 @@
+.scroller .desktop-only {
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
+.d-block {
+    display: block !important;
+}
+.flex1.flex-column.flex-center {
+  flex: 0 0 33.333333%;
+}
 .inner img {
-    width: 150px;
-    height: 150px;
-    border: 0;
-    border-radius: 0;
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
     padding: 4px;
+}
+.inner .nft_img:hover img {
+  border: 1px solid white !important;
+}
+.inner .outer-box img {
+    height: 350px !important;
+    width: 350px !important;
 }
 .inner img.lock {
         border: none;
@@ -52,10 +69,43 @@
     padding: 100px 0 170px;
     box-sizing: border-box;
 }
-.border-box {
-    border: 2px solid;
-    border-radius: 6px;
+.outer-box {
+    border: 1px solid;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    justify-content: flex-start;
+    // position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
 }
-.border-box:nth-child(even) {
-    margin-left: 1rem;
+.border-bottom {
+    border-bottom: 2px solid #d5a642;
+}
+svg#attibute_close path {
+    fill: #d5a642;
+}
+.full-div
+{
+    flex : 0 0 100%;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.mobile-only {
+    .outer-box {
+        padding: 0;
+        margin-top: 1rem;
+    }
+    .outer-box > div {
+        padding: 1rem;
+    }
+}
+.break-word {
+    word-break: break-word;
 }

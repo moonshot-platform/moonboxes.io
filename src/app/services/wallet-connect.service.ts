@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
-import { ethers } from "ethers";
+import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
-export const LootboxAddress = "0x7213Affaf6C96a1e1E8A85A2547078819B89D293";
-export const NFTAddress = "0xAF85238f41f6cA99d0f9391cBe74Bd7D548c9F53";
+export const LootboxAddress = "0x73dcA30f0d71C7453Ae8971690Fb0D7b64DCAE86";
+export const NFTAddress = "0x660Bd15a07eA3775a7cD16d400E7457543D0703d";
+export const ArtistNFTAddress = "0x7e7e76642A2AdeCfafDd5e3A4f55bF19A2af26cc";
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
+const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 //  Create WalletConnect Provider
 const provider = new WalletConnectProvider({
   infuraId: "b0287acccb124ceb8306f3192f9e9c04",
@@ -35,6 +37,7 @@ export class WalletConnectService {
   SilverContract: any;
   LootboxContract: any;
   NFTContract: any;
+  artistLootBoxContract : any;
   constructor(private windowRef: WindowRefService) {
 
   }
@@ -134,6 +137,7 @@ export class WalletConnectService {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);
+      this.artistLootBoxContract = new ethers.Contract(ArtistNFTAddress,ArtistNFTAbi,this.signer);
     }
     var data = {
       'provider': this.provider,
@@ -148,16 +152,55 @@ export class WalletConnectService {
     this.updateData(data);
   }
 
-  async getDetailsLootboxPrice(lootBoxId) {
+  async getDetailsMoonboxPrice() {
     var promise = new Promise((resolve, reject) => {
       try {
-
-        this.LootboxContract.lootboxPrice(lootBoxId)
+        debugger
+        this.LootboxContract.moonboxPrice()
           .then(function (transactionHash) {
+            debugger
             resolve(transactionHash);
           })
       }
       catch (e) {
+        debugger
+        reject(false);
+      }
+    });
+    return promise
+  }
+
+  async getDetailsMoonboxlimit() {
+    var promise = new Promise((resolve, reject) => {
+      try {
+        debugger
+        this.LootboxContract.getMoonShootLimit()
+          .then(function (transactionHash) {
+            debugger
+            resolve(transactionHash);
+          })
+      }
+      catch (e) {
+        debugger
+        reject(false);
+      }
+    });
+    return promise
+  }
+
+
+  async getDetailsMoonboxlimitArtist() {
+    var promise = new Promise((resolve, reject) => {
+      try {
+        debugger
+        this.artistLootBoxContract.getMoonShootLimit()
+          .then(function (transactionHash) {
+            debugger
+            resolve(transactionHash);
+          })
+      }
+      catch (e) {
+        debugger
         reject(false);
       }
     });
@@ -181,7 +224,7 @@ export class WalletConnectService {
   }
 
   async getTransactionHashForAllowance(lootBoxId, noOfBets,userAddress) {
-    var lootboxPrice = await this.getDetailsLootboxPrice(lootBoxId);
+    var lootboxPrice = await this.getDetailsMoonboxPrice();
 
     var promise = new Promise((resolve, reject) => {
       try {
@@ -208,7 +251,7 @@ export class WalletConnectService {
 
   async approveSilverToken(lootBoxId, noOfBets,userAddress)
   {
-    var lootboxPrice = await this.getDetailsLootboxPrice(lootBoxId);
+    var lootboxPrice = await this.getDetailsMoonboxPrice();
     const params2 =((noOfBets*Number(lootboxPrice)*1e9).toString());
 
     var promise = new Promise(async (resolve, reject) => {
@@ -247,13 +290,92 @@ export class WalletConnectService {
     return status;
   }
 
-  redeemBulkTransaction(lootBoxId, seed, noOfBets,userAddress) {
+ 
+
+
+  redeemBulkTransaction(lootBoxId, price, noOfBets,userAddress) {
     var promise = new Promise((resolve, reject) => {
       try {
-        this.LootboxContract.submitBet(lootBoxId, seed, noOfBets)
+        this.LootboxContract.submitBet(lootBoxId, price, noOfBets,{value:(price*noOfBets).toString()})
           .then(function (transactionHash) {
             resolve({ hash: transactionHash.hash, status: true });
+          }).catch(function(e){
+            reject({ hash: e, status: false });
           })
+      }
+      catch (e) {
+       
+        reject({ hash: "", status: false });
+        
+      }
+    });
+    return promise
+  }
+
+  
+
+  async getRedeemBulk(id:any,nftAmount:any,bet:number,signature:any,isArtist:boolean,artistAddress:string)
+  {
+    var promise = new Promise((resolve, reject) => {
+      var spliSign=ethers.utils.splitSignature(signature);
+    if(isArtist){
+      try {
+          this.artistLootBoxContract.redeemBulk(NFTAddress, id, nftAmount,artistAddress, bet,spliSign.v,spliSign.r,spliSign.s)
+            .then(function (transactionHash) {
+              resolve({ hash: transactionHash.hash, status: true });
+            }).catch(function(e){
+              reject({ hash: e, status: false });
+            });
+            
+
+        }
+        catch (e) {
+          console.log(e)
+          reject({ hash: "", status: false });
+        }
+    }
+    else
+    {
+        try {
+            this.LootboxContract.redeemBulk(NFTAddress, id, nftAmount, bet,spliSign.v,spliSign.r,spliSign.s)
+              .then(function (transactionHash) {
+                resolve({ hash: transactionHash.hash, status: true });
+              }).catch(function(e){
+                reject({ hash: e, status: false });
+              });
+          }
+          catch (e) {
+            console.log(e)
+            reject({ hash: "", status: false });
+          }
+       
+    }
+  });
+    
+   // address nftAsset, uint256[] calldata id, uint256[] calldata nftAmount, uint256 bet, uint8 v, bytes32 r, bytes32 s
+      
+      return promise;
+  }
+
+  
+
+/** Artist  **/
+  redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signature) {
+    const params2:any = ethers.utils.parseEther(price.toString());
+    var spliSign=ethers.utils.splitSignature(signature);
+
+    var promise = new Promise((resolve, reject) => {
+      try {
+        this.artistLootBoxContract.submitBet(lootBoxId, params2,artistAddress, noOfBets,
+          spliSign.v,spliSign.r,spliSign.s,
+          {
+            value : (params2*noOfBets).toString()
+          })
+          .then(function (transactionHash) {
+            resolve({ hash: transactionHash.hash, status: true });
+          }).catch(function(e){
+            reject({ hash: e, status: false });
+          });
       }
       catch (e) {
         reject({ hash: "", status: false });
@@ -262,33 +384,26 @@ export class WalletConnectService {
     return promise
   }
 
-  
 
-  async getRedeemBulk(id:any,nftAmount:any,bet:number,signature:any)
-  {
-
-    var spliSign=ethers.utils.splitSignature(signature);
-   // address nftAsset, uint256[] calldata id, uint256[] calldata nftAmount, uint256 bet, uint8 v, bytes32 r, bytes32 s
-      var promise = new Promise((resolve, reject) => {
+  /** Artist  **/
+  async claimRewardTransaction(junkAmount:any,nftId:any,nftAmount:any,betId:any,seed,signHash:any) {
+    var spliSign=ethers.utils.splitSignature(signHash);
+    const params2:any = ethers.utils.parseEther(junkAmount.toString()); 
+    debugger
+    var promise = new Promise(async (resolve, reject) => {
       try {
         debugger
-          this.LootboxContract.redeemBulk(NFTAddress, id, nftAmount, bet,spliSign.v,spliSign.r,spliSign.s)
-            .then(function (transactionHash) {
-              resolve({ hash: transactionHash.hash, status: true });
-            })
-        }
-        catch (e) {
-          console.log(e)
-          reject({ hash: "", status: false });
-        }
-      });
-      return promise;
-  }
-
-  async getTransactionReceipt()
-  {
-    const receipt = await this.provider.getTransactionReceipt("0xecb67e83e47ed6b91384022294c3ddbee695440bd1f74e4c78730b32fd902b07");
-    
-    return receipt;
+        var txn=await this.LootboxContract.claimReward(params2, NFTAddress,nftId,nftAmount,betId,
+          spliSign.v,spliSign.r,spliSign.s)
+         .catch(function(e){
+            reject({ hash: e, status: false });
+          });
+          resolve({ hash: txn, status: true });
+      }
+      catch (e) {
+        reject({ hash: "", status: false });
+      }
+    });
+    return promise
   }
 }

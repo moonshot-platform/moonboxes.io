@@ -1,0 +1,7 @@
+@import "includes";
+
+@media only screen and (max-width: $md-header) {
+    .desktop-bottom-count {
+        display: none;
+    }
+}
