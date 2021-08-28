@@ -83,7 +83,6 @@ export class NavComponent implements OnInit {
   toggleTokenomics() {
     this.open = false;
     this.tokenomicsService.onToggle(false);
-    alert('ge');
   }
 
   menuopen() {
