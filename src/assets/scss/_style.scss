@@ -778,7 +778,15 @@ ul {
   }
 }
 
-
+@media only screen and (max-width: 1149px) and (min-width: 992px) {
+  .tab-only {
+    display: flex !important;
+  }
+  .right-corner,
+  .left-corner {
+    display: none !important;
+  }
+}
 
 // Responsive Menu for global
 @media only screen and (max-width: $md-header) {

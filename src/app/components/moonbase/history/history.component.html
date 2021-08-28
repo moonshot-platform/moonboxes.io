@@ -1,13 +1,12 @@
 <section class="landing flex">
     <div class="inner">
-        <div id="moonbase-particles"></div>
-        <div class="left-corner"></div>
-        <div class="right-corner"></div>
+        <div class="left-corner desktop-only"></div>
+        <div class="right-corner desktop-only"></div>
 
         <app-nav></app-nav>
 
         <section class="scroller">
-            <div class="pt-5 h-100 flex-space-between align-items-center">
+            <div class="pt-5 h-100 flex-space-between align-items-center res-table">
                 <div class="flex1 flex-column flex-center">
                     <div class="table-responsive">
                         <table class="table">
@@ -22,19 +21,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: p }">
+                                <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
                                     <td>{{item.id}}</td>
                                     <td>{{item.BetTier}}</td>
                                     <td>{{item.DateNFT}}</td>
                                     <td>{{item.total}}</td>
                                     <td>14849534</td>
                                     <td>
-                                        <button class="button" (click)="ClaimNft(item)" *ngIf="!item.isClaimed">
+                                        <button class="button" (click)="ClaimNft(item,i)" *ngIf="!item.isClaimed">
                                             Claim
                                         </button>
-                                        <span *ngIf="item.isClaimed">
-                                            -
-                                        </span>
+                                            <button class="button success" *ngIf="item.isClaimed">
+                                                Claimed
+                                        </button>
                                     </td>
                                 </tr>
                             </tbody>
@@ -46,13 +45,8 @@
             </div>
         </section>
 
-<<<<<<< Updated upstream
-        <app-moonbase-footer></app-moonbase-footer>
-
-=======
             <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
      
->>>>>>> Stashed changes
     </div>
     <app-sidebar></app-sidebar>
 </section>

@@ -13,9 +13,8 @@
             <svg *ngIf="successIcon" xmlns='http://www.w3.org/2000/svg' width='14' height='10' fill='white' viewBox='0 0 14 10'><path fill-rule='evenodd' d='M13.707.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L5 7.586 12.293.293a1 1 0 0 1 1.414 0z' fill='%23fcfcfd'/></svg>
           </div>
           <div class="steps__details">
-            <div class="steps__info">Approve Moonshoot</div>
-
-            <div class="steps__text">Send transaction with your wallet</div>
+            <div class="steps__info">Buy MoonBox</div>
+            <div class="steps__text">Checking balance and approving</div>
           </div>
         </div>
         <button class="button steps__button wp100 border-0">{{btn1Text}}</button>
@@ -62,11 +61,11 @@
             <svg *ngIf="successIcon2  && successIcon" xmlns='http://www.w3.org/2000/svg' width='14' height='10' fill='white' viewBox='0 0 14 10'><path fill-rule='evenodd' d='M13.707.293a1 1 0 0 1 0 1.414l-8 8a1 1 0 0 1-1.414 0l-4-4a1 1 0 1 1 1.414-1.414L5 7.586 12.293.293a1 1 0 0 1 1.414 0z' fill='%23fcfcfd'/></svg>
           </div>
           <div class="steps__details">
-            <div class="steps__info">Buy MoonBox</div>
-            <div class="steps__text">Checking balance and approving</div>
+            <div class="steps__info">Reveal Nft</div>
+            <div class="steps__text">retrieving data</div>
           </div>
         </div>
-        <button class="button steps__button disabled wp100 border-0">{{btn2Text}}</button>
+        <button (click)="closeDialogDone()" class="button steps__button disabled wp100 border-0">{{btn2Text}}</button>
       </div>
     
     </div>
