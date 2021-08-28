@@ -1,61 +1,7 @@
 <section class="navigation">
-<<<<<<< Updated upstream
-    <nav class="flex-space-between">
-        <div class="logo-container flex">
-            <a class="flex-center" [routerLink]="['']">
-                <img class="logo" src="assets/media/icons/moonbase/nav/logo-black.svg" alt="moonshot logo">
-
-                <p class="text-dark pl5">MoonBase</p>
-            </a>
-        </div>
-        <!-- <div class="mob-menu" [class.open]="open" (click)="open = !open">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div> -->
-        <ul class="menubar flex">
-            <li *ngFor="let item of navItems" [ngClass]="{'nav-item': item.allPaths.includes(this.router.url)}">
-                <a [routerLink]="[item.path]" routerLinkActive="router-link-active">{{item.name}}
-           </a>
-            </li>
-            <!-- <a [routerLink]="['']">Jim</a> -->
-        </ul>
-        <div class="block flex-center">
-            <img class="close-moonbase" (click)="closeMoonbase()" src="assets/media/icons/moonbase/nav/close.svg">
-        </div>
-    </nav>
-    <div class=" flex-space-between align-start mt20 sub-item-container" style="margin-top: 0px;position: absolute;bottom: -60px;width: 100%;">
-        <div class="info flex3">
-            <div class="shape text-center bottom flex ph50 " style="transform: rotate(180deg);">
-                <div class="minus570"></div>
-                <div class="flex1 no-padding" style="border-bottom: 61px solid #d5a642; border-left: 60px solid transparent; border-right: 60px solid transparent; height: 0; color: black;">
-                    <ul class="justify-around">
-                        <li *ngFor="let item of navSubItems">
-                            <div class="tooltip">
-                                <img class="nav-bar-sub-item" src="{{item.icon}}">
-                                <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}" (mouseleave)="this.isTooltipActive = true">
-                                    <div class="row">
-                                        <img class="close-button" (click)="closeTooltip()" src="assets/media/icons/moonbase/nav/close.svg">
-                                        <p>{{item.tooltip}}</p>
-                                    </div>
-                                    <i></i>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <div class="minus570"></div>
-            </div>
-=======
   <div class="res_menu flex1">
     <ul class="box">
-      <li>
+      <li [routerLink]="['/moonbase']">
         <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 38 38" xml:space="preserve" style="enable-background: new 0 0 38 38;">
           <g>
@@ -124,7 +70,7 @@
           </g>
         </svg>
       </li>
-      <li>
+      <li [routerLink]="['/inventory']">
         <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 45 38" xml:space="preserve" style="enable-background: new 0 0 45 38;">
           <g transform="translate(0,-952.36218)">
@@ -148,7 +94,7 @@
           </g>
         </svg>
       </li>
-      <li>
+      <li [routerLink]="['/history']">
         <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 44 38" xml:space="preserve" style="enable-background: new 0 0 44 38;">
           <g>
@@ -193,7 +139,7 @@ C40,32.9,38.8,34.1,37.2,34.1z M20.5,6.8H4V4.6c0-0.4,0.3-0.7,0.7-0.7h13.8c0.2,0,0
           </g>
         </svg>
       </li>
-      <li>
+      <li [routerLink]="['/prize_pool']">
         <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
           x="0px" y="0px" viewBox="0 0 38 38" xml:space="preserve" style="enable-background: new 0 0 38 38;">
           <g>
@@ -226,7 +172,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
 
 
   <nav class="flex-space-between">
-    <div class="logo-container flex">
+    <div class="logo-container flex border-0">
       <a class="flex-center" [routerLink]="['']">
         <!-- <img class="logo" src="assets/media/images/logo.png" alt="moonshot logo"> -->
 
@@ -271,17 +217,18 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
       <!-- <a [routerLink]="['']">Jim</a> -->
     </ul>
     <div class="block flex-center">
-
-      <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink">
-        <title>Combined Shape</title>
-        <desc>Created with Sketch.</desc>
-        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-          <path
-            d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-            id="Combined-Shape" fill="#000000"></path>
-        </g>
-      </svg>
+      <a href="" [routerLink]="['/']">
+        <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <title>Combined Shape</title>
+          <desc>Created with Sketch.</desc>
+          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <path
+              d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+              id="Combined-Shape" fill="#000000"></path>
+          </g>
+        </svg>
+      </a>
     </div>
   </nav>
 
@@ -291,8 +238,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
     <div class="info flex3">
       <div class="shape text-center bottom flex ph50" style="transform: rotate(180deg);">
         <div class="flex1 no-padding"></div>
-        <div class="flex1 no-padding"
-          style="border-bottom: 61px solid #d5a642; border-left: 60px solid transparent; border-right: 60px solid transparent; height: 0; color: black;">
+        <div class="flex1 no-padding nav-menu">
           <ul class="justify-around">
             <li [routerLink]="['/prize_pool']">
 
@@ -477,23 +423,22 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
 
             </li>
           </ul>
->>>>>>> Stashed changes
         </div>
         <div class="flex1 no-padding"></div>
       </div>
     </div>
   </div>
 
-  <section class="mobile-only footer_menu navigation">
+  <section class="mobile-only footer_menu tab-only navigation">
     <div class="flex1 no-padding shape_down_box">
       <p class="p12 mt-15"><span>BALANCE MOONSHOT</span></p>
-      <p><strong class="p14">Awaiting Connection</strong></p>
+      <p><strong class="p14">{{balanceOfMoon}}</strong></p>
     </div>
 
     <div class="res_menu flex1">
       <ul class="box">
-        <li>
-          <svg width="32px" height="25px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        <li (click)="menuopen()">
+          <svg [ngClass]="{'invisible': menuItem}" width="32px" height="25px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
             <title>Combined Shape</title>
@@ -505,16 +450,18 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
           </svg>
         </li>
         <li>
-          <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink">
-            <title _ngcontent-jde-c121="">Combined Shape</title>
-            <desc _ngcontent-jde-c121="">Created with Sketch.</desc>
-            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-              <path
-                d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                id="Combined-Shape" fill="#000000"></path>
-            </g>
-          </svg>
+          <a href="javascript:void(0)" (click)="closeMenu()">
+            <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title _ngcontent-jde-c121="">Combined Shape</title>
+              <desc _ngcontent-jde-c121="">Created with Sketch.</desc>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+                  id="Combined-Shape" fill="#000000"></path>
+              </g>
+            </svg>
+          </a>
         </li>
         <li>
           <div (click)="openDialog()" class="wallet_block flex-center">
@@ -535,5 +482,16 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
     </div>
   </section>
 
+  <section class="mobile-only moonbox-menu" *ngIf="menuItem">
+    <div class="inner menu-item">
+      <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}" [routerLink]="['/moonbase']" (click)="closeMenu()">MoonBoxes</a>
+      <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}" [routerLink]="['/history']" (click)="closeMenu()">MoonLottery</a>
+      <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+        true}" [routerLink]="['/community']" (click)="closeMenu()">MoonArcade</a>
+      <a class="p17 mb20" (click)="toggleTokenomics();closeMenu()">Tokenomics</a>
+    </div>
+  </section>
 
 </section>

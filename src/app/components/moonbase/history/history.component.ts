@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< Updated upstream
-declare let particlesJS: any;
-=======
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { ToastrService } from 'ngx-toastr';
->>>>>>> Stashed changes
+import { MatDialog } from '@angular/material/dialog';
+import { ModalForClaimComponent } from './modal-for-claim/modal-for-claim.component';
 
 @Component({
   selector: 'app-history',
@@ -15,17 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 export class HistoryComponent implements OnInit {
 
   static readonly routeName: string = 'history';
-<<<<<<< Updated upstream
-  constructor() {
-    particlesJS.load('moonbase-particles', 'assets/json/particlesjs-config.json');
-=======
   data: any;
   historyData : any;
   p: number = 1;
   maxSize:number = 9;
-  constructor(public toastrService: ToastrService,public httpApiService:HttpApiService,public walletConnectService:WalletConnectService) {
+  constructor(public toastrService: ToastrService,public httpApiService:HttpApiService,public walletConnectService:WalletConnectService,
+    public dialog: MatDialog) {
 
->>>>>>> Stashed changes
    }
 
   ngOnInit(): void {
@@ -57,36 +51,22 @@ export class HistoryComponent implements OnInit {
     });
   }
 
-  async ClaimNft(data:any)
+  async ClaimNft(data:any,index:number)
   {
-    
-   var nftSupply=[];
-    var nftIds=[];
-    var sign;
-      data.nftData.forEach(element => {
-          nftSupply.push(element.nftAmount);
-          nftIds.push(element.Id);
-        sign=element.signature;
-      });
-    
-      var txStatus:any = await this.walletConnectService.getRedeemBulk(nftIds,nftSupply,data.betId,sign);
-    if(txStatus.status)
-    {
-      this.httpApiService.changeStatusClaim({
-        userAddress : this.data.address,
-        transactionHash : txStatus.hash,
-        id : data.betId
-      }).subscribe((response:any)=>{
-          if(response.isSuccess)
-          {
-            this.toastrService.success(response.data.message);
-          }
-      })
-    }
-    else
-    {
-      console.log("error redeem")
-    }
+    const dialogref = this.dialog.open(ModalForClaimComponent, {
+      width: 'auto',
+      disableClose : true,
+       data: {
+         nftDetails : data,
+         userAddress : this.data.address
+       }
+    });
+
+    dialogref.afterClosed().subscribe(result => {
+      this.historyData[index].isClaimed = result;
+
+    });
+  
   }
 
 }

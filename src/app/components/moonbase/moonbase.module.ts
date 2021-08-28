@@ -18,7 +18,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { InventoryComponent } from './inventory/inventory.component';
 import { FooterCountComponent } from './footer-count/footer-count.component';
 import { ModalForTransactionComponent } from './modal-for-transaction/modal-for-transaction.component';
-import { UpcomingComponent } from './upcoming/upcoming.component';
+import { ArtistMoonboxComponent } from './ArtistLootBox/artist-moonbox/artist-moonbox.component';
+import { UpcomingComponent } from './ArtistLootBox/upcoming/upcoming.component';
+import { AngularCountdownDateTimeModule } from 'angular-countdown-date-time';
+import { CountdownTimerComponent } from './ArtistLootBox/upcoming/countdown-timer/countdown-timer.component';
+import { ModalForClaimComponent } from './history/modal-for-claim/modal-for-claim.component';
+import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-nft-popup.component';
 
 
 @NgModule({
@@ -34,7 +39,11 @@ import { UpcomingComponent } from './upcoming/upcoming.component';
     InventoryComponent,
     FooterCountComponent,
     ModalForTransactionComponent,
-    UpcomingComponent
+    ArtistMoonboxComponent,
+    UpcomingComponent,
+    CountdownTimerComponent,
+    ModalForClaimComponent,
+    RevealNftPopupComponent
   ],
   imports: [
     MatIconModule,
@@ -43,7 +52,8 @@ import { UpcomingComponent } from './upcoming/upcoming.component';
     MoonbaseRoutingModule,
     NavModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    AngularCountdownDateTimeModule
   ]
 })
 export class MoonbaseModule { }

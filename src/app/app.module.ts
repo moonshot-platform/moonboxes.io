@@ -26,6 +26,7 @@ import { MoonbaseModule } from './components/moonbase/moonbase.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 
+
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
   overrides = <any>{

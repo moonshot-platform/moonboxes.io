@@ -2,6 +2,14 @@ table {
     border: 0; 
     border-collapse: separate; 
     border-spacing: 0 5px;
+    button {
+      border: 2px solid #d5a642;
+    }
+    .button.success {
+      background-color: transparent;
+      border-color: #d5a642 !important;
+      color: #d5a642;
+    }
   }
   
   thead tr th {
@@ -16,6 +24,19 @@ table {
     text-align: center;
   }
   tbody td {
-    padding-top: .5rem;
+    padding: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
+.res-table {
+display: block;
+max-width: calc( 100% - 40px);
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  }
