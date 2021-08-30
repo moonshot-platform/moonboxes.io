@@ -1,11 +1,12 @@
 @import "includes";
+
 section.sidebar {
-    background-color: $primary;
-    width: $sidebar-width;
-    height: 100vh;
-    z-index: 6;
-    position: fixed;
-    border-left: 1px solid $body-bg-color;
+  background-color: $primary;
+  width: $sidebar-width;
+  height: 100vh;
+  z-index: 2;
+  position: fixed;
+  border-left: 1px solid $body-bg-color;
 }
 
 .block {
@@ -48,7 +49,6 @@ ul {
     }
   }
   li:last-child a {
-    // border-bottom: 2px solid;
     padding: 10px;
     padding-bottom: 22px;
   }
@@ -56,4 +56,3 @@ ul {
     border-bottom: 2px solid black;
   }
 }
-

@@ -4,6 +4,7 @@ import { NavComponent } from './nav.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 
 
@@ -15,7 +16,13 @@ import { MatDialogModule } from '@angular/material/dialog';
     CommonModule,
     AppRoutingModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    UiSwitchModule.forRoot({
+      color: 'rgb(0, 189, 99)',
+      switchColor: 'black',
+      defaultBgColor: 'transparent',
+      defaultBoColor : 'black',
+    }),
   ],
   exports: [
     NavComponent

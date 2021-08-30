@@ -1,4 +1,4 @@
-<section class="landing flex">
+  <section class="landing flex">
   <div class="inner">
     <div class="left-corner desktop-only"></div>
     <div class="right-corner desktop-only"></div>
@@ -162,8 +162,10 @@
           <div class="round-mini-button" (click)="prev()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
           </div>
+          <div class="relative">
           <img src={{lootBoxDetails[current].img}} alt="moonticket" />
-
+          <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+        </div>
           <div class="round-mini-button" (click)="next()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
           </div>

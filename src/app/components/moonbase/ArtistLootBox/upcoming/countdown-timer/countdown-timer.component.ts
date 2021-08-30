@@ -10,13 +10,19 @@ export class CountdownTimerComponent implements OnInit {
   @Input() date:string;
   interval:any;
   timer:any=0;
+  checkdate = "";
   constructor() { }
+
+  ngOnDestroy()
+  {
+    clearInterval(this.interval);
+  }
 
   ngOnInit(): void {
     // Set the date we're counting down to
  var date =   new Date(this.date + " UTC");
-var countDownDate = new Date(formatDate(date.toString(), "yyyy-MM-dd HH:mm:ss", "en-us")).getTime();
-console.log(formatDate(date.toString(), "yyyy-MM-dd HH:mm:ss", "en-us"))
+var countDownDate = new Date(formatDate(date.toString(), "yyyy/MM/dd HH:mm:ss", "en-us")).getTime();
+console.log(formatDate(date.toString(), "yyyy/MM/dd HH:mm:ss", "en-us"))
 // Update the count down every 1 second
 this.interval = setInterval(function() {
 

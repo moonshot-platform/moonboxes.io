@@ -177,6 +177,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
    this.dialog.open(ModalForTransactionComponent, {
     width: 'auto',
+    disableClose : true,
      data: {
        inputNumber : this.inputnumber,
        lootBoxName : this.lootBoxDetails[index-1].name,

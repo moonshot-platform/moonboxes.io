@@ -9,25 +9,52 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 })
 export class UpcomingComponent implements OnInit {
   static readonly routeName: string = 'upcoming';
-  listOfArtistCollection: any;
-  listOfArtistUpcoming : any;
+  listOfArtistCollection = [];
+  listOfArtistUpcoming = [];
+  listOfRecentDrops = [];
   endTime  = '2021-09-29T00:00:00';
+  isNSFWStatus = false;
 
   constructor(private httpService:HttpApiService) { }
 
   ngOnInit(): void {
+    this.isNSFWStatus = this.httpService.getNSFWStatus();
+    this.checkNSFWStatus();
     this.getAllCollections();
+    
   }
 
   getAllCollections()
   {
-    this.httpService.getAllCollections().subscribe((response)=>{
-        this.listOfArtistCollection=response.data;
+    this.httpService.getAllCollections(this.isNSFWStatus).subscribe((response)=>{
+        this.listOfArtistCollection=response.data.live_data_array;
+        this.listOfRecentDrops = response.data.recent_data_array;
+        
     });
 
-    this.httpService.getUpcomingArtistCollections().subscribe((response)=>{
-      this.listOfArtistUpcoming=response.data;
-  });
+      this.httpService.getUpcomingArtistCollections(this.isNSFWStatus).subscribe((response)=>{
+        this.listOfArtistUpcoming=response.data.data;
+    });
   }
+
+  checkNSFWStatus()
+  {
+    setInterval(() => {
+      this.checkNSFWStatusFromStorage()
+    }, 4000);
+    
+  }
+
+  checkNSFWStatusFromStorage()
+  {
+    let tempstatus = this.httpService.getNSFWStatus();
+      console.log(tempstatus)
+      if(this.isNSFWStatus!=tempstatus)
+      {
+        this.isNSFWStatus = tempstatus;
+        this.getAllCollections();
+      }
+  }
+  
 
 }

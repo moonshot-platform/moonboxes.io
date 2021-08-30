@@ -50,6 +50,10 @@ const routes: Routes = [
     component: InventoryComponent
   },
   {
+    path: ArtistMoonboxComponent.routeName,
+    component: ArtistMoonboxComponent
+  },
+  {
     path: UpcomingComponent.routeName,
     component: UpcomingComponent
   },

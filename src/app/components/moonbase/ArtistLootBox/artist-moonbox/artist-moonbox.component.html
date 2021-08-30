@@ -13,7 +13,7 @@
             <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
               {{artistDetails?.name}}</p>
             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}</p>
-            <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">Detail
+            <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
                {{artistDetails?.description}}</p>
           </div>
         </div>  
@@ -185,18 +185,20 @@
           <div class="round-mini-button" (click)="prev()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
           </div>
+          <div class="relative">
           <img src={{lootBoxDetails[current].img}} alt="moonticket" />
-
+          <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+        </div>
           <div class="round-mini-button" (click)="next()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
           </div>
         </div>
 
         <div class="flex-col text-center">
-          <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}}  ({{supplyDetails[current]?.currentSupply}})</p>
-          <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[current].value}}</p>
-          <div class="border plus_minus flex mb20">
-            <button class="flex1 toggle-less" (click)="minus(current)">
+          <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">{{supplyDetails[current]?.type}} ({{supplyDetails[current]?.currentSupply}})</p>
+            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[current]?.price}} BNB</p>
+            <div class="border plus_minus flex mb20"  *ngIf="inputnumber[current+1]>0">
+            <button class="flex1 toggle-less" (click)="minus(current+1)">
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 width="11" height="14" viewBox="0 0 11 14">
                 <path fill="#fff"
@@ -204,9 +206,9 @@
               </svg>
             </button>
             <div class="flex1 border_left_right">
-              <input type="text" class="form-control" [(ngModel)]="inputnumber[current]" readonly>
+              <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
             </div>
-            <button class="flex1 toggle-more" (click)="plus(current)">
+            <button class="flex1 toggle-more" (click)="plus(current+1)">
               <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 width="11" height="14" viewBox="0 0 11 14">
                 <path fill="#fff"
@@ -214,12 +216,17 @@
               </svg>
             </button>
           </div>
-          <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(current)">Buy</a>
+          <div class=" plus_minus flex mb20 justify-center"  *ngIf="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming">
+            Sold Out
+          </div>
+          <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
+              Coming soon...
+          </div>
+          <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"  (click)="buyMoonBase(current+1)">Buy</a>
           <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
         </div>
       </div>
     </section>
-
    <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
   </div>
   <app-sidebar></app-sidebar>

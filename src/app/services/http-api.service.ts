@@ -61,12 +61,12 @@ export class HttpApiService {
 
   getUserInventory(data:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"userData?userAddress="+data,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"userData?userAddress="+data.userAddress+"&NSFW="+data.nsfwstatus,{ headers:this.headers});
   }
 
   getuserUpcomingNft(data:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"userUpcomingNft?userAddress="+data,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"userUpcomingNft?userAddress="+data.userAddress+"&nsfw="+data.nsfwstatus,{ headers:this.headers});
   }
 
   verifyBetHash(data:any) : Observable<any>
@@ -85,14 +85,14 @@ export class HttpApiService {
   } 
 
   /***** Artist pages apis *****/
-  getAllCollections():Observable<any>
+  getAllCollections(nsfwStatus:boolean):Observable<any>
   {
-    return this.httpClient.get(baseURL+"allArtistBanners",{ headers:this.headers});
+    return this.httpClient.get(baseURL+"allArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
   } 
   
-  getUpcomingArtistCollections():Observable<any>
+  getUpcomingArtistCollections(nsfwStatus:boolean):Observable<any>
   {
-    return this.httpClient.get(baseURL+"upcomingArtistBanners",{ headers:this.headers});
+    return this.httpClient.get(baseURL+"upcomingArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
   } 
   
   getArtistMoonboxData(userAddress:any):Observable<any>
@@ -127,6 +127,17 @@ export class HttpApiService {
     this.toastrService.success(message);
     else
     this.toastrService.error(message);
+  }
+
+  setNSFWStatus(status)
+  {
+
+    localStorage.setItem("nsfw",status);
+  }
+
+  getNSFWStatus()
+  {
+    return localStorage.getItem("nsfw")=="true";
   }
 
 }
