@@ -1,5 +1,3 @@
-@import "includes";
-
 .inner img {
     width: 200px;
     height: 200px;
@@ -7,97 +5,45 @@
     border-radius: 50%;
     padding: 4px;
 }
-
 .inner img.lock {
-    border: none;
-    width: 35px;
-    z-index: 1;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: -100px;
-    margin-bottom: 60px;
+        border: none;
+        width: 35px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        right: 0;
 }
-
-.plus_minus div,
-.plus_minus button,
-.plus_minus input {
-    //padding: 0.4375rem 1.25rem;
+.plus_minus div, .plus_minus button,.plus_minus input {
+    padding: 0.4375rem 1.25rem;
     background: transparent;
     border: none;
     color: white;
-    padding-top: 7px;
-    cursor: pointer;
 }
-
 .plus_minus div.border_left_right {
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
 }
-
 .border {
     border: 1px solid #fff;
 }
-
 .border.plus_minus.flex {
-    max-width: 120px;
-    height: 40px;
+    max-width: 200px;
     border-radius: 30px;
 }
-
 .border_left_right input {
     width: 100%;
+    padding-left: 0;
+    padding-right: 0;
     text-align: center;
 }
-
 .buy_button {
-    max-width: 120px !important;
-    height: 40px;
+    max-width: 150px;
     margin: auto;
 }
-
-.outlined-button {
-    //padding: 0.9375rem 1.25rem;
-    box-sizing: border-box;
-    display: flex;
-    border: 1px solid #d5a642;
-    height: -webkit-fit-content;
-    height: -moz-fit-content;
-    height: 40px;
-    min-width: 120px;
-    border-radius: 25px;
-    color: #d5a642; //#a17525
-    font-family: "Montserrat", "Sans";
-    font-weight: 700;
-    background-color: transparent;
-    font-size: 16px;
-    text-decoration: none;
-    text-transform: capitalize;
-    text-align: center;
-    cursor: default;
-    align-content: center;
-    justify-content: center;
-    padding-top: 8px;
-}
-
 .flex-column {
     flex-direction: column;
-}
-.scroller > .desktop-only.h-100 {
-    padding-top: 16rem !important;
-}
-
-@media only screen and (max-width: $md-header) {
-    .none {
-        display: none;
-    }
-    .mr30-md {
-        margin-right: 0px;
-    }
-    /* .inner {
-        padding-bottom: -2rem;
-        padding-right: 1rem;
-        //width: $md-header;
-        margin-left: calc(80px - 1rem) !important;
-    } */
 }

@@ -1,5 +1,6 @@
 @import "includes";
 
+
 section.navigation {
   // @include paddingInside(15px);
   padding: 0.9375rem 3rem;
@@ -66,6 +67,10 @@ section.navigation {
   padding-left: 5px;
 }
 
+.text-dark {
+  color: black;
+}
+
 .justify-around {
   display: flex;
   justify-content: space-around;
@@ -84,7 +89,7 @@ nav {
   ul {
     // width: inherit;
     justify-content: center;
-    margin-left: -120px;
+    margin-left: 0;
     padding-bottom: 0rem;
     border-bottom: 4px solid #9f7c31;
 
@@ -269,47 +274,4 @@ nav {
   .mt-15 {
     margin-top: 15px;
   }
-}
-
-
-
-section.moonbox-menu {
-  padding: 20px;
-  border-bottom: 6px solid #6d5422;
-  box-sizing: border-box;
-  background: #d5a642;
-  position: fixed;
-  right: 0;
-  top: 0;
-  width: 100%;
-  max-width: 100%;
-  z-index: 12000;
-  margin-right: 0;
-  height: 100vh;
-  max-height: calc(100vh - 70px);
-  overflow: auto;
-  .inner {
-    @extend %max-width-center;
-    border-radius: 160px;
-  }
-}
-
-.menu-item {
-  display: flex;
-    flex-flow: column;
-    align-items: center;
-    justify-content: flex-end; 
-    a {
-      color: black;
-      width: 100%;
-      text-align: center;
-      padding-top: 1rem;
-    }
-    .active-link {
-      font-weight: bold;
-      border-top: 3px solid;
-    }
-}
-.invisible {
-  visibility: hidden;
 }

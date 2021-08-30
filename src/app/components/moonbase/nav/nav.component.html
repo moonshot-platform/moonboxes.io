@@ -217,6 +217,8 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
       <!-- <a [routerLink]="['']">Jim</a> -->
     </ul>
     <div class="block flex-center">
+      <ui-switch defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)"  class="mr10"></ui-switch>
+      <span class="mr20 text-dark">NSFW</span>
       <a href="" [routerLink]="['/']">
         <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
           xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -438,7 +440,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
     <div class="res_menu flex1">
       <ul class="box">
         <li (click)="menuopen()">
-          <svg [ngClass]="{'invisible': menuItem}" width="32px" height="25px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
+          <svg width="32px" height="25px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink">
             <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
             <title>Combined Shape</title>
@@ -450,7 +452,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
           </svg>
         </li>
         <li>
-          <a href="javascript:void(0)" (click)="closeMenu()">
+          <a href="javascript:void(0)"  (click)="closeMenu()">
             <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink">
               <title _ngcontent-jde-c121="">Combined Shape</title>
@@ -482,6 +484,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
     </div>
   </section>
 
+
   <section class="mobile-only moonbox-menu" *ngIf="menuItem">
     <div class="inner menu-item">
       <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
@@ -490,8 +493,7 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
         true}" [routerLink]="['/history']" (click)="closeMenu()">MoonLottery</a>
       <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
         true}" [routerLink]="['/community']" (click)="closeMenu()">MoonArcade</a>
-      <a class="p17 mb20" (click)="toggleTokenomics();closeMenu()">Tokenomics</a>
+      <a class="p17 mb20" (click)="closeMenu()">Tokenomics</a>
     </div>
   </section>
-
 </section>

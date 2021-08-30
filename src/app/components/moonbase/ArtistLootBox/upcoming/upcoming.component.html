@@ -67,7 +67,7 @@
             </div>
           </div>
           <div class="upcoming flex flex-wrap wrap justify-space-between">
-            <div *ngFor="let item of listOfArtistUpcoming" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+            <div *ngFor="let item of listOfArtistCollection" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
               <div class="flex1 nft_img">
                 <div class="text-center">
                   <div class="flex align-left flex-col mb10 mt10">
@@ -86,10 +86,10 @@
                   <div class="flex align-center"
                     style="padding: 10px;border: 1px solid;border-radius: 30px;margin: .5rem;justify-content: center;">
                     <div class="round-mini-button"
-                      style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: red; border: 1px solid red;">
+                      style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: green; border: 1px solid green;">
                     </div>
                     <p class="color-primary flex">
-                      <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                      <span>Open</span>
                     </p>
                     <div class="round-mini-button"
                       style="width: 30px; height: 30px; margin-left: 10px; font-size: 10px;">
@@ -120,7 +120,7 @@
             </div>
           </div>
           <div class="upcoming flex flex-wrap wrap justify-space-between">
-            <div *ngFor="let item of listOfArtistCollection" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+            <div *ngFor="let item of listOfRecentDrops" class="flex-column flex-center p-3 grid-3" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
               <div class="flex1 nft_img">
                 <div class="text-center">
                   <div class="flex align-left flex-col mb10 mt10">

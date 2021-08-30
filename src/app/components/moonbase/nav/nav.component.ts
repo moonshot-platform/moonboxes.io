@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
-import { TokenomicsService } from 'src/app/services/tokenomics.service';
 
 @Component({
   selector: 'app-nav',
@@ -15,7 +14,9 @@ export class NavComponent implements OnInit {
   isConnected:boolean = false;
   balanceOfMoon: any=0;
   moonCountData: any;
+  isNSFWStatus = false;
   menuItem = false;
+
   public navItems: any[] = [
     {
       'name': 'MoonBoxes',
@@ -35,10 +36,11 @@ export class NavComponent implements OnInit {
   public open = false;
 
   constructor(public dialog: MatDialog,private walletConnectService:WalletConnectService,
-    private httpApi:HttpApiService, private tokenomicsService: TokenomicsService) { }
+    private httpApi:HttpApiService) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
+    this.getNSFWStatus();
 
     setTimeout(async() => {
       await this.walletConnectService.getData().subscribe((data)=>{
@@ -79,12 +81,18 @@ export class NavComponent implements OnInit {
 
    
   }
-  
-  toggleTokenomics() {
-    this.open = false;
-    this.tokenomicsService.onToggle(false);
+
+  changeNSFWStatus(event:any)
+  {
+    debugger
+      this.httpApi.setNSFWStatus(event);
   }
 
+  getNSFWStatus()
+  {
+    this.isNSFWStatus = this.httpApi.getNSFWStatus();
+  }
+  
   menuopen() {
     this.menuItem = true;
   }

@@ -21,7 +21,7 @@ export class InventoryComponent implements OnInit {
   lootBoxDetails = [];
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
- 
+  isNSFWStatus = false;
  
   constructor(private walletConnectService:WalletConnectService,
     private httpApi:HttpApiService,private toastrService:ToastrService,
@@ -31,12 +31,13 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletConnectService.init();
-
+    this.isNSFWStatus = this.httpApi.getNSFWStatus();
+    this.checkNSFWStatus();
     setTimeout(async() => {
       await this.walletConnectService.getData().subscribe((data)=>{
         this.data=data;
       });
-      
+
       if(this.data!==undefined && this.data.address!=undefined)
       {
         this.isConnected=true;
@@ -51,7 +52,10 @@ export class InventoryComponent implements OnInit {
 
   getUserData()
   {
-    this.httpApi.getUserInventory(this.data.address).subscribe((response:any)=>{
+    this.httpApi.getUserInventory({
+      userAddress : this.data.address,
+      nsfwstatus : this.isNSFWStatus
+    }).subscribe((response:any)=>{
       if(response.isSuccess){
         this.inventoryList=response.data.data;
       }
@@ -61,9 +65,13 @@ export class InventoryComponent implements OnInit {
       }
     });
 
-    this.httpApi.getuserUpcomingNft(this.data.address).subscribe((response:any)=>{
+    this.httpApi.getuserUpcomingNft({
+      userAddress : this.data.address,
+      nsfw : this.isNSFWStatus
+    }).subscribe((response:any)=>{
       if(response.isSuccess){
         this.inventoryListUpcoming=response.data.data;
+        
       }
       else
       {
@@ -129,6 +137,7 @@ export class InventoryComponent implements OnInit {
       else{
         this.lootBoxDetailsAttributes[index].disabled = false;
       }
+
     })
   
   }
@@ -168,5 +177,42 @@ export class InventoryComponent implements OnInit {
     }
   }
 
+
+  checkNSFWStatus()
+  {
+    setInterval(() => {
+      this.checkNSFWStatusFromStorage()
+    }, 4000);
+    
+  }
+
+  checkNSFWStatusFromStorage()
+  {
+    let tempstatus = this.httpApi.getNSFWStatus();
+      console.log(tempstatus)
+      if(this.isNSFWStatus!=tempstatus)
+      {
+        this.isNSFWStatus = tempstatus;
+        this.getUserData();
+      }
+  }
+
+  checkFileType(url:string)
+  {
+    const images = ["jpg", "gif", "png","jpeg"]
+    const videos = ["mp4", "3gp", "ogg"]
+
+    const urltemp = new URL(url)
+    const extension = urltemp.pathname.split(".")[1]
+
+    if (images.includes(extension)) {
+      return "true"
+    } else if (videos.includes(extension)) {
+      return false;
+    }
+    return false;
+  }
+
+  
 
 }

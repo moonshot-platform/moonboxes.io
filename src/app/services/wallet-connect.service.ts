@@ -6,9 +6,9 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
-export const LootboxAddress = "0x73dcA30f0d71C7453Ae8971690Fb0D7b64DCAE86";
-export const NFTAddress = "0x660Bd15a07eA3775a7cD16d400E7457543D0703d";
-export const ArtistNFTAddress = "0x7e7e76642A2AdeCfafDd5e3A4f55bF19A2af26cc";
+export const LootboxAddress = "0x3c880aa2C34CF2fe58B16c143e24489f6095a8b7";
+export const NFTAddress = "0x6dbAB406ea7553b1f259b834B8676B99383AeC89";
+export const ArtistNFTAddress = "0xD8125600D626403E02ec4e3Efe40bECddca9Dcf3";
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
@@ -155,15 +155,12 @@ export class WalletConnectService {
   async getDetailsMoonboxPrice() {
     var promise = new Promise((resolve, reject) => {
       try {
-        debugger
         this.LootboxContract.moonboxPrice()
           .then(function (transactionHash) {
-            debugger
             resolve(transactionHash);
           })
       }
       catch (e) {
-        debugger
         reject(false);
       }
     });
@@ -173,15 +170,12 @@ export class WalletConnectService {
   async getDetailsMoonboxlimit() {
     var promise = new Promise((resolve, reject) => {
       try {
-        debugger
         this.LootboxContract.getMoonShootLimit()
           .then(function (transactionHash) {
-            debugger
             resolve(transactionHash);
           })
       }
       catch (e) {
-        debugger
         reject(false);
       }
     });
@@ -192,15 +186,12 @@ export class WalletConnectService {
   async getDetailsMoonboxlimitArtist() {
     var promise = new Promise((resolve, reject) => {
       try {
-        debugger
         this.artistLootBoxContract.getMoonShootLimit()
           .then(function (transactionHash) {
-            debugger
             resolve(transactionHash);
           })
       }
       catch (e) {
-        debugger
         reject(false);
       }
     });
@@ -262,7 +253,6 @@ export class WalletConnectService {
           resolve({hash:tx,status:true,allowance:false})     
       }
       catch (e) {
-        debugger
         reject({ hash: "", status: false });
       }
     });
@@ -388,11 +378,9 @@ export class WalletConnectService {
   /** Artist  **/
   async claimRewardTransaction(junkAmount:any,nftId:any,nftAmount:any,betId:any,seed,signHash:any) {
     var spliSign=ethers.utils.splitSignature(signHash);
-    const params2:any = ethers.utils.parseEther(junkAmount.toString()); 
-    debugger
+    const params2:any = (junkAmount.toString()); 
     var promise = new Promise(async (resolve, reject) => {
       try {
-        debugger
         var txn=await this.LootboxContract.claimReward(params2, NFTAddress,nftId,nftAmount,betId,
           spliSign.v,spliSign.r,spliSign.s)
          .catch(function(e){
