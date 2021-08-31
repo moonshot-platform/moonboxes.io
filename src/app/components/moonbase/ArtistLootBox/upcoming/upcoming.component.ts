@@ -33,7 +33,7 @@ export class UpcomingComponent implements OnInit {
     });
 
       this.httpService.getUpcomingArtistCollections(this.isNSFWStatus).subscribe((response)=>{
-        this.listOfArtistUpcoming=response.data.data;
+        this.listOfArtistUpcoming=response.data;
     });
   }
 
@@ -48,7 +48,6 @@ export class UpcomingComponent implements OnInit {
   checkNSFWStatusFromStorage()
   {
     let tempstatus = this.httpService.getNSFWStatus();
-      console.log(tempstatus)
       if(this.isNSFWStatus!=tempstatus)
       {
         this.isNSFWStatus = tempstatus;

@@ -9,16 +9,21 @@
 .flex1.flex-column.flex-center {
   flex: 0 0 33.333333%;
 }
-.inner img {
-    width: 200px;
-    height: 200px;
-    border: 1px solid;
-    padding: 4px;
+.inner {
+    img,
+    video {
+        width: 200px;
+        height: 200px;
+        border: 1px solid;
+        padding: 4px;
+        object-fit: cover;
+    }
 }
 .inner .nft_img:hover img {
   border: 1px solid white !important;
 }
-.inner .outer-box img {
+.inner .outer-box img,
+.inner .outer-box video {
     height: 350px !important;
     width: 350px !important;
 }
