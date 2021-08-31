@@ -47,3 +47,38 @@
 .flex-column {
     flex-direction: column;
 }
+
+.moonbox {
+    width: 210px;
+    height: calc(12600px / 60);
+    animation: animate 2s steps(60) infinite;
+    transition: all 1s ease;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.wood {
+    background-image: url('/assets/media/sprites/moonboxes/wood.png');
+}
+
+.silver {
+    background-image: url('/assets/media/sprites/moonboxes/silver.png');
+}
+
+.gold {
+    background-image: url('/assets/media/sprites/moonboxes/gold.png');
+}
+
+.diamond {
+    background-image: url('/assets/media/sprites/moonboxes/diamond.png');
+}
+
+@keyframes animate {
+    from {
+        background-position-y: 0;
+    }
+
+    to {
+        background-position-y: 12600px;
+    }
+}
