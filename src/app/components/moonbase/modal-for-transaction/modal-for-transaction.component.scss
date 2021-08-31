@@ -1,3 +1,5 @@
+@import "includes";
+
 // pop up css
 .modal-box {
     justify-content: center;
@@ -74,3 +76,143 @@
     background: #d5a642;
     border-color: #d5a642;
   }
+
+.onvideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - 80px);
+    // height: 73vh;
+    width: calc(100% - 20px);
+    padding: 10px;
+    right: 0;
+}
+
+@media only screen and (max-width: $md-header) {
+  .mmh-75 {
+    // height: 75vh;
+    max-width: 100%;
+  }
+  .onvideo {
+    // height: 73vh;
+    max-width: 100%;
+    max-height: 100%;
+  }
+}
+.mh-75 {
+    max-height: 75vh;
+}
+.relative {
+    position: relative;
+}
+
+.circle {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    background-color: #06090f;
+    border-radius: 50%;
+    padding: 2rem;
+    margin: auto; 
+    transform: translate(-50%, -50%);
+    transition: transform 20s linear;
+    box-shadow:0 0 10px 2px #d5a642;
+}
+
+.circle.expand {
+    animation: expand 20s forwards;
+}
+
+@keyframes expand {
+    0% {
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(10000%);
+    }
+}
+
+.fade-in {
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+  }
+  
+  
+  @keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  .transaction-Popup {
+    // transform: translate3d(-50%, -50%, 0);
+   }
+  .active {
+    animation: enter 5s ease-out;
+  }
+
+  .in-active {
+    animation: exit 5s ease-out;
+  }
+
+  @keyframes enter {
+    from {
+      transform:  perspective(1000px) translate3d(-50%, -50%, 0) scale(0.8);
+    }
+    to {
+      transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
+    }
+  }
+  
+  @keyframes exit {
+    from {
+      transform:  perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
+    }
+  
+    to {
+      transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1.2);
+    }
+  }
+  

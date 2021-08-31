@@ -16,6 +16,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   current = 0;
   inputnumber = [];
+  public lootboxfloating = ['wood','silver','gold','diamond']
   isConnected:boolean = false;
   isWrongNetwork:boolean = false;
   static readonly routeName: string = 'buy_moonbase';
