@@ -22,13 +22,11 @@ export class CountdownTimerComponent implements OnInit {
     // Set the date we're counting down to
  var date =   new Date(this.date + " UTC");
 var countDownDate = new Date(formatDate(date.toString(), "yyyy/MM/dd HH:mm:ss", "en-us")).getTime();
-console.log(formatDate(date.toString(), "yyyy/MM/dd HH:mm:ss", "en-us"))
 // Update the count down every 1 second
 this.interval = setInterval(function() {
 
   // Get today's date and time
   var now = new Date().getTime();
-  console.log(new Date())
 
   // Find the distance between now and the count down date
   var distance = countDownDate - now;

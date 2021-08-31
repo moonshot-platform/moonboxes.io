@@ -189,7 +189,6 @@ export class InventoryComponent implements OnInit {
   checkNSFWStatusFromStorage()
   {
     let tempstatus = this.httpApi.getNSFWStatus();
-      console.log(tempstatus)
       if(this.isNSFWStatus!=tempstatus)
       {
         this.isNSFWStatus = tempstatus;

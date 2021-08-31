@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
@@ -38,7 +38,6 @@ export class ArtistMoonboxComponent implements OnInit {
     this.inputnumber[4] = 0;
 
     this.artistAddress = this.activatedRoute.snapshot.paramMap.get("artistAddress")
-    console.log(this.artistAddress);
 
     this.getMaxSupply();
   }
@@ -62,6 +61,7 @@ export class ArtistMoonboxComponent implements OnInit {
         this.isConnected = false;
       }
     }, 1000);
+    
   }
 
   async getMoonShootBalance() {
@@ -117,6 +117,7 @@ export class ArtistMoonboxComponent implements OnInit {
       if (response.isSuccess) {
         this.supplyDetails = response.data;
         this.artistDetails = response;
+        console.log(this.artistDetails);
         this.inputnumber[0] = 1;
         if (this.supplyDetails[0].currentSupply > 0)
           this.inputnumber[1] = 1;
@@ -184,6 +185,8 @@ export class ArtistMoonboxComponent implements OnInit {
     return true;
   }
 
-
+  openDialogWithTemplateRef (templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef);
+  }
 
 }

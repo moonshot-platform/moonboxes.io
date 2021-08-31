@@ -6,7 +6,7 @@
 
     <section class="scroller d-block">
       <div class="relative desktop-only pt-5 flex1 h-100 flex-center align-items-center">
-        
+
         <div class="flex1 flex-column flex-center mb30" *ngFor="let item of inventoryListUpcoming;let i=index;">
           <div class="relative">
             <img src="{{getImagePath(item.set)}}" class="img-fluid" alt="">
@@ -27,67 +27,70 @@
               <img src="{{item1['logo_path']}}" class="img-fluid" alt="">
             </div>
             <div class="relative nft_img" *ngIf="!checkFileType(item1['logo_path'])">
-              <video class="img-fluid" alt="" controls>
+              <video class="img-fluid" alt="" loop autoplay>
                 <source src="{{item1['logo_path']}}">
-
-                </video>
-  
+              </video>
             </div>
-            
+
             <div class="text-center">
               <p class="p-white-span-primary p16d14m  mb10 mt10">{{item1['name']}}</p>
               <p class="p-white-span-primary p16d14m  mb10 mt10">{{item1['total']}}</p>
               <a (click)="setSelected(j,item1)" class="buy_button outlined-button mb10 text-inherit">Attributes</a>
             </div>
-            
-  
-  
+
+
+
           </div>
 
           <!------ List  -->
           <div class="outer-box" *ngIf="lootBoxDetailsAttributes[j]">
             <div class="flex1 flex-center flex-align-start justify-start mb30">
               <div class="relative flex-col">
-               
-                <img *ngIf="checkFileType(lootBoxDetailsAttributes[j].logo_path)" src="{{lootBoxDetailsAttributes[j].logo_path}}" class="img-fluid mb30" alt="">
-                <video class="img-fluid" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributes[j].logo_path)" controls>
+
+                <img *ngIf="checkFileType(lootBoxDetailsAttributes[j].logo_path)"
+                  src="{{lootBoxDetailsAttributes[j].logo_path}}" class="img-fluid mb30" alt="">
+                <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributes[j].logo_path)" loop autoplay>
                   <source src="{{lootBoxDetailsAttributes[j].logo_path}}">
-                  </video>
+                </video>
 
                 <a class="buy_button outlined-button mb10 text-inherit">Sell</a>
               </div>
               <div class="flex1"></div>
               <div class="flex4">
-  
+
                 <div class="flex justify-space-between flex-align-start">
                   <div class="flex flex-col">
-                      <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributes[j].name}}</p>
-                      <p class="p-white-span-primary p16d14m mb30 mt10">Rarity - {{lootBoxDetailsAttributes[j].rarity}}</p>
+                    <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributes[j].name}}</p>
+                    <p class="p-white-span-primary p16d14m mb30 mt10">Rarity - {{lootBoxDetailsAttributes[j].rarity}}
+                    </p>
                   </div>
                   <div class="flex-center" (click)="closeAttributes()">
-                    <svg id="attibute_close" width="27px" height="27px"
-                      viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1"
+                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                       <title>Combined Shape</title>
                       <desc>Created with Sketch.</desc>
-                      <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                        fill-rule="evenodd">
+                      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <path
                           d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
                           id="Combined-Shape" fill="#000000"></path>
                       </g>
                     </svg></div>
                 </div>
-  
-  
+
+
                 <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span
                     class="w700">Attribute</span><span class="w700">Rarity</span></p>
-                 <p *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties" class="mb20 p-white-span-primary justify-space-between flex">
+                <p *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties"
+                  class="mb20 p-white-span-primary justify-space-between flex">
                   <span>{{propertiesData.key}}</span>
-                    <span>{{propertiesData.value}}</span></p>
-                    <a *ngIf="!lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable"  class="buy_button outlined-button mb10 text-inherit" (click)="claimReward(lootBoxDetailsAttributes[j],$event,j)">Claim Reward</a>
-                    
-                    <a class="buy_button outlined-button mb10 text-inherit" *ngIf="lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable"> Claim Reward </a>
+                  <span>{{propertiesData.value}}</span></p>
+                <a *ngIf="!lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable"
+                  class="buy_button outlined-button mb10 text-inherit"
+                  (click)="claimReward(lootBoxDetailsAttributes[j],$event,j)">Claim Reward</a>
+
+                <a class="buy_button outlined-button mb10 text-inherit"
+                  *ngIf="lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable"> Claim
+                  Reward </a>
               </div>
             </div>
           </div>
@@ -102,9 +105,9 @@
             <img src="{{item.logo_path}}" class="img-fluid" alt="">
           </div>
           <div class="relative" *ngIf="!checkFileType(item.logo_path)">
-            <video class="img-fluid" alt="">
+            <video class="img-fluid" alt="" loop autoplay>
               <source src="{{item.logo_path}}">
-              </video>
+            </video>
 
           </div>
           <div class="text-center">
@@ -114,50 +117,58 @@
 
 
           <!------ List  -->
-  <div class="outer-box" *ngIf="lootBoxDetailsAttributesMobile[i]">
-    <div class="flex1 flex-center flex-col flex-align-start justify-start mb30">
-      <div class="relative flex-col">
-        
-        <img src="{{lootBoxDetailsAttributesMobile[i].logo_path}}" class="img-fluid mb30" alt="">
-        <a class="buy_button outlined-button mb10 text-inherit">Sell</a>
-      </div>
-      <div class="flex1"></div>
-      <div class="wp100 mt30">
+          <div class="outer-box" *ngIf="lootBoxDetailsAttributesMobile[i]!==undefined">
+            <div class="flex1 flex-center flex-col flex-align-start justify-start mb30">
+              <div class="relative flex-col">
 
-        <div class="flex justify-space-between flex-align-start">
-          <div class="flex flex-col">
-              <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributesMobile[i].name}}</p>
-              <p class="p-white-span-primary p16d14m mb30 mt10">Rarity - {{lootBoxDetailsAttributesMobile[i].rarity}}</p>
+                <img *ngIf="checkFileType(lootBoxDetailsAttributesMobile[i].logo_path)"
+                src="{{lootBoxDetailsAttributesMobile[i].logo_path}}" class="img-fluid mb30" alt="">
+              <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributesMobile[i].logo_path)" loop autoplay>
+                <source src="{{lootBoxDetailsAttributesMobile[i].logo_path}}">
+              </video>
+
+                <a class="buy_button outlined-button mb10 text-inherit">Sell</a>
+              </div>
+              <div class="flex1"></div>
+              <div class="wp100 mt30">
+
+                <div class="flex justify-space-between flex-align-start">
+                  <div class="flex flex-col">
+                    <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributesMobile[i].name}}</p>
+                    <p class="p-white-span-primary p16d14m mb30 mt10">Rarity -
+                      {{lootBoxDetailsAttributesMobile[i].rarity}}</p>
+                  </div>
+                  <div class="flex-center" (click)="closeAttributes()">
+                    <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1"
+                      xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <title>Combined Shape</title>
+                      <desc>Created with Sketch.</desc>
+                      <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <path
+                          d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+                          id="Combined-Shape" fill="#000000"></path>
+                      </g>
+                    </svg></div>
+                </div>
+
+
+                <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span
+                    class="w700">Attribute</span><span class="w700">Rarity</span></p>
+                <p *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties"
+                  class="mb20 p-white-span-primary justify-space-between flex break-word">
+                  <span>{{propertiesData.key}}</span>
+                  <span>{{propertiesData.value}}</span></p>
+                <a *ngIf="!lootBoxDetailsAttributesMobile[i].disabled && lootBoxDetailsAttributesMobile[i].isRewardAvailable"
+                  class="buy_button outlined-button mb10 text-inherit"
+                  (click)="claimReward(lootBoxDetailsAttributesMobile[i],$event,0)">Claim Reward</a>
+                <a class="buy_button outlined-button mb10 text-inherit"
+                  *ngIf="lootBoxDetailsAttributesMobile[i].disabled"> Claim Reward </a>
+              </div>
+            </div>
           </div>
-          <div class="flex-center" (click)="closeAttributes()">
-            <svg id="attibute_close" width="27px" height="27px"
-              viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink">
-              <title>Combined Shape</title>
-              <desc>Created with Sketch.</desc>
-              <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                fill-rule="evenodd">
-                <path
-                  d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                  id="Combined-Shape" fill="#000000"></path>
-              </g>
-            </svg></div>
+          <!----list-->
         </div>
 
-
-        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span
-            class="w700">Attribute</span><span class="w700">Rarity</span></p>
-         <p *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties" class="mb20 p-white-span-primary justify-space-between flex break-word">
-          <span>{{propertiesData.key}}</span>
-            <span>{{propertiesData.value}}</span></p>
-            <a *ngIf="!lootBoxDetailsAttributesMobile[i].disabled && lootBoxDetailsAttributesMobile[i].isRewardAvailable"  class="buy_button outlined-button mb10 text-inherit" (click)="claimReward(lootBoxDetailsAttributesMobile[i],$event,0)">Claim Reward</a>
-            <a class="buy_button outlined-button mb10 text-inherit" *ngIf="lootBoxDetailsAttributesMobile[i].disabled"> Claim Reward </a>
-      </div>
-    </div>
-  </div>
-  <!----list-->
-        </div>
-  
       </div>
 
 
