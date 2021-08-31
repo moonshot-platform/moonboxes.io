@@ -10,10 +10,10 @@
       <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center">
 
         <div class="flex1 flex-column flex-center">
-          <div class="relative">
-            <img src="./../../../../assets/media/images/moonbox/wood.png" class="img-fluid" alt="">
-            <img *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || this.supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-          </div>
+        <div class="relative">
+            <div class="relative moonbox wood"></div>
+            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+        </div>
           <div class="text-center">
             <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[0].name}}  ({{this.maxSupply[0]}})</p>
             <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[0].value}}</p>
@@ -48,8 +48,8 @@
         </div>
         <div class="flex1 flex-center flex-column">
           <div class="relative">
-            <img src="./../../../../assets/media/images/moonbox/silver.png" class="img-fluid" alt="">
-            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+            <div class="relative moonbox silver"></div>
+            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
           </div>
           <div class="text-center">
             <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[1].name}} ({{this.maxSupply[1]}})</p>
@@ -84,8 +84,8 @@
         </div>
         <div class="flex1 flex-column flex-center">
           <div class="relative">
-            <img src="./../../../../assets/media/images/moonbox/gold.png" class="img-fluid" alt="">
-            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+            <div class="relative moonbox gold"></div>
+            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
           </div>
           <div class="text-center">
             <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[2].name}} ({{this.maxSupply[2]}})</p>
@@ -120,9 +120,8 @@
         </div>
         <div class="flex1 flex-center flex-column">
           <div class="relative">
-            <img src="./../../../../assets/media/images/moonbox/diamond.png" class="img-fluid" alt="">
-            
-            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9)  || supplyDetails?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+            <div class="relative moonbox diamond"></div>
+            <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
           </div>
           <div class="text-center">
             <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[3].name}} ({{this.maxSupply[3]}})</p>
