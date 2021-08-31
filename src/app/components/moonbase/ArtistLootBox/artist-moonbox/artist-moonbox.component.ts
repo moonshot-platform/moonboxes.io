@@ -21,6 +21,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
 
   public lootBoxDetails: any = [];
+  public lootboxfloating = ['wood','silver','gold','diamond']
   data: any;
   supplyDetails: any = [];
   balanceOfMoon: any;

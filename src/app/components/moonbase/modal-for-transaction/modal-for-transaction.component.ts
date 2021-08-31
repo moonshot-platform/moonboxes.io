@@ -17,7 +17,15 @@ export class ModalForTransactionComponent implements OnInit {
   successIcon: boolean = false;
   successIcon2: boolean = false;
   isCompletedProcess : boolean = false;
-  
+  videoSource = [
+    "assets/media/videos/gold_video.mp4",
+    "assets/media/videos/gold_video.mp4",
+    "assets/media/videos/gold_video.mp4",
+    "assets/media/videos/gold_video.mp4"
+  ]
+  nftrevealed: boolean = false;
+  playvideo: boolean = false;
+
   constructor(private walletConnectService:WalletConnectService,public dialog: MatDialog,private httpApi:HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any){
 
@@ -145,6 +153,11 @@ export class ModalForTransactionComponent implements OnInit {
           {
             this.btn2Text="Done";
             this.isCompletedProcess=true;
+            setTimeout(() => {
+              this.playvideo = true;
+
+            }, 3000);
+            debugger
             this.httpApi.showToastr(response.data.message,true);
           }
       })
@@ -210,5 +223,9 @@ export class ModalForTransactionComponent implements OnInit {
 
   closeDialog() {
   this.dialog.closeAll();
+  }
+
+  nftVisible() {
+    this.nftrevealed = true;
   }
 }
