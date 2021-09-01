@@ -606,9 +606,7 @@ ul {
 
 .mat-dialog-container {
   padding: 0 !important;
-}
-.mat-dialog-container .transaction-Popup {
-    background-color: #06090f;
+  background-color: transparent !important;
 }
 
 .p-white-span-primary {
@@ -1014,4 +1012,29 @@ button.toast-close-button {
 
 .switch.checked {
   background: #fff !important;
+}
+
+svg#share_twitter {
+  width: 50px;
+  border-radius: 50px;
+  border: 1px solid #D5A642;
+  margin-right: 5px;
+  margin-top: 10px;
+}
+
+svg#share_twitter:hover {
+  border: 1px solid #D5A642;
+  border-radius: 50px;
+  box-shadow: 0 0 4px #d5a642; 
+  path {
+    fill: white;
+  }
+}
+
+
+@media only screen and (min-width: $md-header) {
+.cdk-global-overlay-wrapper .cdk-overlay-pane {
+  left: -30px;
+  position: relative !important;
+}
 }

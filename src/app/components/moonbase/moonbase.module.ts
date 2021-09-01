@@ -24,7 +24,9 @@ import { AngularCountdownDateTimeModule } from 'angular-countdown-date-time';
 import { CountdownTimerComponent } from './ArtistLootBox/upcoming/countdown-timer/countdown-timer.component';
 import { ModalForClaimComponent } from './history/modal-for-claim/modal-for-claim.component';
 import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-nft-popup.component';
-
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { SocialShareComponent } from './modal-for-transaction/social-share/social-share.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-
     UpcomingComponent,
     CountdownTimerComponent,
     ModalForClaimComponent,
-    RevealNftPopupComponent
+    RevealNftPopupComponent,
+    SocialShareComponent
   ],
   imports: [
     MatIconModule,
@@ -53,7 +56,9 @@ import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-
     NavModule,
     FormsModule,
     NgxPaginationModule,
-    AngularCountdownDateTimeModule
+    AngularCountdownDateTimeModule,
+    ShareButtonsModule,
+    ShareIconsModule
   ]
 })
 export class MoonbaseModule { }

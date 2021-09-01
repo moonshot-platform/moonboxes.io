@@ -1,3 +1,4 @@
+import { SocialShareComponent } from './social-share/social-share.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpClient } from '@angular/common/http';
@@ -25,6 +26,7 @@ export class ModalForTransactionComponent implements OnInit {
   ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
+  social: boolean = false;
 
   constructor(private walletConnectService:WalletConnectService,public dialog: MatDialog,private httpApi:HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any){
@@ -227,5 +229,18 @@ export class ModalForTransactionComponent implements OnInit {
 
   nftVisible() {
     this.nftrevealed = true;
+  }
+
+  shareSocial() {
+
+    this.closeDialog();
+    this.social = true;
+  }
+
+  openDialog() {
+    let dialogRef = this.dialog.open(SocialShareComponent, {
+      width: 'auto',
+      // data: { name: this.name, animal: this.animal }
+    });
   }
 }

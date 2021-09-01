@@ -466,6 +466,12 @@ c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"><
           </a>
         </li>
         <li>
+          <div class="block flex-center">
+            <ui-switch defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)"  class="mr10"></ui-switch>
+            <span class="mr20 text-dark">NSFW</span>
+          </div>
+        </li>
+        <li>
           <div (click)="openDialog()" class="wallet_block flex-center">
             <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
               x="0px" y="0px" viewBox="0 0 64 64" xml:space="preserve" style="enable-background: new 0 0 64 64;">
