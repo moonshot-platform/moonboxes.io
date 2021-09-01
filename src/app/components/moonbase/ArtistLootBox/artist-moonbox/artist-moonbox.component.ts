@@ -28,6 +28,7 @@ export class ArtistMoonboxComponent implements OnInit {
   artistAddress: string;
   artistDetails: any;
   moonBoxLimitDetails: any;
+  invisible: boolean = false;
 
   constructor(public walletConnectService: WalletConnectService, public dialog: MatDialog,
     public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
@@ -162,8 +163,9 @@ export class ArtistMoonboxComponent implements OnInit {
     {
       return false;
     }
+    this.invisible = true;
 
-    this.dialog.open(ModalForTransactionComponent, {
+    let dialogRef = this.dialog.open(ModalForTransactionComponent, {
       width: 'auto',
       disableClose : true,
       data: {
@@ -180,6 +182,10 @@ export class ArtistMoonboxComponent implements OnInit {
           signature: this.supplyDetails[index - 1].signature
         }
       }
+    });
+
+     dialogRef.afterClosed().subscribe(result => {
+    this.invisible = false;
     });
 
 

@@ -19,7 +19,8 @@
         object-fit: cover;
     }
 }
-.inner .nft_img:hover img {
+.inner .nft_img:hover img,
+.inner .nft_img:hover video {
   border: 1px solid white !important;
 }
 .inner .outer-box img,

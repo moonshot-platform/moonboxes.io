@@ -12,6 +12,9 @@ export class FooterCountComponent implements OnInit {
   isConnected:boolean = false;
   balanceOfMoon: any=0;
   moonCountData: any;
+  moonBoxLimitDetails:any;
+  eligibleTier = "-";
+
   constructor(private walletConnectService:WalletConnectService,
     private httpApi:HttpApiService) { }
 
@@ -31,19 +34,36 @@ export class FooterCountComponent implements OnInit {
     },1000);
   }
 
-  getMoonShootBalance()
+  async getMoonShootBalance()
   {
-    this.walletConnectService.getBalanceOfUser(this.data.address)
-    .then((response:any)=>
-    {
-      this.balanceOfMoon=response;
-    })
+    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
 
     this.httpApi.getMoonCount(this.data.address)
     .subscribe((response:any)=>
     {
       this.moonCountData=response.data;
     })
+
+    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+
+   if(Number(this.balanceOfMoon)>=Number(this.moonBoxLimitDetails[3]))
+   {
+     this.eligibleTier = "Diamond";
+   }
+   else if(Number(this.balanceOfMoon)>=Number(this.moonBoxLimitDetails[2]))
+   {
+     this.eligibleTier = "Silver";
+   }
+   else if(Number(this.balanceOfMoon)>=Number(this.moonBoxLimitDetails[1]))
+   {
+     this.eligibleTier = "Gold";
+   }
+   else
+   {
+     this.eligibleTier = "Wood";
+   }
+
+    
   }
 
 }
