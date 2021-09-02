@@ -607,6 +607,7 @@ ul {
 .mat-dialog-container {
   padding: 0 !important;
   background-color: transparent !important;
+  box-shadow: none !important;
 }
 
 .p-white-span-primary {
@@ -829,6 +830,10 @@ ul {
     padding-bottom: 6rem !important;
     padding-top: 6rem !important;
   }
+  .cdk-overlay-pane {
+    position: relative !important;
+    transform: translate(0px, -35px);
+  }
 }
 
 .ngx-pagination
@@ -1030,7 +1035,9 @@ svg#share_twitter:hover {
     fill: white;
   }
 }
-
+svg#closenft path {
+  fill: #d5a642;
+}
 
 @media only screen and (min-width: $md-header) {
 .cdk-global-overlay-wrapper .cdk-overlay-pane {

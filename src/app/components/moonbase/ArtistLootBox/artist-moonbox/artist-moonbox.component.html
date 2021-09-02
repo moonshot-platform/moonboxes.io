@@ -303,7 +303,7 @@
             <div class="relative moonbox {{lootboxfloating[current]}}"></div>
             <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
             <img
-              *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails?.isUpcoming"
+              *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming"
               src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
           </div>
           <div class="round-mini-button" (click)="next()">
