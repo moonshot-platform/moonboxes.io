@@ -19,10 +19,11 @@ export class ModalForTransactionComponent implements OnInit {
   successIcon2: boolean = false;
   isCompletedProcess : boolean = false;
   videoSource = [
-    "assets/media/videos/gold_video.mp4",
-    "assets/media/videos/gold_video.mp4",
-    "assets/media/videos/gold_video.mp4",
-    "assets/media/videos/gold_video.mp4"
+    "assets/videos/Moonboxes_WOOD.mp4",
+     "assets/videos/Moonboxes_SILVER.mp4",
+     "assets/videos/Moonboxes_GOLD.mp4",
+     "assets/videos/Moonboxes_DIAMOND.mp4"
+
   ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
@@ -155,8 +156,9 @@ export class ModalForTransactionComponent implements OnInit {
           if(response.isSuccess)
           {
             this.btn2Text="Done";
+            this.nftImgRevealed = response.data.file_path;
             this.isCompletedProcess=true;
-            this.nftImgRevealed = true;  
+            
             setTimeout(() => {
               this.playvideo = true;
 
