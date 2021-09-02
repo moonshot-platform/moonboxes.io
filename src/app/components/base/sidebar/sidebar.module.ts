@@ -27,4 +27,4 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     SidebarComponent
   ]
 })
-export class SidebarModule { }
+export class SidebarModule {}
