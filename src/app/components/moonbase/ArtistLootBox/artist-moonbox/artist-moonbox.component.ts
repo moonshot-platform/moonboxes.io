@@ -185,6 +185,7 @@ export class ArtistMoonboxComponent implements OnInit {
     });
 
      dialogRef.afterClosed().subscribe(result => {
+       this.getMaxSupply();
     this.invisible = false;
     });
 

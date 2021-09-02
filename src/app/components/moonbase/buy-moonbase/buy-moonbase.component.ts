@@ -193,6 +193,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   dialogRef.afterClosed().subscribe(result => {
     this.invisible = false;
+    this.getMaxSupply();
     });
 
   return true;
