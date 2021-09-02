@@ -15,7 +15,7 @@
     </a>
     <div class="relative fade-in">
       <video *ngIf="playvideo" width="100%" height="auto" playsinline autoplay (ended)="nftVisible()">
-        <source src="{{videoSource[1]}}" type="video/mp4" />
+        <source src="{{videoSource[data.index-1]}}" type="video/mp4" />
         Browser not supported
       </video>
       <img *ngIf="nftrevealed" src="{{nftImgRevealed}}" class="fade-in onvideo img-fluid" alt="">
