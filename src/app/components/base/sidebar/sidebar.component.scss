@@ -9,6 +9,14 @@ section.sidebar {
   border-left: 1px solid black;
 }
 
+.wallet-button {
+  cursor: pointer;
+
+  > img:hover {
+    filter: invert(1)
+  }
+}
+
 .close {
   color: #7e6328;
   cursor: pointer;
@@ -34,6 +42,7 @@ ul {
   align-items: center;
 
   li {
+    max-width: 40px;
     text-align: center;
     border-bottom: 2px solid black;
     display: flex;

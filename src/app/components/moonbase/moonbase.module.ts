@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { MoonbaseRoutingModule } from './moonbase-routing.module';
 import { MoonbaseComponent } from './moonbase.component';
 import { NavModule } from './nav/nav.module';
-import { SidebarComponent } from './sidebar/sidebar.component';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgParticlesModule } from 'ng-particles';
@@ -27,11 +26,11 @@ import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SocialShareComponent } from './modal-for-transaction/social-share/social-share.component';
+import { SidebarModule } from '../base/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [
     MoonbaseComponent,
-    SidebarComponent,
     IntroComponent,
     FooterComponent,
     BuyMoonbaseComponent,
@@ -58,7 +57,8 @@ import { SocialShareComponent } from './modal-for-transaction/social-share/socia
     NgxPaginationModule,
     AngularCountdownDateTimeModule,
     ShareButtonsModule,
-    ShareIconsModule
+    ShareIconsModule,
+    SidebarModule
   ]
 })
 export class MoonbaseModule { }
