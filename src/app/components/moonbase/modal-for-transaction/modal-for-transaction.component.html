@@ -18,7 +18,7 @@
         <source src="{{videoSource[1]}}" type="video/mp4" />
         Browser not supported
       </video>
-      <img *ngIf="nftrevealed" src="assets/media/images/illustration_1.png" class="fade-in onvideo img-fluid" alt="">
+      <img *ngIf="nftrevealed" src="{{nftImgRevealed}}" class="fade-in onvideo img-fluid" alt="">
     </div>
     <div *ngIf="nftrevealed" class="flex justify-space-between">
       <a class="fade-in flex1 mr10 outlined-button text-inherit mt10" (click)="closeDialog()"
