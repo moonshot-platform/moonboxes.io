@@ -3,6 +3,7 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
+import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
 
 @Component({
   selector: 'app-inventory',
@@ -213,6 +214,11 @@ export class InventoryComponent implements OnInit {
     return false;
   }
 
-  
+  openDialog() {
+    let dialogRef = this.dialog.open(SocialShareComponent, {
+      width: 'auto',
+      // data: { name: this.name, animal: this.animal }
+    });
+  }  
 
 }

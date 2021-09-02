@@ -19,6 +19,7 @@ export class BuyMoonbaseComponent implements OnInit {
   public lootboxfloating = ['wood','silver','gold','diamond']
   isConnected:boolean = false;
   isWrongNetwork:boolean = false;
+  invisible: boolean = false;
   static readonly routeName: string = 'buy_moonbase';
 
 
@@ -175,8 +176,9 @@ export class BuyMoonbaseComponent implements OnInit {
      return false;
   }
 
+  this.invisible = true;
 
-   this.dialog.open(ModalForTransactionComponent, {
+  let dialogRef = this.dialog.open(ModalForTransactionComponent, {
     width: 'auto',
     disableClose : true,
      data: {
@@ -189,6 +191,9 @@ export class BuyMoonbaseComponent implements OnInit {
      }
   });
 
+  dialogRef.afterClosed().subscribe(result => {
+    this.invisible = false;
+    });
 
   return true;
     }
