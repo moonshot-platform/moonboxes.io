@@ -27,6 +27,7 @@ export class ModalForTransactionComponent implements OnInit {
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
+  nftImgRevealed: boolean = false;
 
   constructor(private walletConnectService:WalletConnectService,public dialog: MatDialog,private httpApi:HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any){
@@ -155,6 +156,7 @@ export class ModalForTransactionComponent implements OnInit {
           {
             this.btn2Text="Done";
             this.isCompletedProcess=true;
+            this.nftImgRevealed = true;  
             setTimeout(() => {
               this.playvideo = true;
 
