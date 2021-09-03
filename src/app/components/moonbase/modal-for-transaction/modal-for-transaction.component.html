@@ -1,7 +1,7 @@
 <div class="transaction-Popup">
   <div class="mw-50" *ngIf="isCompletedProcess">
     <!-- <div class="circle expand"></div> -->
-    <a *ngIf="nftrevealed" href="javascript:void(0)" (click)="closeDialog()" class="flex justify-end mt20">
+    <a  [ngClass]="{'opacity1': nftrevealed}" href="javascript:void(0)" (click)="closeDialog()" class="opacity0 flex justify-end mt20">
       <svg width="20px" height="20px" viewBox="0 0 27 27" version="1.1"
         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="closenft" style="margin-bottom: 5px;">
         <title>Close</title>
