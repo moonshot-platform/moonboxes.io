@@ -1,20 +1,21 @@
 @import "includes";
-
 .landing.flex {
     width: calc(100vw - 4rem);
     z-index: 2;
     position: relative;
-   //  background: transparent;
+    //  background: transparent;
     height: $full;
 }
+
 .inner {
-   //  margin: 0 3rem 3rem;
-   //  background: #0f0f0f;
+    //  margin: 0 3rem 3rem;
+    //  background: #0f0f0f;
     margin: 0;
     width: 100%;
     border: 48px solid;
     border-top: 0;
 }
+
 .left-corner {
     clip-path: polygon(0 0, 0% 100%, 100% 100%);
     position: absolute;
@@ -25,6 +26,7 @@
     border: none;
     left: 47px;
 }
+
 .right-corner {
     clip-path: polygon(100% 100%, 0 100%, 100% 0);
     position: absolute;
@@ -41,44 +43,50 @@
 }
 
 .shape {
-   background-color: #d7b13e;
-   position: relative;
-   width: 100%;
-   height: 100%;
-   -webkit-clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
-   clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
-   align-items: center;
+    background-color: #d7b13e;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-height: 65px;
+    -webkit-clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
+    clip-path: polygon(5% 0, 95% 0, 100% 100%, 0 100%, 0 100%);
+    align-items: center;
 }
+
 .shape::before {
-   content: '';
-   width: 100%;
-   height: inherit;
-   -webkit-clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
-   // clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
-   clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
-   background: #090d16;
-   display: block;
-   position: absolute;
-   top: 1px;
-   z-index: -1;
-   left: 1px;
+    content: '';
+    width: 100%;
+    height: inherit;
+    -webkit-clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
+    // clip-path: polygon(5% 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+    clip-path: polygon(5% 0, 94.8% 0, 99.7% 100%, 0% 100%);
+    background: #090d16;
+    display: block;
+    position: absolute;
+    top: 1px;
+    z-index: -1;
+    left: 1px;
 }
+
 @media (min-width: 1600px) {
-   .shape::before {
-      border-top: 1px solid;
-   }
+    .shape::before {
+        border-top: 1px solid;
+    }
 }
 
 .h-100 {
-   height: 100%;
+    height: 100%;
 }
+
 .pt-5 {
-   padding-top: 3rem;
+    padding-top: 3rem;
 }
+
 .normal_text {
-   line-height: 22px;
-   font-weight: normal;
+    line-height: 22px;
+    font-weight: normal;
 }
+
 .box {
     margin-top: 2px;
     position: absolute;
@@ -86,79 +94,80 @@
     width: calc(100vw - 10rem);
     left: 0rem;
 }
+
 .down_box {
-   border-bottom: 61px solid #d5a642;
-   border-left: 60px solid transparent;
-   border-right: 60px solid transparent;
-   height: 0;color:black
+    border-bottom: 61px solid #d5a642;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    height: 0;
+    color: black
 }
+
 .mt-15 {
-   margin-top: 15px;
+    margin-top: 15px;
 }
+
 .d_flex_content_between {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
+
 .prize_pool {
-   display: flex;
-   flex-direction: column;
-   align-items: baseline;
-   justify-content: space-between;
-   flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+    flex: 1;
 }
+
 .pt-0 {
     padding-top: 0;
 }
+
 .img-fluid {
-   max-width: 100%;
-   height: auto;
+    max-width: 100%;
+    height: auto;
 }
+
 .relative {
-   position: relative;
+    position: relative;
 }
+
 .mb0 {
-   margin-bottom: 0 !important;
+    margin-bottom: 0 !important;
 }
-
-
-
 
 // Responsive Menu for global
 @media only screen and (max-width: $md-header) {
-.inner {
-   border: 0;
+    .inner {
+        border: 0;
+    }
+    .navigation {
+        nav,
+        .res_class {
+            display: none;
+        }
+    }
+    .landing.flex {
+        width: 100vw;
+    }
+    .res_menu {
+        .box {
+            display: flex;
+            justify-content: space-between;
+            flex: 1;
+            align-items: center;
+            svg {
+                width: 30px;
+            }
+        }
+    }
+    section.navigation {
+        padding: 1rem !important;
+        align-items: center;
+    }
+    .p34 {
+        font-size: 24px;
+    }
 }
-   .navigation {
-     nav,
-     .res_class {
-       display: none;
-     }
-   }
- 
-   .landing.flex {
-      width: 100vw;
-   }
-   .res_menu {
-     .box {
-       display: flex;
-       justify-content: space-between;
-       flex: 1;
-       align-items: center;
-       svg {
-         width: 30px;
-       }
-     }
-   }
- 
-   section.navigation {
-     padding: 1rem !important;
-     align-items: center;
-   }
- 
-   .p34 {
-     font-size: 24px;
-   }
-   
- }
- 
