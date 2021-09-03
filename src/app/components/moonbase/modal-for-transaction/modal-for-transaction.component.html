@@ -18,7 +18,10 @@
         <source src="{{videoSource[data.index-1]}}" type="video/mp4" />
         Browser not supported
       </video>
-      <img *ngIf="nftrevealed" src="{{nftImgRevealed}}" class="fade-in onvideo img-fluid" alt="">
+      <img *ngIf="nftrevealed && checkFileType(nftImgRevealed)" src="{{nftImgRevealed}}" class="fade-in onvideo img-fluid" alt="">
+      <video class="img-fluid mb30" alt="" *ngIf="nftrevealed && !checkFileType(nftImgRevealed)" loop autoplay>
+        <source src="{{nftImgRevealed}}">
+      </video>
     </div>
     <div *ngIf="nftrevealed" class="flex justify-space-between">
       <a class="fade-in flex1 mr10 outlined-button text-inherit mt10" (click)="closeDialog()"

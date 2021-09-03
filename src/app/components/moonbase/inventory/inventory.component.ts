@@ -204,8 +204,8 @@ export class InventoryComponent implements OnInit {
     const videos = ["mp4", "3gp", "ogg"]
 
     const urltemp = new URL(url)
-    const extension = urltemp.pathname.split(".")[1]
-
+    const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
+    
     if (images.includes(extension)) {
       return "true"
     } else if (videos.includes(extension)) {

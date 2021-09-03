@@ -19,16 +19,15 @@ export class ModalForTransactionComponent implements OnInit {
   successIcon2: boolean = false;
   isCompletedProcess : boolean = false;
   videoSource = [
-    "assets/videos/Moonboxes_WOOD.mp4",
-     "assets/videos/Moonboxes_SILVER.mp4",
-     "assets/videos/Moonboxes_GOLD.mp4",
-     "assets/videos/Moonboxes_DIAMOND.mp4"
-
+    "assets/media/videos/Moonboxes_WOOD.mp4",
+     "assets/media/videos/Moonboxes_SILVER.mp4",
+     "assets/media/videos/Moonboxes_GOLD.mp4",
+     "assets/media/videos/Moonboxes_DIAMOND.mp4"
   ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
-  nftImgRevealed: boolean = false;
+  nftImgRevealed = "";
 
   constructor(private walletConnectService:WalletConnectService,public dialog: MatDialog,private httpApi:HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any){
@@ -153,10 +152,12 @@ export class ModalForTransactionComponent implements OnInit {
         transactionHash : txStatus.hash,
         id : nftDetails.betId
       }).subscribe((response:any)=>{
+        debugger
           if(response.isSuccess)
           {
             this.btn2Text="Done";
-            this.nftImgRevealed = response.data.file_path;
+            debugger
+            this.nftImgRevealed = response.filePath;
             this.isCompletedProcess=true;
             
             setTimeout(() => {
@@ -246,5 +247,22 @@ export class ModalForTransactionComponent implements OnInit {
       width: 'auto',
       // data: { name: this.name, animal: this.animal }
     });
+  }
+
+
+  checkFileType(url:string)
+  {
+    const images = ["jpg", "gif", "png","jpeg"]
+    const videos = ["mp4", "3gp", "ogg"]
+
+    const urltemp = new URL(url)
+    const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
+    
+    if (images.includes(extension)) {
+      return "true"
+    } else if (videos.includes(extension)) {
+      return false;
+    }
+    return false;
   }
 }
