@@ -56,7 +56,7 @@ export class HammerConfig extends HammerGestureConfig {
     MoonbaseModule,
     MatDialogModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory },
     {

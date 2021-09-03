@@ -11,11 +11,12 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 })
 export class NavComponent implements OnInit {
   data: any;
-  isConnected:boolean = false;
-  balanceOfMoon: any=0;
+  isConnected: boolean = false;
+  balanceOfMoon: any = 0;
   moonCountData: any;
   isNSFWStatus = false;
   menuItem = false;
+  public isTooltipActive = true;
 
   public navItems: any[] = [
     {
@@ -33,30 +34,67 @@ export class NavComponent implements OnInit {
     }
   ];
 
+
+  public navSubItems: any[] = [
+    {
+      'icon': 'assets/media/icons/moonbase/nav/moon.svg',
+      'alt': 'moon',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'click': null,
+      'routerLink': ['/prizepool']
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/diamond.svg',
+      'alt': 'diamond',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'click': 'openDialog()',
+      'routerLink': null
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/folder.svg',
+      'alt': 'folder',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'click': null,
+      'routerLink': ['/history']
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/lock.svg',
+      'alt': 'lock',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'click': null,
+      'routerLink': ['/inventory']
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/info.svg',
+      'alt': 'info',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'click': null,
+      'routerLink': ['/moonbase']
+    }
+  ];
+
   public open = false;
 
-  constructor(public dialog: MatDialog,private walletConnectService:WalletConnectService,
-    private httpApi:HttpApiService) { }
+  constructor(public dialog: MatDialog, private walletConnectService: WalletConnectService,
+    private httpApi: HttpApiService) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
     this.getNSFWStatus();
 
-    setTimeout(async() => {
-      await this.walletConnectService.getData().subscribe((data)=>{
-        this.data=data;
+    setTimeout(async () => {
+      await this.walletConnectService.getData().subscribe((data) => {
+        this.data = data;
       });
-      
-      if(this.data!==undefined && this.data.address!=undefined)
-      {
-        this.isConnected=true;
+
+      if (this.data !== undefined && this.data.address != undefined) {
+        this.isConnected = true;
         this.getMoonShootBalance();
       }
-      else
-      {
-        this.balanceOfMoon="Awaiting Connection";
+      else {
+        this.balanceOfMoon = "Awaiting Connection";
       }
-    },1000);
+    }, 1000);
   }
 
   openDialog(): void {
@@ -66,38 +104,37 @@ export class NavComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      // this.animal = result;
     });
   }
-  
-  getMoonShootBalance()
-  {
+
+  getMoonShootBalance() {
     this.walletConnectService.getBalanceOfUser(this.data.address)
-    .then((response:any)=>
-    {
-      this.balanceOfMoon=response>0 ? response/1e9 : 0;
-    })
+      .then((response: any) => {
+        this.balanceOfMoon = response > 0 ? response / 1e9 : 0;
+      })
 
-   
+
   }
 
-  changeNSFWStatus(event:any)
-  {
+  changeNSFWStatus(event: any) {
     debugger
-      this.httpApi.setNSFWStatus(event);
+    this.httpApi.setNSFWStatus(event);
   }
 
-  getNSFWStatus()
-  {
+  getNSFWStatus() {
     this.isNSFWStatus = this.httpApi.getNSFWStatus();
   }
-  
+
   menuopen() {
     this.menuItem = true;
   }
-  
+
   closeMenu() {
     this.menuItem = false;
+  }
+
+  closeTooltip() {
+    this.isTooltipActive = false;
   }
 
 }
