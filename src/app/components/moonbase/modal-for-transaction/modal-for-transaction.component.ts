@@ -47,7 +47,6 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   async submitBet() {
-    debugger
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
 
     this.btn1Text = "Waiting for transaction..";
@@ -56,7 +55,7 @@ export class ModalForTransactionComponent implements OnInit {
       transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
     }
     catch (e) {
-      this.dialog.closeAll();
+      this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
       else
@@ -87,7 +86,7 @@ export class ModalForTransactionComponent implements OnInit {
       });
     }
     else {
-      this.dialog.closeAll();
+      this.closeDialog()
     }
 
     return false;
@@ -171,7 +170,7 @@ export class ModalForTransactionComponent implements OnInit {
         this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature);
     }
     catch (e) {
-      this.dialog.closeAll();
+      this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
       else
