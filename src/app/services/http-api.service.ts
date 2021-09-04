@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WalletConnectService } from './wallet-connect.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
 const baseURL: any = "http://66.29.144.2/api/";
@@ -12,6 +12,8 @@ const baseURL: any = "http://66.29.144.2/api/";
 export class HttpApiService {
   userInfo: any;
   data:any;
+  private subject = new Subject();
+
   public lootBoxDetails: any = [
     {
       img: 'assets/media/images/moonbox/wood.png',
@@ -139,5 +141,17 @@ export class HttpApiService {
   {
     return localStorage.getItem("nsfw")=="true";
   }
+
+  sendMessage(message: boolean) {
+    this.subject.next({ text: message });
+}
+
+clearMessages() {
+    this.subject.next();
+}
+
+getMessage(): Observable<any> {
+    return this.subject.asObservable();
+}
 
 }

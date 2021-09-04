@@ -214,10 +214,10 @@ export class InventoryComponent implements OnInit {
     return false;
   }
 
-  openDialog() {
+  openDialog(imagePath:string) {
     let dialogRef = this.dialog.open(SocialShareComponent, {
       width: 'auto',
-      // data: { name: this.name, animal: this.animal }
+       data: { name: imagePath }
     });
   }  
 

@@ -1,5 +1,9 @@
 @import "includes";
 
+.bg-black.shape::before {
+    background-color: black !important;
+}
+
 @media only screen and (max-width: $md-header) {
     .desktop-bottom-count {
         display: none;
