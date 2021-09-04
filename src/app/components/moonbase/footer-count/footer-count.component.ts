@@ -23,6 +23,7 @@ export class FooterCountComponent implements OnInit {
     private httpApi: HttpApiService) {
     this.subscription = this.httpApi.getMessage().subscribe(message => {
         this.bgChange = message.text;
+        console.log(this.bgChange);
     });
   }
 

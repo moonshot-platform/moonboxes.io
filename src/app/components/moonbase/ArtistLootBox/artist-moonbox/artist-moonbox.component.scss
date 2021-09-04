@@ -1,9 +1,5 @@
 @import "includes";
 
-.artist-popup {
-  max-height: 100% !important;
-  margin-top: 0 !important;
-}
 .scroller {
   max-height: calc(100vh - 250px);
   overflow: auto;
@@ -114,4 +110,11 @@
 }
 .invisible {
   visibility: hidden;
+}
+
+.artist-popup {
+  max-height: calc(100vh - 280px) !important;
+  min-height: calc(100vh - 280px) !important;
+  margin-top: 20px !important;
+  position: relative;
 }

@@ -45,11 +45,11 @@
     width: 48px;
     height: 48px;
     margin-right: 20px;
-    border: 2px solid #d5a642;
+    // border: 2px solid #d5a642;
     border-radius: 50%;
     transition: all .2s;
     overflow: hidden;
-    background-color: #d5a642;
+    // background-color: #d5a642;
 }
 .steps__info {
     font-size: 16px;
@@ -95,8 +95,13 @@
 }
 .mw-50 {
   // max-width: 50vw;
-  width: 300px;
+  // width: 300px;
+  // max-height: 100%;
+  width: 100%;
   max-height: 100%;
+  min-width: 22vw;
+  max-width: 25%;
+  margin: auto;
 }
 .mx-auto {
   margin: auto;
@@ -108,17 +113,7 @@
     background: #d5a642;
   }
 }
-@media only screen and (max-width: $md-header) {
-  .mmh-75 {
-    // height: 75vh;
-    max-width: 100%;
-  }
-  .onvideo {
-    // height: 73vh;
-    max-width: 100%;
-    max-height: 100%;
-  }
-}
+
 .mh-75 {
     max-height: 75vh;
 }
@@ -243,3 +238,21 @@
     }
   }
   
+  @media only screen and (max-width: $md-header) {
+    .mmh-75 {
+      // height: 75vh;
+      max-width: 100%;
+    }
+    .onvideo {
+      // height: 73vh;
+      max-width: 100%;
+      max-height: 100%;
+    }
+    .mw-50 {
+      width: 100%;
+      max-height: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      margin: auto;
+    }
+  }
