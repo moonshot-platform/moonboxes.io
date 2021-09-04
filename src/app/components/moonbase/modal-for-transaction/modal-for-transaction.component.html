@@ -1,5 +1,6 @@
 <div class="transaction-Popup">
   <div class="mw-50" *ngIf="isCompletedProcess">
+    <img class="flex mx-auto" *ngIf="!playvideo && !nftrevealed" src="assets/media/videos/Loading.gif" alt="">
     <!-- <div class="circle expand"></div> -->
     <a  [ngClass]="{'opacity1': nftrevealed}" href="javascript:void(0)" (click)="closeDialog()" class="opacity0 flex justify-end mt20">
       <svg width="20px" height="20px" viewBox="0 0 27 27" version="1.1"
@@ -77,7 +78,7 @@
               <div class="steps__text">Checking balance and approving</div>
             </div>
           </div>
-          <button class="button steps__button wp100 border-0">{{btn1Text}}</button>
+          <button class="button disabled-button steps__button wp100 border-0">{{btn1Text}}</button>
         </div>
         <div class="steps__item">
           <div class="steps__head">
@@ -167,7 +168,7 @@
               <div class="steps__text">retrieving data</div>
             </div>
           </div>
-          <button (click)="closeDialogDone()" class="button steps__button disabled wp100 border-0">{{btn2Text}}</button>
+          <button (click)="closeDialogDone()" class="button disabled-button steps__button disabled wp100 border-0">{{btn2Text}}</button>
         </div>
 
       </div>

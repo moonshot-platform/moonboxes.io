@@ -98,7 +98,16 @@
   width: 300px;
   max-height: 100%;
 }
+.mx-auto {
+  margin: auto;
+}
 
+.disabled-button {
+  cursor: default;
+  &:hover {
+    background: #d5a642;
+  }
+}
 @media only screen and (max-width: $md-header) {
   .mmh-75 {
     // height: 75vh;

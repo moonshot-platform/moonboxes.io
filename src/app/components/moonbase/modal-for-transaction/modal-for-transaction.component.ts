@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-modal-for-transaction',
@@ -12,224 +13,206 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./modal-for-transaction.component.scss']
 })
 export class ModalForTransactionComponent implements OnInit {
-  
-  btn1Text="Waiting for Transaction";
-  btn2Text="Start now";
+
+  btn1Text = "Waiting for Transaction";
+  btn2Text = "Start now";
   successIcon: boolean = false;
   successIcon2: boolean = false;
-  isCompletedProcess : boolean = false;
+  isCompletedProcess: boolean = false;
   videoSource = [
     "assets/media/videos/Moonboxes_WOOD.mp4",
-     "assets/media/videos/Moonboxes_SILVER.mp4",
-     "assets/media/videos/Moonboxes_GOLD.mp4",
-     "assets/media/videos/Moonboxes_DIAMOND.mp4"
+    "assets/media/videos/Moonboxes_SILVER.mp4",
+    "assets/media/videos/Moonboxes_GOLD.mp4",
+    "assets/media/videos/Moonboxes_DIAMOND.mp4"
   ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
   nftImgRevealed = "";
+  messages: any[] = [];
+  subscription: Subscription;
 
-  constructor(private walletConnectService:WalletConnectService,public dialog: MatDialog,private httpApi:HttpApiService,
-    @Inject(MAT_DIALOG_DATA) public data: any){
+  constructor(private walletConnectService: WalletConnectService, public dialog: MatDialog, private httpApi: HttpApiService,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-   }
+  }
 
   ngOnInit(): void {
-    if(this.data.isArtistLootBox){
+    this.httpApi.sendMessage(true);
+    if (this.data.isArtistLootBox) {
       this.submitBetForArtist();
-    }else
-    {
-    this.submitBet();
+    } else {
+      this.submitBet();
     }
   }
 
-  async submitBet()
-  {
+  async submitBet() {
     debugger
-    var price:any = await this.walletConnectService.getDetailsMoonboxPrice();
-    
-    this.btn1Text="Waiting for transaction..";
-    var transactionDetails:any;
-    try{
-    transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index,price,this.data.inputNumber[this.data.index],this.data.data.address)
+    var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
+
+    this.btn1Text = "Waiting for transaction..";
+    var transactionDetails: any;
+    try {
+      transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
     }
-    catch(e)
-    {
+    catch (e) {
       this.dialog.closeAll();
-      if(e.hash.code==4001)
-        this.httpApi.showToastr(e.hash.message,false);
+      if (e.hash.code == 4001)
+        this.httpApi.showToastr(e.hash.message, false);
       else
-        this.httpApi.showToastr(e.hash.data.message,false);
+        this.httpApi.showToastr(e.hash.data.message, false);
       return false;
-    }                     
-    
-    if(transactionDetails.status){
-    
-    this.btn1Text="Submitting data...";
-    this.httpApi.submitBet({
-      userAddress: this.data.data.address,
-      transactionHash : transactionDetails.hash,
-      type : this.data.lootBoxName,
-      quantity : this.data.inputNumber[this.data.index]
-    }).subscribe((response:any)=>
-    {
-      if(response.isSuccess)
-      {
-        this.successIcon = true;
-        this.btn1Text="Done";
-        //this.isCompletedProcess=true;
-        this.revealNft(transactionDetails.hash);
-        this.httpApi.showToastr(response.data.message,true);
+    }
 
-      }
-      else
-      {
-        this.httpApi.showToastr(response.data.message,false)
-      }
-    });
-  }
-  else
-  {
-    this.dialog.closeAll();
-  }
-  
-  return false;
+    if (transactionDetails.status) {
+
+      this.btn1Text = "Submitting data...";
+      this.httpApi.submitBet({
+        userAddress: this.data.data.address,
+        transactionHash: transactionDetails.hash,
+        type: this.data.lootBoxName,
+        quantity: this.data.inputNumber[this.data.index]
+      }).subscribe((response: any) => {
+        if (response.isSuccess) {
+          this.successIcon = true;
+          this.btn1Text = "Done";
+          //this.isCompletedProcess=true;
+          this.revealNft(transactionDetails.hash);
+          this.httpApi.showToastr(response.data.message, true);
+
+        }
+        else {
+          this.httpApi.showToastr(response.data.message, false)
+        }
+      });
+    }
+    else {
+      this.dialog.closeAll();
+    }
+
+    return false;
   }
 
-  async revealNft(txnHash:any)
-  {
+  async revealNft(txnHash: any) {
     this.httpApi.verifyBetHash({
       transactionHash: txnHash,
-      userAddress : this.data.data.address
-    }).subscribe((response:any)=>
-    {
-        if(response.isSuccess)
-        {
-          this.claimTransactionInitiate(response.data);
-        }
-        else
-        {
-          setTimeout(() => {
-            this.revealNft(txnHash);
-          }, 5000);
-        }
-    }); 
-    
-  }
-
-  async claimTransactionInitiate(nftDetails)
-  {
-    var nftSupply=[];
-          var nftIds=[];
-          var sign;
-          
-            nftDetails.nftData.forEach(element => {
-                nftSupply.push(element.nftAmount);
-                nftIds.push(element.Id);
-              sign=element.signature;
-            });
-
-            var txStatus:any;
-      try{
-       txStatus = await this.walletConnectService.getRedeemBulk(nftIds,nftSupply,nftDetails.betId,sign,nftDetails.isArtist,nftDetails.artistAddress);
+      userAddress: this.data.data.address
+    }).subscribe((response: any) => {
+      if (response.isSuccess) {
+        this.claimTransactionInitiate(response.data);
       }
-      catch(e)
-      {
-        this.closeDialog();
-        if(e.hash.code==4001)
-          this.httpApi.showToastr(e.hash.message,false);
-        else
-          this.httpApi.showToastr(e.hash.data.message,false);
-        return false;
-      }                     
-      
-    if(txStatus.status)
-    {
-      this.successIcon2 = true;
-      this.btn2Text="Submitting data...";
-      this.httpApi.changeStatusClaim({
-        userAddress : this.data.data.address,
-        transactionHash : txStatus.hash,
-        id : nftDetails.betId
-      }).subscribe((response:any)=>{
-        debugger
-          if(response.isSuccess)
-          {
-            this.btn2Text="Done";
-            debugger
-            this.nftImgRevealed = response.filePath;
-            this.isCompletedProcess=true;
-            
-            setTimeout(() => {
-              this.playvideo = true;
-
-            }, 3000);
-            debugger
-            this.httpApi.showToastr(response.data.message,true);
-          }
-      })
-        }
-        return false;
-  }
-
-
-  async submitBetForArtist()
-  {
-    
-    this.btn1Text="Waiting for transaction..";
-    var transactionDetails:any;
-    try{
-     transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId,this.data.inputNumber[this.data.index],
-      this.data.artistDetails.price,this.data.artistDetails.address,this.data.artistDetails.signature);
-    }
-    catch(e)
-    {
-      this.dialog.closeAll();
-      if(e.hash.code==4001)
-        this.httpApi.showToastr(e.hash.message,false);
-      else
-        this.httpApi.showToastr(e.hash.data.message,false);
-      return false;
-    }  
-      
-      if(transactionDetails.status){
-    this.btn1Text="Submitting data...";
-    this.httpApi.submitBetForArtistApi({
-      userAddress: this.data.data.address,
-      transactionHash : transactionDetails.hash,
-      type : this.data.lootBoxName,
-      quantity : this.data.inputNumber[this.data.index],
-      id : this.data.artistDetails.lootBoxId
-    }).subscribe((response:any)=>
-    {
-      if(response.isSuccess)
-      {
-        this.successIcon = true;
-        this.btn1Text="Done";
-        // this.isCompletedProcess=true;
-        this.revealNft(transactionDetails.hash);
-        this.httpApi.showToastr(response.data.message,true)
-      }
-      else
-      {
-        this.httpApi.showToastr(response.data.message,false)
+      else {
+        setTimeout(() => {
+          this.revealNft(txnHash);
+        }, 5000);
       }
     });
-  }
-  
-  return false;
+
   }
 
-  closeDialogDone()
-  {
-    if(this.isCompletedProcess)
-    {
+  async claimTransactionInitiate(nftDetails) {
+    var nftSupply = [];
+    var nftIds = [];
+    var sign;
+
+    nftDetails.nftData.forEach(element => {
+      nftSupply.push(element.nftAmount);
+      nftIds.push(element.Id);
+      sign = element.signature;
+    });
+
+    var txStatus: any;
+    try {
+      txStatus = await this.walletConnectService.getRedeemBulk(nftIds, nftSupply, nftDetails.betId, sign, nftDetails.isArtist, nftDetails.artistAddress);
+    }
+    catch (e) {
+      this.closeDialog();
+      if (e.hash.code == 4001)
+        this.httpApi.showToastr(e.hash.message, false);
+      else
+        this.httpApi.showToastr(e.hash.data.message, false);
+      return false;
+    }
+
+    if (txStatus.status) {
+      this.successIcon2 = true;
+      this.btn2Text = "Submitting data...";
+      this.httpApi.changeStatusClaim({
+        userAddress: this.data.data.address,
+        transactionHash: txStatus.hash,
+        id: nftDetails.betId
+      }).subscribe((response: any) => {
+        debugger
+        if (response.isSuccess) {
+          this.btn2Text = "Done";
+          debugger
+          this.nftImgRevealed = response.filePath;
+          this.isCompletedProcess = true;
+
+          setTimeout(() => {
+            this.playvideo = true;
+
+          }, 3000);
+          debugger
+          this.httpApi.showToastr(response.data.message, true);
+        }
+      })
+    }
+    return false;
+  }
+
+
+  async submitBetForArtist() {
+
+    this.btn1Text = "Waiting for transaction..";
+    var transactionDetails: any;
+    try {
+      transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
+        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature);
+    }
+    catch (e) {
+      this.dialog.closeAll();
+      if (e.hash.code == 4001)
+        this.httpApi.showToastr(e.hash.message, false);
+      else
+        this.httpApi.showToastr(e.hash.data.message, false);
+      return false;
+    }
+
+    if (transactionDetails.status) {
+      this.btn1Text = "Submitting data...";
+      this.httpApi.submitBetForArtistApi({
+        userAddress: this.data.data.address,
+        transactionHash: transactionDetails.hash,
+        type: this.data.lootBoxName,
+        quantity: this.data.inputNumber[this.data.index],
+        id: this.data.artistDetails.lootBoxId
+      }).subscribe((response: any) => {
+        if (response.isSuccess) {
+          this.successIcon = true;
+          this.btn1Text = "Done";
+          // this.isCompletedProcess=true;
+          this.revealNft(transactionDetails.hash);
+          this.httpApi.showToastr(response.data.message, true)
+        }
+        else {
+          this.httpApi.showToastr(response.data.message, false)
+        }
+      });
+    }
+
+    return false;
+  }
+
+  closeDialogDone() {
+    if (this.isCompletedProcess) {
       this.closeDialog();
     }
   }
 
   closeDialog() {
-  this.dialog.closeAll();
+    this.httpApi.sendMessage(false);
+    this.dialog.closeAll();
   }
 
   nftVisible() {
@@ -245,19 +228,18 @@ export class ModalForTransactionComponent implements OnInit {
   openDialog() {
     let dialogRef = this.dialog.open(SocialShareComponent, {
       width: 'auto',
-      // data: { name: this.name, animal: this.animal }
+      data: { name: this.nftImgRevealed }
     });
   }
 
 
-  checkFileType(url:string)
-  {
-    const images = ["jpg", "gif", "png","jpeg"]
+  checkFileType(url: string) {
+    const images = ["jpg", "gif", "png", "jpeg"]
     const videos = ["mp4", "3gp", "ogg"]
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
-    
+
     if (images.includes(extension)) {
       return "true"
     } else if (videos.includes(extension)) {
@@ -265,4 +247,12 @@ export class ModalForTransactionComponent implements OnInit {
     }
     return false;
   }
+
+
+
+
+  clearMessages(): void {
+    this.httpApi.clearMessages();
+  }
+
 }
