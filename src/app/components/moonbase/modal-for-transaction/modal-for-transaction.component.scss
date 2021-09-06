@@ -99,8 +99,8 @@
   // max-height: 100%;
   width: 100%;
   max-height: 100%;
-  min-width: 22vw;
-  max-width: 25%;
+  min-width: 100%;
+  max-width: 100%;
   margin: auto;
 }
 .mx-auto {
@@ -208,9 +208,6 @@
     }
   }
 
-  .transaction-Popup {
-    // transform: translate3d(-50%, -50%, 0);
-   }
   .active {
     animation: enter 5s ease-out;
   }
@@ -237,7 +234,13 @@
       transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1.2);
     }
   }
-  
+
+  @media only screen and (min-width: $md-header) {
+  .video-box {
+    max-width: calc(100vh - 360px);
+    }
+  }
+
   @media only screen and (max-width: $md-header) {
     .mmh-75 {
       // height: 75vh;
