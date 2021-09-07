@@ -31,6 +31,7 @@ import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
 import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
 import { CarouselComponent } from './landing/carousel/carousel.component';
+import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { CarouselComponent } from './landing/carousel/carousel.component';
     LandingComponent,
     RarityComponent,
     RaiseStakesComponent,
-    CarouselComponent
+    CarouselComponent,
+    LandingIntroComponent
   ],
   imports: [
     MatIconModule,
