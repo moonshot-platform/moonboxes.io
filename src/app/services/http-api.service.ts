@@ -4,7 +4,7 @@ import { WalletConnectService } from './wallet-connect.service';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 
-const baseURL: any = "http://66.29.144.2/api/";
+const baseURL: any = "http://66.29.144.2/api/api/";
 
 @Injectable({
   providedIn: 'root'

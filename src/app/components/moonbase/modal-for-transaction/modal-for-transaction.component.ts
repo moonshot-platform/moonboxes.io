@@ -28,9 +28,10 @@ export class ModalForTransactionComponent implements OnInit {
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
-  nftImgRevealed = "";
+  nftImgRevealed = [];
   messages: any[] = [];
   subscription: Subscription;
+  current = 0;
 
   constructor(private walletConnectService: WalletConnectService, public dialog: MatDialog, private httpApi: HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -44,6 +45,14 @@ export class ModalForTransactionComponent implements OnInit {
     } else {
       this.submitBet();
     }
+  }
+
+  next() {
+    this.current = this.current < this.nftImgRevealed.length - 1 ? this.current + 1 : 0;
+  }
+
+  prev() {
+    this.current = this.current > 0 ? this.current - 1 : this.nftImgRevealed.length - 1;
   }
 
   async submitBet() {
@@ -141,16 +150,13 @@ export class ModalForTransactionComponent implements OnInit {
         transactionHash: txStatus.hash,
         id: nftDetails.betId
       }).subscribe((response: any) => {
-        debugger
         if (response.isSuccess) {
           this.btn2Text = "Done";
-          debugger
           this.nftImgRevealed = response.filePath;
+          console.log(this.nftImgRevealed);
           this.isCompletedProcess = true;
-
           setTimeout(() => {
             this.playvideo = true;
-
           }, 3000);
           debugger
           this.httpApi.showToastr(response.data.message, true);
