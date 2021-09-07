@@ -7,11 +7,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FooterModule } from './components/base/footer/footer.module';
-import { LandingModule } from './components/landing/landing.module';
-import { AboutModule } from './components/about/about.module';
-import { TokenLockModule } from './components/token-lock/token-lock.module';
-import { CommunityModule } from './components/community/community.module';
-import { SignModule } from './components/sign/sign.module';
 import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -42,11 +37,6 @@ export class HammerConfig extends HammerGestureConfig {
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
-    SignModule,
-    LandingModule,
-    AboutModule,
-    TokenLockModule,
-    CommunityModule,
     FooterModule,
     CountdownModule,
     NgParticlesModule,

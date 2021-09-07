@@ -444,6 +444,14 @@ ul {
   flex-direction: row;
 }
 
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: relative;
+}
+
 .flex-col-space-between {
   @extend %flex-space-between;
 

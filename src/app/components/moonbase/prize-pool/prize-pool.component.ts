@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrizePoolComponent implements OnInit {
 
-  static readonly routeName: string = 'prize_pool';
+  static readonly routeName: string = 'prizepool';
   constructor() { }
 
   ngOnInit(): void {

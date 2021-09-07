@@ -27,6 +27,8 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SocialShareComponent } from './modal-for-transaction/social-share/social-share.component';
 import { SidebarModule } from '../base/sidebar/sidebar.module';
+import { LandingComponent } from './landing/landing.component';
+import { RarityComponent } from './rarity/rarity.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { SidebarModule } from '../base/sidebar/sidebar.module';
     CountdownTimerComponent,
     ModalForClaimComponent,
     RevealNftPopupComponent,
-    SocialShareComponent
+    SocialShareComponent,
+    LandingComponent,
+    RarityComponent
   ],
   imports: [
     MatIconModule,
