@@ -1044,3 +1044,8 @@ svg#closenft path {
   position: relative !important;
 }
 }
+@media only screen and (max-width: $md-header) {
+div#cdk-overlay-0.cdk-overlay-pane {
+  max-width: 100vw !important;
+}
+}
