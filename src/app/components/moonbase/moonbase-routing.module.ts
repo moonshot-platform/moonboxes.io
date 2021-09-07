@@ -9,6 +9,7 @@ import { InventoryComponent } from './inventory/inventory.component';
 import { LandingComponent } from './landing/landing.component';
 import { MoonbaseComponent } from './moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
+import { RarityComponent } from './rarity/rarity.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: UpcomingComponent.routeName,
         component: UpcomingComponent
+      },
+      {
+        path: RarityComponent.routeName,
+        component: RarityComponent
       },
     ]
   }
