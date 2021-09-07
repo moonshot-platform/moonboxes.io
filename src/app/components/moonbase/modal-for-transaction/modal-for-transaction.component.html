@@ -3,7 +3,7 @@
     <div class="mw-50" *ngIf="isCompletedProcess">
       <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
         <div class="flex1 flex justify-end mr-3">
-          <div class="round-mini-button" (click)="prev()">
+          <div class="round-mini-button opacity0" *ngIf="nftImgRevealed.length > 1" [ngClass]="{'opacity1': nftrevealed}" (click)="prev()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
           </div>
         </div>
@@ -62,7 +62,7 @@
           </div>
         </div>
         <div class="flex1 ml-3 ml-0">
-          <div class="round-mini-button" (click)="next()">
+          <div class="round-mini-button opacity0" *ngIf="nftImgRevealed.length > 1" [ngClass]="{'opacity1': nftrevealed}" (click)="next()">
             <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
           </div>
         </div>

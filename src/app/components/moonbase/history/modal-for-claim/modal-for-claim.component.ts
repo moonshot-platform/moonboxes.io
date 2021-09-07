@@ -71,29 +71,18 @@ export class ModalForClaimComponent implements OnInit {
             this.httpApi.showToastr(response.data.message,true);
           }
       })
-    }
-    else
-    {
-      console.log("error redeem")
+    } else {
+      console.error("error redeem");
     }
 
-
-
-
-     
-  
-  return false;
+    return false;
   }
 
-  closeDialogDone()
-  {
-    if(this.isCompletedProcess)
-    {
-      this.closeDialog();
-    }
+  closeDialogDone() {
+    if(this.isCompletedProcess) this.closeDialog();
   }
 
   closeDialog() {
-  this.dialog.close(this.claimed);
+    this.dialog.close(this.claimed);
   }
 }

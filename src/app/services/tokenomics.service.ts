@@ -98,8 +98,8 @@ export class TokenomicsService {
     
             this.onShare(data);
     
-          }).catch( function(e) {
-            console.log(e);
+          }).catch( (e) => {
+            console.error(e);
             this.serverError = true;
           }
         ).finally( () => {
@@ -111,8 +111,6 @@ export class TokenomicsService {
           return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
       }
 
-      async getBalanceForUser()
-      {
-        
+      async getBalanceForUser() {
       }
 }

@@ -188,7 +188,8 @@ export class BuyMoonbaseComponent implements OnInit {
        index : index,
        balance : this.balanceOfMoon,
        isArtistLootBox : false
-     }
+     },
+     panelClass: 'custom-modalbox'
   });
 
   dialogRef.afterClosed().subscribe(result => {
