@@ -153,7 +153,6 @@ export class ModalForTransactionComponent implements OnInit {
         if (response.isSuccess) {
           this.btn2Text = "Done";
           this.nftImgRevealed = response.filePath;
-          console.log(this.nftImgRevealed);
           this.isCompletedProcess = true;
           setTimeout(() => {
             this.playvideo = true;

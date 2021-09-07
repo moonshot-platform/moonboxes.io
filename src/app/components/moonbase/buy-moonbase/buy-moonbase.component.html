@@ -202,10 +202,10 @@
         </button>
       </div>
       <div class=" plus_minus flex mb20 justify-center"
-      *ngIf="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming">
+      *ngIf="inputnumber[current+1]==0 && (supplyDetails && supplyDetails[current]?.isUpcoming)">
       Sold Out
     </div>
-      <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
+      <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails && supplyDetails[current]?.isUpcoming">
         Coming soon...
       </div>
       <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"

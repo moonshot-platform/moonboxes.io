@@ -119,7 +119,7 @@ export class ArtistMoonboxComponent implements OnInit {
       if (response.isSuccess) {
         this.supplyDetails = response.data;
         this.artistDetails = response;
-        console.log(this.artistDetails);
+        
         this.inputnumber[0] = 1;
         if (this.supplyDetails[0].currentSupply > 0)
           this.inputnumber[1] = 1;
@@ -181,7 +181,8 @@ export class ArtistMoonboxComponent implements OnInit {
           address: this.artistDetails.walletAddress,
           signature: this.supplyDetails[index - 1].signature
         }
-      }
+      },
+      panelClass: 'custom-modalbox'
     });
 
      dialogRef.afterClosed().subscribe(result => {
