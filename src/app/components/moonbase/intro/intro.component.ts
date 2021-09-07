@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntroComponent implements OnInit {
 
+  static readonly routeName: string = 'introduction';
+
   moonbase = true;
   buyMoonbase = false;
 

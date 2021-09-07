@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MoonbaseComponent implements OnInit {
 
-  static readonly routeName: string = 'moonbase';
+  static readonly routeName: string = '';
   constructor() { }
 
   ngOnInit(): void {

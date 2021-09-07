@@ -10,7 +10,7 @@ import { environment } from './../../../../environments/environment';
 @Component({
   selector: 'app-buy-moonbase',
   templateUrl: './buy-moonbase.component.html',
-  styleUrls: ['./buy-moonbase.component.scss', './../moonbase.component.scss', './../intro/intro.component.scss']
+  styleUrls: ['./buy-moonbase.component.scss']
 })
 export class BuyMoonbaseComponent implements OnInit {
 

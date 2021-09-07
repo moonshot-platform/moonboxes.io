@@ -25,12 +25,11 @@ export class NavComponent implements OnInit {
     },
     {
       'name': 'MoonLottery',
-      'path': '/history',
-      // 'path': '/moonpaper'
+      'path': '',
     },
     {
       'name': 'MoonArcade',
-      'path': '/community'
+      'path': ''
     }
   ];
 
@@ -69,7 +68,7 @@ export class NavComponent implements OnInit {
       'alt': 'info',
       'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
       'click': null,
-      'routerLink': ['/moonbase']
+      'routerLink': ['/introduction']
     }
   ];
 
