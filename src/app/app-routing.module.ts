@@ -9,10 +9,10 @@ import { ArtistMoonboxComponent } from './components/moonbase/ArtistLootBox/arti
 import { UpcomingComponent } from './components/moonbase/ArtistLootBox/upcoming/upcoming.component';
 
 const routes: Routes = [
-  {
-    path: MoonbaseComponent.routeName,
-    component: MoonbaseComponent
-  },
+  // {
+  //   path: MoonbaseComponent.routeName,
+  //   component: MoonbaseComponent
+  // },
 ];
 
 @NgModule({

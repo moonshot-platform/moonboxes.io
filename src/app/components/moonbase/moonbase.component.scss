@@ -82,11 +82,6 @@
     padding-top: 3rem;
 }
 
-.normal_text {
-    line-height: 22px;
-    font-weight: normal;
-}
-
 .box {
     margin-top: 2px;
     position: absolute;
@@ -105,20 +100,6 @@
 
 .mt-15 {
     margin-top: 15px;
-}
-
-.d_flex_content_between {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.prizepool {
-    display: flex;
-    flex-direction: column;
-    align-items: baseline;
-    justify-content: space-between;
-    flex: 1;
 }
 
 .pt-0 {
