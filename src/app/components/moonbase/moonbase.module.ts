@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SwiperModule } from 'swiper/angular';
 
 import { MoonbaseRoutingModule } from './moonbase-routing.module';
 import { MoonbaseComponent } from './moonbase.component';
@@ -70,7 +71,8 @@ import { LimitedComponent } from './landing/limited/limited.component';
     AngularCountdownDateTimeModule,
     ShareButtonsModule,
     ShareIconsModule,
-    SidebarModule
+    SidebarModule,
+    SwiperModule
   ]
 })
 export class MoonbaseModule { }
