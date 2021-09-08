@@ -30,8 +30,10 @@ import { SidebarModule } from '../base/sidebar/sidebar.module';
 import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
 import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
-import { CarouselComponent } from './landing/carousel/carousel.component';
 import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
+import { LimitedComponent } from './landing/limited/limited.component';
+
+
 
 @NgModule({
   declarations: [
@@ -54,8 +56,8 @@ import { LandingIntroComponent } from './landing/landing-intro/landing-intro.com
     LandingComponent,
     RarityComponent,
     RaiseStakesComponent,
-    CarouselComponent,
-    LandingIntroComponent
+    LandingIntroComponent,
+    LimitedComponent
   ],
   imports: [
     MatIconModule,

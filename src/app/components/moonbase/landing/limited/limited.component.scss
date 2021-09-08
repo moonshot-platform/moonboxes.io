@@ -1,0 +1,11 @@
+@import "includes";
+section.limited {
+    display: flex;
+    flex-direction: column;
+    max-width: 810px;
+    margin-top: 170px;
+    margin-right: 20px;
+    margin-left: 20px;
+    justify-content: center;
+    align-items: center;
+}
