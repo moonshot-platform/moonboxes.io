@@ -22,8 +22,11 @@ export class LimitedComponent implements OnInit {
     direction: 'horizontal',
     centeredSlides: true,
     //spaceBetween: 10,
-    autoplay: true,
-    centeredSlidesBounds: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
     centerInsufficientSlides: true,
     freeMode: {
       enabled: false,
@@ -73,5 +76,12 @@ export class LimitedComponent implements OnInit {
       "name": "",
     },
   ];
+
+  scrollToElement(page: string, fragment: string): void {
+    const element = document.querySelector(`#${fragment}`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
 
 }
