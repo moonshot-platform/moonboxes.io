@@ -3,9 +3,10 @@ section.landing-intro {
     display: flex;
     flex-direction: row;
     max-width: 810px;
-    margin-top: 90px;
+    margin-top: 160px; //90px;
     margin-right: 20px;
     margin-left: 20px;
+    margin-bottom: 90px;
     justify-content: center;
     align-items: center;
 }
@@ -21,9 +22,9 @@ section.landing-intro {
         background: black;
         width: 100%;
         height: 100%;
-        z-index: 1;
+        z-index: 0;
         &:hover {
-            z-index: 3;
+            z-index: 2;
         }
     }
 }
@@ -34,7 +35,7 @@ section.landing-intro {
     border-top: 3px solid $primary;
     margin-top: 80px;
     position: relative;
-    z-index: 2;
+    z-index: 1;
     .buttons-container {
         display: flex;
         flex-direction: row;
@@ -55,6 +56,8 @@ section.landing-intro {
         margin-right: 100px;
     }
     .buy-moonshot-button {
+        position: relative;
+        z-index: 0;
         display: flex;
         width: 170px;
         .button {
