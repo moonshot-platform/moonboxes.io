@@ -29,6 +29,11 @@ import { SocialShareComponent } from './modal-for-transaction/social-share/socia
 import { SidebarModule } from '../base/sidebar/sidebar.module';
 import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
+import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
+import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
+import { LimitedComponent } from './landing/limited/limited.component';
+
+
 
 @NgModule({
   declarations: [
@@ -49,7 +54,10 @@ import { RarityComponent } from './rarity/rarity.component';
     RevealNftPopupComponent,
     SocialShareComponent,
     LandingComponent,
-    RarityComponent
+    RarityComponent,
+    RaiseStakesComponent,
+    LandingIntroComponent,
+    LimitedComponent
   ],
   imports: [
     MatIconModule,
