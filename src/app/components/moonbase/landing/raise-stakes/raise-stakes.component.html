@@ -1,0 +1,38 @@
+<section class="raise-stakes">
+    <div class="all-boxes">
+        <div class="box-container" *ngFor="let box of boxes">
+            <div class="box-card">
+                <img class="rounded-image" src={{box.img}} alt="moonboxes">
+                <div class="desc">
+                    <p>{{box.name}}</p>
+                    <p class="quantity">{{box.quantity}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-container">
+        <div class="heading-container top futuristic-container bottom-only">
+            <p class="p-white-span-primary p34 orbitron">Raise the stakes<br><span>with a shiny<br>Diamond Moonbox</span></p>
+        </div>
+        <div class="description-container">
+            <div class="bottom flex pv20">
+                <div class="bottom-only no-padding ">
+                    <p class="mb20  info-text">There are 4 kinds of MoonBoxes. Wood being the one with the lowest stakes and Diamond with the highest. The higher the stakes ther rare the NFTs.</p>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="buy-moonshot-button">
+                    <a href="" target="_blank" class="button">Buy a MoonBox</a>
+                </div>
+                <div class="arrow-down">
+                    <div class="round-mini-button" (click)="scrollToElement('', 'news')">
+                        <mat-icon fontSet="material-icons" class="color-primary">arrow_downward</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
