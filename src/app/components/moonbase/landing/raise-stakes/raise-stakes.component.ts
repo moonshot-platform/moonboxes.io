@@ -29,13 +29,31 @@ export class RaiseStakesComponent implements OnInit {
       "quantity": "10B",
     }
   ];
+  boxIndex = 0;
+  boxForMobile: any = this.boxes[this.boxIndex];
+
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-
+  nextBox(): void {
+    if (this.boxIndex < this.boxes.length) {
+      this.boxIndex++;
+    } else {
+      this.boxIndex = 0;
+    }
+    this.boxForMobile = this.boxes[this.boxIndex];
+  }
+  prevBox(): void {
+    if (this.boxIndex >= 0) {
+      this.boxIndex--;
+    } else {
+      this.boxIndex = this.boxes.length - 1;
+    }
+    this.boxForMobile = this.boxes[this.boxIndex];
+  }
 
   scrollToElement(page: string, fragment: string): void {
     const element = document.querySelector(`#${fragment}`)
