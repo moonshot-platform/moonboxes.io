@@ -1,2 +1,39 @@
-<section class="limited">
+<section id="limited" class="limited">
+    <!-- This is the 3D Owl Carousel -->
+    <section class="landing-carousel">
+        <swiper [config]="config">
+            <ng-container *ngFor="let slide of slides; index as i">
+                <ng-template swiperSlide>
+                    <div class="nft-image-container">
+                        <img src="{{slide.img}}" alt="{{slide.name}}">
+                    </div>
+                </ng-template>
+            </ng-container>
+        </swiper>
+    </section>
+
+
+    <div class="detail-container">
+        <div class="heading-container top futuristic-container bottom-only">
+            <p class="p-white-span-primary p34 orbitron">Limited edition NFTs<br><span>made by talented<br>3D artist</span></p>
+        </div>
+        <div class="description-container">
+            <div class="bottom flex pv20">
+                <div class="bottom-only no-padding ">
+                    <p class="mb20  info-text">Our 3D artists have made space themed NFTs with attributes — suite color, glove color, Moon badge and so on — each accounting for its own level of rarity.</p>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="buy-moonshot-button">
+                    <a href="" target="_blank" class="button">See attributes</a>
+                </div>
+                <div class="arrow-down">
+                    <div class="round-mini-button" (click)="scrollToElement('', 'news')">
+                        <mat-icon fontSet="material-icons" class="color-primary">arrow_downward</mat-icon>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </section>
