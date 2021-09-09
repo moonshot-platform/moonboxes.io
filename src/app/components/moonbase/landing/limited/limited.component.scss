@@ -2,10 +2,139 @@
 section.limited {
     display: flex;
     flex-direction: column;
-    max-width: 810px;
-    margin-top: 170px;
+    max-width: 770px;
+    margin-top: 240px; //170px;
     margin-right: 20px;
     margin-left: 20px;
     justify-content: center;
     align-items: center;
+    width: 100vw;
+    margin-bottom: 100px;
+}
+
+section.landing-carousel {
+    max-width: calc(100vw - 260px)!important;
+    min-width: 500px;
+    padding-right: 20px;
+    padding-left: 20px;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+swiper {
+    //height: 280px !important;
+    padding-top: 0px !important;
+    .swiper-slide {
+        align-content: center !important;
+        display: flex !important;
+        justify-content: center !important;
+    }
+}
+
+.nft-image-container {
+    max-height: 250px;
+    max-width: 250px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    //margin-left: -30px;
+    border: 1px solid $primary;
+    padding: 10px;
+    overflow: hidden;
+    //margin-right: -3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    img {
+        height: 100%;
+        width: 100%;
+        align-self: center;
+    }
+}
+
+.detail-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: 90px;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    .heading-container {
+        font-family: "Orbitron";
+        font-size: 30px;
+        font-weight: 900;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 36px;
+        letter-spacing: normal;
+        text-align: left;
+        color: #d5a642;
+        border-top: 3px solid $primary;
+        max-width: 370px;
+        width: 100%;
+    }
+    .description-container {
+        display: flex;
+        flex-direction: column;
+        max-width: 270px;
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+        border-top: 1px solid $primary;
+    }
+    .buttons-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    .info-text {
+        font-family: $primary-font;
+        font-size: 16px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.69;
+        letter-spacing: normal;
+        text-align: left;
+        color: $primary;
+    }
+    .buy-moonshot-button {
+        display: flex;
+        width: 170px;
+        .button {
+            max-width: 170px;
+            min-width: 170px;
+            width: 100%;
+            font-size: 16px;
+            height: 40px;
+            padding: 0px 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            font-weight: bold;
+            font-stretch: normal;
+            font-style: normal;
+            line-height: 1.69;
+            letter-spacing: normal;
+            text-align: center;
+        }
+    }
+    .arrow-down {
+        width: 40px;
+        height: 40px;
+        .round-mini-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    }
 }
