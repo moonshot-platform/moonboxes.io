@@ -36,11 +36,11 @@ export class LimitedComponent implements OnInit {
     initialSlide: 3,
     loop: true,
     coverflowEffect: {
-      depth: 700,
+      depth: 400,
       modifier: 1,
       slideShadows: false,
       rotate: 0,
-      stretch: -100,
+      stretch: 0,
     },
 
   };
