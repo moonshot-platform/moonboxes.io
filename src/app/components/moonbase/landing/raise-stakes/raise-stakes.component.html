@@ -10,6 +10,23 @@
             </div>
         </div>
     </div>
+    <div class="all-boxes-mobile">
+        <div class="round-mini-button" (click)="prevBox()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
+        </div>
+        <div class="box-container">
+            <div class="box-card">
+                <img class="rounded-image" src={{boxForMobile.img}} alt="moonboxes">
+                <div class="desc">
+                    <p>{{boxForMobile.name}}</p>
+                    <p class="quantity">{{boxForMobile.quantity}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="round-mini-button" (click)="nextBox()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
+        </div>
+    </div>
 
     <div class="detail-container">
         <div class="heading-container top futuristic-container bottom-only">
