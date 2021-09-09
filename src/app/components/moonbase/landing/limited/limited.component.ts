@@ -64,7 +64,7 @@ export class LimitedComponent implements OnInit {
       "name": "",
     },
     {
-      "img": "assets/media/images/moonbox/landing/575.jpg",
+      "img": "assets/media/images/moonbox/landing/372.jpg",
       "name": "",
     },
     {
@@ -72,7 +72,7 @@ export class LimitedComponent implements OnInit {
       "name": "",
     },
     {
-      "img": "assets/media/images/moonbox/landing/372.jpg",
+      "img": "assets/media/images/moonbox/landing/575.jpg",
       "name": "",
     },
   ];
