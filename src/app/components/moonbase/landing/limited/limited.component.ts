@@ -64,14 +64,29 @@ export class LimitedComponent implements OnInit {
     },
     grabCursor: true,
     initialSlide: this.initialSlideStartIndex,
-    loop: true,
+    loop: false,
     coverflowEffect: {
       depth: 400,
-      modifier: 1,
       slideShadows: false,
       rotate: 0,
       stretch: 0,
+    },
+    breakpoints: {
+      700: {
+        slidesPerView: 3,
+      },
+      600: {
+        slidesPerView: 3,
+      },
+      500: {
+        slidesPerView: 3,
+      },
+      300: {
+        slidesPerView: 2.25,
+      }
+
     }
+
   };
   constructor() {
   }
@@ -98,6 +113,4 @@ export class LimitedComponent implements OnInit {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
-
-
 }
