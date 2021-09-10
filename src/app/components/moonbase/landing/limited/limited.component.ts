@@ -15,31 +15,31 @@ export class LimitedComponent implements OnInit {
   slides: any[] = [
     {
       "img": "assets/media/images/moonbox/landing/322.jpg",
-      "name": "The Moonshooter #109",
+      "name": "The Moonshooter #322",
     },
     {
       "img": "assets/media/images/moonbox/landing/950.jpg",
-      "name": "The Moonshooter #110",
+      "name": "The Moonshooter #950",
     },
     {
       "img": "assets/media/images/moonbox/landing/951.jpg",
-      "name": "The Moonshooter #111",
+      "name": "The Moonshooter #951",
     },
     {
       "img": "assets/media/images/moonbox/landing/068.jpg",
-      "name": "The Moonshooter #112",
+      "name": "The Moonshooter #068",
     },
     {
       "img": "assets/media/images/moonbox/landing/372.jpg",
-      "name": "The Moonshooter #113",
+      "name": "The Moonshooter #372",
     },
     {
       "img": "assets/media/images/moonbox/landing/741.jpg",
-      "name": "The Moonshooter #114",
+      "name": "The Moonshooter #741",
     },
     {
       "img": "assets/media/images/moonbox/landing/575.jpg",
-      "name": "The Moonshooter #115",
+      "name": "The Moonshooter #575",
     },
   ];
 
@@ -82,7 +82,7 @@ export class LimitedComponent implements OnInit {
         slidesPerView: 3,
       },
       300: {
-        slidesPerView: 2.25,
+        slidesPerView: 1.76,
       }
 
     }
