@@ -15,8 +15,6 @@ section.landing-carousel {
     //width: 100%;
     padding-right: 20px;
     padding-left: 20px;
-    position: relative;
-    z-index: 0;
     overflow: hidden;
     display: flex;
     justify-content: center;
@@ -24,13 +22,20 @@ section.landing-carousel {
 }
 
 swiper {
-    //height: 280px !important;
     padding-top: 0px !important;
-    .swiper-slide {
-        align-content: center !important;
-        display: flex !important;
-        justify-content: center !important;
-    }
+}
+
+p.slider-name {
+    margin-top: 20px;
+    font-family: $primary-font;
+    font-size: 18px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    text-align: center;
+    color: $primary;
 }
 
 .nft-image-container {
@@ -39,12 +44,11 @@ swiper {
     width: 100%;
     height: 100%;
     background: black;
-    //margin-left: -30px;
     border: 1px solid $primary;
     padding: 10px;
     overflow: hidden;
-    //margin-right: -3rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     align-self: center;
@@ -58,7 +62,7 @@ swiper {
 .detail-container {
     display: flex;
     flex-direction: row;
-    margin-top: 90px;
+    margin-top: 50px;
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
