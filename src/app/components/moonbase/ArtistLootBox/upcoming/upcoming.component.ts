@@ -34,7 +34,7 @@ export class UpcomingComponent implements OnInit {
     this.httpService.getUpcomingArtistCollections(this.isNSFWStatus).subscribe((response) => {
 
       this.listOfArtistUpcoming = response.data;
-      //his.listOfArtistUpcoming.push(response.data[0]);
+      //this.listOfArtistUpcoming.push(response.data[0]);
     });
   }
 
