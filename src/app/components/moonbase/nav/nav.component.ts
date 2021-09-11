@@ -52,21 +52,21 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/folder.svg',
       'alt': 'folder',
-      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'tooltip': 'This is your history. An overview of your MoonBox NFT claims.',
       'click': null,
       'routerLink': ['/history']
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/lock.svg',
       'alt': 'lock',
-      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
       'click': null,
       'routerLink': ['/inventory']
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/info.svg',
       'alt': 'info',
-      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
       'click': null,
       'routerLink': ['/introduction']
     }
