@@ -15,31 +15,31 @@ export class LimitedComponent implements OnInit {
   slides: any[] = [
     {
       "img": "assets/media/images/moonbox/landing/322.jpg",
-      "name": "The Moonshooter #322",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/950.jpg",
-      "name": "The Moonshooter #950",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/951.jpg",
-      "name": "The Moonshooter #951",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/068.jpg",
-      "name": "The Moonshooter #068",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/372.jpg",
-      "name": "The Moonshooter #372",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/741.jpg",
-      "name": "The Moonshooter #741",
+      "name": "The Moonshooter",
     },
     {
       "img": "assets/media/images/moonbox/landing/575.jpg",
-      "name": "The Moonshooter #575",
+      "name": "The Moonshooter",
     },
   ];
 
