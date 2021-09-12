@@ -1,11 +1,11 @@
 @import "includes";
 section.raise-stakes {
-    display: flex;
+    display: block;
     flex-direction: column;
     max-width: 770px;
     width: 100%;
     padding-top: 90px;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
