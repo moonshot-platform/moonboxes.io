@@ -9,6 +9,8 @@ section.landing-intro {
     margin-bottom: 90px;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 0;
 }
 
 .landing-into-nft-image-container-mobile {
@@ -154,9 +156,6 @@ section.landing-intro {
             width: 100%;
             height: 100%;
             z-index: 0;
-            &:hover {
-                z-index: 2;
-            }
         }
     }
 }

@@ -22,6 +22,7 @@ section.navigation {
 }
 
 .sub-menu {
+    transform: rotateY(180deg);
     img {
         cursor: pointer;
         &:hover {
@@ -78,7 +79,7 @@ section.navigation {
 
 .justify-around img {
     width: 30px;
-    transform: rotate(180deg);
+    //transform: rotate(180deg);
 }
 
 .bottom-container {
@@ -112,7 +113,7 @@ section.navigation {
 .tooltip .bottom {
     width: 270px;
     top: 0px;
-    transform: translate(-57%, -100%) scaleY(-1) scaleX(-1);
+    transform: translate(-32%, -100%) scaleY(-1) scaleX(1);
     padding: 20px 20px;
     color: white;
     background-color: black;
@@ -336,17 +337,17 @@ nav {
     .sub-menu>li {
         &:first-child {
             .tooltip .bottom {
-                transform: translate(-20px, -100%) scaleY(-1) scaleX(-1);
+                transform: translate(-20px, -100%) scaleY(-1) scaleX(1);
                 i {
-                    left: 102%;
+                    left: 28%;
                 }
             }
         }
         &:last-child {
             .tooltip .bottom {
-                transform: translate(-70%, -100%) scaleY(-1) scaleX(-1);
+                transform: translate(-70%, -100%) scaleY(-1) scaleX(1);
                 i {
-                    left: 40%;
+                    left: 91%;
                 }
             }
         }
