@@ -218,7 +218,6 @@ nav {
         justify-content: center;
         margin-left: 0px;
         padding-bottom: 0rem;
-        border-bottom: 4px solid #9f7c31;
         li {
             border-top: 1px solid $primary;
             padding-top: 14px;
@@ -324,7 +323,6 @@ nav {
 }
 
 .menubar.flex li:first-child {
-    border-bottom: 4px solid #000;
     margin-left: 0em !important;
     margin-bottom: -3px;
 }

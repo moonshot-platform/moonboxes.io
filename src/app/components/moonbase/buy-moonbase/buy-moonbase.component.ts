@@ -10,7 +10,7 @@ import { environment } from './../../../../environments/environment';
 @Component({
   selector: 'app-buy-moonbase',
   templateUrl: './buy-moonbase.component.html',
-  styleUrls: ['./buy-moonbase.component.scss']
+  styleUrls: ['./buy-moonbase.component.scss', './../moonbase.component.scss', './../intro/intro.component.scss']
 })
 export class BuyMoonbaseComponent implements OnInit {
 
@@ -20,6 +20,7 @@ export class BuyMoonbaseComponent implements OnInit {
   isConnected:boolean = false;
   isWrongNetwork:boolean = false;
   invisible: boolean = false;
+  popupClosed : boolean = false;
   static readonly routeName: string = 'buy_moonbase';
 
 
@@ -31,6 +32,8 @@ export class BuyMoonbaseComponent implements OnInit {
   balanceOfMoon: any;
   moonBoxLimitDetails: any;
   maxSupply = [];
+  fadeOut: boolean = false;
+  priceForMoonBox = 0;
 
   constructor(public walletConnectService:WalletConnectService,public dialog: MatDialog,
     public httpApi:HttpApiService) {
@@ -76,7 +79,16 @@ export class BuyMoonbaseComponent implements OnInit {
       this.balanceOfMoon=response;
     });
 
+    try{
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+
+    let priceForMoonBoxTemp: any = await this.walletConnectService.getDetailsMoonboxPrice();
+    this.priceForMoonBox = priceForMoonBoxTemp/1e18;
+    }
+    catch(e)
+    {
+      console.error(e)
+    }
     
   }
 
@@ -148,13 +160,16 @@ export class BuyMoonbaseComponent implements OnInit {
 
   buyMoonBase(index : number)
   {
+    
       if(this.data===undefined || this.data.address===undefined)
       {
         this.openDialog();
       }
       else
       {
-          this.submitBetToContract(index);
+        this.fadeOut = true;
+        this.submitBetToContract(index);
+
       }
   }
 
@@ -195,11 +210,10 @@ export class BuyMoonbaseComponent implements OnInit {
   dialogRef.afterClosed().subscribe(result => {
     this.invisible = false;
     this.getMaxSupply();
+    this.fadeOut = false;
+    this.popupClosed = true;
     });
 
   return true;
     }
-
-
-
 }

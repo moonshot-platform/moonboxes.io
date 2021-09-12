@@ -4,7 +4,7 @@ section.raise-stakes {
     flex-direction: column;
     max-width: 770px;
     width: 100%;
-    padding-top: 90px;
+    padding-top: 180px;
     justify-content: start;
     align-items: center;
 }
@@ -158,7 +158,7 @@ section.raise-stakes {
 
 @media only screen and (max-width: 810px) {
     section.raise-stakes {
-        padding-top: 60px;
+        padding-top: 100px;
         max-width: 500px;
         width: calc(100vw - 40px);
     }
