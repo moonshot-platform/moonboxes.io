@@ -10,7 +10,7 @@
       </div>
       <div class="text-center">
         <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[0].name}} ({{this.maxSupply[0]}})</p>
-        <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[0].value}}</p>
+        <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox}} BNB</p>
         <div class="border plus_minus flex mb20" *ngIf="inputnumber[1]>0">
 
           <button class="flex1 toggle-less" (click)="minus(1)">
@@ -50,7 +50,7 @@
       </div>
       <div class="text-center">
         <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[1].name}} ({{this.maxSupply[1]}})</p>
-        <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[1].value}}</p>
+        <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox}} BNB</p>
         <div class="border plus_minus flex mb20" *ngIf="inputnumber[2]>0">
 
           <button class="flex1 toggle-less" (click)="minus(2)">
@@ -89,7 +89,7 @@
       </div>
       <div class="text-center">
         <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[2].name}} ({{this.maxSupply[2]}})</p>
-        <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[2].value}}</p>
+        <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox}} BNB</p>
         <div class="border plus_minus flex mb20" *ngIf="inputnumber[3]>0">
 
           <button class="flex1 toggle-less" (click)="minus(3)">
@@ -129,7 +129,7 @@
       </div>
       <div class="text-center">
         <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[3].name}} ({{this.maxSupply[3]}})</p>
-        <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[3].value}}</p>
+        <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox}} BNB</p>
         <div class="border plus_minus flex mb20" *ngIf="inputnumber[4]>0">
 
           <button class="flex1 toggle-less" (click)="minus(4)">
@@ -181,7 +181,7 @@
     <div class="flex-col text-center">
       <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}}
         ({{this.maxSupply[current]}})</p>
-      <p class="p-white-span-primary p16d14m mb10">{{lootBoxDetails[current].value}}</p>
+      <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox}} BNB</p>
       <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0"> 
         <button class="flex1 toggle-less" (click)="minus(current+1)">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"

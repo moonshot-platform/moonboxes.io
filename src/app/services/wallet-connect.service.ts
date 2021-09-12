@@ -153,18 +153,8 @@ export class WalletConnectService {
   }
 
   async getDetailsMoonboxPrice() {
-    var promise = new Promise((resolve, reject) => {
-      try {
-        this.LootboxContract.moonboxPrice()
-          .then(function (transactionHash) {
-            resolve(transactionHash);
-          })
-      }
-      catch (e) {
-        reject(false);
-      }
-    });
-    return promise
+    var price = await this.LootboxContract.moonboxPrice();
+           return price;
   }
 
   async getDetailsMoonboxlimit() {

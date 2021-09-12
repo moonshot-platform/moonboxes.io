@@ -3,11 +3,10 @@ section.limited {
     display: flex;
     flex-direction: column;
     max-width: 770px;
-    margin-top: 240px; //170px;
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 140px;
+    padding-top: 180px;
 }
 
 section.landing-carousel {
@@ -152,7 +151,7 @@ p.slider-name {
 
 @media only screen and (max-width: 810px) {
     section.limited {
-        margin-top: 120px;
+        padding-top: 100px;
     }
     .detail-container {
         flex-direction: column;
