@@ -36,39 +36,39 @@ export class NavComponent implements OnInit {
 
   public navSubItems: any[] = [
     {
-      'icon': 'assets/media/icons/moonbase/nav/moon.svg',
-      'alt': 'moon',
+      'icon': 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
+      'alt': 'return back',
+      'tooltip': 'This is your MoonBase. Home of this dApp.',
+      'click': null,
+      'routerLink': ['']
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/Menu_drops_black.svg',
+      'alt': 'drops',
+      'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
+      'click': null,
+      'routerLink': ['/upcoming']
+    },
+    {
+      'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
+      'alt': 'inventory',
       'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
       'click': null,
-      'routerLink': ['/prizepool']
+      'routerLink': ['/inventory']
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/diamond.svg',
-      'alt': 'diamond',
-      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
-      'click': 'openDialog()',
-      'routerLink': null
-    },
-    {
-      'icon': 'assets/media/icons/moonbase/nav/folder.svg',
-      'alt': 'folder',
+      'icon': 'assets/media/icons/moonbase/nav/Menu_history_black.svg',
+      'alt': 'history',
       'tooltip': 'This is your history. An overview of your MoonBox NFT claims.',
       'click': null,
       'routerLink': ['/history']
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/lock.svg',
-      'alt': 'lock',
-      'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
-      'click': null,
-      'routerLink': ['/inventory']
-    },
-    {
-      'icon': 'assets/media/icons/moonbase/nav/info.svg',
+      'icon': 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
       'alt': 'info',
-      'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
+      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
       'click': null,
-      'routerLink': ['/introduction']
+      'routerLink': ['/prizepool']
     }
   ];
 

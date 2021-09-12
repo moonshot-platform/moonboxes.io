@@ -9,22 +9,22 @@ export class RaiseStakesComponent implements OnInit {
 
   boxes: any[] = [
     {
-      "img": "assets/media/images/moonbox/landing/wood_rgba0048.png",
+      "img": "assets/media/images/moonbox/landing/wood.png",
       "name": "Wood",
       "quantity": "0,5B",
     },
     {
-      "img": "assets/media/images/moonbox/landing/silver_rgba0001.png",
+      "img": "assets/media/images/moonbox/landing/silver.png",
       "name": "Silver",
       "quantity": "1B",
     },
     {
-      "img": "assets/media/images/moonbox/landing/gold_rgba0001.png",
+      "img": "assets/media/images/moonbox/landing/gold.png",
       "name": "Gold",
       "quantity": "2B",
     },
     {
-      "img": "assets/media/images/moonbox/landing/diamond_rgba0034.png",
+      "img": "assets/media/images/moonbox/landing/diamond.png",
       "name": "Diamond",
       "quantity": "10B",
     }
