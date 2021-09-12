@@ -9,9 +9,15 @@ export class RarityComponent implements OnInit {
 
   static readonly routeName: string = 'rarity';
 
+  sortedOnRarity = false;
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  doChangePancakeRouter() {
+    
   }
 
 }

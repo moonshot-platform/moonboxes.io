@@ -76,7 +76,7 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   plus(index: number) {
-    debugger
+    
     if (this.supplyDetails[index - 1].currentSupply > this.inputnumber[index]) {
       this.inputnumber[index] = this.inputnumber[index] + 1;
     }
