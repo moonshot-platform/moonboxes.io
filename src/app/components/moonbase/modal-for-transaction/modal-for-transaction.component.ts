@@ -157,7 +157,7 @@ export class ModalForTransactionComponent implements OnInit {
           setTimeout(() => {
             this.playvideo = true;
           }, 3000);
-          debugger
+          
           this.httpApi.showToastr(response.data.message, true);
         }
       })

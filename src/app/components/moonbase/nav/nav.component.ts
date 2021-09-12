@@ -116,7 +116,7 @@ export class NavComponent implements OnInit {
   }
 
   changeNSFWStatus(event: any) {
-    debugger
+    
     this.httpApi.setNSFWStatus(event);
   }
 

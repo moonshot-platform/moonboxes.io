@@ -26,7 +26,7 @@ export class RevealNftPopupComponent implements OnInit {
 
   async submitBet()
   {
-    debugger
+    
     var price:any = await this.walletConnectService.getDetailsMoonboxPrice();
     
     this.successIcon = true;

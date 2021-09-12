@@ -33,7 +33,7 @@ import { RarityComponent } from './rarity/rarity.component';
 import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
 import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
 import { LimitedComponent } from './landing/limited/limited.component';
-
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 
 @NgModule({
@@ -72,7 +72,8 @@ import { LimitedComponent } from './landing/limited/limited.component';
     ShareButtonsModule,
     ShareIconsModule,
     SidebarModule,
-    SwiperModule
+    SwiperModule,
+    UiSwitchModule
   ]
 })
 export class MoonbaseModule { }
