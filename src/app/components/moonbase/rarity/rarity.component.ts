@@ -29,7 +29,7 @@ export class RarityComponent implements OnInit {
     'Badge',
     'Gloves',
     'Color',
-    'Tier',
+    //'Tier',
   ]
 
   items = [
@@ -131,7 +131,7 @@ export class RarityComponent implements OnInit {
       rarityNumber: 175,
       rarityPercentage: 17.5,
     },
-    
+
     {
       name: 'Diamond Chest',
       image: '18_Diamond-chest.png',
@@ -171,309 +171,309 @@ export class RarityComponent implements OnInit {
 
     {
       name: 'Visor In Black',
-      image:'29_Visor-in-black.png',
+      image: '29_Visor-in-black.png',
       category: 'Visor',
       rarityNumber: 1,
       rarityPercentage: 0.1,
     },
     {
       name: 'Visor In Gold',
-      image:'28_Visor-in-gold.png',
+      image: '28_Visor-in-gold.png',
       category: 'Visor',
       rarityNumber: 5,
       rarityPercentage: 0.5,
     },
     {
       name: 'Visor In Silver',
-      image:'27_Visor-in-silver.png',
+      image: '27_Visor-in-silver.png',
       category: 'Visor',
       rarityNumber: 15,
       rarityPercentage: 1.5,
     },
     {
       name: 'Visor In Bronze',
-      image:'26_Visor-in-bronze.png',
+      image: '26_Visor-in-bronze.png',
       category: 'Visor',
       rarityNumber: 29,
       rarityPercentage: 2.9,
     },
     {
       name: 'Visor In Emerald Green',
-      image:'25_Visor-in-emerald-green.png',
+      image: '25_Visor-in-emerald-green.png',
       category: 'Visor',
       rarityNumber: 75,
       rarityPercentage: 7.5,
     },
     {
       name: 'Visor In Ruby Red',
-      image:'24_Visor-in-ruby-red.png',
+      image: '24_Visor-in-ruby-red.png',
       category: 'Visor',
       rarityNumber: 100,
       rarityPercentage: 10,
     },
     {
       name: 'Visor In Pink',
-      image:'23_Visor-in-pink.png',
+      image: '23_Visor-in-pink.png',
       category: 'Visor',
       rarityNumber: 125,
       rarityPercentage: 12.5,
     },
     {
       name: 'Visor In Sapphire Blue',
-      image:'22_Visor-in-sapphire-blue.png',
+      image: '22_Visor-in-sapphire-blue.png',
       category: 'Visor',
       rarityNumber: 150,
       rarityPercentage: 15,
     },
     {
       name: 'Visor In Purple',
-      image:'21_Visor-in-purple.png',
+      image: '21_Visor-in-purple.png',
       category: 'Visor',
       rarityNumber: 200,
       rarityPercentage: 20,
     },
     {
       name: 'Visor In White',
-      image:'20_Visor-in-white.png',
+      image: '20_Visor-in-white.png',
       category: 'Visor',
       rarityNumber: 300,
       rarityPercentage: 30,
     },
-    
+
     {
       name: 'Badge Waning Crescent',
-      image:'37_Badge-Waning-crescent.png',
+      image: '37_Badge-Waning-crescent.png',
       category: 'Badge',
       rarityNumber: 25,
       rarityPercentage: 2.5,
     },
     {
       name: 'Badge Last Quarter',
-      image:'36_Badge-Last-quarter.png',
+      image: '36_Badge-Last-quarter.png',
       category: 'Badge',
       rarityNumber: 50,
       rarityPercentage: 5,
     },
     {
       name: 'Badge Waning Gibbous',
-      image:'35_Badge-Waning-gibbous.png',
+      image: '35_Badge-Waning-gibbous.png',
       category: 'Badge',
       rarityNumber: 75,
       rarityPercentage: 7.5,
     },
     {
       name: 'Badge Full Moon',
-      image:'34_Badge-Full-Moon.png',
+      image: '34_Badge-Full-Moon.png',
       category: 'Badge',
       rarityNumber: 100,
       rarityPercentage: 9.3,
     },
     {
       name: 'Badge Waxing Gibbous',
-      image:'33_Badge-Waxing-gibbous.png',
+      image: '33_Badge-Waxing-gibbous.png',
       category: 'Badge',
       rarityNumber: 125,
       rarityPercentage: 12.5,
     },
     {
       name: 'Badge First Quarter',
-      image:'32_Badge-First-quarter.png',
+      image: '32_Badge-First-quarter.png',
       category: 'Badge',
       rarityNumber: 150,
       rarityPercentage: 15,
     },
     {
       name: 'Badge Waxing Crescent',
-      image:'31_Badge-Waxing-crescent.png',
+      image: '31_Badge-Waxing-crescent.png',
       category: 'Badge',
       rarityNumber: 2400,
       rarityPercentage: 20.7,
     },
     {
       name: 'Badge New Moon',
-      image:'30_Badge-New-Moon.png',
+      image: '30_Badge-New-Moon.png',
       category: 'Badge',
       rarityNumber: 275,
       rarityPercentage: 27.5,
     },
-    
+
     {
       name: 'Gloves Full Black',
-      image:'48_Gloves-full-black.png',
+      image: '48_Gloves-full-black.png',
       category: 'Gloves',
       rarityNumber: 1,
       rarityPercentage: 0.1,
     },
     {
       name: 'Gloves Gold',
-      image:'47_Gloves-gold.png',
+      image: '47_Gloves-gold.png',
       category: 'Gloves',
       rarityNumber: 5,
       rarityPercentage: 0.4,
     },
     {
       name: 'Gloves Silver',
-      image:'46_Gloves-silver.png',
+      image: '46_Gloves-silver.png',
       category: 'Gloves',
       rarityNumber: 15,
       rarityPercentage: 1.5,
     },
     {
       name: 'Gloves Bronze',
-      image:'45_Gloves-bronze.png',
+      image: '45_Gloves-bronze.png',
       category: 'Gloves',
       rarityNumber: 29,
       rarityPercentage: 2.5,
     },
     {
       name: 'Gloves Emerald Green',
-      image:'44_Gloves-emerald-green.png',
+      image: '44_Gloves-emerald-green.png',
       category: 'Gloves',
       rarityNumber: 75,
       rarityPercentage: 6.1,
     },
     {
       name: 'Gloves Ruby Red',
-      image:'43_Gloves-ruby-red.png',
+      image: '43_Gloves-ruby-red.png',
       category: 'Gloves',
       rarityNumber: 100,
       rarityPercentage: 9.3,
     },
     {
       name: 'Gloves Pink',
-      image:'42_Gloves-pink.png',
+      image: '42_Gloves-pink.png',
       category: 'Gloves',
       rarityNumber: 125,
       rarityPercentage: 10.4,
     },
     {
       name: 'Gloves Sapphier Blue',
-      image:'40_Gloves-sapphire-blue.png',
+      image: '40_Gloves-sapphire-blue.png',
       category: 'Gloves',
       rarityNumber: 150,
       rarityPercentage: 12.8,
     },
     {
       name: 'Gloves Purple',
-      image:'39_Gloves-purple.png',
+      image: '39_Gloves-purple.png',
       category: 'Gloves',
       rarityNumber: 200,
       rarityPercentage: 33.8,
     },
     {
       name: 'Gloves White',
-      image:'38_Gloves-white.png',
+      image: '38_Gloves-white.png',
       category: 'Gloves',
       rarityNumber: 300,
       rarityPercentage: 23.1,
     },
-    
+
     {
       name: 'Color Full Black',
-      image:'58_Color-full-black.png',
+      image: '58_Color-full-black.png',
       category: 'Color',
       rarityNumber: 1,
       rarityPercentage: 0.1,
     },
     {
       name: 'Color Gold',
-      image:'55_Color-Gold.png',
+      image: '55_Color-Gold.png',
       category: 'Color',
       rarityNumber: 5,
       rarityPercentage: 0.5,
     },
     {
       name: 'Color Silver',
-      image:'56_Color-Silver.png',
+      image: '56_Color-Silver.png',
       category: 'Color',
       rarityNumber: 15,
       rarityPercentage: 1.5,
     },
     {
       name: 'Color Bronze',
-      image:'57_Color-bronze.png',
+      image: '57_Color-bronze.png',
       category: 'Color',
       rarityNumber: 29,
       rarityPercentage: 2.9,
     },
     {
       name: 'Color Emerald Green',
-      image:'54_Color-Emerald-Green.png',
+      image: '54_Color-Emerald-Green.png',
       category: 'Color',
       rarityNumber: 75,
       rarityPercentage: 7.5,
     },
     {
       name: 'Color Ruby Red',
-      image:'53_Color-Ruby-Red.png',
+      image: '53_Color-Ruby-Red.png',
       category: 'Color',
       rarityNumber: 100,
       rarityPercentage: 10,
     },
     {
       name: 'Color Pink',
-      image:'52_Color-Pink.png',
+      image: '52_Color-Pink.png',
       category: 'Color',
       rarityNumber: 125,
       rarityPercentage: 12.5,
     },
     {
       name: 'Color Sapphire Blue',
-      image:'51_Color-Sapphire-Blue.png',
+      image: '51_Color-Sapphire-Blue.png',
       category: 'Color',
       rarityNumber: 150,
       rarityPercentage: 15,
     },
     {
       name: 'Color Purple',
-      image:'50_Color-Purple.png',
+      image: '50_Color-Purple.png',
       category: 'Color',
       rarityNumber: 200,
       rarityPercentage: 20,
     },
     {
       name: 'Color White',
-      image:'49_Color-White.png',
+      image: '49_Color-White.png',
       category: 'Color',
       rarityNumber: 300,
       rarityPercentage: 30,
     },
-    
-    {
-      name: 'Black Tier',
-      image:'62_Black-tier.png',
-      category: 'Tier',
-      rarityNumber: 1,
-      rarityPercentage: 0.1,
-    },
-    {
-      name: 'Gold Tier',
-      image:'61_Gold-tier.png',
-      category: 'Tier',
-      rarityNumber: 5,
-      rarityPercentage: 0.5,
-    },
-    {
-      name: 'Silver Tier',
-      image:'60_Silver-tier.png',
-      category: 'Tier',
-      rarityNumber: 15,
-      rarityPercentage: 1.5,
-    },
-    {
-      name: 'Bronze Tier',
-      image:'59_Bronze-tier.png',
-      category: 'Tier',
-      rarityNumber: 29,
-      rarityPercentage: 2.9,
-    },
-    {
-      name: 'Common Tier',
-      image:'63_Common-tier.png',
-      category: 'Tier',
-      rarityNumber: 950,
-      rarityPercentage: 95,
-    },
+    /* 
+        {
+          name: 'Black Tier',
+          image: '62_Black-tier.png',
+          category: 'Tier',
+          rarityNumber: 1,
+          rarityPercentage: 0.1,
+        },
+        {
+          name: 'Gold Tier',
+          image: '61_Gold-tier.png',
+          category: 'Tier',
+          rarityNumber: 5,
+          rarityPercentage: 0.5,
+        },
+        {
+          name: 'Silver Tier',
+          image: '60_Silver-tier.png',
+          category: 'Tier',
+          rarityNumber: 15,
+          rarityPercentage: 1.5,
+        },
+        {
+          name: 'Bronze Tier',
+          image: '59_Bronze-tier.png',
+          category: 'Tier',
+          rarityNumber: 29,
+          rarityPercentage: 2.9,
+        },
+        {
+          name: 'Common Tier',
+          image: '63_Common-tier.png',
+          category: 'Tier',
+          rarityNumber: 950,
+          rarityPercentage: 95,
+        }, */
   ]
 
   newList = []
@@ -483,18 +483,18 @@ export class RarityComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getAvailableCategories() : any {
+  getAvailableCategories(): any {
     let list = {}
-    
-    this.items.forEach( value => {
+
+    this.items.forEach(value => {
       list[value.category] = list[value.category] || []
       list[value.category].push(value)
-    } );
+    });
 
     return list
   }
 
-  getRareDrops() : any {
+  getRareDrops(): any {
     let list = [
       {
         rarity: [20, 100],
@@ -513,28 +513,28 @@ export class RarityComponent implements OnInit {
         content: []
       }
     ]
-    
-    this.items.forEach( value => {
-      
-      for( let i = 0; i < this.rarityLevels.length; i++ ) {
-        if( value.rarityPercentage >= this.rarityLevels[i][0] ) {
-          list[i].content.push( value )
+
+    this.items.forEach(value => {
+
+      for (let i = 0; i < this.rarityLevels.length; i++) {
+        if (value.rarityPercentage >= this.rarityLevels[i][0]) {
+          list[i].content.push(value)
           break;
         }
       }
 
-    } );
+    });
 
     list.forEach(value => {
-      
-      value.content.sort( ( a, b ) => {
-        if ( a.rarityPercentage > b.rarityPercentage )
+
+      value.content.sort((a, b) => {
+        if (a.rarityPercentage > b.rarityPercentage)
           return -1;
-        else if ( a.rarityPercentage < b.rarityPercentage )
+        else if (a.rarityPercentage < b.rarityPercentage)
           return 1;
-        
+
         return 0;
-      } );
+      });
 
     })
 
