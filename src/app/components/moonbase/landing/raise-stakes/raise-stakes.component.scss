@@ -156,6 +156,10 @@ section.raise-stakes {
     }
 }
 
+.break-line-mobile {
+    display: none;
+}
+
 @media only screen and (max-width: 810px) {
     section.raise-stakes {
         padding-top: 100px;
@@ -192,5 +196,8 @@ section.raise-stakes {
     }
     .arrow-down {
         display: none;
+    }
+    .break-line-mobile {
+        display: flex;
     }
 }

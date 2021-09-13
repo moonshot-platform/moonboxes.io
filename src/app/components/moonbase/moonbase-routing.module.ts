@@ -4,6 +4,7 @@ import { ArtistMoonboxComponent } from './ArtistLootBox/artist-moonbox/artist-mo
 import { UpcomingComponent } from './ArtistLootBox/upcoming/upcoming.component';
 import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { HistoryComponent } from './history/history.component';
+import { InfoComponent } from './info/info.component';
 import { IntroComponent } from './intro/intro.component';
 import { InventoryComponent } from './inventory/inventory.component';
 import { LandingComponent } from './landing/landing.component';
@@ -52,6 +53,14 @@ const routes: Routes = [
         path: RarityComponent.routeName,
         component: RarityComponent
       },
+      {
+        path: InfoComponent.routeName,
+        component: InfoComponent
+      },
+      {
+        path: "**",
+        redirectTo: MoonbaseComponent.routeName,
+      }
     ]
   }
 ];

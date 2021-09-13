@@ -1,10 +1,10 @@
 <section id="rarity" class="rarity flex-col">
-    
+
     <div class="inner">
 
         <div class="detail-container flex mb70">
             <div class="heading-container top futuristic-container flex1">
-                <p class="p-white-span-primary p34 orbitron">Rarity chart<span>- switch attribute and rarity</span></p>
+                <p class="p-white-span-primary p34 orbitron">Rarity chart<span> <br>- switch attribute <br class="break-line-mobile">and rarity</span></p>
             </div>
             <div class="description-container futuristic-container top-only top-line-thin flex1">
                 <div class="bottom flex">
@@ -24,7 +24,7 @@
         </div>
 
         <div class="items-container flex-col align-start mb60">
-            
+
             <ng-container *ngIf="sortedOnRarity; then rarityView else normalView"></ng-container>
 
             <ng-template #normalView>
