@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-nav',
@@ -39,43 +41,53 @@ export class NavComponent implements OnInit {
       'icon': 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
       'alt': 'return back',
       'tooltip': 'This is your MoonBase. Home of this dApp.',
-      'click': null,
-      'routerLink': ['']
+      'click': null, //this.goBack(),
+      'routerLink': [''],
+      'route': 'sallaaa'
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_drops_black.svg',
       'alt': 'drops',
       'tooltip': 'This is your inventory. An overview of the NFTs you received on the MoonBox platform.',
       'click': null,
-      'routerLink': ['/upcoming']
+      'routerLink': ['/upcoming'],
+      'route': '/upcoming'
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
       'alt': 'inventory',
       'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
       'click': null,
-      'routerLink': ['/inventory']
+      'routerLink': ['/inventory'],
+      'route': '/inventory'
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_history_black.svg',
       'alt': 'history',
       'tooltip': 'This is your history. An overview of your MoonBox NFT claims.',
       'click': null,
-      'routerLink': ['/history']
+      'routerLink': ['/history'],
+      'route': '/history'
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
       'alt': 'info',
       'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
       'click': null,
-      'routerLink': ['/prizepool']
+      'routerLink': ['/info'],
+      'route': '/info'
     }
   ];
 
   public open = false;
 
-  constructor(public dialog: MatDialog, private walletConnectService: WalletConnectService,
-    private httpApi: HttpApiService) { }
+  constructor(
+    public dialog: MatDialog,
+    private walletConnectService: WalletConnectService,
+    private httpApi: HttpApiService,
+    public router: Router,
+    private location: Location
+  ) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
@@ -111,12 +123,10 @@ export class NavComponent implements OnInit {
       .then((response: any) => {
         this.balanceOfMoon = response > 0 ? response / 1e9 : 0;
       })
-
-
   }
 
   changeNSFWStatus(event: any) {
-    
+
     this.httpApi.setNSFWStatus(event);
   }
 
@@ -134,6 +144,10 @@ export class NavComponent implements OnInit {
 
   closeTooltip() {
     this.isTooltipActive = false;
+  }
+
+  goBack(): void {
+    //this.location.back();
   }
 
 }

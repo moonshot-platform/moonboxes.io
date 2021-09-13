@@ -8,7 +8,7 @@
                         <div class="tooltip">
                             <ng-container *ngIf="item.click == null; then imageWithRoute else imageWithClick"></ng-container>
                             <ng-template #imageWithRoute>
-                                <img class="nav-bar-sub-item" src="{{item.icon}}" [routerLink]="item.routerLink" routerLinkActive="router-link-active">
+                                <img class="nav-bar-sub-item" src="{{item.icon}}" [ngClass]="{'active-icon': this.router.url == '/' ? false : item.route.includes(this.router.url)}" [routerLink]="item.routerLink" routerLinkActive="router-link-active">
                             </ng-template>
                             <ng-template #imageWithClick>
                                 <img class="nav-bar-sub-item" src="{{item.icon}}" (click)="openDialog()">

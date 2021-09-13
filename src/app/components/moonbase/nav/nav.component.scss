@@ -322,6 +322,10 @@ nav {
     }
 }
 
+.active-icon {
+    filter: brightness(0) invert(1);
+}
+
 .menubar.flex li:first-child {
     margin-left: 0em !important;
     margin-bottom: -3px;
