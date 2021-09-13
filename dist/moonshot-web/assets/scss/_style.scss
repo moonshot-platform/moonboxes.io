@@ -1188,7 +1188,7 @@ svg#closenft path {
     display: flex;
     align-items: center;
     min-height: calc(100vh - 250px);
-    max-width: 85vw;
+    max-width: 90vw;
     align-self: flex-start;
     margin-left: auto;
     margin-right: auto;
@@ -1197,6 +1197,12 @@ svg#closenft path {
     scrollbar-width: none;
     /* for Firefox */
     overflow-y: scroll;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
+
+    &::-webkit-scrollbar { 
+        display: none;  /* Safari and Chrome */
+    }
 }
 
 // .scroller::-webkit-scrollbar-track {
