@@ -34,6 +34,7 @@ import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.compon
 import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
 import { LimitedComponent } from './landing/limited/limited.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { InfoComponent } from './info/info.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     RarityComponent,
     RaiseStakesComponent,
     LandingIntroComponent,
-    LimitedComponent
+    LimitedComponent,
+    InfoComponent
   ],
   imports: [
     MatIconModule,
