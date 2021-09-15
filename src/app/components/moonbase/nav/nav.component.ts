@@ -41,14 +41,14 @@ export class NavComponent implements OnInit {
       'icon': 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
       'alt': 'return back',
       'tooltip': 'Back',
-      'click': null, //this.goBack(),
-      'routerLink': [''],
-      'route': 'sallaaa'
+      'click': () => { },
+      'routerLink': null, // [''],
+      'route': '/'
     },
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_drops_black.svg',
       'alt': 'drops',
-      'tooltip': 'This is your inventory. An overview of all NFTs you received out of the MoonBoxes',
+      'tooltip': 'This is an overview of all NFT drops, here you will be able to see upcoming, active and recent NFT drops.',
       'click': null,
       'routerLink': ['/upcoming'],
       'route': '/upcoming'
@@ -56,7 +56,7 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
       'alt': 'inventory',
-      'tooltip': 'This is your inventory, an overview of rare NFTs you’ve won.',
+      'tooltip': 'This is your inventory. An overview of all NFTs you received out of the Moonboxes.',
       'click': null,
       'routerLink': ['/inventory'],
       'route': '/inventory'
@@ -146,8 +146,8 @@ export class NavComponent implements OnInit {
     this.isTooltipActive = false;
   }
 
-  goBack(): void {
-    //this.location.back();
+  goBack() {
+    this.location.back();
   }
 
 }
