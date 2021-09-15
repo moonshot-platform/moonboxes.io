@@ -96,7 +96,9 @@ export class UpcomingComponent implements OnInit {
     this.lootBoxDetailsAttributesMobile = [];
     this.lootBoxDetailsAttributesMobile[index] = item;
     this.lootBoxDetailsAttributesMobile[index].disabled = false;
-    this.scrollToElement('', 'collection-info');
+    setTimeout(() => {
+      this.scrollToElement('', 'collection-info');
+    }, 100);
   }
 
   closeAttributes() {
