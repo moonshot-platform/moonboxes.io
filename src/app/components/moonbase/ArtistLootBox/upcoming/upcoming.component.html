@@ -7,9 +7,15 @@
                         <div class="flex1 flex flex-col flex-center">
                             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
                             <div class="flex flex-xs-col mb30">
-                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
-                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
-                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
+                                <a class="mb20 mr20 text-inherit"
+                                    [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' "
+                                    (click)="changeTab(3)">Recent</a>
+                                <a class="mb20 mr20 text-inherit"
+                                    [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' "
+                                    (click)="changeTab(2)">Live</a>
+                                <a class="mb20 mr20 text-inherit"
+                                    [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' "
+                                    (click)="changeTab(1)">Upcoming</a>
                             </div>
                         </div>
                     </div>
@@ -22,12 +28,15 @@
               </div>
             </div> -->
                     <div class="upcoming flex flex-wrap wrap">
-                        <div class="full-div" *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index;">
-                            <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView);" class="flex-column flex-center p-3 grid-4">
+                        <div class="full-div"
+                            *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index;">
+                            <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView);"
+                                class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
 
                                     <div class="flex-column flex-center">
-                                        <div class="relative res-box upcoming-img" [style.background]="'url(' + item.filePath + ')'"></div>
+                                        <div class="relative res-box upcoming-img"
+                                            [style.background]="'url(' + item.filePath + ')'"></div>
                                     </div>
 
                                 </div>
@@ -68,17 +77,21 @@
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </a>
 
-                                    <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
-                    Moonbox</a>
-                                    <a class="outlined-button mb20 text-inherit" (click)="setSelected(j,item)">Collection info</a>
+                                    <a *ngIf="activeTab==2" class="button text-inherit mb20"
+                                        [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
+                                        Moonbox</a>
+                                    <a class="outlined-button mb20 text-inherit"
+                                        (click)="setSelected(j,item)">Collection info</a>
                                 </div>
                             </div>
                             <!------ List  -->
-                            <div id="collection-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[j] != undefined">
+                            <div id="collection-info" class="outer-box"
+                                *ngIf="lootBoxDetailsAttributes[j] != undefined">
                                 <div class="flex1 flex-center flex-align-start justify-start mb30">
                                     <div class="relative flex-col">
 
-                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
+                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}"
+                                            class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
@@ -86,12 +99,14 @@
                                             </div>
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10">Availability</p>
-                                                <p class="color-primary mb10">{{details.supply}}/{{details.TotalMaxSupply}}</p>
+                                                <p class="color-primary mb10">
+                                                    {{details.supply}}/{{details.TotalMaxSupply}}</p>
                                             </div>
                                         </div>
                                         <div class="flex justify-space-between">
-                                            <a class="button mb10 text-inherit w100" [routerLink]="details.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',details.walletAddress]">Buy
-                        Moonbox</a>
+                                            <a class="button mb10 text-inherit w100"
+                                                [routerLink]="details.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',details.walletAddress]">Buy
+                                                Moonbox</a>
                                         </div>
                                     </div>
                                     <div class="flex1"></div>
@@ -104,21 +119,55 @@
                                                 </p>
                                             </div>
                                             <div class="flex-center" (click)="closeAttributes()">
-                                                <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>Combined Shape</title>
-                          <desc>Created with Sketch.</desc>
-                          <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <path
-                              d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                              id="Combined-Shape" fill="#000000"></path>
-                          </g>
-                        </svg>
+                                                <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27"
+                                                    version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                    <title>Combined Shape</title>
+                                                    <desc>Created with Sketch.</desc>
+                                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                        fill-rule="evenodd">
+                                                        <path
+                                                            d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+                                                            id="Combined-Shape" fill="#000000"></path>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
 
-                                        <p class="mt20 mb20 justify-space-between flex">
-                                            {{lootBoxDetailsAttributes[j]?.description}}
-                                        </p>
+                                        <textarea readonly class="mt20 mb20 justify-space-between flex">{{lootBoxDetailsAttributes[j]?.description}}</textarea>
+
+                                        <div class="social-icons-container flex justify-space-between">
+                                            <div class="image-bb">
+                                                <a href="{{details.discord}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/discord.png">
+                                                </a>
+                                            </div>
+                                            <div class="image-bb">
+                                                <a href="{{details.twitter}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/twitter.png">
+                                                </a>
+                                            </div>
+                                            <div class="image-bb">
+                                                <a href="{{details.telegram}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/telegram.png">
+                                                </a>
+                                            </div>
+                                            <div class="image-bb">
+                                                <a href="{{details.instagram}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/instagram.png">
+                                                </a>
+                                            </div>
+                                            <div class="image-bb">
+                                                <a href="{{details.opensea}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/opensea.png">
+                                                </a>
+                                            </div>
+                                            <div class="image-bb">
+                                                <a href="{{details.website}}" target="_blank">
+                                                    <img src="assets/media/icons/moonbase/global.png">
+                                                </a>
+                                            </div>
+                                        </div>
 
                                     </div>
                                 </div>
@@ -131,15 +180,18 @@
                                             </p>
                                         </div>
                                         <div class="flex-center" (click)="closeAttributes()">
-                                            <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <title>Combined Shape</title>
-                        <desc>Created with Sketch.</desc>
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                          <path
-                            d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                            id="Combined-Shape" fill="#000000"></path>
-                        </g>
-                      </svg>
+                                            <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27"
+                                                version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <title>Combined Shape</title>
+                                                <desc>Created with Sketch.</desc>
+                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                    fill-rule="evenodd">
+                                                    <path
+                                                        d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+                                                        id="Combined-Shape" fill="#000000"></path>
+                                                </g>
+                                            </svg>
                                         </div>
                                     </div>
 

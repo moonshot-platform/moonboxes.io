@@ -1,4 +1,5 @@
 @import "includes";
+
 section.upcoming-container {
     display: flex;
     flex-direction: column;
@@ -11,8 +12,30 @@ section.upcoming-container {
     overflow: hidden;
 }
 
+.image-bb {
+    background: #d5a642;
+    border-radius: 50px;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    display: flex;
+    margin-right: 10px;
+    align-items: center;
+
+    a {
+        display: flex;
+    }
+
+    img {
+        width: 30px;
+        height: 30px;
+        border: none;
+    }
+}
+
 .scroller {
     max-height: calc(100vh - 120px) !important;
+
     >div {
         width: 100%;
         padding-top: 6rem;
@@ -65,21 +88,25 @@ section.upcoming-container {
     width: 100%;
     // border: 1px solid $primary;
     background-size: cover !important;
+
     &:nth-child(4n) {
         margin-right: 0;
     }
+
     &:before {
         content: "";
         display: block;
-        padding-top: 100%;
+        padding-top: 60%;
         /* initial ratio of 1:1*/
     }
+
     >.content {
         position: absolute;
         top: 0;
         left: 0;
         bottom: 0;
         right: 0;
+
         >img {
             width: 100%;
         }
@@ -119,15 +146,15 @@ section.upcoming-container {
 }
 
 .upcoming-img {
-    max-width: 250px;
-    max-height: 250px;
     width: 100%;
     height: 100%;
+
+    background-position: center !important;
 }
 
 .collection-info-img {
-    width: 100%!important;
-    height: auto!important;
+    width: 100% !important;
+    height: auto !important;
     max-height: 360px !important;
     max-width: 360px !important;
     border-radius: 0 !important;
@@ -153,6 +180,7 @@ section.upcoming-container {
 
 .mb20.mr20.text-inherit.button {
     border: 1px solid #d5a642;
+
     &:hover {
         border-color: white;
     }
@@ -164,8 +192,28 @@ section.upcoming-container {
     flex-flow: wrap;
 }
 
-svg#attibute_close path {
-    fill: #d5a642;
+textarea {
+    width: 100%;
+    height: 300px;
+    background-color: transparent;
+    border: 1px solid $primary;
+    color: white;
+    padding: 10px;
+    box-sizing: border-box;
+    resize: none;
+}
+
+svg#attibute_close {
+    cursor: pointer;
+    path {
+        fill: #d5a642;
+    }
+
+    &:hover {
+        path {
+            fill: #ffffff;
+        }   
+    }
 }
 
 .desktop-md-block {
@@ -181,6 +229,7 @@ svg#attibute_close path {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     img {
         height: 25px;
         width: 25px;
@@ -193,19 +242,43 @@ svg#attibute_close path {
         align-self: flex-start;
         padding-top: 4rem;
     }
+
     .collection-info {
         padding-top: 0px;
     }
+
     .upcoming {
         flex-flow: column;
     }
+
     .grid-4 {
         flex-basis: 100%;
     }
-    .desktop-md-block {
-        display: none !important;
-    }
+
     .d-block {
         display: block;
+    }
+}
+
+@media only screen and (max-width: 820px) {
+
+    #collection-info > div {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .desktop-md-block {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    .social-icons-container {
+        flex-wrap: wrap;
+    }
+
+    .image-bb {
+        width: 45px;
+        height: 45px;
+        margin: 10px;
     }
 }
