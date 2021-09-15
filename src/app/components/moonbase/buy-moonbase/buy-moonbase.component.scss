@@ -1,12 +1,12 @@
 .scroller {
     max-height: calc(100vh - 250px);
     overflow: auto;
-    margin-top: 130px;
+    margin-top: 70px;
     height: max-content;
     justify-content: center;
     display: flex;
     align-items: center;
-    min-height: calc(100vh - 250px);
+    min-height: calc(100vh - 118px);
     max-width: 90vw;
     align-self: flex-start;
     margin-left: auto;
