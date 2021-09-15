@@ -7,9 +7,9 @@
                         <div class="flex1 flex flex-col flex-center">
                             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
                             <div class="flex flex-xs-col mb30">
-                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
-                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
                                 <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
+                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
+                                <a class="mb20 mr20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
                             </div>
                         </div>
                     </div>
@@ -38,12 +38,12 @@
                                             <p class="color-primary">{{item.ArtistName}}</p>
                                         </div>
                                     </div>
-                                    <div class="flex justify-center" *ngIf="activeTab!=3">
+                                    <!-- <div class="flex justify-center" *ngIf="activeTab!=3">
                                         <div class="flex align-center" style="padding: 10px;border: 1px solid;border-radius: 30px;margin: .5rem;justify-content: center;">
                                             <div class="round-mini-button" style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: green; border: 1px solid green;">
                                             </div>
                                             <p class="color-primary flex" *ngIf="activeTab==1">
-                                                <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                                                
                                             </p>
                                             <p class="color-primary flex" *ngIf="activeTab==2">
                                                 <span>Open</span>
@@ -52,7 +52,7 @@
                                                 <mat-icon role="img" fontset="material-icons" aria-hidden="true" ng-reflect-font-set="material-icons" data-mat-icon-type="font" class="mat-icon notranslate color-primary material-icons mat-icon-no-color">done</mat-icon>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="border-top-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
@@ -63,7 +63,12 @@
                                             <p class="color-primary mb10">{{item.supply}}/{{item.TotalMaxSupply}}</p>
                                         </div>
                                     </div>
-                                    <a class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">Buy
+                                    <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button">
+                                        <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
+                                        <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                                    </a>
+
+                                    <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
                     Moonbox</a>
                                     <a class="outlined-button mb20 text-inherit" (click)="setSelected(j,item)">Collection info</a>
                                 </div>
