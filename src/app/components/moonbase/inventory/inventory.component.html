@@ -38,7 +38,7 @@
             </div>
 
             <!------ List  -->
-            <div class="outer-box" *ngIf="lootBoxDetailsAttributes[j]">
+            <div id="attribute-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[j]">
                 <div class="flex1 flex-center flex-align-start justify-start mb30">
                     <div class="relative flex-col attribute-img">
 
@@ -79,7 +79,7 @@
                         <div class="flex justify-space-between flex-align-start">
                             <div class="flex flex-col">
                                 <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributes[j].name}}</p>
-                                <p class="p-white-span-primary p16d14m mb30 mt10">Rarity - {{lootBoxDetailsAttributes[j].rarity}}
+                                <p class="p-white-span-primary p16d14m mb30 mt10">{{lootBoxDetailsAttributes[j].rarity}}
                                 </p>
                             </div>
                             <div class="flex-center" (click)="closeAttributes()">
@@ -95,7 +95,7 @@
                         </div>
 
 
-                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Rarity</span></p>
+                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Property</span></p>
                         <p *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties" class="mb20 p-white-span-primary justify-space-between flex">
                             <span>{{propertiesData.key}}</span>
                             <span>{{propertiesData.value}}</span></p>
@@ -129,7 +129,7 @@
 
 
             <!------ List  -->
-            <div class="outer-box" *ngIf="lootBoxDetailsAttributesMobile[i]!==undefined">
+            <div id="attribute-info-mobile" class="outer-box" *ngIf="lootBoxDetailsAttributesMobile[i]!==undefined">
                 <div class="flex1 flex-center flex-col flex-align-start justify-start mb30 inside-box">
                     <div class="relative flex-col attribute-img">
 
@@ -170,7 +170,7 @@
                         <div class="flex justify-space-between flex-align-start">
                             <div class="flex flex-col">
                                 <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetailsAttributesMobile[i].name}}</p>
-                                <p class="p-white-span-primary p16d14m mb30 mt10">Rarity - {{lootBoxDetailsAttributesMobile[i].rarity}}
+                                <p class="p-white-span-primary p16d14m mb30 mt10">{{lootBoxDetailsAttributesMobile[i].rarity}}
                                 </p>
                             </div>
                             <div class="flex-center" (click)="closeAttributes()">
@@ -186,7 +186,7 @@
                         </div>
 
 
-                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Rarity</span></p>
+                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Property</span></p>
                         <p *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties" class="mb20 p-white-span-primary justify-space-between flex break-word">
                             <span>{{propertiesData.key}}</span>
                             <span>{{propertiesData.value}}</span></p>
