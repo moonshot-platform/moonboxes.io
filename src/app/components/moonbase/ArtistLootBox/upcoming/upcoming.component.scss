@@ -1,5 +1,4 @@
 @import "includes";
-
 section.upcoming-container {
     display: flex;
     flex-direction: column;
@@ -10,34 +9,37 @@ section.upcoming-container {
     margin-bottom: 70px;
     padding-top: 180px;
     overflow: hidden;
-  }
-  
-  .scroller {
+}
+
+.scroller {
     max-height: calc(100vh - 120px) !important;
-  
-    > div {
-      width: 100%;
-      padding-top: 6rem;
-      padding-bottom: 6rem;
+    >div {
+        width: 100%;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 }
 
 .p-3 {
-  padding: 1rem;
+    padding: 1rem;
 }
+
 .inner img.square-box {
-  border-radius: 0 !important;
-  border: none !important;
-  padding: 0 !important;
-  width: 100%;
-  object-fit: cover;
+    border-radius: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+    width: 100%;
+    object-fit: cover;
 }
-.scroller > .desktop-only.h-100 {
-  align-self: flex-start;
+
+.scroller>.desktop-only.h-100 {
+    align-self: flex-start;
 }
+
 .grid-4 {
-  flex-basis: calc(25% - 40px);
+    flex-basis: calc(25% - 40px);
 }
+
 .nft_img {
     padding: 0;
     background: #090d16;
@@ -47,10 +49,15 @@ section.upcoming-container {
     // display: flex;
     // flex-flow: column;
 }
+
 .upcoming .full_banner {
-  width: 100%;
-  max-width: 300px;
-  overflow: hidden;
+    width: 100%;
+    max-width: 300px;
+    overflow: hidden;
+}
+
+.collection-info {
+    padding-top: 70px;
 }
 
 .res-box {
@@ -58,88 +65,94 @@ section.upcoming-container {
     width: 100%;
     // border: 1px solid $primary;
     background-size: cover !important;
-  
-    &:nth-child(4n){
-      margin-right: 0;
+    &:nth-child(4n) {
+        margin-right: 0;
     }
-  
     &:before {
-      content:     "";
-      display:     block;
-      padding-top: 100%; /* initial ratio of 1:1*/
+        content: "";
+        display: block;
+        padding-top: 100%;
+        /* initial ratio of 1:1*/
     }
-  
-    > .content {
-      position: absolute;
-      top:      0;
-      left:     0;
-      bottom:   0;
-      right:    0;
-  
-      > img {
-        width: 100%;
-      }
+    >.content {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        >img {
+            width: 100%;
+        }
     }
 }
 
 .w100 {
-  width: 100%;
+    width: 100%;
 }
-.align-self
-{
-  align-self : flex-start
+
+.align-self {
+    align-self: flex-start
 }
+
 .flex-wrap {
-  flex-wrap: wrap;
+    flex-wrap: wrap;
 }
+
 .border-top-bottom {
-  border-top: 1px solid #d5a642;
-  border-bottom: 1px solid #d5a642;
+    border-top: 1px solid #d5a642;
+    border-bottom: 1px solid #d5a642;
 }
 
 .outer-box {
-  border: 1px solid;
-  padding: 1rem;
-  width: calc(100% - 2rem);
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-bottom: 2rem;
-  padding: 1rem;
-  justify-content: flex-start;
-  // position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+    border: 1px solid;
+    padding: 1rem;
+    width: calc(100% - 2rem);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    justify-content: flex-start;
+    // position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
 }
+
 .px-3 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
+
 .inner .outer-box img,
 .inner .outer-box video {
     height: 350px !important;
     width: 350px !important;
     border-radius: 0 !important;
 }
+
 .border-bottom {
-  border-bottom: 2px solid #d5a642;
+    border-bottom: 2px solid #d5a642;
 }
+
 .mb20.mr20.text-inherit.button {
-  border: 1px solid #d5a642;
-  &:hover {
-    border-color: white;
-  }
+    border: 1px solid #d5a642;
+    &:hover {
+        border-color: white;
+    }
 }
+
 .full-div {
-    flex : 0 0 100%;
+    flex: 0 0 100%;
     display: flex;
     flex-flow: wrap;
 }
+
 svg#attibute_close path {
-  fill: #d5a642;
+    fill: #d5a642;
 }
+
 .desktop-md-block {
-  display: block !important;
+    display: block !important;
 }
 
 .d-md-none {
@@ -147,21 +160,23 @@ svg#attibute_close path {
 }
 
 @media only screen and (max-width: $md-header) {
-  .scroller > div {
-    align-self: flex-start;
-    padding-top: 4rem;
-  }
-
-  .upcoming {
-    flex-flow: column;
-  }
-  .grid-4 {
-    flex-basis: 100%;
-  }
-  .desktop-md-block {
-    display: none !important;
-  }
-  .d-block {
-    display: block;
-  }
+    .scroller>div {
+        align-self: flex-start;
+        padding-top: 4rem;
+    }
+    .collection-info {
+        padding-top: 0px;
+    }
+    .upcoming {
+        flex-flow: column;
+    }
+    .grid-4 {
+        flex-basis: 100%;
+    }
+    .desktop-md-block {
+        display: none !important;
+    }
+    .d-block {
+        display: block;
+    }
 }
