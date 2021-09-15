@@ -1,18 +1,16 @@
 <section class="scroller" [ngClass]="{'invisible':invisible}">
-  <div class="desktop-only flex1 pt-3 h-100 flex-center align-items-center align-start">
-    <div class="flex flex-col flex2">
-      <div class="flex">
-        <div class="flex2 flex flex-col">
-          <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
-            {{artistDetails?.name}}</p>
-          <p class="flex1 flex justify-center p18 orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}
-          </p>
+    <div class="desktop-only flex1 pt-3 h-100 flex-center align-items-center align-start">
+        <div class="flex flex-col flex2">
+            <div class="flex">
+                <div class="flex2 flex flex-col">
+                    <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
+                        {{artistDetails?.name}}</p>
+                    <p class="flex1 flex justify-center p18 orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}
+                    </p>
 
-          <div class="flex justify-center">
-            <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
-              <svg _ngcontent-axc-c125="" version="1.1" id="more" xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38"
-                xml:space="preserve">
+                    <div class="flex justify-center">
+                        <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
+                            <svg _ngcontent-axc-c125="" version="1.1" id="more" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38" xml:space="preserve">
                 <g _ngcontent-axc-c125="">
                   <g _ngcontent-axc-c125="">
                     <g _ngcontent-axc-c125="">
@@ -37,242 +35,223 @@
                   </g>
                 </g>
               </svg>
-            </a>
-          </div>
+                        </a>
+                    </div>
 
-            <ng-template #myDialog>
-              <section class="scroller artist-popup">
-                <div class="justify-center align-items-center flex-col align-start">
-                  <div class="empty flex1"></div>
-                  <div class="connect_popup info flex2">
-                    <div class="line-container flex">
-                      <div class="line flex2"></div>
-                      <div class="empty flex1"></div>
-                    </div>
-                    <div class="info">
-                      <div class="bottom flex justify-center">
-                        <div class="mw-50 p-3 flex-xs-col align-center">
-                          <div class="mb30 group-img text-center">
-                            <img src="{{artistDetails?.filePath}}" alt="Artist" class="img-cover img-fluid">
-                          </div>
-                          <div class="text-center">
-                            <p
-                              class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
-                              {{artistDetails?.description}}</p>
-                          </div>
-                        </div>
-                        <div class="empty flex1"></div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="empty flex1"></div>
+                    <ng-template #myDialog>
+                        <section class="scroller artist-popup">
+                            <div class="justify-center align-items-center flex-col align-start">
+                                <div class="empty flex1"></div>
+                                <div class="connect_popup info flex2">
+                                    <div class="line-container flex">
+                                        <div class="line flex2"></div>
+                                        <div class="empty flex1"></div>
+                                    </div>
+                                    <div class="info">
+                                        <div class="bottom flex justify-center">
+                                            <div class="mw-50 p-3 flex-xs-col align-center">
+                                                <div class="mb30 group-img text-center">
+                                                    <img src="{{artistDetails?.filePath}}" alt="Artist" class="img-cover img-fluid">
+                                                </div>
+                                                <div class="text-center">
+                                                    <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
+                                                        {{artistDetails?.description}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="empty flex1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="empty flex1"></div>
+                            </div>
+                        </section>
+
+                    </ng-template>
+
                 </div>
-              </section>
+            </div>
+            <div class="flex all-boxes">
+                <div class="flex1 flex-column flex-center">
+                    <div class="relative">
+                        <div class="relative moonbox wood"></div>
+                        <img *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                    </div>
+                    <div class="text-center">
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
+                            {{supplyDetails[0]?.type}} ({{supplyDetails[0]?.currentSupply}})</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
+                            {{supplyDetails[0]?.price}} BNB</p>
+                        <div class="border plus_minus flex mb20" *ngIf="inputnumber[1]>0">
 
-            </ng-template>
-
-        </div>
-      </div>
-      <div class="flex">
-        <div class="flex1 flex-column flex-center">
-          <div class="relative">
-            <div class="relative moonbox wood"></div>
-            <img
-              *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming"
-              src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-          </div>
-          <div class="text-center">
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
-              {{supplyDetails[0]?.type}} ({{supplyDetails[0]?.currentSupply}})</p>
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-              {{supplyDetails[0]?.price}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[1]>0">
-
-              <button class="flex1 toggle-less" (click)="minus(1)">
+                            <button class="flex1 toggle-less" (click)="minus(1)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-              <div class="flex1 border_left_right">
-                <input type="text" class="form-control" [(ngModel)]="inputnumber[1]" readonly>
-              </div>
-              <button class="flex1 toggle-more" (click)="plus(1)">
+                            <div class="flex1 border_left_right">
+                                <input type="text" class="form-control" [(ngModel)]="inputnumber[1]" readonly>
+                            </div>
+                            <button class="flex1 toggle-more" (click)="plus(1)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-            </div>
-            <div class=" plus_minus flex mb20 justify-center"
-              *ngIf="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming">
-              Sold Out
-            </div>
-            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[0]?.isUpcoming">
-              Coming soon...
-            </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"
-              (click)="buyMoonBase(1)">Buy</a>
+                        </div>
+                        <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming">
+                            Sold Out
+                        </div>
+                        <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[0]?.isUpcoming">
+                            Coming soon...
+                        </div>
+                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(1)">Buy</a>
 
-            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+                        <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
 
-          </div>
-        </div>
-        <div class="flex1 flex-center flex-column">
-          <div class="relative">
-            <div class="relative moonbox silver"></div>
-            <img
-              *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming"
-              src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-          </div>
-          <div class="text-center">
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-              {{supplyDetails[1]?.type}} ({{supplyDetails[1]?.currentSupply}})</p>
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-              {{supplyDetails[1]?.price}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[2]>0" readonly>
+                    </div>
+                </div>
+                <div class="flex1 flex-center flex-column">
+                    <div class="relative">
+                        <div class="relative moonbox silver"></div>
+                        <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                    </div>
+                    <div class="text-center">
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
+                            {{supplyDetails[1]?.type}} ({{supplyDetails[1]?.currentSupply}})</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
+                            {{supplyDetails[1]?.price}} BNB</p>
+                        <div class="border plus_minus flex mb20" *ngIf="inputnumber[2]>0" readonly>
 
-              <button class="flex1 toggle-less" (click)="minus(2)">
+                            <button class="flex1 toggle-less" (click)="minus(2)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-              <div class="flex1 border_left_right">
-                <input type="text" class="form-control" [(ngModel)]="inputnumber[2]" readonly>
-              </div>
-              <button class="flex1 toggle-more" (click)="plus(2)">
+                            <div class="flex1 border_left_right">
+                                <input type="text" class="form-control" [(ngModel)]="inputnumber[2]" readonly>
+                            </div>
+                            <button class="flex1 toggle-more" (click)="plus(2)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-            </div>
-            <div class=" plus_minus flex mb20 justify-center"
-              *ngIf="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming">
-              Sold Out
-            </div>
-            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[1]?.isUpcoming">
-              Coming soon...
-            </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"
-              (click)="buyMoonBase(2)">Buy</a>
-            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+                        </div>
+                        <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming">
+                            Sold Out
+                        </div>
+                        <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[1]?.isUpcoming">
+                            Coming soon...
+                        </div>
+                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(2)">Buy</a>
+                        <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
 
-          </div>
-        </div>
-        <div class="flex1 flex-column flex-center">
-          <div class="relative">
-            <div class="relative moonbox gold"></div>
-            <img
-              *ngIf="!isConnected   || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming"
-              src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-          </div>
-          <div class="text-center">
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
-              {{supplyDetails[2]?.type}} ({{supplyDetails[2]?.currentSupply}})</p>
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-              {{supplyDetails[2]?.price}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[3]>0">
+                    </div>
+                </div>
+                <div class="flex1 flex-column flex-center">
+                    <div class="relative">
+                        <div class="relative moonbox gold"></div>
+                        <img *ngIf="!isConnected   || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                    </div>
+                    <div class="text-center">
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
+                            {{supplyDetails[2]?.type}} ({{supplyDetails[2]?.currentSupply}})</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
+                            {{supplyDetails[2]?.price}} BNB</p>
+                        <div class="border plus_minus flex mb20" *ngIf="inputnumber[3]>0">
 
-              <button class="flex1 toggle-less" (click)="minus(3)">
+                            <button class="flex1 toggle-less" (click)="minus(3)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-              <div class="flex1 border_left_right">
-                <input type="text" class="form-control" [(ngModel)]="inputnumber[3]" readonly>
-              </div>
-              <button class="flex1 toggle-more" (click)="plus(3)">
+                            <div class="flex1 border_left_right">
+                                <input type="text" class="form-control" [(ngModel)]="inputnumber[3]" readonly>
+                            </div>
+                            <button class="flex1 toggle-more" (click)="plus(3)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-            </div>
-            <div class=" plus_minus flex mb20 justify-center"
-              *ngIf="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming">
-              Sold Out
-            </div>
-            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[2]?.isUpcoming">
-              Coming soon...
-            </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"
-              (click)="buyMoonBase(3)">Buy</a>
-            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+                        </div>
+                        <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming">
+                            Sold Out
+                        </div>
+                        <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[2]?.isUpcoming">
+                            Coming soon...
+                        </div>
+                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(3)">Buy</a>
+                        <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
 
-          </div>
-        </div>
-        <div class="flex1 flex-center flex-column">
-          <div class="relative">
-            <div class="relative moonbox diamond"></div>
-            <img
-              *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming"
-              src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-          </div>
-          <div class="text-center">
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-              {{supplyDetails[3]?.type}} ({{supplyDetails[3]?.currentSupply}})</p>
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-              {{supplyDetails[3]?.price}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[4]>0">
+                    </div>
+                </div>
+                <div class="flex1 flex-center flex-column">
+                    <div class="relative">
+                        <div class="relative moonbox diamond"></div>
+                        <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                    </div>
+                    <div class="text-center">
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
+                            {{supplyDetails[3]?.type}} ({{supplyDetails[3]?.currentSupply}})</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
+                            {{supplyDetails[3]?.price}} BNB</p>
+                        <div class="border plus_minus flex mb20" *ngIf="inputnumber[4]>0">
 
-              <button class="flex1 toggle-less" (click)="minus(4)">
+                            <button class="flex1 toggle-less" (click)="minus(4)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-              <div class="flex1 border_left_right">
-                <input type="text" class="form-control" [(ngModel)]="inputnumber[4]" readonly>
-              </div>
-              <button class="flex1 toggle-more" (click)="plus(4)">
+                            <div class="flex1 border_left_right">
+                                <input type="text" class="form-control" [(ngModel)]="inputnumber[4]" readonly>
+                            </div>
+                            <button class="flex1 toggle-more" (click)="plus(4)">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                   width="11" height="14" viewBox="0 0 11 14">
                   <path fill="#fff"
                     d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
                 </svg>
               </button>
-            </div>
-            <div class=" plus_minus flex mb20 justify-center"
-              *ngIf="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming">
-              Sold Out
-            </div>
-            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[3]?.isUpcoming">
-              Coming soon...
-            </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"
-              (click)="buyMoonBase(4)">Buy</a>
-            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+                        </div>
+                        <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming">
+                            Sold Out
+                        </div>
+                        <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[3]?.isUpcoming">
+                            Coming soon...
+                        </div>
+                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(4)">Buy</a>
+                        <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
 
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
-  <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5">
+    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5">
 
-    <div class="flex">
-      <div class="flex2 flex flex-col mb30">
-        <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
-          {{artistDetails?.name}}</p>
-        <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}
-        </p>
+        <div class="flex">
+            <div class="flex2 flex flex-col mb30">
+                <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
+                    {{artistDetails?.name}}</p>
+                <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}
+                </p>
 
-        <div class="flex justify-center">
-          <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
-            <svg _ngcontent-axc-c125="" version="1.1" id="more" xmlns="http://www.w3.org/2000/svg"
-              xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38"
-              xml:space="preserve">
+                <div class="flex justify-center">
+                    <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
+                        <svg _ngcontent-axc-c125="" version="1.1" id="more" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38" xml:space="preserve">
               <g _ngcontent-axc-c125="">
                 <g _ngcontent-axc-c125="">
                   <g _ngcontent-axc-c125="">
@@ -297,92 +276,87 @@
                 </g>
               </g>
             </svg>
-          </a>
+                    </a>
+                </div>
+
+                <ng-template #myDialog>
+                    <section>
+                        <div class="h-100 justify-center align-items-center flex-xs-col">
+                            <div class="empty flex1"></div>
+                            <div class="connect_popup info flex2">
+                                <div class="line-container flex">
+                                    <div class="line flex2"></div>
+                                    <div class="empty flex1"></div>
+                                </div>
+                                <div class="info">
+                                    <div class="bottom p-3 flex justify-center">
+                                        <div class="mw-50 p-3 flex-xs-col align-center">
+                                            <div class="mb30 group-img text-center">
+                                                <img src="{{artistDetails?.filePath}}" class="img-fluid img-cover" alt="Artist">
+                                            </div>
+                                            <div class="text-center">
+                                                <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
+                                                    {{artistDetails?.description}}</p>
+                                            </div>
+                                        </div>
+                                        <div class="empty flex1"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="empty flex1"></div>
+                        </div>
+                    </section>
+                </ng-template>
+
+            </div>
         </div>
 
-        <ng-template #myDialog>
-          <section>
-            <div class="h-100 justify-center align-items-center flex-xs-col">
-              <div class="empty flex1"></div>
-              <div class="connect_popup info flex2">
-                <div class="line-container flex">
-                  <div class="line flex2"></div>
-                  <div class="empty flex1"></div>
-                </div>
-                <div class="info">
-                  <div class="bottom p-3 flex justify-center">
-                    <div class="mw-50 p-3 flex-xs-col align-center">
-                      <div class="mb30 group-img text-center">
-                        <img src="{{artistDetails?.filePath}}" class="img-fluid img-cover" alt="Artist">
-                      </div>
-                      <div class="text-center">
-                        <p
-                          class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
-                          {{artistDetails?.description}}</p>
-                      </div>
-                    </div>
-                    <div class="empty flex1"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="empty flex1"></div>
+        <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
+            <div class="round-mini-button" (click)="prev()">
+                <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
             </div>
-          </section>
-        </ng-template>
+            <div class="relative">
+                <div class="relative moonbox {{lootboxfloating[current]}}"></div>
+                <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
+                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+            </div>
+            <div class="round-mini-button" (click)="next()">
+                <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
+            </div>
+        </div>
 
-      </div>
-    </div>
-
-    <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
-      <div class="round-mini-button" (click)="prev()">
-        <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
-      </div>
-      <div class="relative">
-        <div class="relative moonbox {{lootboxfloating[current]}}"></div>
-        <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
-        <img
-          *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming"
-          src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
-      </div>
-      <div class="round-mini-button" (click)="next()">
-        <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
-      </div>
-    </div>
-
-    <div class="flex-col text-center">
-      <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-        {{supplyDetails[current]?.type}} ({{supplyDetails[current]?.currentSupply}})</p>
-      <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-        {{supplyDetails[current]?.price}} BNB</p>
-      <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
-        <button class="flex1 toggle-less" (click)="minus(current+1)">
+        <div class="flex-col text-center">
+            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
+                {{supplyDetails[current]?.type}} ({{supplyDetails[current]?.currentSupply}})</p>
+            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
+                {{supplyDetails[current]?.price}} BNB</p>
+            <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
+                <button class="flex1 toggle-less" (click)="minus(current+1)">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             width="11" height="14" viewBox="0 0 11 14">
             <path fill="#fff"
               d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
           </svg>
         </button>
-        <div class="flex1 border_left_right">
-          <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
-        </div>
-        <button class="flex1 toggle-more" (click)="plus(current+1)">
+                <div class="flex1 border_left_right">
+                    <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
+                </div>
+                <button class="flex1 toggle-more" (click)="plus(current+1)">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
             width="11" height="14" viewBox="0 0 11 14">
             <path fill="#fff"
               d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
           </svg>
         </button>
-      </div>
-      <div class=" plus_minus flex mb20 justify-center"
-        *ngIf="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming">
-        Sold Out
-      </div>
-      <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
-        Coming soon...
-      </div>
-      <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit"
-        (click)="buyMoonBase(current+1)">Buy</a>
-      <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+            </div>
+            <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming">
+                Sold Out
+            </div>
+            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
+                Coming soon...
+            </div>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(current+1)">Buy</a>
+            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
+        </div>
     </div>
-  </div>
 </section>
