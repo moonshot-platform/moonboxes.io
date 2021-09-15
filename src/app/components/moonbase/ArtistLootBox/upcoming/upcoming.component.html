@@ -27,7 +27,7 @@
                                 <div class="flex1 nft_img">
 
                                     <div class="flex-column flex-center">
-                                        <div class="relative res-box" [style.background]="'url(' + item.filePath + ')'"></div>
+                                        <div class="relative res-box upcoming-img" [style.background]="'url(' + item.filePath + ')'"></div>
                                     </div>
 
                                 </div>
@@ -78,11 +78,11 @@
                                 <div class="flex1 flex-center flex-align-start justify-start mb30">
                                     <div class="relative flex-col">
 
-                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30" alt="">
+                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
-                                                <p class="color-primary mb10 mt10">{{details.minPrice}}</p>
+                                                <p class="color-primary mb10 mt10">{{details.minPrice}} BNB</p>
                                             </div>
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10">Availability</p>
