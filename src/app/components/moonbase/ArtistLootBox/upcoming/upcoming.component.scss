@@ -159,6 +159,18 @@ svg#attibute_close path {
     display: none !important;
 }
 
+.coundown-button {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    img {
+        height: 25px;
+        width: 25px;
+        margin-right: 20px;
+    }
+}
+
 @media only screen and (max-width: $md-header) {
     .scroller>div {
         align-self: flex-start;
