@@ -31,6 +31,10 @@
     background-color: transparent;
 }
 
+.boxes-title-container {
+    padding-top: 70px;
+}
+
 .align-start {
     align-self: flex-start;
 }
@@ -126,4 +130,10 @@
     min-height: calc(100vh - 280px) !important;
     margin-top: 20px !important;
     position: relative;
+}
+
+@media only screen and (max-width: $md-header) {
+    .boxes-title-container {
+        padding-top: 0px;
+    }
 }
