@@ -87,19 +87,20 @@ export class HttpApiService {
   } 
 
   /***** Artist pages apis *****/
-  getAllCollections(nsfwStatus:boolean):Observable<any>
+  getAllCollections(nsfwStatus:boolean, LootboxAddress: string):Observable<any>
   {
-    return this.httpClient.get(baseURL+"allArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"allArtistBanners?NSFW="+nsfwStatus+"&walletAddress="+LootboxAddress,{ headers:this.headers});
   } 
   
-  getUpcomingArtistCollections(nsfwStatus:boolean):Observable<any>
+  
+  getUpcomingArtistCollections(nsfwStatus:boolean,address:string):Observable<any>
   {
-    return this.httpClient.get(baseURL+"upcomingArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"upcomingArtistBanners?NSFW="+nsfwStatus+"&walletAddress="+address,{ headers:this.headers});
   } 
   
-  getArtistMoonboxData(userAddress:any):Observable<any>
+  getArtistMoonboxData(artistWalletAddress:any,userAddress:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"getArtistMoonboxData?userAddress="+userAddress,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"getArtistMoonboxData?artistWalletAddress="+artistWalletAddress+"&userAddress="+userAddress,{ headers:this.headers});
   } 
 
   submitBetForArtistApi(data:any): Observable<any> {
