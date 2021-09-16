@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpApiService } from 'src/app/services/http-api.service';
+import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 
 
 @Component({
@@ -21,15 +22,17 @@ export class UpcomingComponent implements OnInit {
   listData = [];
   public innerWidth: any;
   singleView = 4;
+  data:any;
+  userAddress: any;
 
-  constructor(private httpService: HttpApiService) {
+  constructor(private httpService: HttpApiService,private walletConnectService:WalletConnectService) {
 
   }
 
   ngOnInit(): void {
     this.isNSFWStatus = this.httpService.getNSFWStatus();
     this.checkNSFWStatus();
-    this.getAllCollections();
+    this.getConnectedAccount();
 
     if (window.innerWidth < 768) {
       this.singleView = 1;
@@ -50,19 +53,52 @@ export class UpcomingComponent implements OnInit {
     }
   }
 
-  getAllCollections() {
 
-    this.httpService.getAllCollections(this.isNSFWStatus).subscribe((response) => {
 
-      this.listOfArtistCollection = response.data.live_data_array;
-
-      this.listOfRecentDrops = response.data.recent_data_array;
-
+  async getConnectedAccount()
+  {
+    await this.walletConnectService.getData().subscribe((data) => {
+      if(this.data!=data && data!=undefined && data.address!=undefined){
+      this.data = data;
+      this.userAddress = data.address;
+      console.log(this.data);
+      // this.userWalletAddress = data.address;
+      
+      this.getAllCollections();
+      }
     });
 
-    this.httpService.getUpcomingArtistCollections(this.isNSFWStatus).subscribe((response) => {
-      this.listOfArtistUpcoming = response.data;
-      this.listData = this.listOfArtistUpcoming;
+    setTimeout(() => {
+      
+      if(this.data==undefined || this.data.address==undefined)
+      {
+        this.getAllCollections();
+      }
+    }, 2500);
+  }
+  async getAllCollections()
+  {
+    
+
+    this.httpService.getAllCollections(this.isNSFWStatus,this.userAddress).subscribe((response)=>{
+     
+      this.listOfArtistCollection=response.data.live_data_array;
+        
+      this.listOfRecentDrops = response.data.recent_data_array;
+      if (this.activeTab == 2) {
+        this.listData = this.listOfArtistCollection;
+      }
+      else if (this.activeTab == 3) {
+        this.listData = this.listOfRecentDrops;
+      }
+       
+    });
+   
+      this.httpService.getUpcomingArtistCollections(this.isNSFWStatus,this.userAddress).subscribe((response)=>{
+        this.listOfArtistUpcoming=response.data;
+        if (this.activeTab == 1) {
+          this.listData = this.listOfArtistUpcoming;
+        }
     });
   }
 

@@ -62,11 +62,11 @@ export class WalletConnectService {
   }
 
   init(): void {
-    var connectedWallet = localStorage.getItem('wallet').toString();
+    var connectedWallet = localStorage.getItem('wallet')?.toString();
     if (connectedWallet == "1") {
       this.connectToWallet(1);
     }
-    else {
+    else if (connectedWallet == "2") {
       this.connectToWalletConnect(1);
     }
   }

@@ -41,7 +41,6 @@ export class ArtistMoonboxComponent implements OnInit {
 
     this.artistAddress = this.activatedRoute.snapshot.paramMap.get("artistAddress")
 
-    this.getMaxSupply();
   }
 
   ngOnInit(): void {
@@ -58,10 +57,12 @@ export class ArtistMoonboxComponent implements OnInit {
           this.isWrongNetwork = true;
         }
         this.getMoonShootBalance();
+        
       }
       else {
         this.isConnected = false;
       }
+      this.getMaxSupply();
     }, 1000);
     
   }
@@ -115,7 +116,8 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   getMaxSupply() {
-    this.httpApi.getArtistMoonboxData(this.artistAddress).subscribe((response: any) => {
+    
+    this.httpApi.getArtistMoonboxData(this.artistAddress,this.data.address).subscribe((response: any) => {
       if (response.isSuccess) {
         this.supplyDetails = response.data;
         this.artistDetails = response;
