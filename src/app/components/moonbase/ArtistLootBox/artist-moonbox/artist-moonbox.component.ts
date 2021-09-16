@@ -10,7 +10,7 @@ import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-
 @Component({
   selector: 'app-artist-moonbox',
   templateUrl: './artist-moonbox.component.html',
-  styleUrls: ['./artist-moonbox.component.scss', './../../buy-moonbase/buy-moonbase.component.scss', './../../moonbase.component.scss', './../../intro/intro.component.scss']
+  styleUrls: ['./artist-moonbox.component.scss']
 })
 export class ArtistMoonboxComponent implements OnInit {
   current = 0;

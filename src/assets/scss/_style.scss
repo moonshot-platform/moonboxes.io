@@ -40,6 +40,19 @@ ul {
     margin: 0;
 }
 
+.h-100 {
+    height: 100% 
+}
+
+.w-100 {
+    width: 100% 
+}
+
+.s-100 {
+    height: 100%;
+    width: 100% 
+}
+
 .lh30 {
     line-height: 30px;
 }
@@ -1183,7 +1196,7 @@ svg#closenft path {
 .scroller {
     max-height: calc(100vh - 250px);
     margin-top: 130px;
-    height: max-content;
+    height: 100%;
     justify-content: center;
     display: flex;
     align-items: center;
