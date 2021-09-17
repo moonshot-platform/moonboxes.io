@@ -55,10 +55,10 @@ export class FooterCountComponent implements OnInit {
       this.eligibleTier = "Diamond";
     }
     else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[2])) {
-      this.eligibleTier = "Silver";
+      this.eligibleTier = "Gold";
     }
     else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[1])) {
-      this.eligibleTier = "Gold";
+      this.eligibleTier = "Silver";
     }
     else {
       this.eligibleTier = "Wood";

@@ -40,6 +40,19 @@ ul {
     margin: 0;
 }
 
+.h-100 {
+    height: 100% 
+}
+
+.w-100 {
+    width: 100% 
+}
+
+.s-100 {
+    height: 100%;
+    width: 100% 
+}
+
 .lh30 {
     line-height: 30px;
 }
@@ -1167,10 +1180,82 @@ svg#closenft path {
     fill: #d5a642;
 }
 
+
+.fade-in {
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+  }
+  
+  
+  @keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  .fadeout {
+    opacity: 0;
+      -webkit-animation: fadeout 4s; /* Safari, Chrome and Opera > 12.1 */
+         -moz-animation: fadeout 4s; /* Firefox < 16 */
+          -ms-animation: fadeout 4s; /* Internet Explorer */
+           -o-animation: fadeout 4s; /* Opera < 12.1 */
+              animation: fadeout 4s;
+  }
+  
+  @keyframes fadeout {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+  }
+  
 @media only screen and (min-width: $md-header) {
     .cdk-global-overlay-wrapper .cdk-overlay-pane {
         left: -30px;
         position: relative !important;
+    }
+    .custom-modalbox {
+        max-width: 100vw !important;
     }
 }
 
@@ -1183,7 +1268,7 @@ svg#closenft path {
 .scroller {
     max-height: calc(100vh - 250px);
     margin-top: 130px;
-    height: max-content;
+    height: 100%;
     justify-content: center;
     display: flex;
     align-items: center;

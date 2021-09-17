@@ -44,7 +44,7 @@ export class BuyMoonbaseComponent implements OnInit {
     this.inputnumber[3]=0;
     this.inputnumber[4]=0;
 
-    this.getMaxSupply();
+    // this.getMaxSupply();
   }
 
   ngOnInit(): void {
@@ -58,7 +58,7 @@ export class BuyMoonbaseComponent implements OnInit {
       if(this.data!==undefined && this.data.address!=undefined)
       {
         this.isConnected=true;
-        if(this.data.networkId.chainId!=97)
+        if(this.data.networkId.chainId!=environment.chainId)
         {
           this.isWrongNetwork=true;
         }
@@ -68,6 +68,7 @@ export class BuyMoonbaseComponent implements OnInit {
       {
         this.isConnected = false;
       }
+      this.getMaxSupply();
     }, 1000);
   }
 
@@ -136,7 +137,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   async getMaxSupply()
   {
-    this.httpApi.getMaxSupply().subscribe((response:any)=>{
+    this.httpApi.getMaxSupply(this.data.address).subscribe((response:any)=>{
       if(response.isSuccess){
         this.supplyDetails=response.data.data;
         if(this.supplyDetails[this.lootBoxDetails[0].name]>0)

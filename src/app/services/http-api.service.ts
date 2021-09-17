@@ -51,9 +51,9 @@ export class HttpApiService {
     return this.httpClient.post(baseURL + 'userBid', data,{ headers:this.headers});
   }
 
-  getMaxSupply():Observable<any>
+  getMaxSupply(userAddress:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"typeCount",{ headers:this.headers});
+    return this.httpClient.get(baseURL+"typeCount?userAddress="+userAddress,{ headers:this.headers});
   }
 
   getUserBetData(data:any):Observable<any>

@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
     apiUrl: 'http://my-api-url',
-    enableDebug: false
+    enableDebug: false,
+    chainId : 97
   };
 
 /*

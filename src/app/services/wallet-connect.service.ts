@@ -6,9 +6,9 @@ import WalletConnectProvider from "@walletconnect/web3-provider";
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
-export const LootboxAddress = "0x0EA8Dd1126f9287dB43a949aE30b175a403e36c1";
-export const NFTAddress = "0xa526dDEd1576A6F3c89c72f9540614f1B66ea472";
-export const ArtistNFTAddress = "0x39ae198C224fcCc802B97a44a63d0dEb450CE3f7";
+export const LootboxAddress = "0xa611B3504672A1f7DBC267494d5D328f2378956B";
+export const NFTAddress = "0xA36AC80127FfB75a803cBD908a618d5c472D1B5C";
+export const ArtistNFTAddress = "0xC6b1b4bCC18EbE1d6e76812F91DCCa58cE98a87B";
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
