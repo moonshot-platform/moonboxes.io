@@ -17,6 +17,8 @@ export class ArtistMoonboxComponent implements OnInit {
   inputnumber = [];
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
+  popupClosed: boolean = false;
+  fadeOut: boolean = false;
   static readonly routeName: string = 'artist_moonbase/:artistAddress';
 
 
@@ -140,6 +142,7 @@ export class ArtistMoonboxComponent implements OnInit {
       this.openDialog();
     }
     else {
+      this.fadeOut = true;
       this.submitBetToContract(index);
     }
   }
@@ -189,7 +192,9 @@ export class ArtistMoonboxComponent implements OnInit {
 
      dialogRef.afterClosed().subscribe(result => {
        this.getMaxSupply();
-    this.invisible = false;
+       this.invisible = false;
+       this.fadeOut = result;
+       this.popupClosed = true;
     });
 
 

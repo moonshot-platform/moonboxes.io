@@ -1,5 +1,5 @@
-<section class="scroller" [ngClass]="{'invisible':invisible}">
-  <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center">
+<section class="scroller buy_moonbase" [ngClass]="{'bg-primary':invisible}">
+  <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
     <div class="flex1 flex-column flex-center">
       <div class="relative flex-center">
