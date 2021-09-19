@@ -161,7 +161,7 @@
     </div>
   </div>
 
-  <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5">
+  <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
     <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
       <div class="round-mini-button" (click)="prev()">
         <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>

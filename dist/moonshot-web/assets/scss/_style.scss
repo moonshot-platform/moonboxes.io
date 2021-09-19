@@ -1263,6 +1263,11 @@ svg#closenft path {
     .custom-modalbox {
         max-width: 100vw !important;
     }
+    .scroller {
+        max-width: 100vw !important;
+        margin-top: 70px !important;
+        min-height: calc(100vh - 220px) !important;
+    }
 }
 
 .scroller {

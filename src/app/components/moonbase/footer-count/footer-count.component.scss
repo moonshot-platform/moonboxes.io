@@ -2,7 +2,11 @@
 .bg-black.shape::before {
     background-color: black !important;
 }
-
+#footer-count-container {
+.bg-black {
+    background-color: #91712d !important;
+}
+}
 @media only screen and (max-width: $md-header) {
     .desktop-bottom-count {
         display: none;

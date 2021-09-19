@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WalletConnectService } from './wallet-connect.service';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 const baseURL: any = "https://moonboxes.io/api/api/";
 
@@ -53,7 +54,7 @@ export class HttpApiService {
 
   getMaxSupply(userAddress:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"typeCount?userAddress="+userAddress,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"typeCount?userWalletAddress="+userAddress+"&ArtistwalletAddress="+environment.ownerAddress,{ headers:this.headers});
   }
 
   getUserBetData(data:any):Observable<any>

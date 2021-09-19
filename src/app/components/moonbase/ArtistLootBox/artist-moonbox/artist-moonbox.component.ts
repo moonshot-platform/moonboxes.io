@@ -142,7 +142,6 @@ export class ArtistMoonboxComponent implements OnInit {
       this.openDialog();
     }
     else {
-      this.fadeOut = true;
       this.submitBetToContract(index);
     }
   }
@@ -169,6 +168,7 @@ export class ArtistMoonboxComponent implements OnInit {
       return false;
     }
     this.invisible = true;
+    this.fadeOut = true;
 
     let dialogRef = this.dialog.open(ModalForTransactionComponent, {
       width: 'auto',
