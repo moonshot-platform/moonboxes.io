@@ -161,16 +161,13 @@ export class BuyMoonbaseComponent implements OnInit {
 
   buyMoonBase(index : number)
   {
-    
       if(this.data===undefined || this.data.address===undefined)
       {
         this.openDialog();
       }
       else
       {
-        this.fadeOut = true;
         this.submitBetToContract(index);
-
       }
   }
 
@@ -193,6 +190,7 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   this.invisible = true;
+  this.fadeOut = true;
 
   let dialogRef = this.dialog.open(ModalForTransactionComponent, {
     width: 'auto',

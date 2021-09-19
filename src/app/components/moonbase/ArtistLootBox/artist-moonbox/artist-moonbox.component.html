@@ -261,10 +261,9 @@
                     </div>
                 </div>
             </div>
-        
     </div>
 
-    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5">
+    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-start px-3 pb100 pt-5" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
         <div class="flex">
             <div class="flex2 flex flex-col mb30">

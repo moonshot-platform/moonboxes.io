@@ -64,7 +64,7 @@ export class InventoryComponent implements OnInit {
 
     this.httpApi.getuserUpcomingNft({
       userAddress: this.data.address,
-      nsfw: this.isNSFWStatus
+      nsfwstatus: this.isNSFWStatus
     }).subscribe((response: any) => {
       if (response.isSuccess) {
         this.inventoryListUpcoming = response.data.data;
@@ -175,7 +175,7 @@ export class InventoryComponent implements OnInit {
 
   checkNSFWStatusFromStorage() {
     let tempstatus = this.httpApi.getNSFWStatus();
-    if (this.isNSFWStatus != tempstatus) {
+    if (this.isNSFWStatus != tempstatus && this.isNSFWStatus!=undefined) {
       this.isNSFWStatus = tempstatus;
       this.getUserData();
     }
