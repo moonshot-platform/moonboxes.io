@@ -61,7 +61,6 @@ export class UpcomingComponent implements OnInit {
       if(this.data!=data && data!=undefined && data.address!=undefined){
       this.data = data;
       this.userAddress = data.address;
-      console.log(this.data);
       // this.userWalletAddress = data.address;
       
       this.getAllCollections();

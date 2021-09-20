@@ -60,7 +60,7 @@ import { InfoComponent } from './info/info.component';
     RaiseStakesComponent,
     LandingIntroComponent,
     LimitedComponent,
-    InfoComponent
+    InfoComponent,
   ],
   imports: [
     MatIconModule,

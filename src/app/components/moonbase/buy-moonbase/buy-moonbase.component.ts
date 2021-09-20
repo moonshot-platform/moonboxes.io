@@ -52,22 +52,28 @@ export class BuyMoonbaseComponent implements OnInit {
 
     setTimeout(async() => {
       await this.walletConnectService.getData().subscribe((data)=>{
+        if(data!==undefined && data.address!=undefined && data!=this.data)
+        {
         this.data=data;
+        
+          this.isConnected=true;
+          if(this.data.networkId.chainId!=environment.chainId)
+          {
+            this.isWrongNetwork=true;
+          }
+          else
+          {
+            this.getMoonShootBalance();
+          }
+          
+        }
+        else
+        {
+          this.isConnected = false;
+        }
       });
 
-      if(this.data!==undefined && this.data.address!=undefined)
-      {
-        this.isConnected=true;
-        if(this.data.networkId.chainId!=environment.chainId)
-        {
-          this.isWrongNetwork=true;
-        }
-        this.getMoonShootBalance();
-      }
-      else
-      {
-        this.isConnected = false;
-      }
+     
       this.getMaxSupply();
     }, 1000);
   }
@@ -137,7 +143,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   async getMaxSupply()
   {
-    this.httpApi.getMaxSupply(this.data.address).subscribe((response:any)=>{
+    this.httpApi.getMaxSupply(this.data?.address).subscribe((response:any)=>{
       if(response.isSuccess){
         this.supplyDetails=response.data.data;
         if(this.supplyDetails[this.lootBoxDetails[0].name]>0)

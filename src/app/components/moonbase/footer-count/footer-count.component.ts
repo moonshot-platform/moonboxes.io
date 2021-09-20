@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-footer-count',
@@ -31,13 +32,18 @@ export class FooterCountComponent implements OnInit {
 
     setTimeout(async () => {
       await this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
+        if(data!=undefined && data.address!=undefined && this.data !=data)
+        {
+          this.data = data;
+          this.isConnected = true;
+          debugger
+          if(this.data.networkId.chainId==environment.chainId){
+            this.getMoonShootBalance();
+          }
+      }
       });
 
-      if (this.data !== undefined && this.data.address != undefined) {
-        this.isConnected = true;
-        this.getMoonShootBalance();
-      }
+   
     }, 1000);
   }
 
