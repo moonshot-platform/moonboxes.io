@@ -35,7 +35,6 @@ import { LandingIntroComponent } from './landing/landing-intro/landing-intro.com
 import { LimitedComponent } from './landing/limited/limited.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { InfoComponent } from './info/info.component';
-import { VideoComponent } from './video/video.component';
 
 
 @NgModule({
@@ -62,7 +61,6 @@ import { VideoComponent } from './video/video.component';
     LandingIntroComponent,
     LimitedComponent,
     InfoComponent,
-    VideoComponent
   ],
   imports: [
     MatIconModule,
