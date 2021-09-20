@@ -2,9 +2,9 @@
 <!-- [ngClass]="{'invisible':invisible}" -->
 <section class="artist-moonbox scroller" [ngClass]="{'bg-primary':invisible}">
  
-    <div class="inner desktop-only s-100 flex-center flex-col" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    <div class="inner desktop-only s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
             <div class="flex w-100">
-                <div class="flex flex-col w-100 boxes-title-container pt-md-200 mb50">
+                <div class="flex flex-col w-100 boxes-title-container">
                     <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row mb10">{{artistDetails?.name}}</p>
                     <p class="flex1 flex justify-center p18 orbitron flex-row mb10">{{artistDetails?.ArtistName}}</p>
 
@@ -46,7 +46,7 @@
                             <div class="justify-center align-items-center flex-col align-start">
                                 <div class="empty flex1"></div>
                                 <div class="connect_popup info flex2">
-                                    <div class="line-container flex">
+                                    <div class="line-container flex">   
                                         <div class="line flex2"></div>
                                         <div class="empty flex1"></div>
                                     </div>

@@ -1,4 +1,3 @@
-import { VideoComponent } from './video/video.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArtistMoonboxComponent } from './ArtistLootBox/artist-moonbox/artist-moonbox.component';
@@ -57,10 +56,6 @@ const routes: Routes = [
       {
         path: InfoComponent.routeName,
         component: InfoComponent
-      },
-      {
-        path: VideoComponent.routeName,
-        component: VideoComponent
       },
       {
         path: "**",
