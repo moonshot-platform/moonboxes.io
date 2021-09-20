@@ -3,6 +3,7 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
 import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { environment } from 'src/environments/environment';
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
@@ -134,7 +135,7 @@ export class WalletConnectService {
     var network = await this.provider.getNetwork();
 
     localStorage.setItem('address', address);
-    if (network.chainId == 97) {
+    if (network.chainId == environment.chainId) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);

@@ -53,6 +53,7 @@ export class HistoryComponent implements OnInit {
 
   async ClaimNft(data:any,index:number)
   {
+    debugger
     const dialogref = this.dialog.open(ModalForClaimComponent, {
       width: 'auto',
       disableClose : true,
