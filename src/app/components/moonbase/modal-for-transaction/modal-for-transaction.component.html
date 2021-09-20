@@ -28,6 +28,10 @@
               <source src="{{videoSource[data.index-1]}}" type="video/mp4" />
               Browser not supported
             </video>
+            <!-- <video *ngIf="playvideo" width="100%" height="auto" playsinline autoplay (ended)="nftVisible()">
+              <source src="{{videoSource[data.index-1]}}" type="video/mp4" />
+              Browser not supported
+            </video> -->
             <img *ngIf="nftrevealed" src="{{nftImgRevealed[current].logo_path}}" class="fade-in onvideo img-fluid" alt="">
           </div>
           <div [ngClass]="{'opacity1': nftrevealed}" class="opacity0 flex justify-space-between">

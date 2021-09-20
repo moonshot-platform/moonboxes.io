@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { ConnetwalletComponent } from '../../connetwallet/connetwallet.component';
 import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-for-transaction.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -50,21 +51,29 @@ export class ArtistMoonboxComponent implements OnInit {
 
     setTimeout(async () => {
       await this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
+        if(data!=undefined && data.address!=undefined && this.data !=data)
+        {
+          this.data = data;
+          this.isConnected = true;
+          if (this.data.networkId.chainId != environment.chainId) {
+            this.isWrongNetwork = true;
+          }
+          else
+          {
+            this.getMoonShootBalance();
+          }
+         
+          
+        }
+        else{
+          this.isConnected = false;
+        }
+       
+        this.getMaxSupply();
+      
       });
 
-      if (this.data !== undefined && this.data.address != undefined) {
-        this.isConnected = true;
-        if (this.data.networkId.chainId != 97) {
-          this.isWrongNetwork = true;
-        }
-        this.getMoonShootBalance();
-        
-      }
-      else {
-        this.isConnected = false;
-      }
-      this.getMaxSupply();
+     
     }, 1000);
     
   }
@@ -119,7 +128,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
   getMaxSupply() {
     
-    this.httpApi.getArtistMoonboxData(this.artistAddress,this.data.address).subscribe((response: any) => {
+    this.httpApi.getArtistMoonboxData(this.artistAddress,this.data?.address).subscribe((response: any) => {
       if (response.isSuccess) {
         this.supplyDetails = response.data;
         this.artistDetails = response;

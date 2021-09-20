@@ -145,7 +145,10 @@
     padding-right: 0;
     text-align: center;
 }
-
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     .pt-md-200 {
         padding-top: 200px;

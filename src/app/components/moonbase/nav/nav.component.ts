@@ -5,6 +5,7 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-nav',
@@ -94,17 +95,20 @@ export class NavComponent implements OnInit {
     this.getNSFWStatus();
 
     setTimeout(async () => {
-      await this.walletConnectService.getData().subscribe((data) => {
+       this.walletConnectService.getData().subscribe((data) => {
+        if (data !== undefined && data.address != undefined) {
         this.data = data;
+        this.isConnected = true;
+        if(this.data.networkId.chainId==environment.chainId){
+          this.getMoonShootBalance();
+        }
+        }
+        else
+        {
+          this.balanceOfMoon = "Awaiting Connection";
+        }
       });
 
-      if (this.data !== undefined && this.data.address != undefined) {
-        this.isConnected = true;
-        this.getMoonShootBalance();
-      }
-      else {
-        this.balanceOfMoon = "Awaiting Connection";
-      }
     }, 1000);
   }
 
@@ -119,10 +123,12 @@ export class NavComponent implements OnInit {
   }
 
   getMoonShootBalance() {
+    
     this.walletConnectService.getBalanceOfUser(this.data.address)
       .then((response: any) => {
         this.balanceOfMoon = response > 0 ? response / 1e9 : 0;
-      })
+      });
+   
   }
 
   changeNSFWStatus(event: any) {
