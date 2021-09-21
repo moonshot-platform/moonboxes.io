@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
-import { ConnectComponent } from '../wallet/connect/connect.component';
+import { ConnetwalletComponent } from '../../moonbase/connetwallet/connetwallet.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -23,13 +23,18 @@ export class SidebarComponent implements OnInit {
     });
   }
 
-  toggleTokenomicsView( active: boolean = false ) {
+  toggleTokenomicsView( active: boolean = null ) {
     this.active = active || !this.active;
   }
 
   openDialog(): void {
-    const dialogRef = this.dialog.open(ConnectComponent, {width: 'auto' });
+    let dialogRef = this.dialog.open(ConnetwalletComponent, {
+      width: 'auto',
+      // data: { name: this.name, animal: this.animal }
+    });
 
-    dialogRef.afterClosed().subscribe(result => {});
+    dialogRef.afterClosed().subscribe(result => {
+      // this.animal = result;
+    });
   }
 }

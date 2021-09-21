@@ -3,19 +3,19 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
 import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { environment } from 'src/environments/environment';
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
-export const LootboxAddress = "0x87F0FbB8df1C46FF60A78C25De2F1691CCB839Dc";
-export const NFTAddress = "0x671ED4511af64C2F36Cd3D4fA2dc609a006273db";
-export const ArtistNFTAddress = "0xd5B5727097d907c2bD3d9a99aFCefA319C75BD70";
+export const LootboxAddress = "0x008C7B8B7251c72dE798F23DBAAA1cfeB39429b3";
+export const NFTAddress = "0xE5f0d4E3ea543c6401E62969d4C87b0f5CceA40F";
+export const ArtistNFTAddress = "0x1c88C37f7B3fc41A644711dAD28BC358e0C0E813";
 
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
-
 //  Create WalletConnect Provider
 const provider = new WalletConnectProvider({
   infuraId: "b0287acccb124ceb8306f3192f9e9c04",
@@ -34,8 +34,8 @@ export class WalletConnectService {
   private serverError: boolean = false;
   public tokenomicsData: any;
   public oldPancakeAddress = true;
-  provider: any;
-  signer: any;
+  provider: ethers.providers.Web3Provider;
+  signer: ethers.providers.JsonRpcSigner;
   SilverContract: any;
   LootboxContract: any;
   NFTContract: any;
@@ -64,11 +64,13 @@ export class WalletConnectService {
   }
 
   init(): void {
-    var connectedWallet = localStorage.getItem('wallet');
-    if (connectedWallet == "1")
+    var connectedWallet = localStorage.getItem('wallet')?.toString();
+    if (connectedWallet == "1") {
       this.connectToWallet(1);
-    else
+    }
+    else if (connectedWallet == "2") {
       this.connectToWalletConnect(1);
+    }
   }
 
   async connectToWallet(origin=0) {
@@ -133,7 +135,7 @@ export class WalletConnectService {
     var network = await this.provider.getNetwork();
 
     localStorage.setItem('address', address);
-    if (network.chainId == 97) {
+    if (network.chainId == environment.chainId) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);
@@ -153,25 +155,15 @@ export class WalletConnectService {
   }
 
   async getDetailsMoonboxPrice() {
-    var promise = new Promise((resolve, reject) => {
-      try {
-        this.LootboxContract.moonboxPrice()
-          .then( (transactionHash: any) => {
-            resolve(transactionHash);
-          })
-      }
-      catch (e) {
-        reject(false);
-      }
-    });
-    return promise
+    var price = await this.LootboxContract.moonboxPrice();
+           return price;
   }
 
   async getDetailsMoonboxlimit() {
     var promise = new Promise((resolve, reject) => {
       try {
         this.LootboxContract.getMoonShootLimit()
-          .then((transactionHash: any) => {
+          .then(function (transactionHash) {
             resolve(transactionHash);
           })
       }
@@ -187,7 +179,7 @@ export class WalletConnectService {
     var promise = new Promise((resolve, reject) => {
       try {
         this.artistLootBoxContract.getMoonShootLimit()
-          .then( (transactionHash: any) => {
+          .then(function (transactionHash) {
             resolve(transactionHash);
           })
       }
@@ -198,12 +190,12 @@ export class WalletConnectService {
     return promise
   }
 
-  async getDetailsLootboxAddress(lootBoxId: any) {
+  async getDetailsLootboxAddress(lootBoxId) {
     var promise = new Promise((resolve, reject) => {
       try {
 
         this.LootboxContract.lootboxPaymentToken(lootBoxId)
-          .then( (transactionHash: any) => {
+          .then(function (transactionHash) {
             resolve(transactionHash);
           })
       }
@@ -214,7 +206,7 @@ export class WalletConnectService {
     return promise
   }
 
-  async getTransactionHashForAllowance(lootBoxId: any, noOfBets: any, userAddress: any) {
+  async getTransactionHashForAllowance(lootBoxId, noOfBets,userAddress) {
     var lootboxPrice = await this.getDetailsMoonboxPrice();
 
     var promise = new Promise((resolve, reject) => {
@@ -222,7 +214,7 @@ export class WalletConnectService {
     const params2 =((noOfBets*Number(lootboxPrice)*1e9).toString());
       let that=this;
       this.SilverContract.allowance(userAddress, LootboxAddress)
-      .then(async (allowanceAmount: any) => {
+      .then(async function (allowanceAmount) {
         if(allowanceAmount>=params2){
           resolve({ hash: "", status: true,allowance:true });
         }
@@ -240,7 +232,7 @@ export class WalletConnectService {
     return promise
   }
 
-  async approveSilverToken(lootBoxId: any, noOfBets: any, userAddress: any)
+  async approveSilverToken(lootBoxId, noOfBets,userAddress)
   {
     var lootboxPrice = await this.getDetailsMoonboxPrice();
     const params2 =((noOfBets*Number(lootboxPrice)*1e9).toString());
@@ -269,7 +261,7 @@ export class WalletConnectService {
     return promise;
   }
 
-  async getTransactionHashForBetSubmit(lootBoxId: any, seed: any, noOfBets: any, userAddress: any) {
+  async getTransactionHashForBetSubmit(lootBoxId, seed, noOfBets,userAddress) {
   var status:any =   await this.getTransactionHashForAllowance(lootBoxId,noOfBets,userAddress);
     if(!status.allowance){  
       await status.hash.wait(1);
@@ -283,13 +275,13 @@ export class WalletConnectService {
  
 
 
-  redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: any, userAddress: any) {
+  redeemBulkTransaction(lootBoxId, price, noOfBets,userAddress) {
     var promise = new Promise((resolve, reject) => {
       try {
         this.LootboxContract.submitBet(lootBoxId, price, noOfBets,{value:(price*noOfBets).toString()})
-          .then( (transactionHash: any) => {
+          .then(function (transactionHash) {
             resolve({ hash: transactionHash.hash, status: true });
-          }).catch((e: any)=> {
+          }).catch(function(e){
             reject({ hash: e, status: false });
           })
       }
@@ -311,9 +303,9 @@ export class WalletConnectService {
     if(isArtist){
       try {
           this.artistLootBoxContract.redeemBulk(NFTAddress, id, nftAmount,artistAddress, bet,spliSign.v,spliSign.r,spliSign.s)
-            .then( (transactionHash: any) => {
+            .then(function (transactionHash) {
               resolve({ hash: transactionHash.hash, status: true });
-            }).catch((e: any) => {
+            }).catch(function(e){
               reject({ hash: e, status: false });
             });
             
@@ -328,9 +320,9 @@ export class WalletConnectService {
     {
         try {
             this.LootboxContract.redeemBulk(NFTAddress, id, nftAmount, bet,spliSign.v,spliSign.r,spliSign.s)
-              .then( (transactionHash: any) => {
+              .then(function (transactionHash) {
                 resolve({ hash: transactionHash.hash, status: true });
-              }).catch((e: any) => {
+              }).catch(function(e){
                 reject({ hash: e, status: false });
               });
           }
@@ -350,7 +342,7 @@ export class WalletConnectService {
   
 
 /** Artist  **/
-  redeemBulkTransactionArtist(lootBoxId: any, noOfBets:any, price: any, artistAddress: any, signature: any ) {
+  redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signature) {
     const params2:any = ethers.utils.parseEther(price.toString());
     var spliSign=ethers.utils.splitSignature(signature);
 
@@ -361,29 +353,29 @@ export class WalletConnectService {
           {
             value : (params2*noOfBets).toString()
           })
-          .then( (transactionHash: any) => {
+          .then(function (transactionHash) {
             resolve({ hash: transactionHash.hash, status: true });
-          }).catch((e:any) => {
+          }).catch(function(e){
             reject({ hash: e, status: false });
           });
-      } catch (e) {
+      }
+      catch (e) {
         reject({ hash: "", status: false });
       }
-    })
-
-    return promise;
+    });
+    return promise
   }
 
 
   /** Artist  **/
-  async claimRewardTransaction(junkAmount:any,nftId:any,nftAmount:any,betId:any,seed: any,signHash:any) {
+  async claimRewardTransaction(junkAmount:any,nftId:any,nftAmount:any,betId:any,seed,signHash:any) {
     var spliSign=ethers.utils.splitSignature(signHash);
     const params2:any = (junkAmount.toString()); 
     var promise = new Promise(async (resolve, reject) => {
       try {
         var txn=await this.LootboxContract.claimReward(params2, NFTAddress,nftId,nftAmount,betId,
           spliSign.v,spliSign.r,spliSign.s)
-         .catch( (e: any) => {
+         .catch(function(e){
             reject({ hash: e, status: false });
           });
           resolve({ hash: txn, status: true });

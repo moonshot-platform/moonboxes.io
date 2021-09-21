@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { WalletConnectService } from './wallet-connect.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
-const baseURL: any = "http://66.29.144.2/api/";
+const baseURL: any = "https://moonboxes.io/api/api/";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,8 @@ const baseURL: any = "http://66.29.144.2/api/";
 export class HttpApiService {
   userInfo: any;
   data:any;
+  private subject = new Subject();
+
   public lootBoxDetails: any = [
     {
       img: 'assets/media/images/moonbox/wood.png',
@@ -37,7 +40,7 @@ export class HttpApiService {
 
   headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
-  .set('APPKEY', 'moonbox');
+  .set('APPKEY', 'mTb+T!5!crBEQEL2!$PJ9&JSjeT3M6Hs*RytA-eaDSBS5UU@8-fCJHu6F?kp@s+JTu2-_-V8L#?5');
   vendor: any;
   
   constructor(private httpClient: HttpClient, private walletConnectService: WalletConnectService,private toastrService:ToastrService) {
@@ -49,9 +52,9 @@ export class HttpApiService {
     return this.httpClient.post(baseURL + 'userBid', data,{ headers:this.headers});
   }
 
-  getMaxSupply():Observable<any>
+  getMaxSupply(userAddress:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"typeCount",{ headers:this.headers});
+    return this.httpClient.get(baseURL+"typeCount?userWalletAddress="+userAddress+"&ArtistwalletAddress="+environment.ownerAddress,{ headers:this.headers});
   }
 
   getUserBetData(data:any):Observable<any>
@@ -85,19 +88,20 @@ export class HttpApiService {
   } 
 
   /***** Artist pages apis *****/
-  getAllCollections(nsfwStatus:boolean):Observable<any>
+  getAllCollections(nsfwStatus:boolean, LootboxAddress: string):Observable<any>
   {
-    return this.httpClient.get(baseURL+"allArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"allArtistBanners?NSFW="+nsfwStatus+"&walletAddress="+LootboxAddress,{ headers:this.headers});
   } 
   
-  getUpcomingArtistCollections(nsfwStatus:boolean):Observable<any>
+  
+  getUpcomingArtistCollections(nsfwStatus:boolean,address:string):Observable<any>
   {
-    return this.httpClient.get(baseURL+"upcomingArtistBanners?NSFW="+nsfwStatus,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"upcomingArtistBanners?NSFW="+nsfwStatus+"&walletAddress="+address,{ headers:this.headers});
   } 
   
-  getArtistMoonboxData(userAddress:any):Observable<any>
+  getArtistMoonboxData(artistWalletAddress:any,userAddress:any):Observable<any>
   {
-    return this.httpClient.get(baseURL+"getArtistMoonboxData?userAddress="+userAddress,{ headers:this.headers});
+    return this.httpClient.get(baseURL+"getArtistMoonboxData?artistWalletAddress="+artistWalletAddress+"&userAddress="+userAddress,{ headers:this.headers});
   } 
 
   submitBetForArtistApi(data:any): Observable<any> {
@@ -139,5 +143,17 @@ export class HttpApiService {
   {
     return localStorage.getItem("nsfw")=="true";
   }
+
+  sendMessage(message: boolean) {
+    this.subject.next({ text: message });
+}
+
+clearMessages() {
+    this.subject.next();
+}
+
+getMessage(): Observable<any> {
+    return this.subject.asObservable();
+}
 
 }

@@ -1,1 +1,12 @@
-<p>moonbase works!</p>
+<section class="landing flex">
+    <div class="inner"  [ngClass]="{'bg-black':bgChange}">
+        <div class="left-corner desktop-only"></div>
+        <div class="right-corner desktop-only"></div>
+        <app-nav></app-nav>
+
+        <router-outlet></router-outlet>
+
+        <app-footer-count class="desktop-only inner flex-space-between align-start mt20 box"></app-footer-count>
+    </div>
+    <app-sidebar></app-sidebar>
+</section>

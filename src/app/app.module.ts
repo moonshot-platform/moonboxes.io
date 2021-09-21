@@ -1,39 +1,62 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { NgParticlesModule } from "ng-particles";
 
+import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { FooterModule } from './components/base/footer/footer.module';
+import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LandingComponent } from './components/landing/landing.component';
-import { MoonbaseComponent } from './components/moonbase/moonbase.component';
-import { SidebarComponent } from './components/base/sidebar/sidebar.component';
-import { ConnectComponent } from './components/base/wallet/connect/connect.component';
-import { TokenomicsComponent } from './components/base/sidebar/tokenomics/tokenomics.component';
-import { UiSwitchModule } from 'ngx-ui-switch';
+
+export function countdownConfigFactory(): CountdownConfig {
+  return {};
+}
+
+import * as Hammer from 'hammerjs';
+import { HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { GtagModule } from 'angular-gtag';
+import { MoonbaseModule } from './components/moonbase/moonbase.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
+
+@Injectable()
+export class HammerConfig extends HammerGestureConfig {
+  overrides = <any>{
+    'swipe': { direction: Hammer.DIRECTION_ALL }
+  };
+}
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
-    MoonbaseComponent,
-    SidebarComponent,
-    ConnectComponent,
-    TokenomicsComponent
   ],
   imports: [
     BrowserModule,
-    MatDialogModule,
     AppRoutingModule,
+    MatIconModule,
+    FooterModule,
+    CountdownModule,
+    NgParticlesModule,
     BrowserAnimationsModule,
-    UiSwitchModule.forRoot({
-      color: 'rgb(0, 189, 99)',
-      switchColor: 'black',
-      defaultBgColor: 'transparent',
-      defaultBoColor : 'black',
-    }),
+    MatDialogModule,
+    GtagModule.forRoot({ trackingId: 'G-5Q9LF9T9Q6', trackPageviews: true }),
+    MoonbaseModule,
+    MatDialogModule,
+    HttpClientModule,
+    ToastrModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory },
+    {
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig
+    }],
+  bootstrap: [AppComponent],
+  exports: [
+    FooterModule,
+    AppRoutingModule
+  ]
 })
 export class AppModule { }
