@@ -30,6 +30,9 @@
     background-color: transparent;
 }
 
+.scroller.buy_moonbase {
+    min-height: calc(100vh - 220px);
+}
 .inner img {
     width: 200px;
     height: 200px;
@@ -130,3 +133,4 @@
 .invisible {
     visibility: hidden;
 }
+

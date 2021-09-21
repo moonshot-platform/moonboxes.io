@@ -41,7 +41,7 @@
 
                                 </div>
                                 <div class="flex flex-col flex1 w100 mt10">
-                                    <div class="text-center">
+                                    <div class="text-center word-break">
                                         <div class="flex align-left flex-col mb10 mt10">
                                             <p class="p18">{{item.name}}</p>
                                             <p class="color-primary">{{item.ArtistName}}</p>
@@ -95,12 +95,12 @@
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
-                                                <p class="color-primary mb10 mt10">{{details.minPrice}} BNB</p>
+                                                <p class="color-primary mb10 mt10">{{lootBoxDetailsAttributes[j].minPrice}} BNB</p>
                                             </div>
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10">Availability</p>
                                                 <p class="color-primary mb10">
-                                                    {{details.supply}}/{{details.TotalMaxSupply}}</p>
+                                                    {{lootBoxDetailsAttributes[j].supply}}/{{lootBoxDetailsAttributes[j].TotalMaxSupply}}</p>
                                             </div>
                                         </div>
                                         <div class="flex justify-space-between">
@@ -143,32 +143,32 @@
 
                                         <div class="social-icons-container flex justify-space-between">
                                             <div class="image-bb">
-                                                <a href="{{details.discord}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].discord}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/discord.png">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{details.twitter}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].twitter}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/twitter.png">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{details.telegram}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].telegram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/telegram.png">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{details.instagram}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].instagram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/instagram.png">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{details.opensea}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].opensea}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/opensea.png">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{details.website}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[j].website}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/global.png">
                                                 </a>
                                             </div>

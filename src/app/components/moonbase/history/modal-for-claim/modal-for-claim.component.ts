@@ -61,7 +61,7 @@ export class ModalForClaimComponent implements OnInit {
       this.httpApi.changeStatusClaim({
         userAddress : this.data.userAddress,
         transactionHash : txStatus.hash,
-        id : this.data.nftDetails.betId
+        id : this.data.nftDetails.id
       }).subscribe((response:any)=>{
           if(response.isSuccess)
           {

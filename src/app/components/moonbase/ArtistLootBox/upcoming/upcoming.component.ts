@@ -15,7 +15,7 @@ export class UpcomingComponent implements OnInit {
   listOfRecentDrops = [];
   endTime = '2021-09-29T00:00:00';
   isNSFWStatus = false;
-  activeTab = 1;
+  activeTab = 2;
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
   artistDetails: any;
@@ -61,7 +61,6 @@ export class UpcomingComponent implements OnInit {
       if(this.data!=data && data!=undefined && data.address!=undefined){
       this.data = data;
       this.userAddress = data.address;
-      console.log(this.data);
       // this.userWalletAddress = data.address;
       
       this.getAllCollections();

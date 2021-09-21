@@ -1,5 +1,5 @@
-<section class="scroller" [ngClass]="{'invisible':invisible}">
-  <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center">
+<section class="scroller buy_moonbase" [ngClass]="{'bg-primary':invisible}">
+  <div class="desktop-only pt-5 flex1 h-100 flex-center align-items-center" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
     <div class="flex1 flex-column flex-center">
       <div class="relative flex-center">
@@ -161,7 +161,7 @@
     </div>
   </div>
 
-  <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5">
+  <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
     <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
       <div class="round-mini-button" (click)="prev()">
         <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
@@ -170,7 +170,7 @@
       <div class="relative moonbox {{lootboxfloating[current]}}"></div>
         <!-- <img src={{lootBoxDetails[current].img}} alt="moonticket" /> -->
         <img
-          *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming"
+          *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || (supplyDetails && supplyDetails[current]?.isUpcoming)"
           src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
       </div>
       <div class="round-mini-button" (click)="next()">

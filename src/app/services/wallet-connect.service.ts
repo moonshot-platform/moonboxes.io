@@ -3,12 +3,14 @@ import { Subject, Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
 import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+import { environment } from 'src/environments/environment';
 
 
 export const SilverAddress = "0x46192Bd44C9066D425375326808109C7d97a2181";
-export const LootboxAddress = "0x0EA8Dd1126f9287dB43a949aE30b175a403e36c1";
-export const NFTAddress = "0xa526dDEd1576A6F3c89c72f9540614f1B66ea472";
-export const ArtistNFTAddress = "0x39ae198C224fcCc802B97a44a63d0dEb450CE3f7";
+export const LootboxAddress = "0x008C7B8B7251c72dE798F23DBAAA1cfeB39429b3";
+export const NFTAddress = "0xE5f0d4E3ea543c6401E62969d4C87b0f5CceA40F";
+export const ArtistNFTAddress = "0x1c88C37f7B3fc41A644711dAD28BC358e0C0E813";
+
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
@@ -133,7 +135,7 @@ export class WalletConnectService {
     var network = await this.provider.getNetwork();
 
     localStorage.setItem('address', address);
-    if (network.chainId == 97) {
+    if (network.chainId == environment.chainId) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);

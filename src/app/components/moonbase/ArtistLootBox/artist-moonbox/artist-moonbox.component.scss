@@ -8,7 +8,9 @@
     }
 }
 
-
+.pt-5 {
+    padding-top: 3rem;
+}
 .align-start {
     align-self: flex-start;
 }
@@ -142,6 +144,20 @@
     padding-left: 0;
     padding-right: 0;
     text-align: center;
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+@media only screen and (min-width: 1200px) and (max-width: 1599px) {
+    .pt-md-200 {
+        padding-top: 200px;
+        box-sizing: border-box;
+    }
+    .pt-md-100 {
+        padding-top: 200px;
+        box-sizing: border-box;
+    }
 }
 
 @media only screen and (max-width: $md-header) {

@@ -106,7 +106,12 @@ export class ModalForTransactionComponent implements OnInit {
       transactionHash: txnHash,
       userAddress: this.data.data.address
     }).subscribe((response: any) => {
-      if (response.isSuccess) {
+      if(response.status==408)
+      {
+        this.httpApi.showToastr("Contract address not matched",false);
+        this.closeDialog();
+      }
+      else if (response.isSuccess) {
         this.claimTransactionInitiate(response.data);
       }
       else {
@@ -148,7 +153,7 @@ export class ModalForTransactionComponent implements OnInit {
       this.httpApi.changeStatusClaim({
         userAddress: this.data.data.address,
         transactionHash: txStatus.hash,
-        id: nftDetails.betId
+        id: nftDetails.id
       }).subscribe((response: any) => {
         if (response.isSuccess) {
           this.btn2Text = "Done";

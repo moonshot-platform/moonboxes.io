@@ -44,7 +44,7 @@ export class BuyMoonbaseComponent implements OnInit {
     this.inputnumber[3]=0;
     this.inputnumber[4]=0;
 
-    this.getMaxSupply();
+    // this.getMaxSupply();
   }
 
   ngOnInit(): void {
@@ -52,22 +52,29 @@ export class BuyMoonbaseComponent implements OnInit {
 
     setTimeout(async() => {
       await this.walletConnectService.getData().subscribe((data)=>{
+        if(data!==undefined && data.address!=undefined && data!=this.data)
+        {
         this.data=data;
+        
+          this.isConnected=true;
+          if(this.data.networkId.chainId!=environment.chainId)
+          {
+            this.isWrongNetwork=true;
+          }
+          else
+          {
+            this.getMoonShootBalance();
+          }
+          
+        }
+        else
+        {
+          this.isConnected = false;
+        }
       });
 
-      if(this.data!==undefined && this.data.address!=undefined)
-      {
-        this.isConnected=true;
-        if(this.data.networkId.chainId!=97)
-        {
-          this.isWrongNetwork=true;
-        }
-        this.getMoonShootBalance();
-      }
-      else
-      {
-        this.isConnected = false;
-      }
+     
+      this.getMaxSupply();
     }, 1000);
   }
 
@@ -136,7 +143,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   async getMaxSupply()
   {
-    this.httpApi.getMaxSupply().subscribe((response:any)=>{
+    this.httpApi.getMaxSupply(this.data?.address).subscribe((response:any)=>{
       if(response.isSuccess){
         this.supplyDetails=response.data.data;
         if(this.supplyDetails[this.lootBoxDetails[0].name]>0)
@@ -160,16 +167,13 @@ export class BuyMoonbaseComponent implements OnInit {
 
   buyMoonBase(index : number)
   {
-    
       if(this.data===undefined || this.data.address===undefined)
       {
         this.openDialog();
       }
       else
       {
-        this.fadeOut = true;
         this.submitBetToContract(index);
-
       }
   }
 
@@ -192,6 +196,7 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   this.invisible = true;
+  this.fadeOut = true;
 
   let dialogRef = this.dialog.open(ModalForTransactionComponent, {
     width: 'auto',
