@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpApiService } from 'src/app/services/http-api.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-moonbase',
@@ -6,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./moonbase.component.scss']
 })
 export class MoonbaseComponent implements OnInit {
+  subscription: Subscription;
+  bgChange : boolean = false;
+  static readonly routeName: string = '';
 
-  constructor() { }
+  constructor(private httpApi: HttpApiService) { 
+    this.subscription = this.httpApi.getMessage().subscribe(message => {
+      this.bgChange = message.text;
+  });
+  }
 
   ngOnInit(): void {
   }

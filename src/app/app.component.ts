@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
+import { TokenomicsService } from './services/tokenomics.service';
+declare let particlesJS: any;
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: '<div id="particles"></div><router-outlet></router-outlet>',
 })
 export class AppComponent {
-  title = 'moonboxes';
+  constructor( private tokenomicService: TokenomicsService ) {
+    particlesJS.load('particles', 'assets/json/particlesjs-config.json');
+    
+    this.tokenomicService.init();
+  }
 }

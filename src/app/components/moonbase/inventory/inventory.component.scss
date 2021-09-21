@@ -1,0 +1,165 @@
+.scroller .desktop-only {
+    display: flex;
+    flex-wrap: wrap;
+    align-self: flex-start;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.flex1.flex-column.flex-center {
+    flex: 0 0 33.333333%;
+}
+
+.inner {
+    .nft_img {
+        img,
+        video {
+            width: 200px;
+            height: 200px;
+            border: 1px solid;
+            padding: 4px;
+            object-fit: cover;
+        }
+    }
+}
+
+.nft_img {
+    img,
+    video {
+        width: 200px;
+        height: 200px;
+        border: 1px solid;
+        padding: 4px;
+        object-fit: cover;
+    }
+}
+
+.inner .nft_img:hover img,
+.inner .nft_img:hover video {
+    border: 1px solid white !important;
+}
+
+.inner .outer-box img,
+.inner .outer-box video {
+    height: 350px !important;
+    width: 350px !important;
+}
+
+.inner img.lock {
+    border: none;
+    width: 35px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    right: 0;
+}
+
+.img-fluid {
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    padding: 4px;
+    object-fit: cover;
+}
+
+.attribute-img>img {
+    height: 350px !important;
+    width: 350px !important;
+}
+
+.plus_minus div,
+.plus_minus button,
+.plus_minus input {
+    padding: 0.4375rem 1.25rem;
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.plus_minus div.border_left_right {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.border {
+    border: 1px solid #fff;
+}
+
+.border.plus_minus.flex {
+    max-width: 200px;
+    border-radius: 30px;
+}
+
+.border_left_right input {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+.buy_button {
+    max-width: 150px;
+    margin: auto;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.py-100 {
+    padding: 100px 0 170px;
+    box-sizing: border-box;
+}
+
+.outer-box {
+    border: 1px solid;
+    padding: 1rem;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+    justify-content: flex-start;
+    // position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-left: 20px;
+    margin-right: 20px;
+    .inside-box {
+        align-items: center;
+    }
+}
+
+.border-bottom {
+    border-bottom: 2px solid #d5a642;
+}
+
+svg#attibute_close path {
+    fill: #d5a642;
+}
+
+.full-div {
+    flex: 0 0 100%;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.mobile-only {
+    .outer-box {
+        padding: 0;
+        margin-top: 1rem;
+    }
+    .outer-box>div {
+        padding: 1rem;
+    }
+}
+
+.break-word {
+    word-break: break-word;
+}

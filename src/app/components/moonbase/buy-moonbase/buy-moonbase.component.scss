@@ -1,0 +1,136 @@
+.scroller {
+    max-height: calc(100vh - 250px);
+    overflow: auto;
+    margin-top: 70px;
+    height: max-content;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    min-height: calc(100vh - 118px);
+    max-width: 90vw;
+    align-self: flex-start;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.scroller::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #090d16;
+    border-radius: 10px;
+}
+
+.scroller::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 10px;
+    background-color: #090d16;
+}
+
+.scroller::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.scroller.buy_moonbase {
+    min-height: calc(100vh - 220px);
+}
+.inner img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid;
+    border-radius: 50%;
+    padding: 4px;
+}
+
+.lock {
+    width: 35px;
+    height: 35px;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    left: 0px;
+    right: 0px;
+}
+
+.plus_minus div,
+.plus_minus button,
+.plus_minus input {
+    text-align: center;
+    padding: 0.4375rem 0;
+    background: transparent;
+    border: none;
+    color: white;
+}
+
+.plus_minus div.border_left_right {
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.border {
+    border: 1px solid #fff;
+}
+
+.border.plus_minus.flex {
+    max-width: 200px;
+    border-radius: 30px;
+}
+
+.border_left_right input {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    text-align: center;
+}
+
+.buy_button {
+    max-width: 150px;
+    margin: auto;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.moonbox {
+    width: 210px;
+    height: calc(12600px / 60);
+    animation: animate 2s steps(60) infinite;
+    transition: all 1s ease;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.wood {
+    background-image: url('/assets/media/sprites/moonboxes/wood.png');
+}
+
+.silver {
+    background-image: url('/assets/media/sprites/moonboxes/silver.png');
+}
+
+.gold {
+    background-image: url('/assets/media/sprites/moonboxes/gold.png');
+}
+
+.diamond {
+    background-image: url('/assets/media/sprites/moonboxes/diamond.png');
+}
+
+@keyframes animate {
+    from {
+        background-position-y: 0;
+    }
+    to {
+        background-position-y: 12600px;
+    }
+}
+
+.bg-primary {
+    background-color: #000000;
+}
+
+.invisible {
+    visibility: hidden;
+}
+

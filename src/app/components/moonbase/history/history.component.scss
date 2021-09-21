@@ -1,0 +1,53 @@
+@import "includes";
+
+table {
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+
+  button {
+    border: 2px solid #d5a642;
+  }
+
+  .button.success {
+    background-color: transparent;
+    border-color: #d5a642 !important;
+    color: #d5a642;
+  }
+}
+
+thead tr th {
+  border-bottom: 3px solid #d5a642;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
+  padding-bottom: 1rem;
+  padding-right: 1rem;
+}
+
+tbody td:nth-child(4) {
+  text-align: center;
+}
+
+tbody td {
+  padding: 0.5rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.res-table {
+  max-width: calc(100% - 40px);
+}
+
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+@media only screen and (max-width: $md-header) {
+  .res-table {
+    display: block;
+  }
+}

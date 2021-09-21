@@ -1,0 +1,21 @@
+@import 'includes';
+
+.d_flex_content_between {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.prizepool {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: space-between;
+    flex: 1;
+}
+
+@media only screen and (max-width: $sm) {
+    .buttons-container {
+        flex-direction: column;
+    }
+}
