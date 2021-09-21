@@ -501,7 +501,7 @@ export class RarityComponent implements OnInit {
       let value = list[key];
 
       value.sort(
-        (a: any, b: any) => this.sortFromHighToLow(a, b)
+        (a: any, b: any) => this.sortFromLowToHigh(a, b)
       );
     })
 
@@ -513,7 +513,15 @@ export class RarityComponent implements OnInit {
       const arp = a.rarityPercentage;
       const brp = b.rarityPercentage;
 
-      return ( arp > brp ) ? -1 : ( arp < brp ) ? 1 : 0
+      return (arp > brp) ? -1 : (arp < brp) ? 1 : 0
+    }
+  }
+  sortFromLowToHigh(a: any, b: any) {
+    {
+      const arp = a.rarityPercentage;
+      const brp = b.rarityPercentage;
+
+      return (arp < brp) ? -1 : (arp > brp) ? 1 : 0
     }
   }
 

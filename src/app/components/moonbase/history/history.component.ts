@@ -14,60 +14,56 @@ export class HistoryComponent implements OnInit {
 
   static readonly routeName: string = 'history';
   data: any;
-  historyData : any;
+  historyData: any;
   p: number = 1;
-  maxSize:number = 9;
-  constructor(public toastrService: ToastrService,public httpApiService:HttpApiService,public walletConnectService:WalletConnectService,
+  maxSize: number = 9;
+  constructor(public toastrService: ToastrService, public httpApiService: HttpApiService, public walletConnectService: WalletConnectService,
     public dialog: MatDialog) {
 
-   }
+  }
 
   ngOnInit(): void {
     this.walletConnectService.init();
 
-    setTimeout(async() => {
-      await this.walletConnectService.getData().subscribe((data)=>{
-        this.data=data;
+    setTimeout(async () => {
+      await this.walletConnectService.getData().subscribe((data) => {
+        this.data = data;
       });
-    this.getBidHistory();
-    },1000);
+      this.getBidHistory();
+    }, 1000);
   }
 
-  getBidHistory()
-  {
+  getBidHistory() {
     this.httpApiService.getUserBetData(
-     this.data.address
-    ).subscribe((response:any)=>
-    {
-      if(response.isSuccess){
+      this.data.address
+    ).subscribe((response: any) => {
+      if (response.isSuccess) {
         this.historyData = response.data;
-        
+
       }
-      else
-      {
+      else {
         this.toastrService.error("something went wrong")
       }
 
     });
   }
 
-  async ClaimNft(data:any,index:number)
-  {
-    debugger
+  async ClaimNft(data: any, index: number) {
+    // debugger
     const dialogref = this.dialog.open(ModalForClaimComponent, {
       width: 'auto',
-      disableClose : true,
-       data: {
-         nftDetails : data,
-         userAddress : this.data.address
-       }
+      disableClose: true,
+      data: {
+        nftDetails: data,
+        userAddress: this.data.address
+      }
     });
 
     dialogref.afterClosed().subscribe(result => {
       this.historyData[index].isClaimed = result;
 
     });
-  
+
   }
 
 }
