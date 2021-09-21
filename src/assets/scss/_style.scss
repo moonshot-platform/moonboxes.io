@@ -488,6 +488,10 @@ ul {
     justify-content: space-between;
 }
 
+.justify-content-evenly {
+    justify-content: space-evenly;
+}
+
 .flex-align-start {
     display: flex;
     align-items: flex-start;
@@ -1180,16 +1184,93 @@ svg#closenft path {
     fill: #d5a642;
 }
 
+
+.fade-in {
+    animation: fadeIn ease 5s;
+    -webkit-animation: fadeIn ease 5s;
+    -moz-animation: fadeIn ease 5s;
+    -o-animation: fadeIn ease 5s;
+    -ms-animation: fadeIn ease 5s;
+  }
+  
+  
+  @keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
+  .fadeout {
+    opacity: 0;
+      -webkit-animation: fadeout 4s; /* Safari, Chrome and Opera > 12.1 */
+         -moz-animation: fadeout 4s; /* Firefox < 16 */
+          -ms-animation: fadeout 4s; /* Internet Explorer */
+           -o-animation: fadeout 4s; /* Opera < 12.1 */
+              animation: fadeout 4s;
+  }
+  
+  @keyframes fadeout {
+      from { opacity: 1; }
+      to   { opacity: 0; }
+  }
+  
 @media only screen and (min-width: $md-header) {
     .cdk-global-overlay-wrapper .cdk-overlay-pane {
         left: -30px;
         position: relative !important;
+    }
+    .custom-modalbox {
+        max-width: 100vw !important;
     }
 }
 
 @media only screen and (max-width: $md-header) {
     .custom-modalbox {
         max-width: 100vw !important;
+    }
+    .scroller {
+        max-width: 100vw !important;
+        margin-top: 70px !important;
+        min-height: calc(100vh - 220px) !important;
     }
 }
 

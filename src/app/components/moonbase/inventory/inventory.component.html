@@ -4,7 +4,7 @@
         <div class="flex1 flex-column flex-center mb30" *ngFor="let item of inventoryListUpcoming;let i=index;">
             <div class="relative">
                 <!-- <img src="{{getImagePath(item.set)}}" class="img-fluid" alt=""> -->
-                <img src="assets/media/images/moonbox/Alltypes.gif" class="img-fluid" alt="">
+                <img src="assets/media/images/moonbox/Alltypes.mp4" class="img-fluid" alt="">
             </div>
             <div class="text-center">
                 <p class="p-white-span-primary p16d14m  mb10 mt10">{{item.set}}</p>
@@ -48,7 +48,7 @@
             </video>
 
                         <div class="flex justify-space-between">
-                            <a class="buy_button outlined-button mb10 text-inherit">Sell</a>
+                            <a class="disabled buy_button outlined-button mb10 text-inherit">Sell</a>
                             <a (click)="openDialog(lootBoxDetailsAttributes[j].logo_path)" href="javascript:void(0)">
                                 <svg version="1.1" id="share_twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 49 49" style="enable-background:new 0 0 49 49;" xml:space="preserve">
                   <style type="text/css">
