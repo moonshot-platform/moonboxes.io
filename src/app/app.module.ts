@@ -6,7 +6,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterModule } from './components/base/footer/footer.module';
 import { CountdownConfig, CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -37,7 +36,6 @@ export class HammerConfig extends HammerGestureConfig {
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
-    FooterModule,
     CountdownModule,
     NgParticlesModule,
     BrowserAnimationsModule,
@@ -49,13 +47,12 @@ export class HammerConfig extends HammerGestureConfig {
     ToastrModule.forRoot(),
   ],
   providers: [{ provide: CountdownGlobalConfig, useFactory: countdownConfigFactory },
-    {
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: HammerConfig
-    }],
+  {
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerConfig
+  }],
   bootstrap: [AppComponent],
   exports: [
-    FooterModule,
     AppRoutingModule
   ]
 })
