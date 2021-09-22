@@ -18,12 +18,12 @@ export class FooterCountComponent implements OnInit {
   eligibleTier = "-";
   messages: any[] = [];
   subscription: Subscription;
-  bgChange : boolean = false;
+  bgChange: boolean = false;
 
   constructor(private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService) {
     this.subscription = this.httpApi.getMessage().subscribe(message => {
-        this.bgChange = message.text;
+      this.bgChange = message.text;
     });
   }
 
@@ -32,18 +32,17 @@ export class FooterCountComponent implements OnInit {
 
     setTimeout(async () => {
       await this.walletConnectService.getData().subscribe((data) => {
-        if(data!=undefined && data.address!=undefined && this.data !=data)
-        {
+        if (data != undefined && data.address != undefined && this.data != data) {
           this.data = data;
           this.isConnected = true;
-          debugger
-          if(this.data.networkId.chainId==environment.chainId){
+          //debugger
+          if (this.data.networkId.chainId == environment.chainId) {
             this.getMoonShootBalance();
           }
-      }
+        }
       });
 
-   
+
     }, 1000);
   }
 

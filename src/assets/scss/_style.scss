@@ -41,16 +41,16 @@ ul {
 }
 
 .h-100 {
-    height: 100% 
+    height: 100%
 }
 
 .w-100 {
-    width: 100% 
+    width: 100%
 }
 
 .s-100 {
     height: 100%;
-    width: 100% 
+    width: 100%
 }
 
 .lh30 {
@@ -706,13 +706,13 @@ ul {
         border-top: 0;
     }
     &.bottom-line-thick {
-      border-top: 3px solid $primary;
+        border-top: 3px solid $primary;
     }
     &.top-only {
         border-bottom: 0;
     }
     &.top-line-thin {
-      border-top: 1px solid $primary;
+        border-top: 1px solid $primary;
     }
     &.no-padding-top {
         padding-top: 0;
@@ -1184,75 +1184,81 @@ svg#closenft path {
     fill: #d5a642;
 }
 
-
 .fade-in {
     animation: fadeIn ease 5s;
     -webkit-animation: fadeIn ease 5s;
     -moz-animation: fadeIn ease 5s;
     -o-animation: fadeIn ease 5s;
     -ms-animation: fadeIn ease 5s;
-  }
-  
-  
-  @keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-moz-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-webkit-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-o-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-ms-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
+}
 
-  .fadeout {
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeout {
     opacity: 0;
-      -webkit-animation: fadeout 4s; /* Safari, Chrome and Opera > 12.1 */
-         -moz-animation: fadeout 4s; /* Firefox < 16 */
-          -ms-animation: fadeout 4s; /* Internet Explorer */
-           -o-animation: fadeout 4s; /* Opera < 12.1 */
-              animation: fadeout 4s;
-  }
-  
-  @keyframes fadeout {
-      from { opacity: 1; }
-      to   { opacity: 0; }
-  }
-  
+    -webkit-animation: fadeout 4s;
+    /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeout 4s;
+    /* Firefox < 16 */
+    -ms-animation: fadeout 4s;
+    /* Internet Explorer */
+    -o-animation: fadeout 4s;
+    /* Opera < 12.1 */
+    animation: fadeout 4s;
+}
+
+@keyframes fadeout {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 @media only screen and (min-width: $md-header) {
     .cdk-global-overlay-wrapper .cdk-overlay-pane {
         left: -30px;
@@ -1291,11 +1297,13 @@ svg#closenft path {
     scrollbar-width: none;
     /* for Firefox */
     overflow-y: scroll;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
-
-    &::-webkit-scrollbar { 
-        display: none;  /* Safari and Chrome */
+    -ms-overflow-style: none;
+    /* Internet Explorer 10+ */
+    scrollbar-width: none;
+    /* Firefox */
+    &::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
     }
 }
 
@@ -1305,7 +1313,6 @@ svg#closenft path {
 //     background-color: #090d16;
 //     border-radius: 10px;
 // }
-
 .normal_text {
     line-height: 22px;
     font-weight: normal;
@@ -1321,15 +1328,12 @@ svg#closenft path {
     min-width: 60px;
     background-color: $primary;
     border-color: black;
-
     &.checked {
-        background-color: transparent !important;
-
+        background-color: white !important;
         small {
             right: 2px;
         }
     }
-
     small {
         width: 26px;
         height: 26px;
