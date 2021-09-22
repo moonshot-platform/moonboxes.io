@@ -136,7 +136,7 @@ export class InventoryComponent implements OnInit {
 
   async claimRewardTransaction(data: any, nftId, supply: Number, index: any) {
     try {
-      debugger
+      //debugger
       var txnstatus: any = await this.walletConnectService.claimRewardTransaction(
         data.junkAmount, nftId, supply, data.id, data.id, data.signHash
       );
@@ -156,7 +156,7 @@ export class InventoryComponent implements OnInit {
             this.lootBoxDetailsAttributes[index].disabled = false;
             this.httpApi.showToastr(response.data.message, false);
           }
-          debugger
+          //debugger
         })
       }
     }
@@ -175,7 +175,7 @@ export class InventoryComponent implements OnInit {
 
   checkNSFWStatusFromStorage() {
     let tempstatus = this.httpApi.getNSFWStatus();
-    if (this.isNSFWStatus != tempstatus && this.isNSFWStatus!=undefined) {
+    if (this.isNSFWStatus != tempstatus && this.isNSFWStatus != undefined) {
       this.isNSFWStatus = tempstatus;
       this.getUserData();
     }

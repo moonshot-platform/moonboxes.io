@@ -33,7 +33,7 @@
                             <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView);"
                                 class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
-                                    
+
                                     <div class="flex-column flex-center">
                                         <div class="relative res-box upcoming-img"
                                             [style.background]="'url('+item.filePath+')'"></div>
@@ -52,7 +52,7 @@
                                             <div class="round-mini-button" style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: green; border: 1px solid green;">
                                             </div>
                                             <p class="color-primary flex" *ngIf="activeTab==1">
-                                                
+
                                             </p>
                                             <p class="color-primary flex" *ngIf="activeTab==2">
                                                 <span>Open</span>
@@ -108,7 +108,7 @@
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
                                                 <app-countdown-timer [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
                                             </a>
-        
+
                                             <a *ngIf="activeTab==2" class="button mb10 text-inherit w100"
                                                 [routerLink]="lootBoxDetailsAttributes[j].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[j].walletAddress] ">Buy
                                                 Moonbox</a>
@@ -144,32 +144,32 @@
                                         <div class="social-icons-container flex justify-space-between">
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].discord}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/discord.png">
+                                                    <img src="assets/media/icons/moonbase/discord.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].twitter}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/twitter.png">
+                                                    <img src="assets/media/icons/moonbase/twitter.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].telegram}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/telegram.png">
+                                                    <img src="assets/media/icons/moonbase/telegram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].instagram}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/instagram.png">
+                                                    <img src="assets/media/icons/moonbase/instagram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].opensea}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/opensea.png">
+                                                    <img src="assets/media/icons/moonbase/opensea.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].website}}" target="_blank">
-                                                    <img src="assets/media/icons/moonbase/global.png">
+                                                    <img src="assets/media/icons/moonbase/global.svg">
                                                 </a>
                                             </div>
                                         </div>
