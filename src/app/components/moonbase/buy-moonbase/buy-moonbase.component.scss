@@ -1,5 +1,5 @@
 .scroller {
-    max-height: calc(100vh - 250px);
+    max-height: calc(100vh - 110px);
     overflow: auto;
     margin-top: 70px;
     height: max-content;
@@ -33,6 +33,7 @@
 .scroller.buy_moonbase {
     min-height: calc(100vh - 220px);
 }
+
 .inner img {
     width: 200px;
     height: 200px;
@@ -133,4 +134,3 @@
 .invisible {
     visibility: hidden;
 }
-
