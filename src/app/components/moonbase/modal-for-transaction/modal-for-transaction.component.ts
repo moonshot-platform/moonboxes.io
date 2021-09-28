@@ -20,10 +20,10 @@ export class ModalForTransactionComponent implements OnInit {
   successIcon2: boolean = false;
   isCompletedProcess: boolean = false;
   videoSource = [
-    "assets/media/videos/Moonboxes_WOOD.mp4",
-    "assets/media/videos/Moonboxes_SILVER.mp4",
-    "assets/media/videos/Moonboxes_GOLD.mp4",
-    "assets/media/videos/Moonboxes_DIAMOND.mp4"
+    "assets/media/videos/Moonboxes_WOOD.webm",
+    "assets/media/videos/Moonboxes_SILVER.webm",
+    "assets/media/videos/Moonboxes_GOLD.webm",
+    "assets/media/videos/Moonboxes_DIAMOND.webm"
   ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
@@ -106,9 +106,8 @@ export class ModalForTransactionComponent implements OnInit {
       transactionHash: txnHash,
       userAddress: this.data.data.address
     }).subscribe((response: any) => {
-      if(response.status==408)
-      {
-        this.httpApi.showToastr("Contract address not matched",false);
+      if (response.status == 408) {
+        this.httpApi.showToastr("Contract address not matched", false);
         this.closeDialog();
       }
       else if (response.isSuccess) {
@@ -162,7 +161,7 @@ export class ModalForTransactionComponent implements OnInit {
           setTimeout(() => {
             this.playvideo = true;
           }, 3000);
-          
+
           this.httpApi.showToastr(response.data.message, true);
         }
       })
