@@ -35,7 +35,7 @@
                     <div [ngClass]="{'opacity1': nftrevealed}" class="opacity0 flex justify-space-between">
                         <a class="fade-in flex1 mr10 outlined-button text-inherit mt10" (click)="closeDialog()" [routerLink]="['/inventory']">Go To
               Inventory </a>
-                        <p class="amount-of-nft">{{data.inputNumber[data.index]}}/{{data.inputNumber[data.index]}}</p>
+                        <p class="amount-of-nft">{{current + 1}}/{{data.inputNumber[data.index]}}</p>
                         <a (click)="openDialog()" href="javascript:void(0)">
                             <svg version="1.1" id="share_twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 49 49" style="enable-background:new 0 0 49 49;" xml:space="preserve">
                 <style type="text/css">
