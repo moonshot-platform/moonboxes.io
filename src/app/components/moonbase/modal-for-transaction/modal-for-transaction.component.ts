@@ -58,7 +58,7 @@ export class ModalForTransactionComponent implements OnInit {
   async submitBet() {
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
 
-    this.btn1Text = "Waiting for transaction..";
+    this.btn1Text = "Waiting for transaction...";
     var transactionDetails: any;
     try {
       transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
