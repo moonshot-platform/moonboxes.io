@@ -1,5 +1,4 @@
 @import "includes";
-
 // pop up css
 .modal-box {
     justify-content: center;
@@ -10,12 +9,15 @@
     padding: 2rem;
     margin: auto;
 }
+
 .steps__item:not(:last-child) {
     margin-bottom: 32px;
 }
+
 .popup__title {
     margin-bottom: 32px;
 }
+
 .popup .mfp-close {
     position: absolute;
     top: 32px;
@@ -31,11 +33,13 @@
     transition: all .2s;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 .steps__head {
     display: flex;
     align-items: center;
     margin-bottom: 16px;
 }
+
 .steps__icon {
     position: relative;
     display: flex;
@@ -51,31 +55,37 @@
     overflow: hidden;
     // background-color: #d5a642;
 }
+
 .steps__info {
     font-size: 16px;
     line-height: 1.5;
     font-weight: 500;
-    color:white
+    color: white
 }
+
 .steps__text {
     font-size: 12px;
     line-height: 1.66667;
     color: #777E90;
 }
+
 .border-0 {
     border: none;
 }
+
 .cursor {
     cursor: pointer;
 }
+
 .loader-img {
     width: 100px;
     border-radius: 50px;
 }
+
 .success__icon {
     background: #d5a642;
     border-color: #d5a642;
-  }
+}
 
 .onvideo {
     position: absolute;
@@ -87,36 +97,53 @@
     right: 0;
     background: #010001;
 }
+
 .opacity0 {
-  opacity: 0;
+    opacity: 0;
 }
+
 .opacity1 {
-  opacity: 1;
+    opacity: 1;
 }
+
+.amount-of-nft {
+    color: $primary;
+    font-size: 16px;
+    width: 90px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+}
+
 .mw-50 {
-  // max-width: 50vw;
-  // width: 300px;
-  // max-height: 100%;
-  width: 100%;
-  max-height: 100%;
-  min-width: 100%;
-  max-width: 100%;
-  margin: auto;
+    // max-width: 50vw;
+    // width: 300px;
+    // max-height: 100%;
+    width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    margin: auto;
 }
+
 .mx-auto {
-  margin: auto;
+    margin: auto;
 }
 
 .disabled-button {
-  cursor: default;
-  &:hover {
-    background: #d5a642;
-  }
+    cursor: default;
+    &:hover {
+        background: #d5a642;
+    }
 }
 
 .mh-75 {
     max-height: 75vh;
 }
+
 .relative {
     position: relative;
 }
@@ -128,29 +155,31 @@
     background-color: #06090f;
     border-radius: 50%;
     padding: 2rem;
-    margin: auto; 
+    margin: auto;
     transform: translate(-50%, -50%);
     transition: transform 20s linear;
-    box-shadow:0 0 10px 2px #d5a642;
+    box-shadow: 0 0 10px 2px #d5a642;
 }
 
 .circle.expand {
     animation: expand 20s forwards;
 }
+
 .d-none {
-  display: none;
+    display: none;
 }
+
 .preload {
-  opacity: 1;
-  display: flex;
+    opacity: 1;
+    display: flex;
 }
 
 @keyframes expand {
     0% {
-      transform: translate(-50%, -50%) scale(1);
+        transform: translate(-50%, -50%) scale(1);
     }
     100% {
-      transform: translate(-50%, -50%) scale(10000%);
+        transform: translate(-50%, -50%) scale(10000%);
     }
 }
 
@@ -160,113 +189,111 @@
     -moz-animation: fadeIn ease 5s;
     -o-animation: fadeIn ease 5s;
     -ms-animation: fadeIn ease 5s;
-  }
-  
-  
-  @keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-moz-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-webkit-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-o-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
-  
-  @-ms-keyframes fadeIn {
-    0% {
-      opacity:0;
-    }
-    100% {
-      opacity:1;
-    }
-  }
+}
 
-  .active {
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-moz-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-o-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@-ms-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.active {
     animation: enter 5s ease-out;
-  }
+}
 
-  .in-active {
+.in-active {
     animation: exit 5s ease-out;
-  }
-  .ml-0 {
+}
+
+.ml-0 {
     margin-left: 0 !important;
-  }
+}
 
-  @keyframes enter {
+@keyframes enter {
     from {
-      transform:  perspective(1000px) translate3d(-50%, -50%, 0) scale(0.8);
+        transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(0.8);
     }
     to {
-      transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
+        transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
     }
-  }
-  
-  @keyframes exit {
-    from {
-      transform:  perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
-    }
-  
-    to {
-      transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1.2);
-    }
-  }
+}
 
-  @media only screen and (min-width: $md-header) {
-  .video-box {
-    min-width: calc(100vw - 455px);
-    max-width: calc(100vw - 455px);
+@keyframes exit {
+    from {
+        transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1);
+    }
+    to {
+        transform: perspective(1000px) translate3d(-50%, -50%, 0) scale(1.2);
+    }
+}
+
+@media only screen and (min-width: $md-header) {
+    .video-box {
+        min-width: calc(100vw - 455px);
+        max-width: calc(100vw - 455px);
     }
     .ml-3 {
-      margin-left: 1rem !important;
+        margin-left: 1rem !important;
     }
     .mr-3 {
-      margin-right: 1rem;
+        margin-right: 1rem;
     }
-  }
-  
+}
 
-  @media only screen and (max-width: $md-header) {
+@media only screen and (max-width: $md-header) {
     .mmh-75 {
-      // height: 75vh;
-      max-width: 100%;
+        // height: 75vh;
+        max-width: 100%;
     }
     .onvideo {
-      // height: 73vh;
-      max-width: 100%;
-      max-height: 100%;
+        // height: 73vh;
+        max-width: 100%;
+        max-height: 100%;
     }
     .mw-50 {
-      width: 100%;
-      max-height: 100%;
-      min-width: 100%;
-      max-width: 100%;
-      margin: auto;
+        width: 100%;
+        max-height: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        margin: auto;
     }
-  }
+}
