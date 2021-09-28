@@ -1,7 +1,13 @@
+@import "includes";
 .scroller .desktop-only {
     display: flex;
     flex-wrap: wrap;
     align-self: flex-start;
+}
+
+.scroller {
+    max-height: calc(100vh - 70px) !important;
+    margin-bottom: 70px !important;
 }
 
 .d-block {
@@ -162,4 +168,12 @@ svg#attibute_close path {
 
 .break-word {
     word-break: break-word;
+}
+
+@media only screen and (max-width: $md-header) {
+    .scroller {
+        max-height: calc(100vh - 50px) !important;
+        padding-bottom: 40px;
+        margin-bottom: 0px !important;
+    }
 }
