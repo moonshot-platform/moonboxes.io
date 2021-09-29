@@ -48,7 +48,15 @@
             </video>
 
                         <div class="flex justify-space-between">
-                            <a class="disabled buy_button outlined-button mb10 text-inherit">Sell</a>
+                            <div class="tooltip">
+                                <a class="buy_button outlined-button mb10 text-inherit sell-button">Sell</a>
+                                <div class="bottom">
+                                    <div class="row">
+                                        <p>Available soon</p>
+                                    </div>
+                                    <i></i>
+                                </div>
+                            </div>
                             <a (click)="openDialog(lootBoxDetailsAttributes[j].logo_path)" href="javascript:void(0)">
                                 <svg version="1.1" id="share_twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 49 49" style="enable-background:new 0 0 49 49;" xml:space="preserve">
                   <style type="text/css">
@@ -82,10 +90,9 @@
                                 <p class="p-white-span-primary p16d14m mb30 mt10">{{lootBoxDetailsAttributes[j].rarity}}
                                 </p>
                             </div>
-                            <div class="flex-center" (click)="closeAttributes()">
+                            <div class="flex-center" (click)="closeAttributes()" style="cursor: pointer;">
                                 <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>Combined Shape</title>
-                  <desc>Created with Sketch.</desc>
+                  
                   <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <path
                       d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
@@ -139,7 +146,15 @@
           </video>
 
                         <div class="flex justify-space-between">
-                            <a class="buy_button outlined-button mb10 text-inherit">Sell</a>
+                            <div class="tooltip">
+                                <a class="buy_button outlined-button mb10 text-inherit sell-button">Sell</a>
+                                <div class="bottom">
+                                    <div class="row">
+                                        <p>Available soon</p>
+                                    </div>
+                                    <i></i>
+                                </div>
+                            </div>
                             <a (click)="openDialog(lootBoxDetailsAttributesMobile[i].logo_path)" href="javascript:void(0)">
                                 <svg version="1.1" id="share_twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 49 49" style="enable-background:new 0 0 49 49;" xml:space="preserve">
                 <style type="text/css">
@@ -173,10 +188,9 @@
                                 <p class="p-white-span-primary p16d14m mb30 mt10">{{lootBoxDetailsAttributesMobile[i].rarity}}
                                 </p>
                             </div>
-                            <div class="flex-center" (click)="closeAttributes()">
+                            <div class="flex-center" (click)="closeAttributes()" style="cursor: pointer;">
                                 <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                  <title>Combined Shape</title>
-                  <desc>Created with Sketch.</desc>
+                  
                   <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                     <path
                       d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
