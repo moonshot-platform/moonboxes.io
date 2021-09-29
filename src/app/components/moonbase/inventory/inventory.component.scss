@@ -14,8 +14,122 @@
     display: block !important;
 }
 
+.sell-button {
+    color: gray;
+    border-color: gray !important;
+    cursor: pointer;
+    &:hover {
+        border-color: gray !important;
+    }
+}
+
 .flex1.flex-column.flex-center {
     flex: 0 0 33.333333%;
+}
+
+// .tooltip .bottom {
+//     width: 210px;
+//     right: 90px !important;
+//     transform: translate(56%, 100%) scaleY(1) scaleX(1) !important;
+// }
+// .tooltip .bottom i {
+//     margin-left: 0px;
+// }
+.flex .tooltip .bottom {
+    width: 210px;
+    //top: 0px;
+    transform: translate(30%, -200%) scaleY(1); //translate(-32%, -100%) scaleY(-1) scaleX(1);
+    padding: 20px 20px;
+    color: white;
+    background-color: black;
+    font-weight: normal;
+    font-size: 13px;
+    border-radius: 8px;
+    position: absolute;
+    z-index: 99999999;
+    box-sizing: border-box;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    visibility: visible;
+    opacity: 0;
+    transition: opacity 0.8s;
+    font-family: $primary-font;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.69;
+    text-align: left;
+    -webkit-transition: .3s all;
+    -webkit-transition-delay: .3s;
+    -moz-transition: .3s all;
+    -moz-transition-delay: .3s;
+    -ms-transition: .3s all;
+    -ms-transition-delay: .3s;
+    -o-transition: .3s all;
+    -o-transition-delay: .3s;
+    transition: .3s all;
+    transition-delay: .3s;
+    .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        /* align children centered vertically */
+        align-items: flex-start;
+        /* align children centered horizontally */
+        .close-button {
+            cursor: pointer;
+            display: flex;
+            height: 24px;
+            width: 24px;
+            align-self: start;
+            margin-top: 10px;
+            filter: brightness(0) invert(1);
+            margin-right: 20px;
+            &:hover {
+                filter: brightness(0) invert(1);
+            }
+        }
+    }
+}
+
+.close-tooltip {
+    visibility: hidden !important;
+    //opacity: 0 !important;
+    -webkit-transition-delay: -0.3s !important;
+    -moz-transition-delay: -0.3s !important;
+    -ms-transition-delay: -0.3s !important;
+    -o-transition-delay: -0.3s !important;
+    transition-delay: -0.3s !important;
+}
+
+.flex .tooltip:hover .bottom {
+    visibility: visible;
+    opacity: 1;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
+.flex .tooltip .bottom i {
+    position: absolute;
+    bottom: -10px;
+    left: 52.5%;
+    margin-left: -52px;
+    width: 24px;
+    height: 12px;
+    overflow: hidden;
+    transform: scaleY(1);
+}
+
+.flex .tooltip .bottom i::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg) scaleY(-1);
+    background-color: black;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 }
 
 .inner {
