@@ -15,7 +15,7 @@ export class UpcomingComponent implements OnInit {
   listOfRecentDrops = [];
   endTime = '2021-09-29T00:00:00';
   isNSFWStatus = false;
-  activeTab = 3;
+  activeTab = 1;
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
   artistDetails: any;
