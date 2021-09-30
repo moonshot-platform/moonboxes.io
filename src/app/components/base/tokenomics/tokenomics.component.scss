@@ -23,6 +23,8 @@ section.tokenomics {
     /* Internet Explorer 10+ */
     scrollbar-width: none;
     /* Firefox */
+    box-shadow: -1px 0px 2px 0px #000;
+
     .inner {
         @extend %max-width-center;
         border-radius: 160px;

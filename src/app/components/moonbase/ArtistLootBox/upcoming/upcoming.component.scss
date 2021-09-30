@@ -30,6 +30,10 @@ section.upcoming-container {
     }
 }
 
+.live {
+    margin: 0 10px;
+}
+
 .scroller {
     max-height: calc(100vh - 100px) !important;
     >div {
@@ -229,6 +233,11 @@ svg#attibute_close {
 }
 
 @media only screen and (max-width: $md-header) {
+    .live {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+
     .scroller>div {
         align-self: flex-start;
         padding-top: 4rem;
