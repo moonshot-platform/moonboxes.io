@@ -26,7 +26,7 @@
         "@fortawesome/free-brands-svg-icons": "^5.15.4",
         "@fortawesome/free-solid-svg-icons": "^5.15.4",
         "@types/hammerjs": "^2.0.39",
-        "@walletconnect/web3-provider": "^1.4.1",
+        "@walletconnect/web3-provider": "^1.5.2",
         "angular-countdown-date-time": "^0.1.0",
         "angular-gtag": "^1.0.4",
         "angular-socialshare": "^2.3.11",
