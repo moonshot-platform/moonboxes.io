@@ -23,13 +23,6 @@ const provider = new WalletConnectProvider({
  },
  network: "binance",
  chainId: 56,
- qrcode: true,
- qrcodeModalOptions: {
-   mobileLinks: [
-     "metamask",
-     "trust",
-   ]
- }
 });
 
 @Injectable({
