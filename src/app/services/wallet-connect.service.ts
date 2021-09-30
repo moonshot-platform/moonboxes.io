@@ -18,7 +18,18 @@ const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 //  Create WalletConnect Provider
 const provider = new WalletConnectProvider({
-  infuraId: "b0287acccb124ceb8306f3192f9e9c04",
+ rpc: {
+    56: "https://bsc-dataseed1.binance.org",
+ },
+ network: "binance",
+ chainId: 56,
+ qrcode: true,
+ qrcodeModalOptions: {
+   mobileLinks: [
+     "metamask",
+     "trust",
+   ]
+ }
 });
 
 @Injectable({
