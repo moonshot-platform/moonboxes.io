@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
-
+import { Title } from '@angular/platform-browser';
+import { Location } from '@angular/common';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-upcoming',
@@ -25,7 +27,13 @@ export class UpcomingComponent implements OnInit {
   data:any;
   userAddress: any;
 
-  constructor(private httpService: HttpApiService,private walletConnectService:WalletConnectService) {
+  constructor(
+    private httpService: HttpApiService,
+    private walletConnectService:WalletConnectService,
+    private route: ActivatedRoute,
+    private title: Title,
+    private location: Location
+  ) {
 
   }
 
@@ -37,18 +45,37 @@ export class UpcomingComponent implements OnInit {
     if (window.innerWidth < 768) {
       this.singleView = 1;
     }
-  }
+    
+    this.route.url.subscribe(url => {
+      
+      switch(url[0].path) {
+        case 'recent':
+          this.activeTab = 3;
+        break;
+        case 'live':
+          this.activeTab = 2;
+        break;
+      }
+      
+    })
+    }
 
   changeTab(tabIndex: number) {
     this.closeAttributes();
     this.activeTab = tabIndex;
     if (this.activeTab == 1) {
+      this.title.setTitle('Moonbox drops - Upcoming');
+      this.location.go('/upcoming');
       this.listData = this.listOfArtistUpcoming;
     }
     else if (this.activeTab == 2) {
+      this.title.setTitle('Moonbox drops - Live');
+      this.location.go('/live');
       this.listData = this.listOfArtistCollection;
     }
     else if (this.activeTab == 3) {
+      this.title.setTitle('Moonbox drops - Recent');
+      this.location.go('/recent');
       this.listData = this.listOfRecentDrops;
     }
   }
