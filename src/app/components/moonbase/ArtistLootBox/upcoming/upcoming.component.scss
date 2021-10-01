@@ -231,6 +231,11 @@ svg#attibute_close {
         width: 25px;
         margin-right: 20px;
     }
+
+    &:hover {
+        background-color: $primary;
+        cursor: default;
+    }
 }
 
 @media only screen and (max-width: $md-header) {

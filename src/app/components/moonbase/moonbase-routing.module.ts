@@ -50,6 +50,14 @@ const routes: Routes = [
         component: UpcomingComponent
       },
       {
+        path: 'live',
+        component: UpcomingComponent
+      },
+      {
+        path: 'recent',
+        component: UpcomingComponent
+      },
+      {
         path: RarityComponent.routeName,
         component: RarityComponent
       },
