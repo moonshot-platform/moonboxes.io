@@ -19,16 +19,12 @@ section.landing-intro {
 .landing-into-nft-image-container {
     position: relative;
     margin-left: -75px;
-    .nft-image {
-        position: relative;
-        max-width: 470px;
-        max-height: 470px;
-        min-width: 232px;
-        background: black;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-    }
+    max-width: 470px;
+    max-height: 470px;
+    background: black;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
 }
 
 .info {
@@ -145,17 +141,14 @@ section.landing-intro {
         display: none;
     }
     .landing-into-nft-image-container-mobile {
-        display: flex;
         margin-bottom: -45px;
         max-width: 240px;
-        .nft-image {
-            position: relative;
-            max-width: 240px;
-            max-height: 240px;
-            background: black;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-        }
+        max-height: 240px;
+        background: black;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        position: relative;
+        display: block;
     }
 }
