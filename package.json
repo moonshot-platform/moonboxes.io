@@ -56,6 +56,7 @@
         "tsparticles": "^1.26.3",
         "ungrid": "^1.0.1",
         "web3": "^1.4.0",
+        "web3modal": "^1.9.4",
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
