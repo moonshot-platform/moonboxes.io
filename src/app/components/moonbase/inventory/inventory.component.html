@@ -22,7 +22,7 @@
                     <img src="{{item1['logo_path']}}" class="img-fluid" alt="">
                 </div>
                 <div class="relative nft_img" *ngIf="!checkFileType(item1['logo_path'])">
-                    <video class="img-fluid" alt="" loop autoplay>
+                    <video class="img-fluid" alt="" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
             <source src="{{item1['logo_path']}}">
           </video>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="relative flex-col attribute-img">
 
                         <img *ngIf="checkFileType(lootBoxDetailsAttributes[j].logo_path)" src="{{lootBoxDetailsAttributes[j].logo_path}}" class="img-fluid mb30" alt="">
-                        <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributes[j].logo_path)" loop autoplay>
+                        <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributes[j].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
               <source src="{{lootBoxDetailsAttributes[j].logo_path}}">
             </video>
 
@@ -124,7 +124,7 @@
                 <img src="{{item.logo_path}}" class="img-fluid" alt="">
             </div>
             <div class="relative" *ngIf="!checkFileType(item.logo_path)">
-                <video class="img-fluid" alt="" loop autoplay>
+                <video class="img-fluid" alt="" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
           <source src="{{item.logo_path}}">
         </video>
 
@@ -141,7 +141,7 @@
                     <div class="relative flex-col attribute-img">
 
                         <img *ngIf="checkFileType(lootBoxDetailsAttributesMobile[i].logo_path)" src="{{lootBoxDetailsAttributesMobile[i].logo_path}}" class="img-fluid mb30" alt="">
-                        <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributesMobile[i].logo_path)" loop autoplay>
+                        <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributesMobile[i].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
             <source src="{{lootBoxDetailsAttributesMobile[i].logo_path}}">
           </video>
 
