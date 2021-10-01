@@ -236,6 +236,9 @@ svg#attibute_close {
         padding: 20px 20px;
         color: white;
         background-color: black;
+        justify-content: center;
+        align-content: center;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
 
         &.reveal {
             display: flex !important;
