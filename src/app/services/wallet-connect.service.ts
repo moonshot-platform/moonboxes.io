@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
 import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -17,13 +17,16 @@ const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 //  Create WalletConnect Provider
-const provider = new WalletConnectProvider({
- rpc: {
+
+const providerOptions = {
+  rpc: {
     56: "https://bsc-dataseed1.binance.org",
  },
  network: "binance",
  chainId: 56,
-});
+};
+
+const provider = new WalletConnectProvider(providerOptions);
 
 @Injectable({
   providedIn: 'root'

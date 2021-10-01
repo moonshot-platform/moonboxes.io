@@ -26,6 +26,7 @@ export class UpcomingComponent implements OnInit {
   singleView = 4;
   data:any;
   userAddress: any;
+  reveal = false;
 
   constructor(
     private httpService: HttpApiService,
