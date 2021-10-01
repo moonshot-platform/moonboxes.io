@@ -72,10 +72,15 @@
                                             <p class="color-primary mb10">{{item.supply}}/{{item.TotalMaxSupply}}</p>
                                         </div>
                                     </div>
-                                    <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button">
+                                    
+                                    <div *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button" (mouseover)="reveal = true" (mouseleave)="reveal = false">
+                                        <div class="tooltip" [class.reveal]="reveal === true">
+                                            <div class="row">Available soon</div>
+                                            <i></i>
+                                        </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
-                                    </a>
+                                    </div>
 
                                     <a *ngIf="activeTab==2" class="button text-inherit mb20"
                                         [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
