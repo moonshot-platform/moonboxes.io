@@ -17,20 +17,20 @@ export class UpcomingComponent implements OnInit {
   listOfRecentDrops = [];
   endTime = '2021-09-29T00:00:00';
   isNSFWStatus = false;
-  activeTab = 1;
+  activeTab = 2;
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
   artistDetails: any;
   listData = [];
   public innerWidth: any;
   singleView = 4;
-  data:any;
+  data: any;
   userAddress: any;
   reveal = false;
 
   constructor(
     private httpService: HttpApiService,
-    private walletConnectService:WalletConnectService,
+    private walletConnectService: WalletConnectService,
     private route: ActivatedRoute,
     private title: Title,
     private location: Location
@@ -46,20 +46,20 @@ export class UpcomingComponent implements OnInit {
     if (window.innerWidth < 768) {
       this.singleView = 1;
     }
-    
+
     this.route.url.subscribe(url => {
-      
-      switch(url[0].path) {
+
+      switch (url[0].path) {
         case 'recent':
           this.activeTab = 3;
-        break;
+          break;
         case 'live':
           this.activeTab = 2;
-        break;
+          break;
       }
-      
+
     })
-    }
+  }
 
   changeTab(tabIndex: number) {
     this.closeAttributes();
@@ -83,34 +83,31 @@ export class UpcomingComponent implements OnInit {
 
 
 
-  async getConnectedAccount()
-  {
+  async getConnectedAccount() {
     await this.walletConnectService.getData().subscribe((data) => {
-      if(this.data!=data && data!=undefined && data.address!=undefined){
-      this.data = data;
-      this.userAddress = data.address;
-      // this.userWalletAddress = data.address;
-      
-      this.getAllCollections();
+      if (this.data != data && data != undefined && data.address != undefined) {
+        this.data = data;
+        this.userAddress = data.address;
+        // this.userWalletAddress = data.address;
+
+        this.getAllCollections();
       }
     });
 
     setTimeout(() => {
-      
-      if(this.data==undefined || this.data.address==undefined)
-      {
+
+      if (this.data == undefined || this.data.address == undefined) {
         this.getAllCollections();
       }
     }, 2500);
   }
-  async getAllCollections()
-  {
-    
+  async getAllCollections() {
 
-    this.httpService.getAllCollections(this.isNSFWStatus,this.userAddress).subscribe((response)=>{
-     
-      this.listOfArtistCollection=response.data.live_data_array;
-        
+
+    this.httpService.getAllCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
+
+      this.listOfArtistCollection = response.data.live_data_array;
+
       this.listOfRecentDrops = response.data.recent_data_array;
       if (this.activeTab == 2) {
         this.listData = this.listOfArtistCollection;
@@ -118,14 +115,14 @@ export class UpcomingComponent implements OnInit {
       else if (this.activeTab == 3) {
         this.listData = this.listOfRecentDrops;
       }
-       
+
     });
-   
-      this.httpService.getUpcomingArtistCollections(this.isNSFWStatus,this.userAddress).subscribe((response)=>{
-        this.listOfArtistUpcoming=response.data;
-        if (this.activeTab == 1) {
-          this.listData = this.listOfArtistUpcoming;
-        }
+
+    this.httpService.getUpcomingArtistCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
+      this.listOfArtistUpcoming = response.data;
+      if (this.activeTab == 1) {
+        this.listData = this.listOfArtistUpcoming;
+      }
     });
   }
 
