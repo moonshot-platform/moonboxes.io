@@ -2,7 +2,6 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-navigation',
@@ -13,9 +12,6 @@ export class NavigationComponent implements OnInit {
 
   public atTop = true;
   public open = false;
-
-  isMobile = this.deviceService.isMobile();
-  isTablet = this.deviceService.isTablet();
   
   public navItems: any[] = [
     {
@@ -88,18 +84,7 @@ export class NavigationComponent implements OnInit {
   } 
 
   scrollToElement(page: string, fragment: string = null,item:any = null): void {
-    /* if(item !== null && (this.deviceService.isMobile || this.deviceService.isTablet())){
-      
-      this.navItems.filter((navItem)=>(navItem.name != item.name ? navItem.onHover = false : null ));
-      
-      if(item.onHover){
-        this.jumpThere(page,fragment);
-      }
-      item.onHover = !item.onHover;
-      return;
-    }  */
     this.jumpThere(page,fragment);
-    
   }
 
   jumpThere(page: string, fragment: string = null){
@@ -126,7 +111,6 @@ export class NavigationComponent implements OnInit {
     private _router: Router, 
     private location: Location,
     private tokenomicsService: TokenomicsService, 
-    private deviceService: DeviceDetectorService
   ) { }
 
   ngOnInit(): void {
