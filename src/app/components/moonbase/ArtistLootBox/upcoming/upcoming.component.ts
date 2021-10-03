@@ -48,32 +48,39 @@ export class UpcomingComponent implements OnInit {
     }
 
     this.route.url.subscribe(url => {
-
+      console.log(url);
+      
       switch (url[0].path) {
+        
         case 'recent':
           this.activeTab = 3;
           break;
         case 'live':
           this.activeTab = 2;
           break;
+        case 'upcoming':
+          this.activeTab = 1;
+          break;
       }
-
     })
   }
 
   changeTab(tabIndex: number) {
     this.closeAttributes();
     this.activeTab = tabIndex;
+
     if (this.activeTab == 1) {
       this.title.setTitle('Moonbox drops - Upcoming');
       this.location.go('/upcoming');
       this.listData = this.listOfArtistUpcoming;
     }
+
     else if (this.activeTab == 2) {
       this.title.setTitle('Moonbox drops - Live');
       this.location.go('/live');
       this.listData = this.listOfArtistCollection;
     }
+
     else if (this.activeTab == 3) {
       this.title.setTitle('Moonbox drops - Recent');
       this.location.go('/recent');
