@@ -28,18 +28,16 @@ export class FooterCountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
-
     setTimeout(async () => {
-      await this.walletConnectService.getData().subscribe((data) => {
+      this.walletConnectService.getData().subscribe((data) => {
         if (data != undefined && data.address != undefined && this.data != data) {
           this.data = data;
           this.isConnected = true;
-          //debugger
           if (this.data.networkId.chainId == environment.chainId) {
             this.getMoonShootBalance();
           }
         }
+
       });
 
 
@@ -68,8 +66,6 @@ export class FooterCountComponent implements OnInit {
     else {
       this.eligibleTier = "Wood";
     }
-
-
   }
 
   ngOnDestroy() {
