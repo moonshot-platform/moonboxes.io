@@ -5,7 +5,6 @@ import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { environment } from 'src/environments/environment';
 
-
 export const SilverAddress = "0xd27D3F7f329D93d897612E413F207A4dbe8bF799";
 export const LootboxAddress = "0x83350dB1Ab42c8ac82FAf74FdA7C0160919d2a40";
 export const NFTAddress = "0x82A3E038048CF02C19e60856564bE209899d4F12";
@@ -32,8 +31,6 @@ const provider = new WalletConnectProvider(providerOptions);
   providedIn: 'root'
 })
 
-
-
 export class WalletConnectService {
   private toggle = new BehaviorSubject<any>({});
   public data = new BehaviorSubject<any>({});
@@ -47,8 +44,8 @@ export class WalletConnectService {
   LootboxContract: any;
   NFTContract: any;
   artistLootBoxContract : any;
-  constructor(private windowRef: WindowRefService) {
 
+  constructor(private windowRef: WindowRefService) {
   }
 
   onToggle(state?: boolean) {
@@ -62,16 +59,15 @@ export class WalletConnectService {
   updateData(state: any) {
     this.tokenomicsData = state;
     this.data.next(state);
-
   }
 
   getData(): Observable<any> {
-
     return this.data.asObservable();
   }
 
   init(): void {
     var connectedWallet = localStorage.getItem('wallet')?.toString();
+
     if (connectedWallet == "1") {
       this.connectToWallet(1);
     }
@@ -81,67 +77,93 @@ export class WalletConnectService {
   }
 
   async connectToWallet(origin=0) {
+    try {
+      if (typeof this.windowRef.nativeWindow.ethereum !== undefined) {
+        await this.windowRef.nativeWindow.ethereum.enable();
+        this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum)
+        await this.getAccountAddress();
+        localStorage.setItem('wallet', '1');
+        // Subscribe to accounts change
+        this.windowRef.nativeWindow.ethereum.on("accountsChanged", (accounts: string[]) => {
+          if(accounts.length == 0) { 
+            // MetaMask is locked or the user has not connected any accounts
+            console.log("Please connect to metamask");
+          }
+          else {
+            this.connectToWallet();
+            
+          }
+        });
 
-    if (typeof this.windowRef.nativeWindow.ethereum !== undefined) {
-     await this.windowRef.nativeWindow.ethereum.enable();
-      this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum)
-      await this.getAccountAddress();
-      localStorage.setItem('wallet', '1');
-      // Subscribe to accounts change
-      this.windowRef.nativeWindow.ethereum.on("accountsChanged", (accounts: string[]) => {
-        this.connectToWallet();
-        location.reload();
-      });
+        // Subscribe to session disconnection
+        this.windowRef.nativeWindow.ethereum.on("networkChanged", (code: number, reason: string) => {
+          this.connectToWallet();
+        });
 
+        // Subscribe to session disconnection
+        this.windowRef.nativeWindow.ethereum.on("disconnect", (code: number, reason: string) => {
+          if( provider.close ) {
+            provider.close();
+          }
+          localStorage.removeItem('wallet');
+        });
 
-      // Subscribe to session disconnection
-      this.windowRef.nativeWindow.ethereum.on("networkChanged", (code: number, reason: string) => {
-        this.connectToWallet();
-        location.reload();
-      });
-      if(origin==0)
-      {
-        location.reload();
+        if(origin==0)
+        {
+          location.reload();
+        }
       }
+    } catch(e) {
+      console.log(e.message);
+      localStorage.removeItem('wallet');
     }
 
   }
 
   async connectToWalletConnect(origin=0) {
-    await provider.enable();
-    this.provider = new ethers.providers.Web3Provider(provider);
-    await this.getAccountAddress();
-    localStorage.setItem('wallet', '2');
-    // Subscribe to accounts change
-    provider.on("accountsChanged", (accounts: string[]) => {
-      this.connectToWalletConnect();
-      location.reload();
-    });
+    
+    console.log("connectToWalletConnect ", origin);
 
-    // Subscribe to session disconnection
-    provider.on("disconnect", (code: number, reason: string) => {
+    try {
+      this.provider = new ethers.providers.Web3Provider(provider);
+      await provider.enable();
+      
+      await this.getAccountAddress();
+      localStorage.setItem('wallet', '2');
+      // Subscribe to accounts change
+      provider.on("accountsChanged", (accounts: string[]) => {
+        this.connectToWalletConnect();
+      });
 
-      location.reload();
-    });
+      // Subscribe to session disconnection
+      provider.on("disconnect", (code: number, reason: string) => {
+        localStorage.removeItem('wallet');
+      });
 
-    // Subscribe to session disconnection
-    provider.on("networkChanged", (code: number, reason: string) => {
-      this.connectToWalletConnect();
-      location.reload();
-    });
-    if(origin==0)
-    {
-      location.reload();
+      // Subscribe to session disconnection
+      provider.on("networkChanged", (code: number, reason: string) => {
+        this.connectToWalletConnect();
+      });
+
+      if(origin==0)
+      {
+        location.reload();
+      }
+    }
+    catch(e) {
+      console.log(e.message);
+      localStorage.removeItem('wallet');
+      location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it     
     }
   }
 
   async getAccountAddress() {
     this.signer = this.provider.getSigner();
     var address = await this.signer.getAddress();
-
     var network = await this.provider.getNetwork();
 
     localStorage.setItem('address', address);
+
     if (network.chainId == environment.chainId) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
@@ -163,7 +185,7 @@ export class WalletConnectService {
 
   async getDetailsMoonboxPrice() {
     var price = await this.LootboxContract.moonboxPrice();
-           return price;
+    return price;
   }
 
   async getDetailsMoonboxlimit() {
@@ -279,9 +301,6 @@ export class WalletConnectService {
     return status;
   }
 
- 
-
-
   redeemBulkTransaction(lootBoxId, price, noOfBets,userAddress) {
     var promise = new Promise((resolve, reject) => {
       try {
@@ -300,8 +319,6 @@ export class WalletConnectService {
     });
     return promise
   }
-
-  
 
   async getRedeemBulk(id:any,nftAmount:any,bet:number,signature:any,isArtist:boolean,artistAddress:string)
   {

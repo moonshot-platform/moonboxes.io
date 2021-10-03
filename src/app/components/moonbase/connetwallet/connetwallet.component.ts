@@ -19,15 +19,14 @@ export class ConnetwalletComponent implements OnInit {
 
   async connectToMetamask()
   {
-     await this.walletConnectService.connectToWallet();
-     this.parentDialogRef.close()
+    this.parentDialogRef.close();
+    await this.walletConnectService.connectToWallet(); 
   }
 
-  connectToWalletConnect()
+  async connectToWalletConnect()
   {
-      this.walletConnectService.connectToWalletConnect();
+    this.parentDialogRef.close();
+    await this.walletConnectService.connectToWalletConnect();
   }
-
-
 
 }
