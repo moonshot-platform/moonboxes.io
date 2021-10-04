@@ -1,12 +1,6 @@
 [
   {
-    "inputs": [
-      {
-        "internalType": "address payable",
-        "name": "_transferAddress",
-        "type": "address"
-      }
-    ],
+    "inputs": [],
     "stateMutability": "nonpayable",
     "type": "constructor"
   },
@@ -34,7 +28,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "lootboxID",
+        "name": "moonboxID",
         "type": "uint256"
       },
       {
@@ -95,31 +89,6 @@
       }
     ],
     "name": "OwnershipTransferred",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "id",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "paymentToken",
-        "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "price",
-        "type": "uint256"
-      }
-    ],
-    "name": "UpdateLootbox",
     "type": "event"
   },
   {
@@ -195,6 +164,25 @@
       {
         "internalType": "uint256",
         "name": "_moonboxId4",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "limitPerDrop",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -335,12 +323,12 @@
   {
     "inputs": [
       {
-        "internalType": "address payable",
-        "name": "_address",
-        "type": "address"
+        "internalType": "uint256",
+        "name": "limit",
+        "type": "uint256"
       }
     ],
-    "name": "setTransferAddress",
+    "name": "setNftLimit",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -365,6 +353,11 @@
       {
         "internalType": "uint256",
         "name": "bets",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "betLimit",
         "type": "uint256"
       },
       {
@@ -402,13 +395,24 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "transferAddress",
-    "outputs": [
+    "inputs": [
       {
-        "internalType": "address payable",
+        "internalType": "address",
         "name": "",
         "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "totalPurchased",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
       }
     ],
     "stateMutability": "view",
@@ -423,6 +427,19 @@
       }
     ],
     "name": "transferOwnership",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_prizePoolPercentage",
+        "type": "uint256"
+      }
+    ],
+    "name": "updatePrizePoolPercentage",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
