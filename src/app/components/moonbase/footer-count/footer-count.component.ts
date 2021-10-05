@@ -45,12 +45,12 @@ export class FooterCountComponent implements OnInit {
 
   async getMoonShootBalance() {
     this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
+    this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
     this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     this.httpApi.getMoonCount(this.data.address)
       .subscribe((response: any) => {
         this.moonCountData = response.data;
       });
-
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
 
     if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[3])) {
