@@ -37,7 +37,6 @@ export class FooterCountComponent implements OnInit {
             this.getMoonShootBalance();
           }
         }
-
       });
 
 
