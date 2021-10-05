@@ -130,6 +130,7 @@ export class NavComponent implements OnInit {
         this.balanceOfMoon = response > 0 ? response / 1e9 : 0;
       });
 
+    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   changeNSFWStatus(event: any) {
