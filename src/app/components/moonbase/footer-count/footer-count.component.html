@@ -14,16 +14,16 @@
         </div>
         <div class="flex1 no-padding down_box">
             <p class="p12 mt-15">
-                <span>Moonshot Balance</span>
+                <span>MOONSHOT BALANCE</span>
             </p>
-            
-            <p>
-              <strong>{{balanceOfMoon>0 ? balanceOfMoon/1e9 : 0}}</strong>
-            </p>
+
+            <p><strong>{{balanceOfMoon}}
+            </strong></p>
         </div>
         <div class="flex1 no-padding">
-            <p class="p12 p-white-span-primary"><span>Total NFTs</span></p>
-            <p class="p-white-span-primary"><span><strong>{{ moonCountData?.nftTotal !== null ? moonCountData.nftTotal : '-' }}</strong></span></p>
+            <p class="p12 p-white-span-primary"><span>TOTAL NFT</span></p>
+            <p class="p-white-span-primary"><span><strong>{{moonCountData === undefined ? "-" : moonCountData.nftTotal}}
+              </strong></span></p>
         </div>
     </div>
 </div>
