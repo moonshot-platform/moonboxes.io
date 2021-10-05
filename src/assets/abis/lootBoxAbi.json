@@ -46,7 +46,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "nonce",
+        "name": "poolAmount",
         "type": "uint256"
       }
     ],
@@ -123,6 +123,31 @@
     "type": "event"
   },
   {
+    "anonymous": false,
+    "inputs": [
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "indexed": true,
+        "internalType": "uint256",
+        "name": "betid",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "time",
+        "type": "uint256"
+      }
+    ],
+    "name": "redeemNFT",
+    "type": "event"
+  },
+  {
     "inputs": [],
     "name": "authAddress",
     "outputs": [
@@ -139,7 +164,7 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "junkAmount",
+        "name": "rewardAmount",
         "type": "uint256"
       },
       {
@@ -262,6 +287,19 @@
       {
         "internalType": "uint256",
         "name": "_moonboxId4",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "maxPerBet",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
         "type": "uint256"
       }
     ],
@@ -406,6 +444,19 @@
     "inputs": [
       {
         "internalType": "uint256",
+        "name": "_maxPerBet",
+        "type": "uint256"
+      }
+    ],
+    "name": "setMaxPerBet",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
         "name": "moonBoxId",
         "type": "uint256"
       },
@@ -416,6 +467,32 @@
       }
     ],
     "name": "setMoonshootLimit",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_totalNFTForSale",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTotalNFTForSale",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_totalSold",
+        "type": "uint256"
+      }
+    ],
+    "name": "setTotalSold",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -459,6 +536,32 @@
   {
     "inputs": [],
     "name": "totalBets",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalNFTForSale",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "totalSold",
     "outputs": [
       {
         "internalType": "uint256",

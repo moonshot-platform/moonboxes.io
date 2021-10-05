@@ -78,7 +78,7 @@ export class WalletConnectService {
 
   async connectToWallet(origin=0) {
     try {
-      if (typeof this.windowRef.nativeWindow.ethereum !== undefined) {
+      if (typeof this.windowRef.nativeWindow.ethereum !== 'undefined' || typeof this.windowRef.nativeWindow.ethereum !== undefined) {
         await this.windowRef.nativeWindow.ethereum.enable();
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum)
         await this.getAccountAddress();
