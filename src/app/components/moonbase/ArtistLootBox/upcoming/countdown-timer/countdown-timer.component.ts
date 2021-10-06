@@ -17,7 +17,7 @@ export class CountdownTimerComponent implements OnInit {
   interval: any;
   timer: any = 0;
   checkdate = "";
-  constructor() {}
+  constructor() { }
 
   ngOnDestroy() {
     clearInterval(this.interval);
@@ -43,10 +43,10 @@ export class CountdownTimerComponent implements OnInit {
       var seconds = Math.floor((distance % (1000 * 60)) / 1000);
       // Display the result in the element with id="demo"
       if (days > 0 || hours > 0 || minutes > 0 || seconds > 0) {
-        this.timer = (days <= 9 ? `0${days}` : days) + " D : " + 
-        (hours <= 9 ? `0${hours}` : hours) + " H : " + 
-        (minutes <= 9 ? `0${minutes}` : minutes)  + " M : " + 
-        (seconds <= 9 ? `0${seconds}` : seconds)  + " S";
+        this.timer = (days <= 9 ? `0${days}` : days) + " D : " +
+          (hours <= 9 ? `0${hours}` : hours) + " H : " +
+          (minutes <= 9 ? `0${minutes}` : minutes) + " M : " +
+          (seconds <= 9 ? `0${seconds}` : seconds) + " S";
       } else {
         this.timer = 0;
       }
