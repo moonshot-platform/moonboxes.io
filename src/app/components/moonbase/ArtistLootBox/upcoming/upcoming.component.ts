@@ -27,6 +27,8 @@ export class UpcomingComponent implements OnInit {
   data: any;
   userAddress: any;
   reveal = false;
+  fakeCollectionData: any;
+  public isTooltipActive: boolean[] = [];
 
   constructor(
     private httpService: HttpApiService,
@@ -49,9 +51,9 @@ export class UpcomingComponent implements OnInit {
 
     this.route.url.subscribe(url => {
       console.log(url);
-      
+
       switch (url[0].path) {
-        
+
         case 'recent':
           this.activeTab = 3;
           break;
@@ -85,6 +87,9 @@ export class UpcomingComponent implements OnInit {
       this.title.setTitle('Moonbox drops - Recent');
       this.location.go('/recent');
       this.listData = this.listOfRecentDrops;
+    }
+    for (let index = 0; index < this.listData.length; index++) {
+      this.isTooltipActive[index] = false;
     }
   }
 
@@ -127,8 +132,37 @@ export class UpcomingComponent implements OnInit {
 
     this.httpService.getUpcomingArtistCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
       this.listOfArtistUpcoming = response.data;
+      this.fakeCollectionData = {
+        ArtistName: "Ra8bits",
+        NSFW: false.valueOf,
+        TotalMaxSupply: 1,
+        description: "In an epic journey through outer space, the MoonShooter finds himself on a mission to explore the surface of the Moon. His objective? To continue the unending search for the uncharted relic artifacts. Legend says there are orb-like objects scattered throughout the Moon, which behold powers beyond our perception. Only those, truly balanced by heart and mind, will be able to observe the orbs and harvest their energy.\n\nWill he be the one? The one that will be allowed to witness the true and enormous power of these mysterious orbs?\n\nCheck out the first episode of The Moonshooter \"First Landing\" here:  https://youtu.be/uRi-6OL-QrI",
+        discord: "https://discord.com/invite/QrXVQRKzrh",
+        filePath: "assets/media/icons/drops/The_Ra8bits_Series.jpg",
+        id: 1,
+        instagram: "https://www.instagram.com/moonshotrs25/",
+        isAdmin: true,
+        minPrice: "-",
+        name: "The Ra8bits Series",
+        opensea: "",
+        rarible: "",
+        revealDate: "2021/10/07 18:00:00",
+        supply: 1,
+        telegram: "https://t.me/MoonShotChat",
+        transactionhash: "0x09d7e6b10a34748f2399b146c3ef275f2d2628dad324f7a6a1184d0c963e8463",
+        twitter: "https://twitter.com/RS25Moonshot",
+        walletAddress: "0x4fdf3c15758EFc81Ad809420ABd7bD1D02B4734e",
+        website: "https://project-moonshot.me/",
+        isFake: true,
+      };
       if (this.activeTab == 1) {
         this.listData = this.listOfArtistUpcoming;
+        console.log(this.listData[0]);
+
+        this.listData.push(this.fakeCollectionData);
+      }
+      for (let index = 0; index < this.listData.length; index++) {
+        this.isTooltipActive[index] = false;
       }
     });
   }
