@@ -181,6 +181,11 @@ section.upcoming-container {
     }
 }
 
+.disabled-button {
+    color: gray !important;
+    border-color: gray !important;
+}
+
 .full-div {
     flex: 0 0 100%;
     display: flex;

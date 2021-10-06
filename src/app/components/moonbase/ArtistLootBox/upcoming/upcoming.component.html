@@ -76,7 +76,8 @@
 
                                     <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
                                         Moonbox</a>
-                                    <a class="outlined-button mb20 text-inherit" (click)="setSelected(j,item)">Collection info</a>
+                                    <a class="outlined-button disabled disabled-button mb20 text-inherit" *ngIf="item.isFake != undefined || item.isFake">Collection info</a>
+                                    <a class="outlined-button mb20 text-inherit" *ngIf="item.isFake == undefined || !item.isFake" (click)="setSelected(j,item)">Collection info</a>
                                 </div>
                             </div>
                             <!------ List  -->
