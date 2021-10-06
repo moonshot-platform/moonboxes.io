@@ -176,7 +176,7 @@ export class ModalForTransactionComponent implements OnInit {
     var transactionDetails: any;
     try {
       transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
-        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature);
+        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature,this.data.artistDetails.limit);
     }
     catch (e) {
       this.closeDialog()
