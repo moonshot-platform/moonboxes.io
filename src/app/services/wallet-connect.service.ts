@@ -366,13 +366,13 @@ export class WalletConnectService {
   
 
 /** Artist  **/
-  redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signature) {
+redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signature,betlimit) {
     const params2:any = ethers.utils.parseEther(price.toString());
     var spliSign=ethers.utils.splitSignature(signature);
 
     var promise = new Promise((resolve, reject) => {
       try {
-        this.artistLootBoxContract.submitBet(lootBoxId, params2,artistAddress, noOfBets,
+        this.artistLootBoxContract.submitBet(lootBoxId, params2,artistAddress, noOfBets,betlimit,
           spliSign.v,spliSign.r,spliSign.s,
           {
             value : (params2*noOfBets).toString()
