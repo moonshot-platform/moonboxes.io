@@ -71,7 +71,7 @@ section.upcoming-container {
     justify-content: center;
     position: relative;
     z-index: -1;
-    border:2px solid #d5a642;
+    border: 2px solid #d5a642;
 }
 
 .upcoming .full_banner {
@@ -181,6 +181,11 @@ section.upcoming-container {
     }
 }
 
+.disabled-button {
+    color: gray !important;
+    border-color: gray !important;
+}
+
 .full-div {
     flex: 0 0 100%;
     display: flex;
@@ -199,6 +204,10 @@ textarea {
     padding: 10px;
     box-sizing: border-box;
     resize: none;
+}
+
+.close-tooltip {
+    display: none !important;
 }
 
 svg#attibute_close {
@@ -227,7 +236,6 @@ svg#attibute_close {
     justify-content: center;
     align-items: center;
     position: relative;
-
     .tooltip {
         display: none;
         position: absolute;
@@ -239,31 +247,25 @@ svg#attibute_close {
         justify-content: center;
         align-content: center;
         box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-
         &.reveal {
             display: flex !important;
         }
-
-         > i::after {
-                content: "";
-                position: absolute;
-                width: 15px;
-                height: 15px;
-                left: 50%;
-                transform: translate(-50%, 200%) rotate(
-            45deg) scaleY(-1);
-                background-color: black;
-                box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
-            }
-         
+        >i::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 50%;
+            transform: translate(-50%, 200%) rotate( 45deg) scaleY(-1);
+            background-color: black;
+            box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
+        }
     }
-
     img {
         height: 25px;
         width: 25px;
         margin-right: 20px;
     }
-
     &:hover {
         background-color: $primary;
         cursor: default;
@@ -275,7 +277,6 @@ svg#attibute_close {
         margin: 0;
         margin-bottom: 20px;
     }
-
     .scroller>div {
         align-self: flex-start;
         padding-top: 4rem;

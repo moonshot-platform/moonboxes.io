@@ -7,15 +7,9 @@
                         <div class="flex1 flex flex-col flex-center">
                             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
                             <div class="flex flex-xs-col mb30">
-                                <a class="mb20 text-inherit"
-                                    [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' "
-                                    (click)="changeTab(3)">Recent</a>
-                                <a class="live mb20 text-inherit"
-                                    [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' "
-                                    (click)="changeTab(2)">Live</a>
-                                <a class="mb20 text-inherit"
-                                    [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' "
-                                    (click)="changeTab(1)">Upcoming</a>
+                                <a class="mb20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
+                                <a class="live mb20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
+                                <a class="mb20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
                             </div>
                         </div>
                     </div>
@@ -28,15 +22,12 @@
               </div>
             </div> -->
                     <div class="upcoming flex flex-wrap wrap">
-                        <div class="full-div"
-                            *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index;">
-                            <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView);"
-                                class="flex-column flex-center p-3 grid-4">
+                        <div class="full-div" *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index;">
+                            <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView); let i = index;" class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
 
                                     <div class="flex-column flex-center">
-                                        <div class="relative res-box upcoming-img"
-                                            [style.background]="'url('+item.filePath+')'"></div>
+                                        <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                     </div>
 
                                 </div>
@@ -72,31 +63,29 @@
                                             <p class="color-primary mb10">{{item.supply}}/{{item.TotalMaxSupply}}</p>
                                         </div>
                                     </div>
-                                    
-                                    <div *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button" (mouseover)="reveal = true" (mouseleave)="reveal = false">
-                                        <div class="tooltip" [class.reveal]="reveal === true">
+
+                                    <div *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button" (mouseover)="isTooltipActive[i] = true" (mouseleave)="isTooltipActive[i] = false">
+                                        <div class="tooltip" [class.reveal]="isTooltipActive[i]">
                                             <div class="row">Available soon</div>
                                             <i></i>
                                         </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                        <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                                        <p *ngIf="item.isFake != undefined || item.isFake">Upcoming...</p>
+                                        <app-countdown-timer *ngIf="item.isFake == undefined || !item.isFake" [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
-                                    <a *ngIf="activeTab==2" class="button text-inherit mb20"
-                                        [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
+                                    <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
                                         Moonbox</a>
-                                    <a class="outlined-button mb20 text-inherit"
-                                        (click)="setSelected(j,item)">Collection info</a>
+                                    <a class="outlined-button disabled disabled-button mb20 text-inherit" *ngIf="item.isFake != undefined || item.isFake">Collection info</a>
+                                    <a class="outlined-button mb20 text-inherit" *ngIf="item.isFake == undefined || !item.isFake" (click)="setSelected(j,item)">Collection info</a>
                                 </div>
                             </div>
                             <!------ List  -->
-                            <div id="collection-info" class="outer-box"
-                                *ngIf="lootBoxDetailsAttributes[j] != undefined">
+                            <div id="collection-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[j] != undefined">
                                 <div class="flex1 flex-center flex-align-start justify-start mb30">
                                     <div class="relative flex-col">
 
-                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}"
-                                            class="img-fluid mb30 collection-info-img" alt="">
+                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
@@ -111,11 +100,11 @@
                                         <div class="flex justify-space-between">
                                             <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button w100">
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                                <app-countdown-timer [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
+                                                <p *ngIf="lootBoxDetailsAttributes[j].isFake != undefined || lootBoxDetailsAttributes[j].isFake">Upcoming...</p>
+                                                <app-countdown-timer *ngIf="lootBoxDetailsAttributes[j].isFake == undefined || !lootBoxDetailsAttributes[j].isFake" [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
                                             </a>
 
-                                            <a *ngIf="activeTab==2" class="button mb10 text-inherit w100"
-                                                [routerLink]="lootBoxDetailsAttributes[j].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[j].walletAddress] ">Buy
+                                            <a *ngIf="activeTab==2" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetailsAttributes[j].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[j].walletAddress] ">Buy
                                                 Moonbox</a>
                                         </div>
                                     </div>
@@ -129,9 +118,7 @@
                                                 </p>
                                             </div>
                                             <div class="flex-center" (click)="closeAttributes()">
-                                                <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27"
-                                                    version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                                <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                     <title>Combined Shape</title>
                                                     <desc>Created with Sketch.</desc>
                                                     <g id="Page-1" stroke="none" stroke-width="1" fill="none"
@@ -190,9 +177,7 @@
                                             </p>
                                         </div>
                                         <div class="flex-center" (click)="closeAttributes()">
-                                            <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27"
-                                                version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink">
+                                            <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                 <title>Combined Shape</title>
                                                 <desc>Created with Sketch.</desc>
                                                 <g id="Page-1" stroke="none" stroke-width="1" fill="none"
