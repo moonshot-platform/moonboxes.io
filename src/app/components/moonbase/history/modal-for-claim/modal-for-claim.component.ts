@@ -49,8 +49,10 @@ export class ModalForClaimComponent implements OnInit {
         this.closeDialog();
         if(e.hash.code==4001)
           this.httpApi.showToastr(e.hash.message,false);
-        else
-          this.httpApi.showToastr(e.hash.data.message,false);
+        else if(e.hash?.data)
+          this.httpApi.showToastr(e.hash?.data?.message,false);
+        else if(e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message,false);
         return false;
       }                     
       
