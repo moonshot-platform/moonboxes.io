@@ -193,7 +193,8 @@ export class ArtistMoonboxComponent implements OnInit {
           lootBoxId: this.supplyDetails[index - 1].id,
           price: this.supplyDetails[index - 1].price,
           address: this.artistDetails.walletAddress,
-          signature: this.supplyDetails[index - 1].signature
+          signature: this.supplyDetails[index - 1].signature,
+          limit : this.supplyDetails[index - 1].limitPerTxn
         }
       },
       panelClass: 'custom-modalbox'

@@ -47,7 +47,6 @@ export class FooterCountComponent implements OnInit {
     this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
     this.balanceOfMoon /= 1e9;
     this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
-    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     this.httpApi.getMoonCount(this.data.address)
       .subscribe((response: any) => {
         this.moonCountData = response.data;
@@ -66,6 +65,7 @@ export class FooterCountComponent implements OnInit {
     else {
       this.eligibleTier = "Wood";
     }
+    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
   ngOnDestroy() {

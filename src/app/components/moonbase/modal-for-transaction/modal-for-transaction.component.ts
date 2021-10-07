@@ -242,8 +242,8 @@ export class ModalForTransactionComponent implements OnInit {
 
 
   checkFileType(url: string) {
-    const images = ["jpg", "gif", "png", "jpeg"]
-    const videos = ["mp4", "3gp", "ogg"]
+    const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
+    const videos = ["mp4", "3gp", "ogg","MP4", "3GP", "OGG"]
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
