@@ -128,15 +128,15 @@
 
         <div class="flex-col text-center">
             <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}} <span *ngIf="maxSupply[current] !== undefined">({{maxSupply[current]}})</span></p>
-            <p *ngIf="inputnumber[current+1]!=0" class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
+            <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
+            <div class="border plus_minus flex mb20" *ngIf="isConnected && !isWrongNetwork && maxSupply[current]>0">
 
                 <div class="flex1">
                     <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
                 </div>
 
             </div>
-            <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[current+1]==0 && (supplyDetails && supplyDetails[current]?.isUpcoming)">
+            <div class="soldout flex justify-center" *ngIf="inputnumber[current+1]==0">
                 Sold Out
             </div>
             <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails && supplyDetails[current]?.isUpcoming">
