@@ -353,7 +353,7 @@ export class RarityComponent implements OnInit {
       rarityPercentage: 10.3,
     },
     {
-      name: 'Gloves Sapphier Blue',
+      name: 'Gloves Sapphire Blue',
       image: '40_Gloves-sapphire-blue.webp',
       category: 'Gloves',
       rarityNumber: 125,
