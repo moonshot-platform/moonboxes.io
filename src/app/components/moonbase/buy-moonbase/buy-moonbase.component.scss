@@ -139,3 +139,33 @@
 .invisible {
     visibility: hidden;
 }
+
+.tooltip {
+    display: none;
+    position: absolute;
+    //top: 0px;
+    width: 210px;
+    padding: 20px 10px;
+    color: white;
+    background-color: black;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    margin-top: -65px;
+    margin-left: -15px;
+    &.reveal {
+        display: flex !important;
+    }
+    >i::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 50%;
+        transform: translate(-50%, 200%) rotate( 45deg) scaleY(-1);
+        background-color: black;
+        box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
+        margin-top: 5px;
+    }
+}
