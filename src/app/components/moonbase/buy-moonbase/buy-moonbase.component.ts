@@ -50,11 +50,11 @@ export class BuyMoonbaseComponent implements OnInit {
   ngOnInit(): void {
     this.walletConnectService.init();
 
-    setTimeout(async() => {
-      await this.walletConnectService.getData().subscribe((data)=>{
+    (async () => {
+      this.walletConnectService.getData().subscribe((data)=>{
         if(data!==undefined && data.address!=undefined && data!=this.data)
         {
-        this.data=data;
+          this.data=data;
         
           this.isConnected=true;
           if(this.data.networkId.chainId!=environment.chainId)
@@ -66,16 +66,22 @@ export class BuyMoonbaseComponent implements OnInit {
             this.getMoonShootBalance();
           }
           
-        }
-        else
-        {
+        } else {
           this.isConnected = false;
         }
       });
-
      
       this.getMaxSupply();
-    }, 1000);
+    })();
+  }
+
+  async getBoxPrices() {
+    try{
+      let priceForMoonBoxTemp: any = await this.walletConnectService.getDetailsMoonboxPrice();
+      this.priceForMoonBox = priceForMoonBoxTemp/1e18;
+    } catch(e) {
+      console.error(e)
+    }
   }
 
   async getMoonShootBalance()
@@ -86,17 +92,7 @@ export class BuyMoonbaseComponent implements OnInit {
       this.balanceOfMoon=response;
     });
 
-    try{
-    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
-
-    let priceForMoonBoxTemp: any = await this.walletConnectService.getDetailsMoonboxPrice();
-    this.priceForMoonBox = priceForMoonBoxTemp/1e18;
-    }
-    catch(e)
-    {
-      console.error(e)
-    }
-    
+    this.getBoxPrices();
   }
 
   plus(index:number) {
@@ -121,24 +117,14 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ConnetwalletComponent, {
-      width: 'auto',
-      // data: { name: this.name, animal: this.animal }
-    });
+    let dialogRef = this.dialog.open(ConnetwalletComponent, { width: 'auto'});
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.walletConnectService.getData().subscribe((data)=>{
-        this.data=data;
-        if(this.data.address!==undefined)
-        {
-          this.isConnected=true;
-        }
-        else
-        {
-          this.isConnected=false;
-        }
-      })
-    });
+    dialogRef.afterClosed().subscribe( (result) => {
+      this.walletConnectService.getData().subscribe( (data) => {
+        this.data = data;
+        this.isConnected = (data.address !== undefined)
+      } );
+    } );
   }
 
   async getMaxSupply()
