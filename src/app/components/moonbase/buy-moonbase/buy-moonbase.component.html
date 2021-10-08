@@ -127,7 +127,7 @@
         </div>
 
         <div class="flex-col text-center">
-            <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}} <span *ngIf="maxSupply[0] !== undefined">({{maxSupply[0]}})</span></p>
+            <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}} <span *ngIf="maxSupply[current] !== undefined">({{maxSupply[current]}})</span></p>
             <p *ngIf="inputnumber[current+1]!=0" class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
             <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
 
