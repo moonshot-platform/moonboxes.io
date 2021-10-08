@@ -75,6 +75,8 @@ export class BuyMoonbaseComponent implements OnInit {
 
   async getBoxPrices() {
     try {
+      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+
       let priceForMoonBoxTemp: any = await this.walletConnectService.getDetailsMoonboxPrice();
       this.priceForMoonBox = priceForMoonBoxTemp / 1e18;
     } catch (e) {
@@ -89,19 +91,6 @@ export class BuyMoonbaseComponent implements OnInit {
       });
 
     this.getBoxPrices();
-  }
-
-  plus(index: number) {
-    return false;
-    if (this.supplyDetails[this.lootBoxDetails[index - 1].name] > this.inputnumber[index]) {
-      this.inputnumber[index] = this.inputnumber[index] + 1;
-    }
-  }
-  minus(index: number) {
-    return false;
-    if (this.inputnumber[index] != 1) {
-      this.inputnumber[index] = this.inputnumber[index] - 1;
-    }
   }
 
   next() {
