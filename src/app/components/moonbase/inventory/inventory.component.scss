@@ -274,6 +274,7 @@ svg#attibute_close path {
     .outer-box {
         padding: 0;
         margin-top: 1rem;
+        max-width: calc(100% - 20px);
     }
     .outer-box>div {
         padding: 1rem;
@@ -283,11 +284,34 @@ svg#attibute_close path {
 .break-word {
     word-break: break-word;
 }
-
+table.wp100 {
+    border-collapse: collapse;
+}
+tbody tr:first-child td {
+    padding-top: 20px !important;
+}
+table tr th {
+    border-bottom: 2px solid #d5a642;
+    padding-bottom: 15px;
+    text-align: left;
+}
+tbody td {
+    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-right: 15px;
+    // white-space: nowrap;
+}
 @media only screen and (max-width: $md-header) {
     .scroller {
         max-height: calc(100vh - 50px) !important;
         padding-bottom: 40px;
         margin-bottom: 0px !important;
+    }
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
     }
 }

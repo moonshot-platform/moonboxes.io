@@ -102,10 +102,27 @@
                         </div>
 
 
-                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Value</span></p>
+                        <table class="wp100">
+                            <thead>
+                                <tr>
+                                    <th class="w700">Attribute</th>
+                                    <th class="w700">Value</th>
+                                    <th class="w700">Rarity</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties">
+                                    <td>{{propertiesData.key}}</td>
+                                    <td>{{propertiesData.value}}</td>
+                                    <td>{{propertiesData.rarity}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Value</span><span class="w700">Rarity</span></p>
                         <p *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties" class="mb20 p-white-span-primary justify-space-between flex">
                             <span>{{propertiesData.key}}</span>
-                            <span>{{propertiesData.value}}</span></p>
+                            <span>{{propertiesData.value}}</span>
+                            <span>{{propertiesData.rarity}}</span></p> -->
                         <a *ngIf="!lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable" class="buy_button outlined-button mb10 text-inherit" (click)="claimReward(lootBoxDetailsAttributes[j],$event,j)">Claim Reward</a>
 
                         <a class="buy_button outlined-button mb10 text-inherit" *ngIf="lootBoxDetailsAttributes[j].disabled && lootBoxDetailsAttributes[j].isRewardAvailable"> Claim
@@ -200,10 +217,28 @@
                         </div>
 
 
-                        <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Value</span></p>
-                        <p *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties" class="mb20 p-white-span-primary justify-space-between flex break-word">
-                            <span>{{propertiesData.key}}</span>
-                            <span>{{propertiesData.value}}</span></p>
+                        <div class="table-responsive">
+                            <table class="table wp100">
+                                <thead>
+                                    <tr>
+                                        <th class="w700">Attribute</th>
+                                        <th class="w700">Value</th>
+                                        <th class="w700">Rarity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties">
+                                        <td>{{propertiesData.key}}</td>
+                                        <td>{{propertiesData.value}}</td>
+                                        <td>{{propertiesData.rarity}}%</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                            <!-- <p class="pb10 mb20 p-white-span-primary justify-space-between flex border-bottom"><span class="w700">Attribute</span><span class="w700">Value</span></p>
+                            <p *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties" class="mb20 p-white-span-primary justify-space-between flex break-word">
+                                <span>{{propertiesData.key}}</span>
+                                <span>{{propertiesData.value}}</span></p> -->
                         <a *ngIf="!lootBoxDetailsAttributesMobile[i].disabled && lootBoxDetailsAttributesMobile[i].isRewardAvailable" class="buy_button outlined-button mb10 text-inherit" (click)="claimReward(lootBoxDetailsAttributesMobile[i],$event,0)">Claim Reward</a>
                         <a class="buy_button outlined-button mb10 text-inherit" *ngIf="lootBoxDetailsAttributesMobile[i].disabled"> Claim Reward </a>
                     </div>
