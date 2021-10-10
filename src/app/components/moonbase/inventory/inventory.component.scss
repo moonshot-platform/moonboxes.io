@@ -189,8 +189,17 @@
 }
 
 .attribute-img>img {
-    height: 350px !important;
-    width: 350px !important;
+    max-width: 350px !important;
+    max-height: 350px !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+.attribute-img>video {
+    max-width: 350px !important;
+    max-height: 350px !important;
+    height: 100% !important;
+    width: 100% !important;
 }
 
 .plus_minus div,
