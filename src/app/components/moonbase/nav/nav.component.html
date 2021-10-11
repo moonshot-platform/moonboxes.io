@@ -61,8 +61,8 @@
             <!-- <a [routerLink]="['']">Jim</a> -->
         </ul>
         <div class="block flex-center nsfw-and-close-container">
-            <ui-switch *ngIf="this.router.url == '/upcoming'|| this.router.url == '/inventory' " defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10"></ui-switch>
-            <span *ngIf="this.router.url == '/upcoming'|| this.router.url == '/inventory' " class="mr20 text-dark">NSFW</span>
+            <ui-switch *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'" defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10"></ui-switch>
+            <span *ngIf="this.router.url == '/upcoming'|| this.router.url == '/inventory' || router.url == '/live' || router.url == '/recent'" class="mr20 text-dark">NSFW</span>
             <div class="tooltip">
                 <a href="https://project-moonshot.me">
                     <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
