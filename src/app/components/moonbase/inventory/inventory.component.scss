@@ -268,7 +268,10 @@
         align-items: center;
     }
 }
-
+.mx-10 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .border-bottom {
     border-bottom: 2px solid #d5a642;
 }
@@ -313,6 +316,9 @@ tbody td {
     padding-top: 10px;
     padding-right: 15px;
     // white-space: nowrap;
+}
+.mobile-sell {
+    min-width: 120px;
 }
 @media only screen and (max-width: $md-header) {
     .scroller {
