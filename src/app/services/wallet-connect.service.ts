@@ -410,4 +410,20 @@ redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signatur
     });
     return promise
   }
+
+
+  async isApproved(address:any)
+  {
+    return await this.NFTContract.isApprovedForAll(address,address);
+  }
+
+  async setApproval(address:any)
+  {
+    return await this.NFTContract.setApprovalForAll(address,true);
+  }
+
+  async safeTransfer(address:any,toAddress:any,nftId:any)
+  {
+    return await this.NFTContract.safeTransferFrom(address,toAddress,nftId,1,"0x00");
+  }
 }

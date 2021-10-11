@@ -1,0 +1,21 @@
+
+    <div class="modal-box">
+        <div class="justify-space-between mb20">
+            <p class="p-white-span-primary mb20">Address :</p>
+            <input #toAddress type="text" class="outlined-button wp100" placeholder="enter your address" />
+          </div>
+      <div class="flex flex-wrap justify-space-between mb20">
+        <p class="p-white-span-primary">Token id :</p>
+        <p class="p-white-span-primary">{{data.details.nftId}}</p>
+      </div>
+      <div class="flex flex-wrap justify-space-between mb20">
+        <p class="p-white-span-primary">Token Name :</p>
+        <p class="p-white-span-primary">{{data.details.name}}</p>
+      </div>
+     
+      <div>
+        <a (click)="transfer(toAddress.value)" class="button text-inherit mb20 ng-star-inserted"
+          >{{btnText}}</a
+        >
+      </div>
+    </div>
