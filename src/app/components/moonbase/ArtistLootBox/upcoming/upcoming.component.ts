@@ -100,9 +100,8 @@ export class UpcomingComponent implements OnInit {
       this.location.go('/upcoming');
       
       this.listData = [];
-      this.listOfArtistUpcoming = []
       this.listData = this.listOfArtistUpcoming;
-      this.listData.push(this.fakeCollectionData);
+      // this.listData.push(this.fakeCollectionData);
     }
 
     else if (this.activeTab == 2) {
@@ -161,7 +160,7 @@ export class UpcomingComponent implements OnInit {
       if (this.activeTab == 1) {
         this.listData = [];
         this.listData = this.listOfArtistUpcoming;
-        this.listData.push(this.fakeCollectionData);
+        // this.listData.push(this.fakeCollectionData);
       }
       for (let index = 0; index < this.listData.length; index++) {
         this.isTooltipActive[index] = false;

@@ -1,5 +1,5 @@
 <section class="scroller buy_moonbase" [ngClass]="{'bg-primary':invisible}">
-    <div class="desktop-only flex1 h-100 flex-center align-items-center" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    <div class="desktop-only flex-center align-items-center" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
         <div class="moonbox-container flex1 flex-column flex-center">
             <div class="relative flex-center">
@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pb100 pt-5" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-center px-3 pt-5 w-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
         <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
             <div class="round-mini-button" (click)="prev()">
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
@@ -146,4 +146,6 @@
             <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">Wrong Network</a>
         </div>
     </div>
+
+    <p *ngIf="!isConnected" class="mt50 fade-in">Not connected to wallet</p>
 </section>
