@@ -1,0 +1,37 @@
+@import "includes";
+
+.modal-box {
+    justify-content: center;
+    background: #090d16;
+    border-top: 6px solid #d5a642;
+    border-radius: 4px;
+    min-width: 25vw;
+    padding: 2rem;
+    margin: auto;
+}
+input.outlined-button.wp100 {
+    cursor: text !important;
+}
+
+@media only screen and (max-width: $md-header) {
+    .scroller {
+        max-height: calc(100vh - 50px) !important;
+        padding-bottom: 40px;
+        margin-bottom: 0px !important;
+    }
+    .table-responsive {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .modal-box div {
+        flex-flow: column;
+        text-align: center;
+        justify-content: center;
+        p {
+            margin-bottom: 0.5rem;
+        }
+    }
+}

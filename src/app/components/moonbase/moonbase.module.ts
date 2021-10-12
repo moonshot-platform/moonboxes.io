@@ -35,6 +35,7 @@ import { LandingIntroComponent } from './landing/landing-intro/landing-intro.com
 import { LimitedComponent } from './landing/limited/limited.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { InfoComponent } from './info/info.component';
+import { TransferComponent } from './modal-for-transaction/transfer/transfer.component';
 
 
 @NgModule({
@@ -61,6 +62,7 @@ import { InfoComponent } from './info/info.component';
     LandingIntroComponent,
     LimitedComponent,
     InfoComponent,
+    TransferComponent,
   ],
   imports: [
     MatIconModule,
