@@ -38,6 +38,19 @@
     padding: 4px;
 }
 
+.buy_moonbase {
+    flex-direction: column;
+}
+
+.desktop-only {
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.mobile-only {
+    box-sizing: border-box;
+}
+
 .lock {
     width: 35px;
     height: 35px;
