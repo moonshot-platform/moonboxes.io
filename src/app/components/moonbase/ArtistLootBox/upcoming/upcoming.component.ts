@@ -100,7 +100,6 @@ export class UpcomingComponent implements OnInit {
       this.location.go('/upcoming');
       
       this.listData = [];
-      this.listOfArtistUpcoming = []
       this.listData = this.listOfArtistUpcoming;
       // this.listData.push(this.fakeCollectionData);
     }
@@ -157,6 +156,8 @@ export class UpcomingComponent implements OnInit {
     this.httpService.getUpcomingArtistCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
 
       this.listOfArtistUpcoming = response.data;
+      this.listOfArtistUpcoming.push(this.fakeCollectionData);
+      
 
       if (this.activeTab == 1) {
         this.listData = [];
