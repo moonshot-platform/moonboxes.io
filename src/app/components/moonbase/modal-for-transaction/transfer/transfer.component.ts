@@ -10,6 +10,7 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 })
 export class TransferComponent implements OnInit {
   btnText: string="Transfer";
+  showError: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<TransferComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -22,7 +23,15 @@ export class TransferComponent implements OnInit {
 
   async transfer(userAddress:any)
   {
-    this.btnText = "Transfer inititated" ;
+    try{
+    if(userAddress=="")
+    {
+        this.showError = true;
+    }
+    else
+    {
+      this.showError = false;
+    }
     var transferTxn = await this.walletConnectService.safeTransfer(this.data.walletAddress,userAddress,this.data.details.nftId);
     this.btnText = "Waiting for confirmation";
     transferTxn.wait(3);
@@ -34,7 +43,17 @@ export class TransferComponent implements OnInit {
     }).subscribe((response:any)=>{
       this.httpApi.showToastr(response.data.message,response.isSuccess);
     });
-      
+  } catch (e) {
+    this.btnText = "Transfer";
+    if (e.code == 4001)
+      this.httpApi.showToastr(e.message, false);
+    else if(e.data)
+      this.httpApi.showToastr(e.data?.message,false);
+    else if(e.error)
+    this.httpApi.showToastr(e.error?.message,false);
+    return false;
+  }
+      return true;
   }
 
 }

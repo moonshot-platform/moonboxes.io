@@ -3,6 +3,7 @@
         <div class="justify-space-between mb20">
             <p class="p-white-span-primary mb20">Address :</p>
             <input #toAddress type="text" class="outlined-button wp100" placeholder="enter your address" />
+            <p *ngIf="showError" class="p-white-span-primary mb20">Address field required...</p>
           </div>
       <div class="flex flex-wrap justify-space-between mb20">
         <p class="p-white-span-primary">Token id :</p>
