@@ -239,8 +239,9 @@ svg#attibute_close {
     .tooltip {
         display: none;
         position: absolute;
-        top: -70px;
+        top: -10px;
         width: calc(100% - 40px);
+        left: 15px;
         padding: 20px 20px;
         color: white;
         background-color: black;
@@ -257,7 +258,7 @@ svg#attibute_close {
             width: 15px;
             height: 15px;
             left: 50%;
-            transform: translate(-50%, 200%) rotate( 45deg) scaleY(-1);
+            transform: translate(-50%, 180%) rotate( 45deg) scaleY(-1);
             background-color: black;
             box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
         }
