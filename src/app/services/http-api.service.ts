@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
-const baseURL: any = "https://moonboxes.io/api/api/";
+const baseURL: any = "http://codetentacles-006-site3.htempurl.com/api/";
 
 @Injectable({
   providedIn: 'root'
@@ -116,7 +116,9 @@ export class HttpApiService {
     return this.httpClient.post(baseURL + 'transactionHashForReward', data,{ headers:this.headers});
   }
 
-
+  transferNft(data:any): Observable<any> {
+    return this.httpClient.post(baseURL + 'transferNft', data,{ headers:this.headers});
+  }
 
   
   revealData(data:any): Observable<any> {
@@ -155,5 +157,7 @@ clearMessages() {
 getMessage(): Observable<any> {
     return this.subject.asObservable();
 }
+
+
 
 }
