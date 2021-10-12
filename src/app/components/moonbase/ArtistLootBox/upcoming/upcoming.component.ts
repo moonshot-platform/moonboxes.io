@@ -100,7 +100,6 @@ export class UpcomingComponent implements OnInit {
       this.location.go('/upcoming');
       
       this.listData = [];
-      this.listOfArtistUpcoming = []
       this.listData = this.listOfArtistUpcoming;
       // this.listData.push(this.fakeCollectionData);
     }
