@@ -66,7 +66,28 @@ export class UpcomingComponent implements OnInit {
   ngOnInit(): void {
     this.isNSFWStatus = this.httpService.getNSFWStatus();
     this.checkNSFWStatus();
-    
+
+    this.route
+      .data
+      .subscribe((value) => {
+        switch (value.activeTab) {
+          case 1:
+            this.activeTab = 1;
+            //console.log("It came for UPCOMING!!!")
+            break;
+          case 2:
+            this.activeTab = 2;
+            //console.log("It came for LIVE!!!")
+            break;
+          case 3:
+            this.activeTab = 3;
+            //console.log("It came for RECENT!!!")
+            break;
+          default:
+            this.activeTab = 2;
+            break;
+        }
+      });
     this.getConnectedAccount();
 
     if (window.innerWidth < 768) {
@@ -74,7 +95,7 @@ export class UpcomingComponent implements OnInit {
     }
 
     this.route.url.subscribe(url => {
-      console.log(url);
+      //console.log(url);
 
       switch (url[0].path) {
 
@@ -98,7 +119,7 @@ export class UpcomingComponent implements OnInit {
     if (this.activeTab == 1) {
       this.title.setTitle('Moonbox drops - Upcoming');
       this.location.go('/upcoming');
-      
+
       this.listData = [];
       this.listData = this.listOfArtistUpcoming;
       // this.listData.push(this.fakeCollectionData);
@@ -137,7 +158,8 @@ export class UpcomingComponent implements OnInit {
     }
   }
 
-  async getAllCollections() {
+  async
+  getAllCollections() {
 
     this.httpService.getAllCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
 
