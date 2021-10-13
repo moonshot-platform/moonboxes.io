@@ -94,8 +94,8 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletConnectService.init();
-    this.getNSFWStatus();
-
+    //this.getNSFWStatus();
+    this.checkNSFWStatus();
     setTimeout(async () => {
       this.walletConnectService.getData().subscribe((data) => {
         if (data !== undefined && data.address != undefined) {
@@ -140,6 +140,7 @@ export class NavComponent implements OnInit {
 
   getNSFWStatus() {
     this.isNSFWStatus = this.httpApi.getNSFWStatus();
+    //console.log("NSFW  STATUS : " + this.isNSFWStatus);
   }
 
   menuopen() {
@@ -161,5 +162,13 @@ export class NavComponent implements OnInit {
     this.tokenomicsService.onToggle(true);
     this.closeMenu();
   }
+  checkNSFWStatus() {
+    setInterval(() => {
+      this.getNSFWStatus()
+    }, 1500);//4000
+
+  }
+
+
 
 }
