@@ -47,15 +47,18 @@ const routes: Routes = [
       },
       {
         path: UpcomingComponent.routeName,
-        component: UpcomingComponent
+        component: UpcomingComponent,
+        data: { activeTab: 1 }
       },
       {
         path: 'live',
-        component: UpcomingComponent
+        component: UpcomingComponent,
+        data: { activeTab: 2 }
       },
       {
         path: 'recent',
-        component: UpcomingComponent
+        component: UpcomingComponent,
+        data: { activeTab: 3 }
       },
       {
         path: RarityComponent.routeName,
