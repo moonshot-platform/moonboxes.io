@@ -190,11 +190,16 @@
                             <th class="w700">Attribute</th>
                             <th class="w700">Value</th>
                             <th class="w700 ">
-                                <p class="rarity-column-text" (mouseover)="isRarityTooltipActive = true" (mouseleave)="isRarityTooltipActive = false">Rarity</p>
-                                <div class="rarity-column-text-tooltip" [class.reveal]="isRarityTooltipActive">
-                                    <div class="row">These percentages express the given attribute rarity by evaluating the rarity of the items traits. A lower value is better.</div>
-                                    <i></i>
+                                <div class="rarity-column-text">
+                                    Rarity
+                                    <div class="tooltip">
+                                        <div class="row">
+                                            These percentages express the given attribute rarity by evaluating the rarity of the items traits. A lower value is better.
+                                        </div>
+                                        <i></i>
+                                    </div>
                                 </div>
+
                             </th>
                         </tr>
                     </thead>
