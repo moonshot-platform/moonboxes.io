@@ -198,10 +198,11 @@ export class InventoryComponent implements OnInit {
     return false;
   }
 
-  openDialog(imagePath: string) {
+  openDialog(data: any) {
+
     let dialogRef = this.dialog.open(SocialShareComponent, {
       width: 'auto',
-      data: { name: imagePath }
+      data: { imageUrl: data.logo_path, name: data.name, url: '' }
     });
   }
 
