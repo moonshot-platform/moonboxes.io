@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
+import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
 
 @Component({
   selector: 'app-inventory',
@@ -23,6 +24,7 @@ export class InventoryComponent implements OnInit {
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
   isNSFWStatus = false;
+  isRarityTooltipActive: boolean = false;
 
   constructor(private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService, private toastrService: ToastrService,
@@ -183,7 +185,7 @@ export class InventoryComponent implements OnInit {
 
   checkFileType(url: string) {
     const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg","MP4", "3GP", "OGG"]
+    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
@@ -208,6 +210,20 @@ export class InventoryComponent implements OnInit {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
+  }
+
+  openDialogWithTemplateRef(templateRef: TemplateRef<any>) {
+    this.dialog.open(templateRef);
+  }
+
+  openTransferDialog(data: any) {
+    let dialogRef = this.dialog.open(TransferComponent, {
+      width: 'auto',
+      data: {
+        details: data,
+        walletAddress: this.data.address
+      }
+    });
   }
 
 }
