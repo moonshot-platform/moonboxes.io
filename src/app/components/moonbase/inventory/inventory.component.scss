@@ -269,6 +269,11 @@
     }
 }
 
+.mx-10 {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .border-bottom {
     border-bottom: 2px solid #d5a642;
 }
@@ -297,12 +302,15 @@ svg#attibute_close path {
 .break-word {
     word-break: break-word;
 }
+
 table.wp100 {
     border-collapse: collapse;
 }
+
 tbody tr:first-child td {
     padding-top: 20px !important;
 }
+
 table tr th {
     border-bottom: 2px solid #d5a642;
     padding-bottom: 15px;
@@ -314,6 +322,81 @@ tbody td {
     padding-right: 15px;
     // white-space: nowrap;
 }
+
+.mobile-sell {
+    min-width: 120px;
+}
+
+.rarity-column-text {
+    .tooltip {
+        display: flex;
+        visibility: hidden;
+        position: absolute;
+        width: 300px;
+        padding: 20px 20px;
+        color: white;
+        background-color: black;
+        justify-content: center;
+        align-content: center;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+        border-radius: 8px;
+        margin-left: -240px;
+        margin-top: -170px;
+        font-family: $primary-font;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.69;
+        text-align: left;
+        opacity: 0;
+        transition: opacity 0.8s;
+        -webkit-transition: .3s all;
+        -webkit-transition-delay: .3s;
+        -moz-transition: .3s all;
+        -moz-transition-delay: .3s;
+        -ms-transition: .3s all;
+        -ms-transition-delay: .3s;
+        -o-transition: .3s all;
+        -o-transition-delay: .3s;
+        transition: .3s all;
+        transition-delay: .3s;
+        >i::after {
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            left: 80%;
+            transform: translate(-50%, 180%) rotate( 45deg) scaleY(-1);
+            background-color: black;
+            box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
+            margin-top: 85px;
+        }
+    }
+    &:hover {
+        opacity: 1;
+        color: white;
+        -webkit-transition: .2s all;
+        -webkit-transition-delay: .2s;
+        -moz-transition: .3s all;
+        -moz-transition-delay: .2s;
+        -ms-transition: .3s all;
+        -ms-transition-delay: .2s;
+        -o-transition: .3s all;
+        -o-transition-delay: .2s;
+        transition: .3s all;
+        transition-delay: .2s;
+    }
+}
+
+.rarity-column-text:hover .tooltip {
+    visibility: visible !important;
+    opacity: 1;
+    -webkit-transition-delay: 0s;
+    -moz-transition-delay: 0s;
+    -ms-transition-delay: 0s;
+    -o-transition-delay: 0s;
+    transition-delay: 0s;
+}
+
 @media only screen and (max-width: $md-header) {
     .scroller {
         max-height: calc(100vh - 50px) !important;
