@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
+import { MoonbaseComponent } from '../moonbase.component';
 
 @Component({
   selector: 'app-nav',
@@ -156,7 +157,8 @@ export class NavComponent implements OnInit {
   }
 
   goBack() {
-    this.location.back();
+    if( this.router.url.replace('/', '') !== MoonbaseComponent.routeName )
+      this.location.back();
   }
   toggleTokenomics() {
     this.tokenomicsService.onToggle(true);
