@@ -22,7 +22,7 @@
               </div>
             </div> -->
                     <div class="upcoming flex flex-wrap wrap">
-                        <div class="full-div" *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index;">
+                        <div class="full-div" *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index; trackBy: trackByFn;">
                             <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView); let i = index;" class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
 

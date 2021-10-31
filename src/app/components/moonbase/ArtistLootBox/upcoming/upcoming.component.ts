@@ -159,6 +159,10 @@ export class UpcomingComponent implements OnInit {
     });
   }
 
+  trackByFn(index, item) {
+    return item.title;
+  }
+
   checkNSFWStatus() {
     setInterval(() => {
       this.checkNSFWStatusFromStorage()
