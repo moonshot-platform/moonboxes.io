@@ -27,14 +27,6 @@ export class NavComponent implements OnInit {
       'name': 'MoonBoxes',
       'path': ''
     },
-    // {
-    //   'name': 'MoonLottery',
-    //   'path': '',
-    // },
-    // {
-    //   'name': 'MoonArcade',
-    //   'path': ''
-    // }
   ];
 
 
@@ -58,7 +50,7 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
       'alt': 'inventory',
-      'tooltip': 'This is your inventory. An overview of all NFTs you received out of the Moonboxes.',
+      'tooltip': 'This is your inventory. An overview of all NFTs you received out of the MoonBoxes.',
       'click': null,
       'routerLink': ['/inventory'],
       'route': '/inventory'
@@ -74,7 +66,7 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
       'alt': 'info',
-      'tooltip': 'This is an overview of all information about the moonbase dApp. Coming soon!',
+      'tooltip': 'This is an overview of all information about the MoonBase dApp. Coming soon!',
       'click': null,
       'routerLink': ['/info'],
       'route': '/info'
@@ -94,7 +86,6 @@ export class NavComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletConnectService.init();
-    //this.getNSFWStatus();
     this.checkNSFWStatus();
     setTimeout(async () => {
       this.walletConnectService.getData().subscribe((data) => {
@@ -116,7 +107,6 @@ export class NavComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(ConnetwalletComponent, {
       width: 'auto',
-      // data: { name: this.name, animal: this.animal }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -140,7 +130,6 @@ export class NavComponent implements OnInit {
 
   getNSFWStatus() {
     this.isNSFWStatus = this.httpApi.getNSFWStatus();
-    //console.log("NSFW  STATUS : " + this.isNSFWStatus);
   }
 
   menuopen() {
