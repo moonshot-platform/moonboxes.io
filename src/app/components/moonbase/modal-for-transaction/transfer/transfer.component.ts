@@ -47,6 +47,7 @@ export class TransferComponent implements OnInit {
     }).subscribe((response:any)=>{
       if(response.isSuccess) {
         this.dialog.closeAll();
+        location.reload();
       }
       this.httpApi.showToastr(response.data.message,response.isSuccess);
     });

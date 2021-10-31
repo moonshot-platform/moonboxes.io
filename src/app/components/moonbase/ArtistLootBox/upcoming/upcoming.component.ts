@@ -15,7 +15,6 @@ export class UpcomingComponent implements OnInit {
   listOfArtistCollection = [];
   listOfArtistUpcoming = [];
   listOfRecentDrops = [];
-  endTime = '2021-09-29T00:00:00';
   isNSFWStatus = false;
   activeTab = 1;
   lootBoxDetailsAttributes = [];
@@ -49,15 +48,12 @@ export class UpcomingComponent implements OnInit {
         switch (value.activeTab) {
           case 1:
             this.activeTab = 1;
-            //console.log("It came for UPCOMING!!!")
             break;
           case 2:
             this.activeTab = 2;
-            //console.log("It came for LIVE!!!")
             break;
           case 3:
             this.activeTab = 3;
-            //console.log("It came for RECENT!!!")
             break;
           default:
             this.activeTab = 2;
@@ -71,8 +67,7 @@ export class UpcomingComponent implements OnInit {
     }
 
     this.route.url.subscribe(url => {
-      //console.log(url);
-
+      
       switch (url[0].path) {
 
         case 'recent':
@@ -98,7 +93,6 @@ export class UpcomingComponent implements OnInit {
 
       this.listData = [];
       this.listData = this.listOfArtistUpcoming;
-      // this.listData.push(this.fakeCollectionData);
     }
 
     else if (this.activeTab == 2) {
@@ -158,12 +152,15 @@ export class UpcomingComponent implements OnInit {
       if (this.activeTab == 1) {
         this.listData = [];
         this.listData = this.listOfArtistUpcoming;
-        // this.listData.push(this.fakeCollectionData);
       }
       for (let index = 0; index < this.listData.length; index++) {
         this.isTooltipActive[index] = false;
       }
     });
+  }
+
+  trackByFn(index, item) {
+    return item.title;
   }
 
   checkNSFWStatus() {
