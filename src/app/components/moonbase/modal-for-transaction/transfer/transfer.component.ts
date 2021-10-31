@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 
@@ -13,6 +14,8 @@ export class TransferComponent implements OnInit {
   showError: boolean = false;
 
   constructor(public dialogRef: MatDialogRef<TransferComponent>,
+    public dialog: MatDialog,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private walletConnectService:WalletConnectService,
     private httpApi:HttpApiService) { }
@@ -39,8 +42,12 @@ export class TransferComponent implements OnInit {
       fromAddress : this.data.walletAddress,
       toAddress :userAddress,
       nftId : this.data.details.nftId,
-      amount : 1
+      amount : 1,
+      transactionHash: transferTxn.hash
     }).subscribe((response:any)=>{
+      if(response.isSuccess) {
+        this.dialog.closeAll();
+      }
       this.httpApi.showToastr(response.data.message,response.isSuccess);
     });
   } catch (e) {

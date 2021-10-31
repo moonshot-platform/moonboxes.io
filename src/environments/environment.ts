@@ -6,8 +6,8 @@ export const environment = {
   production: false,
     apiUrl: 'http://my-api-url',
     enableDebug: false,
-    chainId : 97,
-    ownerAddress : "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC"
+    chainId : 56,
+    ownerAddress : "0x66A7B9f608378e59105022aB00b0F541666e8c4d"
   };
 
 /*
