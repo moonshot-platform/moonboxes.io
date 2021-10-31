@@ -148,7 +148,7 @@ export class UpcomingComponent implements OnInit {
     this.httpService.getUpcomingArtistCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
 
       this.listOfArtistUpcoming = response.data;
-      
+
       if (this.activeTab == 1) {
         this.listData = [];
         this.listData = this.listOfArtistUpcoming;
