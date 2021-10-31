@@ -3,11 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-    apiUrl: 'http://my-api-url',
-    enableDebug: false,
-    chainId : 56,
-    ownerAddress : "0x66A7B9f608378e59105022aB00b0F541666e8c4d"
+    production: false,
+    chainId : 97,
+    providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
+    providerMainNetURL: "https://bsc-dataseed1.binance.org",
+    baseURL: "http://codetentacles-006-site3.htempurl.com/api/",
+    ownerAddress : "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC",
+    silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
+    lootboxAddress: "0xEe772209dd245A42fc61BCCE712DF8619DE88F4E",
+    NFTAddress: "0x1FeCD17Bec7e5Bd83cf6aA64e8B71c74E12E17A2",
+    artistNFTAddress: "0x264893F570fFc3D70672958Fa4C97B2DC1C998c2"
   };
 
 /*
