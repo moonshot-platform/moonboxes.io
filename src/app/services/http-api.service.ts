@@ -5,7 +5,7 @@ import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 
-const baseURL: any = "https://moonboxes.io/api/api/";
+const baseURL: any = environment.baseURL;
 
 @Injectable({
   providedIn: 'root'

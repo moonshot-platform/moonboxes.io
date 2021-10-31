@@ -1,1 +1,7 @@
+/dist/
+*.log
 node_modules
+.idea
+.settings/
+*.swo
+*.swp

@@ -5,25 +5,31 @@ import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { environment } from 'src/environments/environment';
 
-export const SilverAddress = "0xd27D3F7f329D93d897612E413F207A4dbe8bF799";
-export const LootboxAddress = "0x83350dB1Ab42c8ac82FAf74FdA7C0160919d2a40";
-export const NFTAddress = "0x82A3E038048CF02C19e60856564bE209899d4F12";
-export const ArtistNFTAddress = "0xa8e67efd3DDAD234947d8BC80F36aa8F9eb35dF0";
+export const SilverAddress = environment.silverAddress;
+export const LootboxAddress = environment.lootboxAddress;
+export const NFTAddress = environment.NFTAddress;
+export const ArtistNFTAddress = environment.artistNFTAddress;
 
+const providerMainNetURL = environment.providerMainNetURL;
+const providerTestNetURL = environment.providerTestNetURL;
+const providerChainID = environment.chainId;
 
 const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
-//  Create WalletConnect Provider
 
+//  Create WlletConnect Provider
 const providerOptions = {
   rpc: {
-    56: "https://bsc-dataseed1.binance.org",
+    56: providerMainNetURL,
+    97: providerTestNetURL,
  },
  network: "binance",
- chainId: 56,
+ chainId: providerChainID,
 };
+
+console.log(providerOptions);
 
 const provider = new WalletConnectProvider(providerOptions);
 

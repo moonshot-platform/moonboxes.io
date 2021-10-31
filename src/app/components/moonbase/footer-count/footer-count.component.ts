@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class FooterCountComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
-  balanceOfMoon: any = 0;
+  balanceOfMoon: any = "-";
   moonCountData: any;
   moonBoxLimitDetails: any;
   eligibleTier = "-";
