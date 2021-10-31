@@ -151,7 +151,7 @@ export class BuyMoonbaseComponent implements OnInit {
     }
     var moonShootLimit = this.moonBoxLimitDetails[index - 1];
     if (Number(this.balanceOfMoon) < Number(moonShootLimit)) {
-      this.httpApi.showToastr("Lower token balance ", false)
+      this.httpApi.showToastr("You are not eligible for this Tier", false)
       return false;
     }
     if (maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
