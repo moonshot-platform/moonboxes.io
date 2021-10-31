@@ -6,10 +6,10 @@
                     <div class="flex">
                         <div class="flex1 flex flex-col flex-center">
                             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
-                            <div class="flex flex-xs-col mb30">
-                                <a class="mb20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
-                                <a class="live mb20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
-                                <a class="mb20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
+                            <div class="tabs-container flex flex-xs-col mb30">
+                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
+                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
+                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
                             </div>
                         </div>
                     </div>
