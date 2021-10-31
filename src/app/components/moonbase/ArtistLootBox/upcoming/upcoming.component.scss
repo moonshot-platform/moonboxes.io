@@ -36,6 +36,7 @@ section.upcoming-container {
 
 .scroller {
     max-height: calc(100vh - 100px) !important;
+    max-width: initial !important;
     >div {
         width: 100%;
         padding-top: 6rem;
@@ -72,6 +73,10 @@ section.upcoming-container {
     position: relative;
     z-index: -1;
     border: 2px solid #d5a642;
+}
+
+.upcoming {
+    padding: 0 1rem;
 }
 
 .upcoming .full_banner {
