@@ -14,7 +14,6 @@ import { TransferComponent } from '../modal-for-transaction/transfer/transfer.co
 export class InventoryComponent implements OnInit {
   static readonly routeName: string = 'inventory';
   data: any;
-  isConnected: boolean = false;
   inventoryList: any;
 
   p: number = 1;
@@ -25,6 +24,8 @@ export class InventoryComponent implements OnInit {
   lootBoxDetailsAttributesMobile = [];
   isNSFWStatus = false;
   isRarityTooltipActive: boolean = false;
+  isConnected = false;
+  address = "";
 
   constructor(private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService, private toastrService: ToastrService,
@@ -37,20 +38,16 @@ export class InventoryComponent implements OnInit {
     this.isNSFWStatus = this.httpApi.getNSFWStatus();
     this.checkNSFWStatus();
     setTimeout(async () => {
-      await this.walletConnectService.getData().subscribe((data) => {
+      this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
       });
-
       if (this.data !== undefined && this.data.address != undefined) {
-        this.isConnected = true;
         this.getUserData();
       }
-      else {
-        this.isConnected = false;
-      }
+      this.isConnected = this.walletConnectService.isWalletConnected();
+      this.address = this.walletConnectService.getAccount();
     }, 1000);
   }
-
   getUserData() {
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
