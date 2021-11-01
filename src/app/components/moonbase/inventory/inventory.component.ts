@@ -9,7 +9,7 @@ import { TransferComponent } from '../modal-for-transaction/transfer/transfer.co
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
-  styleUrls: ['./inventory.component.scss', './../moonbase.component.scss', './../intro/intro.component.scss']
+  styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
   static readonly routeName: string = 'inventory';
