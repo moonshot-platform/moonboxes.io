@@ -25,14 +25,10 @@
       <p *ngIf="
       isConnected &&
       inventoryList?.length == 0 &&
-      inventoryListUpcoming?.length == 0
-    ">
-          I didn't find any MoonBase NFTs in your wallet ..
+      inventoryListUpcoming?.length == 0">
+          No MoonBase NFT found in your wallet..
       </p>
-      <div class="full-div" *ngFor="
-      let details of inventoryList | slice: 0:inventoryList?.length / 3 + 1;
-      let j = index
-    ">
+      <div class="full-div" *ngFor="let details of inventoryList | slice: 0:inventoryList?.length / 3 + 1; let j = index">
           <div class="flex1 flex-column flex-center mb30" *ngFor="let item1 of inventoryList | slice: j * 3:j * 3 + 3">
               <div class="relative nft_img" *ngIf="checkFileType(item1['logo_path'])">
                   <img src="{{ item1['logo_path'] }}" class="img-fluid" alt="" />
