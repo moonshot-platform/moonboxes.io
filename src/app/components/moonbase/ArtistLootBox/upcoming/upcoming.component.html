@@ -70,7 +70,7 @@
                                             <i></i>
                                         </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                        <p *ngIf="item.isFake != undefined || item.isFake">Upcoming...</p>
+                                        <p *ngIf="item.isFake != undefined || item.isFake">Upcoming</p>
                                         <app-countdown-timer *ngIf="item.isFake == undefined || !item.isFake" [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
@@ -100,7 +100,7 @@
                                         <div class="flex justify-space-between">
                                             <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button w100">
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                                <p *ngIf="lootBoxDetailsAttributes[j].isFake != undefined || lootBoxDetailsAttributes[j].isFake">Upcoming...</p>
+                                                <p *ngIf="lootBoxDetailsAttributes[j].isFake != undefined || lootBoxDetailsAttributes[j].isFake">Upcoming</p>
                                                 <app-countdown-timer *ngIf="lootBoxDetailsAttributes[j].isFake == undefined || !lootBoxDetailsAttributes[j].isFake" [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
                                             </a>
 
