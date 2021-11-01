@@ -26,7 +26,7 @@ export class HistoryComponent implements OnInit {
     this.walletConnectService.init();
 
     setTimeout(async () => {
-      await this.walletConnectService.getData().subscribe((data) => {
+      this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
       });
       this.getBidHistory();
@@ -39,17 +39,15 @@ export class HistoryComponent implements OnInit {
     ).subscribe((response: any) => {
       if (response.isSuccess) {
         this.historyData = response.data;
-
       }
       else {
-        this.toastrService.error("something went wrong")
+        this.toastrService.error("Sorry, something went wrong")
       }
 
     });
   }
 
   async ClaimNft(data: any, index: number) {
-    // debugger
     const dialogref = this.dialog.open(ModalForClaimComponent, {
       width: 'auto',
       disableClose: true,
