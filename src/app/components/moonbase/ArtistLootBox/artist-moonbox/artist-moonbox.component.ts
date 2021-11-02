@@ -33,7 +33,7 @@ export class ArtistMoonboxComponent implements OnInit {
   moonBoxLimitDetails: any;
   invisible: boolean = false;
 
-  constructor(public walletConnectService: WalletConnectService, public dialog: MatDialog,
+  constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService, public dialog: MatDialog,
     public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
       this.lootBoxDetails=httpApi.lootBoxDetails;
     this.inputnumber[0] = 0;
@@ -50,29 +50,24 @@ export class ArtistMoonboxComponent implements OnInit {
     this.walletConnectService.init();
 
     setTimeout(async () => {
-      await this.walletConnectService.getData().subscribe((data) => {
+      this.walletConnectService.getData().subscribe((data) => {
         if(data!=undefined && data.address!=undefined && this.data !=data)
         {
           this.data = data;
-          this.isConnected = true;
+          this.isConnected = this.walletConnectService.isWalletConnected();
           if (this.data.networkId.chainId != environment.chainId) {
             this.isWrongNetwork = true;
+            this.toastrService.error("You are on the wrong network");
           }
           else
           {
             this.getMoonShootBalance();
           }
-         
-          
-        }
-        else{
-          this.isConnected = false;
         }
        
         this.getMaxSupply();
       
       });
-
      
     }, 1000);
     
@@ -167,7 +162,7 @@ export class ArtistMoonboxComponent implements OnInit {
     var moonShootLimit = this.moonBoxLimitDetails[index-1];
    if(Number(this.balanceOfMoon)<Number(moonShootLimit))
    {
-     this.httpApi.showToastr("Lower token balance ",false)
+     this.httpApi.showToastr("You are not eligible for this Tier",false)
      return false;
    }
 
