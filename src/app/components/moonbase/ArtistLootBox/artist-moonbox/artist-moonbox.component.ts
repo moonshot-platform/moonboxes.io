@@ -4,9 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
-import { ConnetwalletComponent } from '../../connetwallet/connetwallet.component';
 import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-for-transaction.component';
 import { environment } from 'src/environments/environment';
+import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -103,7 +103,7 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ConnetwalletComponent, {
+    let dialogRef = this.dialog.open(WalletConnectComponent, {
       width: 'auto',
       // data: { name: this.name, animal: this.animal }
     });
