@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
 import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-inventory',
@@ -16,6 +17,8 @@ export class InventoryComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
   inventoryList: any;
+
+  base64Image: any;
 
   p: number = 1;
   maxSize: number = 9;
@@ -225,6 +228,59 @@ export class InventoryComponent implements OnInit {
         walletAddress: this.data.address
       }
     });
+  }
+
+
+  public downloadImage(data: any) {
+    console.log(data.logo_path);
+    this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
+      //console.log(base64data);
+      this.base64Image = "data:image/jpg;base64," + base64data;
+      // save image to disk
+      var link = document.createElement("a");
+
+      document.body.appendChild(link); // for Firefox
+
+      if (data.logo_path.slice(-3) == 'gif') {
+        link.setAttribute("href", data.logo_path);
+        link.setAttribute("download", `${data.name}.gif`);
+      } else {
+        link.setAttribute("href", this.base64Image);
+        link.setAttribute("download", `${data.name}.jpg`);
+      }
+      link.click();
+    });
+  }
+
+  getBase64ImageFromURL(url: string) {
+    return Observable.create((observer: Observer<string>) => {
+      const img: HTMLImageElement = new Image();
+      img.crossOrigin = "Anonymous";
+      img.src = url;
+      if (!img.complete) {
+        img.onload = () => {
+          observer.next(this.getBase64Image(img));
+          observer.complete();
+        };
+        img.onerror = err => {
+          observer.error(err);
+        };
+      } else {
+        observer.next(this.getBase64Image(img));
+        observer.complete();
+      }
+    });
+  }
+
+  getBase64Image(img: HTMLImageElement) {
+    const canvas: HTMLCanvasElement = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx: CanvasRenderingContext2D = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    const dataURL: string = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
 }
