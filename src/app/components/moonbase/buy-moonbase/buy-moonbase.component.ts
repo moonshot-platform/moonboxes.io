@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
-import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
 
@@ -8,6 +7,7 @@ import { ModalForTransactionComponent } from '../modal-for-transaction/modal-for
 import { environment } from './../../../../environments/environment';
 
 import { ToastrService } from 'ngx-toastr';
+import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-buy-moonbase',
@@ -97,7 +97,7 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ConnetwalletComponent, { width: 'auto' });
+    let dialogRef = this.dialog.open(WalletConnectComponent, { width: 'auto' });
 
     dialogRef.afterClosed().subscribe((result) => {
       this.walletConnectService.getData().subscribe((data) => {
