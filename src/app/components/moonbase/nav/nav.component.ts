@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ConnetwalletComponent } from '../connetwallet/connetwallet.component';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
 import { MoonbaseComponent } from '../moonbase.component';
+import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-nav',
@@ -106,7 +106,7 @@ export class NavComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ConnetwalletComponent, {
+    let dialogRef = this.dialog.open(WalletConnectComponent, {
       width: 'auto',
     });
 
