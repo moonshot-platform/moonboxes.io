@@ -4,6 +4,7 @@ import { WindowRefService } from './window-ref.service';
 import { ethers, BigNumber } from "ethers";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 export const SilverAddress = environment.silverAddress;
 export const LootboxAddress = environment.lootboxAddress;
@@ -29,8 +30,6 @@ const providerOptions = {
  chainId: providerChainID,
 };
 
-console.log(providerOptions);
-
 const provider = new WalletConnectProvider(providerOptions);
 
 @Injectable({
@@ -44,6 +43,8 @@ export class WalletConnectService {
   private serverError: boolean = false;
   public tokenomicsData: any;
   public oldPancakeAddress = true;
+  private isConnected = false;
+  private account = "";
   provider: ethers.providers.Web3Provider;
   signer: ethers.providers.JsonRpcSigner;
   SilverContract: any;
@@ -51,7 +52,7 @@ export class WalletConnectService {
   NFTContract: any;
   artistLootBoxContract : any;
 
-  constructor(private windowRef: WindowRefService) {
+  constructor(private windowRef: WindowRefService, private toastrService:ToastrService) {
   }
 
   onToggle(state?: boolean) {
@@ -86,7 +87,14 @@ export class WalletConnectService {
     try {
       if (typeof this.windowRef.nativeWindow.ethereum !== 'undefined' || typeof this.windowRef.nativeWindow.ethereum !== undefined) {
         await this.windowRef.nativeWindow.ethereum.enable();
-        this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum)
+        this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
+        
+        let currentNetwork = await this.provider.getNetwork();
+        if(currentNetwork.chainId != providerChainID ) {
+          this.toastrService.error("You are on the wrong network");
+          throw "Wrong network";
+        }
+        
         await this.getAccountAddress();
         localStorage.setItem('wallet', '1');
         // Subscribe to accounts change
@@ -94,6 +102,7 @@ export class WalletConnectService {
           if(accounts.length == 0) { 
             // MetaMask is locked or the user has not connected any accounts
             console.log("Please connect to metamask");
+            this.setWalletDisconnected();
           }
           else {
             this.connectToWallet();
@@ -104,6 +113,7 @@ export class WalletConnectService {
         // Subscribe to session disconnection
         this.windowRef.nativeWindow.ethereum.on("networkChanged", (code: number, reason: string) => {
           this.connectToWallet();
+          this.setWalletConnected();
         });
 
         // Subscribe to session disconnection
@@ -111,17 +121,19 @@ export class WalletConnectService {
           if( provider.close ) {
             provider.close();
           }
-          localStorage.removeItem('wallet');
+          this.setWalletDisconnected();
         });
+
+        this.setWalletConnected();
 
         if(origin==0)
         {
           location.reload();
         }
+       
       }
     } catch(e) {
-      console.log(e.message);
-      localStorage.removeItem('wallet');
+      this.setWalletDisconnected();
     }
 
   }
@@ -143,14 +155,16 @@ export class WalletConnectService {
 
       // Subscribe to session disconnection
       provider.on("disconnect", (code: number, reason: string) => {
-        localStorage.removeItem('wallet');
+        this.setWalletDisconnected();
       });
 
       // Subscribe to session disconnection
       provider.on("networkChanged", (code: number, reason: string) => {
         this.connectToWalletConnect();
+        this.setWalletDisconnected();
       });
 
+      this.setWalletConnected();
       if(origin==0)
       {
         location.reload();
@@ -158,8 +172,9 @@ export class WalletConnectService {
     }
     catch(e) {
       console.log(e.message);
-      localStorage.removeItem('wallet');
-      location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it     
+      this.setWalletDisconnected();
+      location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it  
+     
     }
   }
 
@@ -186,6 +201,7 @@ export class WalletConnectService {
       'networkId': network
     }
 
+    this.account = address;
     this.updateData(data);
   }
 
@@ -431,5 +447,23 @@ redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signatur
   async safeTransfer(address:any,toAddress:any,nftId:any)
   {
     return await this.NFTContract.safeTransferFrom(address,toAddress,nftId,1,"0x00");
+  }
+
+  isWalletConnected() {
+    return this.isConnected;
+  }
+
+  getAccount() {
+    return this.account;
+  }
+
+  setWalletConnected() {
+    this.isConnected = true;
+  }
+
+  setWalletDisconnected() {
+    this.isConnected = false;
+    this.account = "";
+    localStorage.removeItem('wallet');
   }
 }

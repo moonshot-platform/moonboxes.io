@@ -39,7 +39,7 @@ export class ModalForClaimComponent implements OnInit {
       });
       this.successIcon = true;
       this.btn1Text="Approved";
-      this.btn2Text="Waiting for transaction..";
+      this.btn2Text="Waiting for transaction";
       var txStatus:any;
       try{
        txStatus = await this.walletConnectService.getRedeemBulk(nftIds,nftSupply,this.data.nftDetails.betId,sign,this.data.nftDetails.isArtist,this.data.nftDetails.artistAddress);
@@ -59,7 +59,7 @@ export class ModalForClaimComponent implements OnInit {
        if(txStatus.status)
     {
       this.successIcon2 = true;
-      this.btn2Text="Submitting data...";
+      this.btn2Text="Submitting data";
       this.httpApi.changeStatusClaim({
         userAddress : this.data.userAddress,
         transactionHash : txStatus.hash,

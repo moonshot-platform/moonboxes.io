@@ -48,7 +48,7 @@ export class RevealNftPopupComponent implements OnInit {
     
     if(transactionDetails.status){
     this.successIcon2 = true;
-    this.btn2Text="Submitting data...";
+    this.btn2Text="Submitting data";
     this.httpApi.submitBet({
       userAddress: this.data.data.address,
       transactionHash : transactionDetails.hash,
