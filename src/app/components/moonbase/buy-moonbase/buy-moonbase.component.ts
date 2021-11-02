@@ -7,6 +7,8 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 import { ModalForTransactionComponent } from '../modal-for-transaction/modal-for-transaction.component';
 import { environment } from './../../../../environments/environment';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-buy-moonbase',
   templateUrl: './buy-moonbase.component.html',
@@ -23,10 +25,7 @@ export class BuyMoonbaseComponent implements OnInit {
   popupClosed: boolean = false;
   static readonly routeName: string = 'buy_moonbase';
   public isTooltipActive: boolean[] = [false, false, false, false];
-
-
   public lootBoxDetails: any = [];
-
 
   data: any;
   supplyDetails: any;
@@ -36,7 +35,7 @@ export class BuyMoonbaseComponent implements OnInit {
   fadeOut: boolean = false;
   priceForMoonBox = 0;
 
-  constructor(public walletConnectService: WalletConnectService, public dialog: MatDialog,
+  constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService,public dialog: MatDialog,
     public httpApi: HttpApiService) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
     this.inputnumber[0] = 0;
@@ -44,8 +43,6 @@ export class BuyMoonbaseComponent implements OnInit {
     this.inputnumber[2] = 0;
     this.inputnumber[3] = 0;
     this.inputnumber[4] = 0;
-
-    // this.getMaxSupply();
   }
 
   ngOnInit(): void {
@@ -55,18 +52,16 @@ export class BuyMoonbaseComponent implements OnInit {
       this.walletConnectService.getData().subscribe((data) => {
         if (data !== undefined && data.address != undefined && data != this.data) {
           this.data = data;
-
-          this.isConnected = true;
+          this.isConnected = this.walletConnectService.isWalletConnected();
+          
           if (this.data.networkId.chainId != environment.chainId) {
             this.isWrongNetwork = true;
+            this.toastrService.error("You are on the wrong network");
           }
           else {
             this.getMoonShootBalance();
           }
-
-        } else {
-          this.isConnected = false;
-        }
+        } 
       });
 
       this.getMaxSupply();
@@ -151,11 +146,11 @@ export class BuyMoonbaseComponent implements OnInit {
     }
     var moonShootLimit = this.moonBoxLimitDetails[index - 1];
     if (Number(this.balanceOfMoon) < Number(moonShootLimit)) {
-      this.httpApi.showToastr("Lower token balance ", false)
+      this.httpApi.showToastr("You are not eligible for this Tier", false)
       return false;
     }
     if (maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
-      alert("invalid no of bet");
+      alert("Invalid bet");
       return false;
     }
 

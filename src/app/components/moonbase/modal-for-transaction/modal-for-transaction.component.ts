@@ -58,7 +58,7 @@ export class ModalForTransactionComponent implements OnInit {
   async submitBet() {
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
 
-    this.btn1Text = "Waiting for transaction...";
+    this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
       transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
@@ -76,7 +76,7 @@ export class ModalForTransactionComponent implements OnInit {
 
     if (transactionDetails.status) {
 
-      this.btn1Text = "Submitting data...";
+      this.btn1Text = "Submitting data";
       this.httpApi.submitBet({
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
@@ -152,7 +152,7 @@ export class ModalForTransactionComponent implements OnInit {
 
     if (txStatus.status) {
       this.successIcon2 = true;
-      this.btn2Text = "Submitting data...";
+      this.btn2Text = "Submitting data";
       this.httpApi.changeStatusClaim({
         userAddress: this.data.data.address,
         transactionHash: txStatus.hash,
@@ -176,7 +176,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   async submitBetForArtist() {
 
-    this.btn1Text = "Waiting for transaction..";
+    this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
       transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
@@ -194,7 +194,7 @@ export class ModalForTransactionComponent implements OnInit {
     }
 
     if (transactionDetails.status) {
-      this.btn1Text = "Submitting data...";
+      this.btn1Text = "Submitting data";
       this.httpApi.submitBetForArtistApi({
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,

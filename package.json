@@ -52,12 +52,12 @@
         "swiper": "^7.0.3",
         "tslib": "^2.0.0",
         "tsparticles": "^1.35.4",
-        "web3": "^1.4.0",
+        "web3": "^1.6.0",
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^12.0.4",
-        "@angular/cli": "~12.0.4",
+        "@angular/cli": "^12.2.12",
         "@angular/compiler-cli": "~12.0.4",
         "@types/jasmine": "~3.6.0",
         "@types/node": "^12.11.1",

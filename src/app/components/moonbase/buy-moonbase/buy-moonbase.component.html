@@ -140,7 +140,7 @@
                 Sold Out
             </div>
             <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails && supplyDetails[current]?.isUpcoming">
-                Coming soon...
+                Coming soon!
             </div>
             <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (click)="buyMoonBase(current+1)" [class.disabled]="!isConnected || isWrongNetwork || this.maxSupply[3] === 0">Buy</a>
             <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>

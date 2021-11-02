@@ -8,6 +8,7 @@
 .scroller {
     max-height: calc(100vh - 70px) !important;
     margin-bottom: 70px !important;
+    height: 70%;
 }
 
 .d-block {
@@ -70,7 +71,7 @@
     .row {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         /* align children centered vertically */
         align-items: flex-start;
         /* align children centered horizontally */
@@ -79,7 +80,7 @@
             display: flex;
             height: 24px;
             width: 24px;
-            align-self: start;
+            align-self: flex-start;
             margin-top: 10px;
             filter: brightness(0) invert(1);
             margin-right: 20px;
