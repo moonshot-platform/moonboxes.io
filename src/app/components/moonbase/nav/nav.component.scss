@@ -156,7 +156,7 @@ section.navigation {
     .row {
         display: flex;
         flex-direction: row;
-        justify-content: start;
+        justify-content: flex-start;
         /* align children centered vertically */
         align-items: flex-start;
         /* align children centered horizontally */
@@ -165,7 +165,7 @@ section.navigation {
             display: flex;
             height: 24px;
             width: 24px;
-            align-self: start;
+            align-self: flex-start;
             margin-top: 10px;
             filter: brightness(0) invert(1);
             margin-right: 20px;
