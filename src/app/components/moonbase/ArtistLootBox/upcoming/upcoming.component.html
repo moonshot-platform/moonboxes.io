@@ -70,14 +70,12 @@
                                             <i></i>
                                         </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                        <p *ngIf="item.isFake != undefined || item.isFake">Upcoming...</p>
-                                        <app-countdown-timer *ngIf="item.isFake == undefined || !item.isFake" [date]="item.revealDate"></app-countdown-timer>
+                                        <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
                                     <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
                                         Moonbox</a>
-                                    <a class="outlined-button disabled disabled-button mb20 text-inherit" *ngIf="item.isFake != undefined || item.isFake">Collection info</a>
-                                    <a class="outlined-button mb20 text-inherit" *ngIf="item.isFake == undefined || !item.isFake" (click)="setSelected(j,item)">Collection info</a>
+                                    <a class="outlined-button mb20 text-inherit" (click)="setSelected(j,item)">Collection info</a>
                                 </div>
                             </div>
                             <!------ List  -->
@@ -100,8 +98,7 @@
                                         <div class="flex justify-space-between">
                                             <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button w100">
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                                <p *ngIf="lootBoxDetailsAttributes[j].isFake != undefined || lootBoxDetailsAttributes[j].isFake">Upcoming...</p>
-                                                <app-countdown-timer *ngIf="lootBoxDetailsAttributes[j].isFake == undefined || !lootBoxDetailsAttributes[j].isFake" [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
+                                                <app-countdown-timer [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
                                             </a>
 
                                             <a *ngIf="activeTab==2" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetailsAttributes[j].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[j].walletAddress] ">Buy

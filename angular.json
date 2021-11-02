@@ -23,6 +23,10 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies":["web3", "hash.js", 
+                            "@walletconnect/window-metadata", "@walletconnect/socket-transport", "@walletconnect/environment",
+                            "@walletconnect/encoding", "query-string", "tsparticles", "src/app/services/wallet-connect.service"
+                        ],
                         "outputPath": "dist/moonshot-web",
                         "index": "src/index.html",
                         "main": "src/main.ts",

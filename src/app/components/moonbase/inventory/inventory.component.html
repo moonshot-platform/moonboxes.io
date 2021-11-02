@@ -21,12 +21,13 @@
               </a>
           </div>
       </div>
-      <p *ngIf="!isConnected">Connecting Wallet</p>
+      <p *ngIf="!isConnected">Your wallet is not (yet) connected</p>
       <p *ngIf="
       isConnected &&
       inventoryList?.length == 0 &&
-      inventoryListUpcoming?.length == 0">
-          No MoonBase NFT found in your wallet..
+      inventoryListUpcoming?.length == 0
+      ">
+      No MoonBase NFT found in your wallet.<br/>{{address}}
       </p>
       <div class="full-div" *ngFor="let details of inventoryList | slice: 0:inventoryList?.length / 3 + 1; let j = index">
           <div class="flex1 flex-column flex-center mb30" *ngFor="let item1 of inventoryList | slice: j * 3:j * 3 + 3">
