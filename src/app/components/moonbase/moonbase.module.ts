@@ -13,7 +13,6 @@ import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
-import { ConnetwalletComponent } from './connetwallet/connetwallet.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InventoryComponent } from './inventory/inventory.component';
 import { FooterCountComponent } from './footer-count/footer-count.component';
@@ -28,6 +27,7 @@ import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SocialShareComponent } from './modal-for-transaction/social-share/social-share.component';
 import { SidebarModule } from '../base/sidebar/sidebar.module';
+import { WalletConnectModule } from '../base/wallet/connect/connect.module';
 import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
 import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
@@ -46,7 +46,6 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
     BuyMoonbaseComponent,
     PrizePoolComponent,
     HistoryComponent,
-    ConnetwalletComponent,
     InventoryComponent,
     FooterCountComponent,
     ModalForTransactionComponent,
@@ -76,6 +75,7 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
     ShareButtonsModule,
     ShareIconsModule,
     SidebarModule,
+    WalletConnectModule,
     SwiperModule,
     UiSwitchModule
   ]

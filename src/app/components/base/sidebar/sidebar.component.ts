@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
-import { ConnetwalletComponent } from '../../moonbase/connetwallet/connetwallet.component';
+import { WalletConnectComponent } from '../wallet/connect/connect.component';
 
 @Component({
   selector: 'app-sidebar',
@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(ConnetwalletComponent, {
+    let dialogRef = this.dialog.open(WalletConnectComponent, {
       width: 'auto',
       // data: { name: this.name, animal: this.animal }
     });
