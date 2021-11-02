@@ -326,7 +326,7 @@ tbody td {
 }
 
 .mobile-sell {
-    min-width: 120px;
+    min-width: 70px;
 }
 
 .rarity-column-text {
@@ -399,6 +399,10 @@ tbody td {
     transition-delay: 0s;
 }
 
+.inventory-detail-button {
+    min-width: 110px !important;
+}
+
 @media only screen and (max-width: $md-header) {
     .scroller {
         max-height: calc(100vh - 50px) !important;
@@ -411,5 +415,10 @@ tbody td {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
+    }
+    .buy_button {
+        max-width: 110px !important;
+        margin-left: 0px !important;
+        margin-right: 0px !important;
     }
 }
