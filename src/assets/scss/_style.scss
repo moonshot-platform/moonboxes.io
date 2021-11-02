@@ -97,6 +97,10 @@ ul {
     margin-top: 20px;
 }
 
+.mt25 {
+    margin-top: 25px;
+}
+
 .mt30 {
     margin-top: 30px;
 }
@@ -159,6 +163,10 @@ ul {
 
 .mb20 {
     margin-bottom: 20px;
+}
+
+.mb25 {
+    margin-bottom: 25px;
 }
 
 .mb30 {
@@ -781,7 +789,6 @@ ul {
         border-color: white;
         cursor: pointer;
     }
-
     &.disabled {
         color: gray;
         border-color: gray;
@@ -1168,7 +1175,6 @@ button.toast-close-button {
 svg#share_twitter {
     width: 50px;
     border-radius: 50px;
-
     &:hover {
         border-radius: 50px;
         path {
