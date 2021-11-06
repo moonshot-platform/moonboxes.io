@@ -39,7 +39,7 @@
 .flex .tooltip .bottom {
     width: 210px;
     //top: 0px;
-    transform: translate(30%, -200%) scaleY(1); //translate(-32%, -100%) scaleY(-1) scaleX(1);
+    transform: translate(2%, -200%) scaleY(1); //translate(-32%, -100%) scaleY(-1) scaleX(1);
     padding: 20px 20px;
     color: white;
     background-color: black;
@@ -114,7 +114,7 @@
 .flex .tooltip .bottom i {
     position: absolute;
     bottom: -10px;
-    left: 52.5%;
+    left: 42.5%;
     margin-left: -52px;
     width: 24px;
     height: 12px;
