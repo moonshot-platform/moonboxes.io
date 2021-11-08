@@ -247,7 +247,7 @@
         </div>
     </div>
 
-    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-start px-3 pb100 pt-5" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-start px-3 pt30" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
         <div class="flex">
             <div class="flex2 flex flex-col mb30">
@@ -367,4 +367,5 @@
             <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
         </div>
     </div>
+    <p *ngIf="!isConnected" class="mt50 fade-in">Please connect your wallet</p>
 </section>
