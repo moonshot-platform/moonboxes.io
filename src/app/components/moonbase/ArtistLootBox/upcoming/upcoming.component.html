@@ -79,9 +79,9 @@
                                 </div>
                             </div>
                             <!------ List  -->
-                            <div id="collection-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[j] != undefined">
-                                <div class="flex1 flex-center flex-align-start justify-start mb30">
-                                    <div class="relative flex-col">
+                            <div class="collection-info" *ngIf="lootBoxDetailsAttributes[j] != undefined">
+                                <div class="collection-inner">
+                                    <div class="left relative flex-col">
 
                                         <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
@@ -105,8 +105,10 @@
                                                 Moonbox</a>
                                         </div>
                                     </div>
+
                                     <div class="flex1"></div>
-                                    <div class="flex4 desktop-md-block">
+
+                                    <div class="right flex4 desktop-md-block w-100">
 
                                         <div class="flex justify-space-between flex-align-start border-bottom">
                                             <div class="flex flex-col">
@@ -128,9 +130,9 @@
                                             </div>
                                         </div>
 
-                                        <textarea readonly class="mt20 mb20 justify-space-between flex">{{lootBoxDetailsAttributes[j]?.description}}</textarea>
+                                        <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetailsAttributes[j]?.description}}</textarea>
 
-                                        <div class="social-icons-container flex justify-space-between">
+                                        <div class="social-icons-container flex-center flex-wrap justify-space-between w-100">
                                             <div class="image-bb">
                                                 <a href="{{lootBoxDetailsAttributes[j].discord}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/discord.svg">
