@@ -146,5 +146,5 @@
         </div>
     </div>
 
-    <p *ngIf="!isConnected" class="mt50 fade-in">Please connect your wallet</p>
+    <p *ngIf="!isConnected" class="mt50 fade-in pointer" (click)="openDialog()">Please connect your wallet</p>
 </section>
