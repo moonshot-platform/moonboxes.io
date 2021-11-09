@@ -99,6 +99,11 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributes = [];
     this.lootBoxDetailsAttributes[index] = item;
     this.lootBoxDetailsAttributes[index].disabled = false;
+
+    if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
+      this.lootBoxDetailsAttributes[index].rarity = `Rarity score:`;
+    }
+    
     setTimeout(() => {
       this.scrollToElement('', 'attribute-info');
     }, 100);
@@ -108,6 +113,11 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributesMobile = [];
     this.lootBoxDetailsAttributesMobile[index] = item;
     this.lootBoxDetailsAttributesMobile[index].disabled = false;
+    
+    if( this.lootBoxDetailsAttributesMobile[index].hasOwnProperty('rarityScore') ) {
+      this.lootBoxDetailsAttributesMobile[index].rarity = `Rarity score:`;
+    }
+
     setTimeout(() => {
       this.scrollToElement('', 'attribute-info-mobile');
     }, 100);
