@@ -1,6 +1,5 @@
 import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgParticlesModule } from "ng-particles";
 
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -31,7 +30,6 @@ export class HammerConfig extends HammerGestureConfig {
     BrowserModule,
     AppRoutingModule,
     MatIconModule,
-    NgParticlesModule,
     BrowserAnimationsModule,
     MatDialogModule,
     GtagModule.forRoot({ trackingId: 'G-5Q9LF9T9Q6', trackPageviews: true }),

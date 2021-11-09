@@ -6,9 +6,13 @@
 }
 
 .scroller {
-    max-height: calc(100vh - 70px) !important;
-    margin-bottom: 70px !important;
-    height: 70%;
+    max-height: calc(100vh - 48px) !important;
+    margin-bottom: initial !important;
+    height: 100%;
+    margin-top: 0 !important;
+
+    padding-top: 160px;
+    box-sizing: border-box;
 }
 
 .d-block {
@@ -22,6 +26,10 @@
     &:hover {
         border-color: gray !important;
     }
+}
+
+#attribute-info > div {
+    flex-direction: row;
 }
 
 .flex1.flex-column.flex-center {
@@ -405,9 +413,12 @@ tbody td {
 
 @media only screen and (max-width: $md-header) {
     .scroller {
-        max-height: calc(100vh - 50px) !important;
-        padding-bottom: 40px;
+        margin-top: 70px!important;
+        max-height: calc(100vh - 70px) !important;
         margin-bottom: 0px !important;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        box-sizing: border-box;
     }
     .table-responsive {
         display: block;

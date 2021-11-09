@@ -280,4 +280,8 @@ export class InventoryComponent implements OnInit {
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
   }
 
+  trackByFn(index, item) {
+    return item.title;
+  }
+
 }
