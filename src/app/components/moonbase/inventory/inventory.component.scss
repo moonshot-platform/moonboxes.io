@@ -285,8 +285,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin-left: 100px;
+  margin-right: 100px;
 
   .inside-box {
     align-items: center;
@@ -317,6 +317,8 @@ svg#attibute_close path {
     padding: 0;
     margin-top: 1rem;
     max-width: calc(100% - 20px);
+    margin-left: initial;
+    margin-right: initial;
   }
 
   .outer-box>div {
