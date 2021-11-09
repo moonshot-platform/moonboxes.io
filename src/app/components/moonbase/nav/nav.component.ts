@@ -114,12 +114,10 @@ export class NavComponent implements OnInit {
     });
   }
 
-  getMoonShootBalance() {
+  async getMoonShootBalance() {
+    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
 
-    this.walletConnectService.getBalanceOfUser(this.data.address)
-      .then((response: any) => {
-        this.balanceOfMoon = response > 0 ? response / 1e9 : 0;
-      });
+    this.balanceOfMoon /= 1e9;
     this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
     this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
