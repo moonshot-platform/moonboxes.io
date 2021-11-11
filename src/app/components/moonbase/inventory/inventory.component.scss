@@ -1,11 +1,5 @@
 @import "includes";
 
-.scroller .desktop-only {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: flex-start;
-}
-
 .scroller {
     max-height: calc(100vh - 110px);
     overflow: auto;
@@ -39,6 +33,7 @@
 
 #attribute-info>div {
   flex-direction: row;
+  box-sizing: border-box;
 }
 
 .flex1.flex-column.flex-center {
@@ -312,20 +307,6 @@ svg#attibute_close path {
   flex-flow: wrap;
 }
 
-.mobile-only {
-  .outer-box {
-    padding: 0;
-    margin-top: 1rem;
-    max-width: calc(100% - 20px);
-    margin-left: initial;
-    margin-right: initial;
-  }
-
-  .outer-box>div {
-    padding: 1rem;
-  }
-}
-
 .break-word {
   word-break: break-word;
 }
@@ -453,5 +434,27 @@ tbody td {
     max-width: 110px !important;
     margin-left: 0px !important;
     margin-right: 0px !important;
+  }
+
+  .outer-box {
+    padding: 0;
+    margin-top: 1rem;
+    max-width: calc(100% - 20px);
+    margin-left: initial;
+    margin-right: initial;
+  }
+
+  .outer-box>div {
+    padding: 1rem;
+  }
+
+  #attribute-info>div {
+    align-items: center;
+    flex-direction: column;
+    > .flex4 {
+      width: 100%;
+      margin-left: initial;
+      margin-top: 30px;
+    }
   }
 }

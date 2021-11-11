@@ -13,7 +13,9 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
+  
   static readonly routeName: string = 'inventory';
+
   data: any;
   inventoryList: any;
 
@@ -24,7 +26,6 @@ export class InventoryComponent implements OnInit {
   inventoryListUpcoming: any;
   lootBoxDetails = [];
   lootBoxDetailsAttributes = [];
-  lootBoxDetailsAttributesMobile = [];
   isNSFWStatus = false;
   isRarityTooltipActive: boolean = false;
   isConnected = false;
@@ -101,7 +102,8 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributes[index].disabled = false;
 
     if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
-      this.lootBoxDetailsAttributes[index].rarity = `Rarity score:`;
+      const score = this.lootBoxDetailsAttributes[index].rarityScore;
+      this.lootBoxDetailsAttributes[index].rarity = `Rarity score: ${score}`;
     }
     
     setTimeout(() => {
@@ -109,23 +111,8 @@ export class InventoryComponent implements OnInit {
     }, 100);
   }
 
-  setSelectedMobile(index: number, item: any) {
-    this.lootBoxDetailsAttributesMobile = [];
-    this.lootBoxDetailsAttributesMobile[index] = item;
-    this.lootBoxDetailsAttributesMobile[index].disabled = false;
-    
-    if( this.lootBoxDetailsAttributesMobile[index].hasOwnProperty('rarityScore') ) {
-      this.lootBoxDetailsAttributesMobile[index].rarity = `Rarity score:`;
-    }
-
-    setTimeout(() => {
-      this.scrollToElement('', 'attribute-info-mobile');
-    }, 100);
-  }
-
   closeAttributes() {
     this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributesMobile = [];
   }
 
   claimReward(details: any, event: any, index: any) {
