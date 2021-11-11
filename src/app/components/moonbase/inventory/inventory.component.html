@@ -1,34 +1,20 @@
 <section class="scroller d-block">
-  <div class="
-    relative
-    pt-5
-    flex1
-    h-100
-    flex-center
-    align-items-center
-  ">
+  <div class="relative flex1 h-100 flex-center">
     <div class="flex1 flex-column flex-center pb60"
       *ngFor="let item of inventoryListUpcoming; let i = index; trackBy: trackByFn;">
       <div class="relative">
-        <!-- <img src="{{getImagePath(item.set)}}" class="img-fluid" alt=""> -->
         <img src="assets/media/images/moonbox/alltypes.mp4" class="img-fluid" alt="" />
       </div>
       <div class="text-center">
-        <p class="p-white-span-primary p16d14m mb10 mt10">{{ item.set }}</p>
-        <p class="p-white-span-primary p16d14m mb10 mt10">{{ item.total }}</p>
+        <p class="p-white-span-primary p16d14m mv10">{{ item.set }}</p>
+        <p class="p-white-span-primary p16d14m mv10">{{ item.total }}</p>
         <a class="buy_button outlined-button mb10 text-inherit">
           <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
         </a>
       </div>
     </div>
     <p *ngIf="!isConnected">Connecting Wallet</p>
-    <p *ngIf="
-      isConnected &&
-      inventoryList?.length == 0 &&
-      inventoryListUpcoming?.length == 0
-    ">
-      I didn't find any MoonBase NFTs in your wallet ..
-    </p>
+    <p *ngIf="isConnected && inventoryList?.length == 0 && inventoryListUpcoming?.length == 0">You have no MoonBase NFTs in your wallet</p>
     <div class="full-div"
       *ngFor="let details of inventoryList | slice: 0:inventoryList?.length / 3 + 1;let j = index;trackBy: trackByFn;">
       <div class="flex1 flex-column flex-center pb100"

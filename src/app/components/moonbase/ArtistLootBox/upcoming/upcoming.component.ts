@@ -4,6 +4,7 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-upcoming',
@@ -30,6 +31,7 @@ export class UpcomingComponent implements OnInit {
 
   constructor(
     private httpService: HttpApiService,
+    private localStorage: LocalStorageService,
     private walletConnectService: WalletConnectService,
     private route: ActivatedRoute,
     private title: Title,
@@ -39,7 +41,7 @@ export class UpcomingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isNSFWStatus = this.httpService.getNSFWStatus();
+    this.isNSFWStatus = this.localStorage.getNSFW();
     this.checkNSFWStatus();
 
     this.route
@@ -171,7 +173,7 @@ export class UpcomingComponent implements OnInit {
   }
 
   checkNSFWStatusFromStorage() {
-    let tempstatus = this.httpService.getNSFWStatus();
+    let tempstatus = this.localStorage.getNSFW();
     if (this.isNSFWStatus != tempstatus) {
       this.isNSFWStatus = tempstatus;
       this.getAllCollections();

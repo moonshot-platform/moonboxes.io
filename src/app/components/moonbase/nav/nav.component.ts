@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
 import { MoonbaseComponent } from '../moonbase.component';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -80,14 +81,15 @@ export class NavComponent implements OnInit {
     public dialog: MatDialog,
     private walletConnectService: WalletConnectService,
     private tokenomicsService: TokenomicsService,
-    private httpApi: HttpApiService,
+    private localStorage: LocalStorageService,
     public router: Router,
     private location: Location
   ) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
-    this.checkNSFWStatus();
+    this.getNSFWStatus();
+    
     setTimeout(async () => {
       this.walletConnectService.getData().subscribe((data) => {
         if (data !== undefined && data.address != undefined) {
@@ -122,15 +124,6 @@ export class NavComponent implements OnInit {
     this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  changeNSFWStatus(event: any) {
-
-    this.httpApi.setNSFWStatus(event);
-  }
-
-  getNSFWStatus() {
-    this.isNSFWStatus = this.httpApi.getNSFWStatus();
-  }
-
   menuopen() {
     this.menuItem = true;
   }
@@ -151,13 +144,13 @@ export class NavComponent implements OnInit {
     this.tokenomicsService.onToggle(true);
     this.closeMenu();
   }
-  checkNSFWStatus() {
-    setInterval(() => {
-      this.getNSFWStatus()
-    }, 1500);//4000
 
+  changeNSFWStatus( state: boolean ) {
+    this.localStorage.setNSFW( state );
   }
 
-
+  getNSFWStatus() {
+    this.isNSFWStatus = this.localStorage.getNSFW();
+  }
 
 }
