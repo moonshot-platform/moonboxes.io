@@ -79,7 +79,7 @@ export class ArtistMoonboxComponent implements OnInit {
         this.balanceOfMoon = response;
       });
 
-      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimitArtist();
+      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
   }
 
   plus(index: number) {
