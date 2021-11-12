@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
-import { ethers, BigNumber } from "ethers";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+import { ethers, BigNumber } from 'ethers';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from './local-storage.service';
@@ -21,13 +21,15 @@ const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 
+const NETWORK = 'binance';
+
 //  Create WlletConnect Provider
 const providerOptions = {
   rpc: {
     56: providerMainNetURL,
     97: providerTestNetURL,
  },
- network: "binance",
+ network: NETWORK,
  chainId: providerChainID,
 };
 
@@ -38,6 +40,11 @@ const provider = new WalletConnectProvider(providerOptions);
 })
 
 export class WalletConnectService {
+
+  private readonly ACCOUNTS_CHANGED: string = 'accountsChanged';
+  private readonly NETWORK_CHANGED: string = 'networkChanged';
+  private readonly DISCONNECT: string = 'disconnect';
+
   private toggle = new BehaviorSubject<any>({});
   public data = new BehaviorSubject<any>({});
   private interval: any;
@@ -45,7 +52,7 @@ export class WalletConnectService {
   public tokenomicsData: any;
   public oldPancakeAddress = true;
   private isConnected = false;
-  private account = "";
+  private account = '';
   provider: ethers.providers.Web3Provider;
   signer: ethers.providers.JsonRpcSigner;
   SilverContract: any;
@@ -97,30 +104,30 @@ export class WalletConnectService {
         
         let currentNetwork = await this.provider.getNetwork();
         if(currentNetwork.chainId != providerChainID ) {
-          this.toastrService.error("You are on the wrong network");
-          throw "Wrong network";
+          this.toastrService.error( 'You are on the wrong network' );
+          throw 'Wrong network';
         }
         
         await this.getAccountAddress();
         this.localStorageService.setWallet(1);
         // Subscribe to accounts change
-        this.windowRef.nativeWindow.ethereum.on("accountsChanged", (accounts: string[]) => {
+        this.windowRef.nativeWindow.ethereum.on( this.ACCOUNTS_CHANGED, (accounts: string[]) => {
           if(accounts.length == 0) { 
             // MetaMask is locked or the user has not connected any accounts
-            console.log("Please connect to metamask");
+            console.log('Please connect to metamask');
             this.setWalletDisconnected();
           } else
             this.connectToWallet();
         });
 
         // Subscribe to session disconnection
-        this.windowRef.nativeWindow.ethereum.on("networkChanged", (code: number, reason: string) => {
+        this.windowRef.nativeWindow.ethereum.on( this.NETWORK_CHANGED, (code: number, reason: string) => {
           this.connectToWallet();
           this.setWalletConnected();
         });
 
         // Subscribe to session disconnection
-        this.windowRef.nativeWindow.ethereum.on("disconnect", (code: number, reason: string) => {
+        this.windowRef.nativeWindow.ethereum.on( this.DISCONNECT, (code: number, reason: string) => {
           if( provider.close ) provider.close();
           this.setWalletDisconnected();
         });
@@ -137,7 +144,7 @@ export class WalletConnectService {
   }
 
   async connectToWalletConnect( origin = 0 ) {    
-    console.log("connectToWalletConnect ", origin);
+    console.log( 'connectToWalletConnect ', origin );
 
     try {
       this.provider = new ethers.providers.Web3Provider(provider);
@@ -147,13 +154,13 @@ export class WalletConnectService {
       this.localStorageService.setWallet(2);
 
       // Subscribe to accounts change
-      provider.on( "accountsChanged", (accounts: string[]) => this.connectToWalletConnect() );
+      provider.on( this.ACCOUNTS_CHANGED, (accounts: string[]) => this.connectToWalletConnect() );
 
       // Subscribe to session disconnect
-      provider.on( "disconnect", (code: number, reason: string) => this.setWalletDisconnected() );
+      provider.on( this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected() );
 
       // Subscribe to session disconnection
-      provider.on( "networkChanged", (code: number, reason: string) => {
+      provider.on( this.NETWORK_CHANGED, (code: number, reason: string) => {
         this.connectToWalletConnect();
         this.setWalletDisconnected();
       });
@@ -243,13 +250,13 @@ export class WalletConnectService {
         this.SilverContract.allowance(userAddress, LootboxAddress)
           .then(async (allowanceAmount: string) => {
             if(allowanceAmount>=params2)
-              resolve( { hash: "", status: true, allowance: true } );
+              resolve( { hash: '', status: true, allowance: true } );
             else
-              resolve( {hash: "", status: true, allowance: false} );
+              resolve( {hash: '', status: true, allowance: false} );
           } );
         
       } catch (e) {
-        reject( { hash: "", status: false } );
+        reject( { hash: '', status: false } );
       }
     } );
 
@@ -266,7 +273,7 @@ export class WalletConnectService {
         const tx = await this.SilverContract.approve( LootboxAddress, (params) );
         resolve( { hash:tx, status:true, allowance:false } );
       } catch (e) {
-        reject( { hash: "", status: false } );
+        reject( { hash: '', status: false } );
       }
     } );
 
@@ -296,7 +303,7 @@ export class WalletConnectService {
   }
 
   redeemBulkTransaction( lootBoxId: any, price: any, noOfBets: number, userAddress: string ) {
-    var promise = new Promise( ( resolve, reject ) => {
+    const promise = new Promise( ( resolve, reject ) => {
       try {
         this.LootboxContract.submitBet( lootBoxId, price, noOfBets, { value:( price*noOfBets ).toString() } )
           .then( ( transactionHash: any ) => {
@@ -305,7 +312,7 @@ export class WalletConnectService {
             reject({ hash: e, status: false });
           })
       } catch (e) {
-       reject( { hash: "", status: false } );
+       reject( { hash: '', status: false } );
       }
     });
 
@@ -319,19 +326,19 @@ export class WalletConnectService {
       if( isArtist ){
         try {
           this.artistLootBoxContract.redeemBulk( NFTAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s )
-            .then( (transactionHash) => 
+            .then( (transactionHash: any) => 
               resolve({ hash: transactionHash.hash, status: true })
             ).catch( (e: any) => {
               reject( { hash: e, status: false } );
             });
         } catch (e) {
           console.log(e)
-          reject( { hash: "", status: false } );
+          reject( { hash: '', status: false } );
         }
       } else {
         try {
           this.LootboxContract.redeemBulk( NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s )
-            .then( (transactionHash) => {
+            .then( ( transactionHash: any ) => {
               resolve({ hash: transactionHash.hash, status: true });
             }).catch( (e: any) => {
               reject({ hash: e, status: false });
@@ -339,7 +346,7 @@ export class WalletConnectService {
         }
         catch (e) {
           console.log(e)
-          reject({ hash: "", status: false });
+          reject({ hash: '', status: false });
         }
       }
     } );
@@ -351,27 +358,25 @@ export class WalletConnectService {
   
 
 /** Artist  **/
-redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signature,betlimit) {
-    const params2:any = ethers.utils.parseEther(price.toString());
-    var spliSign=ethers.utils.splitSignature(signature);
+redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAddress: string, signature: any, betlimit: number ) {
+    const params: any = ethers.utils.parseEther( price.toString() );
+    const spliSign = ethers.utils.splitSignature( signature );
 
-    var promise = new Promise((resolve, reject) => {
+    const promise = new Promise( ( resolve, reject ) => {
       try {
-        this.artistLootBoxContract.submitBet(lootBoxId, params2,artistAddress, noOfBets,betlimit,
-          spliSign.v,spliSign.r,spliSign.s,
-          {
-            value : (params2*noOfBets).toString()
-          })
-          .then(function (transactionHash) {
-            resolve({ hash: transactionHash.hash, status: true });
-          }).catch(function(e){
-            reject({ hash: e, status: false });
-          });
-      }
-      catch (e) {
-        reject({ hash: "", status: false });
+        this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit, spliSign.v, spliSign.r, spliSign.s, {
+            value : ( params * noOfBets ).toString()
+          }
+        ).then( ( transactionHash: any ) => {
+          resolve( { hash: transactionHash.hash, status: true } );
+        }).catch( (e: any) => {
+          reject( { hash: e, status: false } );
+        });
+      } catch (e) {
+        reject( { hash: '', status: false } );
       }
     });
+
     return promise;
   }
 
@@ -389,7 +394,7 @@ redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signatur
         });
         resolve( { hash: txn, status: true } );
       } catch (e) {
-        reject( { hash: "", status: false } );
+        reject( { hash: '', status: false } );
       }
     });
 
@@ -423,7 +428,7 @@ redeemBulkTransactionArtist(lootBoxId, noOfBets:any,price,artistAddress,signatur
 
   setWalletDisconnected() {
     this.isConnected = false;
-    this.account = "";
+    this.account = '';
     this.localStorageService.removeWallet();
   }
 }
