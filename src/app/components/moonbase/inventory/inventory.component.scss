@@ -457,4 +457,10 @@ tbody td {
       margin-top: 30px;
     }
   }
+
+  .full-div {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
