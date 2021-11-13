@@ -476,6 +476,15 @@ ul {
     display: flex;
 }
 
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
 .align-start {
     align-items: flex-start;
 }
@@ -1180,9 +1189,11 @@ button.toast-close-button {
     background: #fff !important;
 }
 
-svg#share_twitter {
+svg.interactable {
     width: 50px;
     border-radius: 50px;
+    cursor: pointer;
+
     &:hover {
         border-radius: 50px;
         path {

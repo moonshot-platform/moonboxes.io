@@ -13,6 +13,8 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
+
+  sampleList = [ { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false } ];
   
   static readonly routeName: string = 'inventory';
 
@@ -21,7 +23,6 @@ export class InventoryComponent implements OnInit {
 
   base64Image: any;
 
-  p: number = 1;
   maxSize: number = 9;
   inventoryListUpcoming: any;
   lootBoxDetails = [];
@@ -30,6 +31,7 @@ export class InventoryComponent implements OnInit {
   isRarityTooltipActive: boolean = false;
   isConnected = false;
   address = "";
+  selectedIndex = -1;
 
   constructor(private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService, private toastrService: ToastrService,
@@ -59,6 +61,10 @@ export class InventoryComponent implements OnInit {
     }).subscribe((response: any) => {
       if (response.isSuccess) {
         this.inventoryList = response.data.data;
+        // this.inventoryList = this.sampleList;
+        // this.inventoryList = [];
+        // this.inventoryList[0].NSFW = true;
+        // console.log(this.inventoryList);
       }
       else {
         this.toastrService.error("something went wrong");
@@ -100,6 +106,7 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributes = [];
     this.lootBoxDetailsAttributes[index] = item;
     this.lootBoxDetailsAttributes[index].disabled = false;
+    this.selectedIndex = index;
 
     if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
       const score = this.lootBoxDetailsAttributes[index].rarityScore;
