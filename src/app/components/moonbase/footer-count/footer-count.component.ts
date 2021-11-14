@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 export class FooterCountComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
-  balanceOfMoon: any = "-";
+  balance: any = "-";
   moonCountData: any;
   moonBoxLimitDetails: any;
   eligibleTier = "-";
@@ -43,30 +43,37 @@ export class FooterCountComponent implements OnInit {
     }, 1000);
   }
 
-  async getMoonShootBalance() {
-    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
+  async getTier(moonBalance: number) {
+    const tiers = [
+      "Wood",
+      "Silver",
+      "Gold",
+      "Diamond"
+    ];
     
-    this.httpApi.getMoonCount(this.data.address)
-      .subscribe((response: any) => {
-        this.moonCountData = response.data;
-      });
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+    for( let i = this.moonBoxLimitDetails.length - 1; i >= 0; i-- ) {
+      if( moonBalance >= Number(this.moonBoxLimitDetails[i]) ) {
+        this.eligibleTier = tiers[i]
+        break;
+      }
+    }
+  }
 
-    if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[3])) {
-      this.eligibleTier = "Diamond";
-    }
-    else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[2])) {
-      this.eligibleTier = "Gold";
-    }
-    else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[1])) {
-      this.eligibleTier = "Silver";
-    }
-    else {
-      this.eligibleTier = "Wood";
-    }
-    this.balanceOfMoon /= 1e9;
-    this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
-    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  async convertBalanceWithDecimals( balance: number ) {
+    this.balance = balance / 1e9;
+    this.balance = Math.trunc(this.balance);
+    this.balance = this.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  async getMoonShootBalance() {
+    const balance = Number( await this.walletConnectService.getBalanceOfUser(this.data.address) );
+    
+    await this.getTier( balance );
+
+    this.moonCountData = (await this.httpApi.getMoonCount(this.data.address)).data;
+    
+    this.convertBalanceWithDecimals( balance );
   }
 
   ngOnDestroy() {

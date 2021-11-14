@@ -97,11 +97,11 @@ export class HttpApiService {
     return this.httpClient.post( url, data, { headers: this.headers } );
   }
   
-  getMoonCount( userAddress: string ): Observable<any> {
+  getMoonCount( userAddress: string ): Promise<any> {
     const params = { userAddress };
     const url = `${baseURL}allArtistBanners`;
 
-    return this.httpClient.get( url,{ headers: this.headers,params } );
+    return this.httpClient.get( url,{ headers: this.headers,params } ).toPromise();
   } 
 
   /***** Artist pages apis *****/
