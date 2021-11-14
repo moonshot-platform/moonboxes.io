@@ -54,41 +54,41 @@ export class HttpApiService {
   submitBet( data: any ): Observable<any> {
     const url = `${baseURL}userBid`;
 
-    return this.httpClient.post( url, data, { headers:this.headers } );
+    return this.httpClient.post( url, data, { headers: this.headers } );
   }
 
   getMaxSupply( userWalletAddress: string ): Observable<any> {
     const params = { userWalletAddress, ArtistwalletAddress: environment.ownerAddress };
     const url = `${baseURL}typeCount`;
 
-    return this.httpClient.get( url, { headers:this.headers, params} );
+    return this.httpClient.get( url, { headers: this.headers, params} );
   }
 
   getUserBetData( data: any ): Observable<any> {
     const params = { userAddress: data };
     const url = `${baseURL}userBetData`;
 
-    return this.httpClient.get( url, { headers:this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } );
   }
 
   getUserInventory( data: any ): Observable<any> {
     const params = { userAddress: data.userAddress, NSFW: data.nsfwstatus };
     const url = `${baseURL}userData`;
 
-    return this.httpClient.get( url, { headers:this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } );
   }
 
   getuserUpcomingNft( data: any ): Observable<any> {
     const params = { userAddress: data.userAddress, nsfw: data.nsfwstatus };
     const url = `${baseURL}userUpcomingNft`;
 
-    return this.httpClient.get( url, { headers:this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } );
   }
 
   verifyBetHash( data: any ): Observable<any> {
     const url = `${baseURL}verifyBetHash`;
 
-    return this.httpClient.post( url, data, { headers:this.headers } );
+    return this.httpClient.post( url, data, { headers: this.headers } );
   }
 
   changeStatusClaim( data: any ): Observable<any> {
@@ -101,7 +101,7 @@ export class HttpApiService {
     const params = { userAddress };
     const url = `${baseURL}allArtistBanners`;
 
-    return this.httpClient.get( url,{ headers:this.headers,params } );
+    return this.httpClient.get( url,{ headers: this.headers,params } );
   } 
 
   /***** Artist pages apis *****/
@@ -109,7 +109,7 @@ export class HttpApiService {
     const params = { NSFW, walletAddress };
     const url = `${baseURL}allArtistBanners`;
 
-    return this.httpClient.get( url, { headers:this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } );
   } 
   
   
