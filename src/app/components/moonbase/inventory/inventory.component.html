@@ -1,30 +1,33 @@
 <section class="custom-scroller">
-  <div *ngIf="!isConnected" class="flex-center w-100 h-100"><p>Connecting Wallet</p></div>
-  <div *ngIf="isConnected && inventoryList?.length == 0 && inventoryListUpcoming?.length == 0" class="flex-center w-100 h-100"><p>No MoonBase NFTs found in your wallet</p></div>
+  <div class="flex-center w-100 h-100 text-center pa20" *ngIf="mainMessage !== null">{{mainMessage}}</div>
   <div class="inner flex-wrap">
-      <div class="box flex-center col pb100" *ngFor="let item of inventoryList; let i = index; trackBy: trackByFn;">
-        <div class="relative nft_img" *ngIf="checkFileType(item['logo_path'])">
-          <img src="{{ item['logo_path'] }}" class="img-fluid" alt="" />
-        </div>
-        <div class="relative nft_img" *ngIf="!checkFileType(item['logo_path'])">
-          <video class="img-fluid" alt="" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
-            <source src="{{ item['logo_path'] }}" />
-          </video>
-        </div>
+      <ng-container *ngFor="let item of inventoryList; let i = index; trackBy: trackByFn;">
+        <div class="box flex-center col pb100" *ngIf="!(this.isNSFWStatus && item['NSFW'])">
+          
+          <div class="relative nft_img" *ngIf="fileTypeIsImage(item['logo_path'])">
+            <img src="{{ item['logo_path'] }}" class="img-fluid" alt="" />
+          </div>
 
-        <div class="text-center">
-          <p class="p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
-          <a (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</a>
+          <div class="relative nft_img" *ngIf="!fileTypeIsImage(item['logo_path'])">
+            <video class="img-fluid" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
+              <source src="{{ item['logo_path'] }}" />
+            </video>
+          </div>
+
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
+            <a (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</a>
+          </div>
         </div>
-      </div>
+      </ng-container>
 
       <!------ List  -->
       <div id="attribute-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[selectedIndex]">
         <div class="flex1 flex-center flex-col flex-align-start">
           <div class="relative flex-col attribute-img">
-            <img *ngIf="checkFileType(lootBoxDetailsAttributes[selectedIndex].logo_path)" src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" class="img-fluid mb30" alt="" />
+            <img *ngIf="fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" class="img-fluid mb30" alt="" />
             
-            <video class="img-fluid mb30" alt="" *ngIf="!checkFileType(lootBoxDetailsAttributes[selectedIndex].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
+            <video class="img-fluid mb30" alt="" *ngIf="!fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
               <source src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" />
             </video>
 

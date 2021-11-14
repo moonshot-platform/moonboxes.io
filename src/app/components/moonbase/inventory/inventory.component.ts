@@ -7,6 +7,11 @@ import { SocialShareComponent } from '../modal-for-transaction/social-share/soci
 import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
 import { Observable, Observer } from 'rxjs';
 
+enum MESSAGES {
+  IDLE = 'Connecting wallet',
+  EMPTY_WALLET = 'No MoonBase NFTs found in your wallet',
+};
+
 @Component({
   selector: 'app-inventory',
   templateUrl: './inventory.component.html',
@@ -14,8 +19,6 @@ import { Observable, Observer } from 'rxjs';
 })
 export class InventoryComponent implements OnInit {
 
-  sampleList = [ { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/190520293.png", "name": "artist3 #1", "description": "artist3 #1 data", "revealDate": "2021-11-12 07:26:10", "NSFW": false, "total": 2, "set": "Wood", "properties": [ { "key": "cxvx", "value": "dfsdfsd" }, { "key": "fdgd rgtd", "value": "dfg dfg" } ], "nftId": 90763, "rarity": "Common", "id": 244, "isRewardAvailable": false }, { "logo_path": "http://codetentacles-006-site3.htempurl.com/nft/images/1628163582.gif", "name": "dffggfgh ghgh", "description": "gjghdsa asdgh", "revealDate": "2021-10-26 14:52:41", "NSFW": false, "total": 4, "set": "Wood", "properties": [], "nftId": 1941, "rarity": "Common", "id": 226, "isRewardAvailable": false } ];
-  
   static readonly routeName: string = 'inventory';
 
   data: any;
@@ -33,6 +36,8 @@ export class InventoryComponent implements OnInit {
   address = "";
   selectedIndex = -1;
 
+  mainMessage: string = MESSAGES.IDLE;
+
   constructor(private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService, private toastrService: ToastrService,
     public dialog: MatDialog) {
@@ -43,6 +48,7 @@ export class InventoryComponent implements OnInit {
     this.walletConnectService.init();
     this.isNSFWStatus = this.httpApi.getNSFWStatus();
     this.checkNSFWStatus();
+
     setTimeout(async () => {
       this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
@@ -60,13 +66,9 @@ export class InventoryComponent implements OnInit {
       nsfwstatus: this.isNSFWStatus
     }).subscribe((response: any) => {
       if (response.isSuccess) {
-        this.inventoryList = response.data.data;
-        // this.inventoryList = this.sampleList;
-        // this.inventoryList = [];
-        // this.inventoryList[0].NSFW = true;
-        // console.log(this.inventoryList);
-      }
-      else {
+        this.inventoryList = response.data.data ?? [];
+        this.mainMessage = this.inventoryList.length == 0 ? MESSAGES.EMPTY_WALLET : null;
+      } else {
         this.toastrService.error("something went wrong");
       }
     });
@@ -84,8 +86,6 @@ export class InventoryComponent implements OnInit {
       }
     });
   }
-
-
 
   getImagePath(type) {
     if (type == "Wood") {
@@ -187,18 +187,15 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  checkFileType(url: string) {
-    const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
+  fileTypeIsImage(url: string) {
+    const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
+    const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
 
-    if (images.includes(extension)) {
-      return "true"
-    } else if (videos.includes(extension)) {
-      return false;
-    }
+    if (images.includes(extension)) return true;
+
     return false;
   }
 
@@ -236,7 +233,7 @@ export class InventoryComponent implements OnInit {
     console.log(data.logo_path);
     this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
       //console.log(base64data);
-      this.base64Image = "data:image/jpg;base64," + base64data;
+      this.base64Image = 'data:image/jpg;base64,' + base64data;
       // save image to disk
       var link = document.createElement("a");
 
