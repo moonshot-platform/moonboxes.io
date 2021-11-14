@@ -1,8 +1,12 @@
+import { Observable, Subject } from 'rxjs';
+
 export class LocalStorageService {
 
     public readonly NSFW_KEY: string = 'nsfw';
     public readonly WALLET_KEY: string = 'wallet';
     public readonly ADDRESS_KEY: string = 'address';
+
+    private subjectNSFW = new Subject<boolean>();
 
     set(key: string, val: any): void {
         localStorage.setItem( key, val );
@@ -13,11 +17,16 @@ export class LocalStorageService {
     }
 
     remove(key: string): void {
-        localStorage.remove( key );
+        localStorage.removeItem( key );
     }
 
     setNSFW(state: boolean): void {
         localStorage.setItem( this.NSFW_KEY, JSON.stringify( state ) );
+        this.subjectNSFW.next(state);
+    }
+
+    whenNSFWToggled(): Observable<any> {
+        return this.subjectNSFW.asObservable();
     }
 
     getNSFW(): boolean {
@@ -33,7 +42,7 @@ export class LocalStorageService {
     }
 
     removeWallet(): void {
-        localStorage.remove( this.WALLET_KEY );
+        localStorage.removeItem( this.WALLET_KEY );
     }
 
     setAddress(address: string): void {

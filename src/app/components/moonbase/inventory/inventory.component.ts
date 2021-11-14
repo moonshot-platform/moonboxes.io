@@ -26,17 +26,14 @@ export class InventoryComponent implements OnInit {
   inventoryList: any;
 
   base64Image: any;
-
-  maxSize: number = 9;
-  inventoryListUpcoming: any;
+  
   lootBoxDetails = [];
   lootBoxDetailsAttributes = [];
-  isNSFWStatus = false;
-  isRarityTooltipActive: boolean = false;
+  
+  toggleState = false;
   isConnected = false;
-  address = "";
-  selectedIndex = -1;
 
+  selectedIndex = -1;
   mainMessage: string = MESSAGES.IDLE;
 
   constructor(
@@ -49,61 +46,37 @@ export class InventoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
-    this.isNSFWStatus = this.localStorage.getNSFW();
-    this.checkNSFWStatus();
+    this.toggleState = this.localStorage.getNSFW();
 
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
-      });
-      if (this.data !== undefined && this.data.address != undefined) {
+    this.localStorage.whenNSFWToggled().subscribe( (toggleState) => {
+      this.toggleState = toggleState;
+    } );
+    
+    this.walletConnectService.getData().subscribe((data) => {
+      this.data = data ?? {};
+
+      if( Object.keys(this.data).length > 0 ) {
         this.getUserData();
+        this.isConnected = this.walletConnectService.isWalletConnected();
       }
-      this.isConnected = this.walletConnectService.isWalletConnected();
-      this.address = this.walletConnectService.getAccount();
-    }, 1000);
+    });
   }
+
   getUserData() {
+
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
-      nsfwstatus: this.isNSFWStatus
-    }).subscribe((response: any) => {
-      if (response.isSuccess) {
+      nsfwstatus: this.toggleState
+    }).then((response: any) => {
+      const {isSuccess, status} = response;
+
+      if (isSuccess && status === 200) {
         this.inventoryList = response.data.data ?? [];
         this.mainMessage = this.inventoryList.length == 0 ? MESSAGES.EMPTY_WALLET : null;
       } else {
         this.toastrService.error("something went wrong");
       }
     });
-
-    this.httpApi.getuserUpcomingNft({
-      userAddress: this.data.address,
-      nsfwstatus: this.isNSFWStatus
-    }).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.inventoryListUpcoming = response.data.data;
-
-      }
-      else {
-        this.toastrService.error("something went wrong");
-      }
-    });
-  }
-
-  getImagePath(type) {
-    if (type == "Wood") {
-      return this.lootBoxDetails[0].img;
-    }
-    else if (type == "Silver") {
-      return this.lootBoxDetails[1].img;
-    }
-    else if (type == "Gold") {
-      return this.lootBoxDetails[2].img;
-    }
-    else {
-      return this.lootBoxDetails[3].img;
-    }
   }
 
   setSelected(index: number, item: any) {
@@ -172,19 +145,6 @@ export class InventoryComponent implements OnInit {
     }
     catch (e) {
       this.lootBoxDetailsAttributes[index].disabled = false;
-    }
-  }
-
-
-  checkNSFWStatus() {
-    this.checkNSFWStatusFromStorage();
-  }
-
-  checkNSFWStatusFromStorage() {
-    let tempstatus = this.localStorage.getNSFW();
-    if (this.isNSFWStatus != tempstatus && this.isNSFWStatus != undefined) {
-      this.isNSFWStatus = tempstatus;
-      this.getUserData();
     }
   }
 

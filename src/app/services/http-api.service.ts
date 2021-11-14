@@ -71,11 +71,11 @@ export class HttpApiService {
     return this.httpClient.get( url, { headers: this.headers, params } );
   }
 
-  getUserInventory( data: any ): Observable<any> {
+  getUserInventory( data: any ): Promise<any> {
     const params = { userAddress: data.userAddress, NSFW: data.nsfwstatus };
     const url = `${baseURL}userData`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } ).toPromise();
   }
 
   getuserUpcomingNft( data: any ): Observable<any> {
