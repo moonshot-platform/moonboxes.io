@@ -1,13 +1,17 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
 import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
 import { Observable, Observer } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
+
+enum MESSAGES {
+  IDLE = 'Connecting wallet',
+  EMPTY_WALLET = 'No MoonBase NFTs found in your wallet',
+};
 
 @Component({
   selector: 'app-inventory',
@@ -15,7 +19,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
-  
+
   static readonly routeName: string = 'inventory';
 
   data: any;
@@ -23,7 +27,6 @@ export class InventoryComponent implements OnInit {
 
   base64Image: any;
 
-  p: number = 1;
   maxSize: number = 9;
   inventoryListUpcoming: any;
   lootBoxDetails = [];
@@ -31,10 +34,13 @@ export class InventoryComponent implements OnInit {
   isNSFWStatus = false;
   isRarityTooltipActive: boolean = false;
   isConnected = false;
-  isWrongNetwork: boolean = false;
   address = "";
+  selectedIndex = -1;
 
-  constructor(private walletConnectService: WalletConnectService,
+  mainMessage: string = MESSAGES.IDLE;
+
+  constructor(
+    private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService, 
     private localStorage: LocalStorageService,
     private toastrService: ToastrService,
@@ -46,63 +52,57 @@ export class InventoryComponent implements OnInit {
     this.walletConnectService.init();
     this.isNSFWStatus = this.localStorage.getNSFW();
     this.checkNSFWStatus();
+
     setTimeout(async () => {
-      
       this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
-        
-        this.isConnected = this.walletConnectService.isWalletConnected();
-        this.address = this.walletConnectService.getAccount();
       });
-
-      if (this.data !== undefined && this.data.address != undefined)
+      if (this.data !== undefined && this.data.address != undefined) {
         this.getUserData();
-      
-      if (this.isEmpty(this.data)) {
-        this.isWrongNetwork = true;
-        this.toastrService.error("You are on the wrong network");
       }
-
+      this.isConnected = this.walletConnectService.isWalletConnected();
+      this.address = this.walletConnectService.getAccount();
     }, 1000);
   }
-  isEmpty(obj) {
-    return Object.keys(obj).length === 0 && obj.constructor === Object;
-  }
-
   getUserData() {
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
       nsfwstatus: this.isNSFWStatus
     }).subscribe((response: any) => {
-      if (response.isSuccess)
-        this.inventoryList = response.data.data;
-      else
+      if (response.isSuccess) {
+        this.inventoryList = response.data.data ?? [];
+        this.mainMessage = this.inventoryList.length == 0 ? MESSAGES.EMPTY_WALLET : null;
+      } else {
         this.toastrService.error("something went wrong");
+      }
     });
 
     this.httpApi.getuserUpcomingNft({
       userAddress: this.data.address,
       nsfwstatus: this.isNSFWStatus
     }).subscribe((response: any) => {
-      if (response.isSuccess)
+      if (response.isSuccess) {
         this.inventoryListUpcoming = response.data.data;
-      else
+
+      }
+      else {
         this.toastrService.error("something went wrong");
+      }
     });
   }
 
-
-
-  getImagePath(type: string) {
-    switch( type ) {
-      case 'Wood':
-        return this.lootBoxDetails[0].img;
-      case 'Silver':
-        return this.lootBoxDetails[1].img;
-      case 'Gold':
-        return this.lootBoxDetails[2].img;
-      default:
-        return this.lootBoxDetails[3].img;
+  getImagePath(type) {
+    if (type == "Wood") {
+      return this.lootBoxDetails[0].img;
+    }
+    else if (type == "Silver") {
+      return this.lootBoxDetails[1].img;
+    }
+    else if (type == "Gold") {
+      return this.lootBoxDetails[2].img;
+    }
+    else {
+      return this.lootBoxDetails[3].img;
     }
   }
 
@@ -110,13 +110,16 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributes = [];
     this.lootBoxDetailsAttributes[index] = item;
     this.lootBoxDetailsAttributes[index].disabled = false;
+    this.selectedIndex = index;
 
     if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
       const score = this.lootBoxDetailsAttributes[index].rarityScore;
       this.lootBoxDetailsAttributes[index].rarity = `Rarity score: ${score}`;
     }
     
-    setTimeout(() => this.scrollToElement('', 'attribute-info'), 100);
+    setTimeout(() => {
+      this.scrollToElement('', 'attribute-info');
+    }, 100);
   }
 
   closeAttributes() {
@@ -130,15 +133,20 @@ export class InventoryComponent implements OnInit {
       userAddress: this.data.address,
       nftId: details.nftId
     }).subscribe((response) => {
-      if (response.isSuccess)
+      if (response.isSuccess) {
         this.claimRewardTransaction(response.data, details.nftId, details.total, index);
-      else
+      }
+      else {
         this.lootBoxDetailsAttributes[index].disabled = false;
-    });
+      }
+
+    })
+
   }
 
   async claimRewardTransaction(data: any, nftId, supply: Number, index: any) {
     try {
+      //debugger
       var txnstatus: any = await this.walletConnectService.claimRewardTransaction(
         data.junkAmount, nftId, supply, data.id, data.id, data.signHash
       );
@@ -153,10 +161,12 @@ export class InventoryComponent implements OnInit {
           if (response.isSuccess) {
             this.lootBoxDetailsAttributes[index].isRewardAvailable = false;
             this.httpApi.showToastr(response.data.message, true);
-          } else {
+          }
+          else {
             this.lootBoxDetailsAttributes[index].disabled = false;
             this.httpApi.showToastr(response.data.message, false);
           }
+          //debugger
         })
       }
     }
@@ -167,7 +177,7 @@ export class InventoryComponent implements OnInit {
 
 
   checkNSFWStatus() {
-    setInterval(() => this.checkNSFWStatusFromStorage(), 4000);
+    this.checkNSFWStatusFromStorage();
   }
 
   checkNSFWStatusFromStorage() {
@@ -178,18 +188,15 @@ export class InventoryComponent implements OnInit {
     }
   }
 
-  checkFileType(url: string) {
-    const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
+  fileTypeIsImage(url: string) {
+    const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
+    const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
 
-    if (images.includes(extension)) {
-      return "true"
-    } else if (videos.includes(extension)) {
-      return false;
-    }
+    if (images.includes(extension)) return true;
+
     return false;
   }
 
@@ -227,7 +234,7 @@ export class InventoryComponent implements OnInit {
     console.log(data.logo_path);
     this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
       //console.log(base64data);
-      this.base64Image = "data:image/jpg;base64," + base64data;
+      this.base64Image = 'data:image/jpg;base64,' + base64data;
       // save image to disk
       var link = document.createElement("a");
 
