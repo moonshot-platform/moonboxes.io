@@ -232,18 +232,6 @@ textarea {
     display: none !important;
 }
 
-svg#attibute_close {
-    cursor: pointer;
-    path {
-        fill: #d5a642;
-    }
-    &:hover {
-        path {
-            fill: #ffffff;
-        }
-    }
-}
-
 .desktop-md-block {
     display: block !important;
 }
@@ -310,6 +298,7 @@ svg#attibute_close {
     .grid-4 {
         flex-basis: 100%;
     }
+
     .d-block {
         display: block;
     }
