@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
 import { ethers } from 'ethers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
@@ -46,7 +46,7 @@ export class WalletConnectService {
   private readonly DISCONNECT: string = 'disconnect';
   private readonly ETH_REQUEST_ACCOUNTS: string = 'eth_requestAccounts';
 
-  public data = new Subject<any>();
+  public data = new BehaviorSubject<any>({});
   public tokenomicsData: any;
   public oldPancakeAddress = true;
   private isConnected = false;

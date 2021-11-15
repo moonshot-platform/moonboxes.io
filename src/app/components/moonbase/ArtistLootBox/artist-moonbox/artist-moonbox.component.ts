@@ -35,7 +35,8 @@ export class ArtistMoonboxComponent implements OnInit {
 
   constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService, public dialog: MatDialog,
     public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
-      this.lootBoxDetails=httpApi.lootBoxDetails;
+    this.lootBoxDetails = httpApi.lootBoxDetails;
+
     this.inputnumber[0] = 0;
     this.inputnumber[1] = 0;
     this.inputnumber[2] = 0;

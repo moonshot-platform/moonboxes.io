@@ -26,8 +26,7 @@ export class UpcomingComponent implements OnInit {
 
   NSFWToggleState = false;
   
-  lootBoxDetailsAttributes = [];
-  lootBoxDetailsAttributesMobile = [];
+  lootBoxDetails = [];
   artistDetails: any;
 
   data: any;
@@ -75,7 +74,7 @@ export class UpcomingComponent implements OnInit {
   }
 
   changeTab(tabIndex: DROPS_CATEGORY) {
-    this.closeAttributes();
+    this.clearLootboxDetails();
     this.currentCategory = tabIndex;
 
     const categoryName = (Object.values(DROPS_CATEGORY)[tabIndex]).toString().toLowerCase();
@@ -87,17 +86,11 @@ export class UpcomingComponent implements OnInit {
 
   async getConnectedAccount() {
     this.walletConnectService.getData().subscribe((data) => {
-      if (this.data != data && data != undefined && data.address != undefined) {
         this.data = data;
         this.address = data.address;
-
-        this.getAllCollections();
-      }
     });
 
-    if (this.data == undefined || this.data.address == undefined) {
-      this.getAllCollections();
-    }
+    this.getAllCollections();
   }
 
   async getAllCollections() {
@@ -114,27 +107,17 @@ export class UpcomingComponent implements OnInit {
 
   setSelected(index: number, item: any) {
     this.selectedIndex = index;
-    this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributes[index] = item;
-    this.lootBoxDetailsAttributes[index].disabled = false;
+
+    this.clearLootboxDetails();
+    this.lootBoxDetails[index] = item;
+    this.lootBoxDetails[index].disabled = false;
     setTimeout(() => {
       this.scrollToElement('', 'collection-info');
     }, 100);
   }
 
-  setSelectedMobile(index: number, item: any) {
-    this.selectedIndex = index;
-    this.lootBoxDetailsAttributesMobile = [];
-    this.lootBoxDetailsAttributesMobile[index] = item;
-    this.lootBoxDetailsAttributesMobile[index].disabled = false;
-    setTimeout(() => {
-      this.scrollToElement('', 'collection-info');
-    }, 100);
-  }
-
-  closeAttributes() {
-    this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributesMobile = [];
+  clearLootboxDetails() {
+    this.lootBoxDetails = [];
   }
 
   scrollToElement(page: string, fragment: string): void {
@@ -144,7 +127,11 @@ export class UpcomingComponent implements OnInit {
     }
   }
 
-  trackByFn(index, item) {
+  trackByFn(index: number, item: any) {
     return item.title;
+  }
+
+  getButtonType( tabButton: DROPS_CATEGORY ) {
+    return this.currentCategory === tabButton ? 'button' : 'outlined-button';
   }
 }

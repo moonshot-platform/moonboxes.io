@@ -17,26 +17,10 @@ export class HttpApiService {
   private subject = new Subject();
 
   public lootBoxDetails: any = [
-    {
-      img: 'assets/media/images/moonbox/wood.png',
-      name: "Wood",
-      value: "0.5B"
-    },
-    {
-      img: 'assets/media/images/moonbox/silver.png',
-      name: "Silver",
-      value: "1B"
-    },
-    {
-      img: 'assets/media/images/moonbox/gold.png',
-      name: "Gold",
-      value: "2B"
-    },
-    {
-      img: 'assets/media/images/moonbox/diamond.png',
-      name: "Diamond",
-      value: "10B"
-    }
+    { name: 'Wood' },
+    { name: 'Silver' },
+    { name: 'Gold' },
+    { name: 'Diamond' }
   ];
 
   headers = new HttpHeaders()

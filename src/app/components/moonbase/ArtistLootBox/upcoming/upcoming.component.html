@@ -2,21 +2,20 @@
     <section class="scroller">
         <div class="pt-5 flex1 h-100 flex-space-between align-self">
             <div class="flex-col flex1">
-                <div class="flex flex-col flex2">
+                <div class="flex flex-col">
                     <div class="flex">
-                        <div class="flex1 flex flex-col flex-center">
-                            <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
+                        <div class="flex flex-col w100 flex-center">
+                            <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops</p>
                             <div class="tabs-container flex flex-xs-col mb30">
-                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.RECENT ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.RECENT)">Recent</a>
-                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.LIVE ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.LIVE)">Live</a>
-                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.UPCOMING ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.UPCOMING)">Upcoming</a>
+                                <a class="tab" [ngClass]="getButtonType(dropsCategory.RECENT)" (click)="changeTab(dropsCategory.RECENT)">Recent</a>
+                                <a class="tab" [ngClass]="getButtonType(dropsCategory.LIVE)" (click)="changeTab(dropsCategory.LIVE)">Live</a>
+                                <a class="tab" [ngClass]="getButtonType(dropsCategory.UPCOMING)" (click)="changeTab(dropsCategory.UPCOMING)">Upcoming</a>
                             </div>
                         </div>
                     </div>
-
                 </div>
-                <div class="flex flex-col flex2">
-                    
+
+                <div class="flex flex-col">    
                     <div class="upcoming flex flex-wrap wrap">
                             <div *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;" class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
@@ -60,29 +59,29 @@
                             </div>
 
                             <!------ List  -->
-                            <div class="collection-info" *ngIf="lootBoxDetailsAttributes[selectedIndex] != undefined">
+                            <div id="collection-info" class="collection-info" *ngIf="lootBoxDetails[selectedIndex] != undefined">
                                 <div class="collection-inner">
                                     <div class="left relative flex-col">
 
-                                        <img src="{{lootBoxDetailsAttributes[selectedIndex].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
+                                        <img src="{{lootBoxDetails[selectedIndex].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
-                                                <p class="color-primary mb10 mt10">{{lootBoxDetailsAttributes[selectedIndex].minPrice}} BNB</p>
+                                                <p class="color-primary mb10 mt10">{{lootBoxDetails[selectedIndex].minPrice}} BNB</p>
                                             </div>
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10">Availability</p>
                                                 <p class="color-primary mb10">
-                                                    {{lootBoxDetailsAttributes[selectedIndex].supply}}/{{lootBoxDetailsAttributes[selectedIndex].TotalMaxSupply}}</p>
+                                                    {{lootBoxDetails[selectedIndex].supply}}/{{lootBoxDetails[selectedIndex].TotalMaxSupply}}</p>
                                             </div>
                                         </div>
                                         <div class="flex justify-space-between">
                                             <a *ngIf="currentCategory === dropsCategory.UPCOMING" class="button text-inherit mb20 coundown-button w100">
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                                <app-countdown-timer [date]="lootBoxDetailsAttributes[selectedIndex].revealDate"></app-countdown-timer>
+                                                <app-countdown-timer [date]="lootBoxDetails[selectedIndex].revealDate"></app-countdown-timer>
                                             </a>
 
-                                            <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetailsAttributes[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[selectedIndex].walletAddress] ">Buy
+                                            <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetails[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetails[selectedIndex].walletAddress] ">Buy
                                                 Moonbox</a>
                                         </div>
                                     </div>
@@ -93,11 +92,11 @@
 
                                         <div class="flex justify-space-between flex-align-start border-bottom">
                                             <div class="flex flex-col">
-                                                <p class="p18 w700 mt10">{{lootBoxDetailsAttributes[selectedIndex].name}}</p>
-                                                <p class="mb20 mt10">{{lootBoxDetailsAttributes[selectedIndex].rarity}}
+                                                <p class="p18 w700 mt10">{{lootBoxDetails[selectedIndex].name}}</p>
+                                                <p class="mb20 mt10">{{lootBoxDetails[selectedIndex].rarity}}
                                                 </p>
                                             </div>
-                                            <div class="flex-center" (click)="closeAttributes()">
+                                            <div class="flex-center" (click)="clearLootboxDetails()">
                                                 <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                                     <title>Combined Shape</title>
                                                     <desc>Created with Sketch.</desc>
@@ -111,36 +110,36 @@
                                             </div>
                                         </div>
 
-                                        <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetailsAttributes[selectedIndex]?.description}}</textarea>
+                                        <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetails[selectedIndex]?.description}}</textarea>
 
                                         <div class="social-icons-container flex-center flex-wrap justify-space-between w-100">
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].discord}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].discord}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/discord.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].twitter}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].twitter}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/twitter.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].telegram}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].telegram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/telegram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].instagram}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].instagram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/instagram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].opensea}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].opensea}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/opensea.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].website}}" target="_blank">
+                                                <a href="{{lootBoxDetails[selectedIndex].website}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/global.svg">
                                                 </a>
                                             </div>
@@ -152,26 +151,17 @@
 
                                     <div class="flex justify-space-between flex-align-start border-bottom">
                                         <div class="flex flex-col">
-                                            <p class="p18 w700">{{lootBoxDetailsAttributes[selectedIndex].name}}</p>
-                                            <p class="mb20 mt10">{{lootBoxDetailsAttributes[selectedIndex].rarity}}
+                                            <p class="p18 w700">{{lootBoxDetails[selectedIndex].name}}</p>
+                                            <p class="mb20 mt10">{{lootBoxDetails[selectedIndex].rarity}}
                                             </p>
                                         </div>
-                                        <div class="flex-center" (click)="closeAttributes()">
-                                            <svg id="attibute_close" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                                                <title>Combined Shape</title>
-                                                <desc>Created with Sketch.</desc>
-                                                <g id="Page-1" stroke="none" stroke-width="1" fill="none"
-                                                    fill-rule="evenodd">
-                                                    <path
-                                                        d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
-                                                        id="Combined-Shape" fill="#000000"></path>
-                                                </g>
-                                            </svg>
+                                        <div class="flex-center" (click)="clearLootboxDetails()">
+                                            <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#000"/></svg>
                                         </div>
                                     </div>
 
                                     <p class="mt20 mb20 justify-space-between flex">
-                                        {{lootBoxDetailsAttributes[selectedIndex]?.description}}
+                                        {{lootBoxDetails[selectedIndex]?.description}}
                                     </p>
 
                                 </div>

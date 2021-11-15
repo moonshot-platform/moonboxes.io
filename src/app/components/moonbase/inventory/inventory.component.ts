@@ -43,9 +43,8 @@ export class InventoryComponent implements OnInit {
     private httpApi: HttpApiService, 
     private localStorage: LocalStorageService,
     private toastrService: ToastrService,
-    public dialog: MatDialog) {
-    this.lootBoxDetails = httpApi.lootBoxDetails;
-  }
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.toggleState = this.localStorage.getNSFW();
@@ -198,7 +197,6 @@ export class InventoryComponent implements OnInit {
       }
     });
   }
-
 
   public downloadImage(data: any) {
     console.log(data.logo_path);
