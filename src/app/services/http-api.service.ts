@@ -81,7 +81,7 @@ export class HttpApiService {
   
   getMoonCount( userAddress: string ): Promise<any> {
     const params = { userAddress };
-    const url = `${baseURL}allArtistBanners`;
+    const url = `${baseURL}landingPageData`;
 
     return this.httpClient.get( url,{ headers: this.headers,params } ).toPromise();
   } 
@@ -92,8 +92,7 @@ export class HttpApiService {
     const url = `${baseURL}allArtistBanners`;
 
     return this.httpClient.get( url, { headers: this.headers, params } );
-  } 
-  
+  }
   
   getUpcomingArtistCollections( NSFW: boolean, walletAddress: string ): Observable<any> {
     const params = { NSFW, walletAddress };

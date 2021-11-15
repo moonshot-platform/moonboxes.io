@@ -32,7 +32,7 @@ export class InventoryComponent implements OnInit {
   lootBoxDetails = [];
   lootBoxDetailsAttributes = [];
   
-  toggleState = false;
+  NSFWToggleState = false;
   isConnected = false;
 
   selectedIndex: number;
@@ -47,10 +47,10 @@ export class InventoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.toggleState = this.localStorage.getNSFW();
+    this.NSFWToggleState = this.localStorage.getNSFW();
 
-    this.localStorage.whenNSFWToggled().subscribe( (toggleState) => {
-      this.toggleState = toggleState;
+    this.localStorage.whenNSFWToggled().subscribe( (NSFWToggleState) => {
+      this.NSFWToggleState = NSFWToggleState;
     } );
     
     this.walletConnectService.init();
@@ -75,7 +75,7 @@ export class InventoryComponent implements OnInit {
   getUserData() {
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
-      nsfwstatus: this.toggleState
+      nsfwstatus: this.NSFWToggleState
     }).then((response: any) => {
       const {isSuccess, status} = response;
 
