@@ -141,7 +141,7 @@
                   {{ lootBoxDetailsAttributes[j].description }}
                 </p>
                 <p class="p-white-span-primary p16d14m mb30 mt10">
-                  {{ lootBoxDetailsAttributes[j].rarity }}
+                  Rarity Score: {{ lootBoxDetailsAttributes[j].rarity }}
                 </p>
               </div>
               <div class="flex-center" (click)="closeAttributes()" style="cursor: pointer">
@@ -180,7 +180,7 @@
                 <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[j].properties;trackBy: trackByFn;">
                   <td>{{ propertiesData.key }}</td>
                   <td>{{ propertiesData.value }}</td>
-                  <td>{{ propertiesData.rarity }}%</td>
+                  <td>{{ propertiesData.rarity!==undefined ? propertiesData.rarity : propertiesData.probability }}%</td>
                 </tr>
               </tbody>
             </table>
@@ -311,7 +311,7 @@
                   {{ lootBoxDetailsAttributesMobile[i].description }}
                 </p>
                 <p class="p-white-span-primary p16d14m mb30 mt10">
-                  {{ lootBoxDetailsAttributesMobile[i].rarity }}
+                 Rarity Score: {{ lootBoxDetailsAttributesMobile[i].rarity }}
                 </p>
               </div>
               <div class="flex-center" (click)="closeAttributes()" style="cursor: pointer">
@@ -338,7 +338,7 @@
                   <tr *ngFor="let propertiesData of lootBoxDetailsAttributesMobile[i].properties;trackBy: trackByFn;">
                     <td>{{ propertiesData.key }}</td>
                     <td>{{ propertiesData.value }}</td>
-                    <td>{{ propertiesData.rarity }}%</td>
+                    <td>{{ propertiesData.rarity!==undefined ? propertiesData.rarity : propertiesData.probability }}%</td>
                   </tr>
                 </tbody>
               </table>
