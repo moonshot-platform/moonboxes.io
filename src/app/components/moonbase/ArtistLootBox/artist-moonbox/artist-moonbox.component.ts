@@ -15,7 +15,8 @@ import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/c
 })
 export class ArtistMoonboxComponent implements OnInit {
   current = 0;
-  inputnumber = [];
+  inputnumber = [...Array(5).fill(0)];
+  
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
   popupClosed: boolean = false;
@@ -37,14 +38,7 @@ export class ArtistMoonboxComponent implements OnInit {
     public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
 
-    this.inputnumber[0] = 0;
-    this.inputnumber[1] = 0;
-    this.inputnumber[2] = 0;
-    this.inputnumber[3] = 0;
-    this.inputnumber[4] = 0;
-
     this.artistAddress = this.activatedRoute.snapshot.paramMap.get("artistAddress")
-
   }
 
   ngOnInit(): void {

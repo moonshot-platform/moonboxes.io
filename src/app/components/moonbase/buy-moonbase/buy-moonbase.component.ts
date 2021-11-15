@@ -17,7 +17,7 @@ import { WalletConnectComponent } from '../../base/wallet/connect/connect.compon
 export class BuyMoonbaseComponent implements OnInit {
 
   current = 0;
-  inputnumber = [];
+  inputnumber = [...Array(5).fill(0)];
   public lootboxfloating = ['wood', 'silver', 'gold', 'diamond']
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
@@ -35,15 +35,12 @@ export class BuyMoonbaseComponent implements OnInit {
   fadeOut: boolean = false;
   priceForMoonBox = 0;
 
-  constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService,public dialog: MatDialog,
-    public httpApi: HttpApiService) {
-    this.lootBoxDetails = httpApi.lootBoxDetails;
-    this.inputnumber[0] = 0;
-    this.inputnumber[1] = 0;
-    this.inputnumber[2] = 0;
-    this.inputnumber[3] = 0;
-    this.inputnumber[4] = 0;
-  }
+  constructor(
+    public walletConnectService: WalletConnectService, 
+    private toastrService:ToastrService,
+    public dialog: MatDialog,
+    public httpApi: HttpApiService
+  ) { this.lootBoxDetails = httpApi.lootBoxDetails; }
 
   ngOnInit(): void {
     this.walletConnectService.init();
@@ -103,36 +100,26 @@ export class BuyMoonbaseComponent implements OnInit {
     });
   }
 
-  async getMaxSupply() {
-    this.httpApi.getMaxSupply(this.data?.address).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.supplyDetails = response.data.data;
-        if (this.supplyDetails[this.lootBoxDetails[0].name] > 0)
-          this.inputnumber[1] = 1;
-        if (this.supplyDetails[this.lootBoxDetails[1].name] > 0)
-          this.inputnumber[2] = 1;
-        if (this.supplyDetails[this.lootBoxDetails[2].name] > 0)
-          this.inputnumber[3] = 1;
-        if (this.supplyDetails[this.lootBoxDetails[3].name] > 0)
-          this.inputnumber[4] = 1;
+  getMaxSupply() {
+    this.httpApi.getMaxSupply(this.data?.address).subscribe( ( response: any ) => {
+      if( response.isSuccess ) {
+        this.supplyDetails  = response.data.data;
 
-        this.maxSupply[0] = this.supplyDetails[this.lootBoxDetails[0].name];
-        this.maxSupply[1] = this.supplyDetails[this.lootBoxDetails[1].name];
-        this.maxSupply[2] = this.supplyDetails[this.lootBoxDetails[2].name];
-        this.maxSupply[3] = this.supplyDetails[this.lootBoxDetails[3].name];
+        for (let i = 0; i < this.inputnumber.length ; i++) {
+          if( this.supplyDetails[ this.lootBoxDetails[i].name ] > 0 )
+            this.inputnumber[i+1] = 1;
+
+          this.maxSupply[i] = this.supplyDetails[this.lootBoxDetails[i].name];
+        }
       }
-    });
-
-
+    } )
   }
 
   buyMoonBase(index: number) {
-    if (this.data === undefined || this.data.address === undefined) {
+    if (this.data === undefined || this.data.address === undefined)
       this.openDialog();
-    }
-    else {
+    else
       this.submitBetToContract(index);
-    }
   }
 
   async submitBetToContract(index: number) {
