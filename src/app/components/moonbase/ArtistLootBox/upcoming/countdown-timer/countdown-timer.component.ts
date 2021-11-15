@@ -1,11 +1,8 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
-import {
-  formatDate
-} from '@angular/common';
+import { Component, OnInit, Input } from '@angular/core';
+import { formatDate } from '@angular/common';
+
+import { interval, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-countdown-timer',
@@ -16,11 +13,11 @@ export class CountdownTimerComponent implements OnInit {
   
   @Input() date: string;
 
-  interval: number;
-  timer: string;
+  public timer: string;
+  private _interval: Subscription;
 
   ngOnDestroy() {
-    clearInterval( this.interval );
+    this._interval.unsubscribe();
   }
 
   ngOnInit(): void {
@@ -31,8 +28,8 @@ export class CountdownTimerComponent implements OnInit {
 
     const targetDateTime = new Date( formatDate( date, format, local ) ).getTime();
     
-    this.interval = window.setInterval( () => {
-      
+    this._interval = interval( 1000 ).subscribe( () => {
+
       // Get now DateTime
       const now = new Date().getTime();
 
@@ -47,9 +44,8 @@ export class CountdownTimerComponent implements OnInit {
 
       this.timer = `${d} D : ${h} H : ${m} M : ${s} S`;
 
-      if ( remainingTime <= 0 ) clearInterval( this.interval );
-    },  1000 );
-
+      if ( remainingTime <= 0 ) this._interval.unsubscribe();
+    } );
   }
 
 }
