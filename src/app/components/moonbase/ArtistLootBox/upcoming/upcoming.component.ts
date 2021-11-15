@@ -113,6 +113,7 @@ export class UpcomingComponent implements OnInit {
   }
 
   setSelected(index: number, item: any) {
+    this.selectedIndex = index;
     this.lootBoxDetailsAttributes = [];
     this.lootBoxDetailsAttributes[index] = item;
     this.lootBoxDetailsAttributes[index].disabled = false;
@@ -122,6 +123,7 @@ export class UpcomingComponent implements OnInit {
   }
 
   setSelectedMobile(index: number, item: any) {
+    this.selectedIndex = index;
     this.lootBoxDetailsAttributesMobile = [];
     this.lootBoxDetailsAttributesMobile[index] = item;
     this.lootBoxDetailsAttributesMobile[index].disabled = false;

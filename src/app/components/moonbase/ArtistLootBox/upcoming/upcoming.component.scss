@@ -80,6 +80,7 @@ section.upcoming-container {
 
 .upcoming {
     padding: 0 1rem;
+    justify-content: center;
 }
 
 .upcoming .full_banner {
@@ -97,6 +98,7 @@ section.upcoming-container {
         @extend %flex-center;
         @extend %max-width-center;
 
+        align-items: flex-start;
         border: 1px solid;
         padding: 1rem;
         box-sizing: border-box;
