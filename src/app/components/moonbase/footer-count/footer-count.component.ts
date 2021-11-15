@@ -28,19 +28,16 @@ export class FooterCountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        if (data != undefined && data.address != undefined && this.data != data) {
-          this.data = data;
-          this.isConnected = true;
-          if (this.data.networkId.chainId == environment.chainId) {
-            this.getMoonShootBalance();
-          }
+    this.walletConnectService.getData().subscribe((data) => {
+      if (data != undefined && data.address != undefined && this.data != data) {
+        this.data = data;
+        this.isConnected = true;
+
+        if (this.data.networkId.chainId == environment.chainId) {
+          this.getMoonShootBalance();
         }
-      });
-
-
-    }, 1000);
+      }
+    });
   }
 
   async getTier(moonBalance: number) {
@@ -60,20 +57,14 @@ export class FooterCountComponent implements OnInit {
     }
   }
 
-  async convertBalanceWithDecimals( balance: number ) {
-    this.balance = balance / 1e9;
-    this.balance = Math.trunc(this.balance);
-    this.balance = this.balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
   async getMoonShootBalance() {
-    const balance = Number( await this.walletConnectService.getBalanceOfUser(this.data.address) );
+    const balance = await this.walletConnectService.getUserBalance( this.data.address );
     
     await this.getTier( balance );
 
     this.moonCountData = (await this.httpApi.getMoonCount(this.data.address)).data;
     
-    this.convertBalanceWithDecimals( balance );
+    this.balance = this.walletConnectService.convertBalance( balance );
   }
 
   ngOnDestroy() {

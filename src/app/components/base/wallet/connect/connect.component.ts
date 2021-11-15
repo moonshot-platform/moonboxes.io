@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { MatDialogRef } from '@angular/material/dialog';
 
@@ -7,26 +7,20 @@ import { MatDialogRef } from '@angular/material/dialog';
   templateUrl: './connect.component.html',
   styleUrls: ['./connect.component.scss']
 })
-export class WalletConnectComponent implements OnInit {
-  data: any;
+export class WalletConnectComponent {
+  
+  constructor(
+    private walletConnectService: WalletConnectService,
+    public parentDialogRef : MatDialogRef<WalletConnectComponent>
+  ) { }
 
-  constructor(private walletConnectService:WalletConnectService,
-    public parentDialogRef : MatDialogRef<WalletConnectComponent>,) { }
-
-  ngOnInit(): void {
-   
-  }
-
-  async connectToMetamask()
-  {
+  async connectToMetamask() {
     this.parentDialogRef.close();
-    await this.walletConnectService.connectToWallet(); 
+    this.walletConnectService.connectToWallet(); 
   }
 
-  async connectToWalletConnect()
-  {
+  async connectToWalletConnect() {
     this.parentDialogRef.close();
-    await this.walletConnectService.connectToWalletConnect();
+    this.walletConnectService.connectToWalletConnect();
   }
-
 }

@@ -10,7 +10,9 @@ import { Observable, Observer } from 'rxjs';
 
 enum MESSAGES {
   IDLE = 'Connecting wallet',
-  EMPTY_WALLET = 'No MoonBase NFTs found in your wallet',
+  EMPTY_WALLET = 'No MoonBase NFTs found in your wallet.',
+  UNABLE_TO_CONNECT = 'Unable to connect to your wallet. Please check your wallet network and try again.',
+  NO_WALLET_DATA_FROM_SERVER = 'Could not receive wallet data from the server.',
 };
 
 @Component({
@@ -33,7 +35,7 @@ export class InventoryComponent implements OnInit {
   toggleState = false;
   isConnected = false;
 
-  selectedIndex = -1;
+  selectedIndex: number;
   mainMessage: string = MESSAGES.IDLE;
 
   constructor(
@@ -52,18 +54,26 @@ export class InventoryComponent implements OnInit {
       this.toggleState = toggleState;
     } );
     
-    this.walletConnectService.getData().subscribe((data) => {
-      this.data = data ?? {};
+    this.walletConnectService.init();
+    setTimeout( () => {
 
-      if( Object.keys(this.data).length > 0 ) {
-        this.getUserData();
-        this.isConnected = this.walletConnectService.isWalletConnected();
-      }
-    });
+      
+      this.walletConnectService.getData().subscribe((data) => {
+        this.data = data ?? {};
+
+        if( Object.keys(this.data).length > 0 ) {
+          this.isConnected = this.walletConnectService.isWalletConnected();
+          this.getUserData();
+        } else {
+          this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
+        }
+      });
+
+    }, 100);
+    
   }
 
   getUserData() {
-
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
       nsfwstatus: this.toggleState
@@ -180,7 +190,7 @@ export class InventoryComponent implements OnInit {
   }
 
   openTransferDialog(data: any) {
-    let dialogRef = this.dialog.open(TransferComponent, {
+    this.dialog.open(TransferComponent, {
       width: 'auto',
       data: {
         details: data,

@@ -74,7 +74,7 @@
             <div class="flex1 flex-col flex-center">
                 <div class="relative">
                     <div class="relative moonbox wood"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    <img *ngIf="!isConnected  || (balance < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
                     <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
@@ -118,7 +118,7 @@
             <div class="flex1 flex-center flex-col">
                 <div class="relative">
                     <div class="relative moonbox silver"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
                     <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
@@ -161,7 +161,7 @@
             <div class="flex1 flex-col flex-center">
                 <div class="relative">
                     <div class="relative moonbox gold"></div>
-                    <img *ngIf="!isConnected   || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    <img *ngIf="!isConnected   || (balance/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
                     <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
@@ -204,7 +204,7 @@
             <div class="flex1 flex-center flex-col">
                 <div class="relative">
                     <div class="relative moonbox diamond"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
                     <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
@@ -326,7 +326,7 @@
             <div class="relative">
                 <div class="relative moonbox {{lootboxfloating[current]}}"></div>
                 <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class=" lock">
+                <img *ngIf="!isConnected  || (balance/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class=" lock">
             </div>
             <div class="round-mini-button" (click)="next()">
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>

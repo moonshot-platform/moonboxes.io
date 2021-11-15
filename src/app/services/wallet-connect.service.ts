@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
-import { ethers, BigNumber } from 'ethers';
+import { ethers } from 'ethers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
@@ -42,13 +42,11 @@ const provider = new WalletConnectProvider(providerOptions);
 export class WalletConnectService {
 
   private readonly ACCOUNTS_CHANGED: string = 'accountsChanged';
-  private readonly NETWORK_CHANGED: string = 'networkChanged';
+  private readonly CHAIN_CHANGED: string = 'chainChanged';
   private readonly DISCONNECT: string = 'disconnect';
+  private readonly ETH_REQUEST_ACCOUNTS: string = 'eth_requestAccounts';
 
-  private toggle = new BehaviorSubject<any>({});
-  public data = new BehaviorSubject<any>({});
-  private interval: any;
-  private serverError: boolean = false;
+  public data = new Subject<any>();
   public tokenomicsData: any;
   public oldPancakeAddress = true;
   private isConnected = false;
@@ -64,15 +62,7 @@ export class WalletConnectService {
     private windowRef: WindowRefService, 
     private toastrService: ToastrService,
     private localStorageService: LocalStorageService
-  ) { }
-
-  onToggle(state?: boolean) {
-    this.toggle.next(state);
-  }
-
-  whenToggled(): Observable<any> {
-    return this.toggle.asObservable();
-  }
+  ) {}
 
   updateData(state: any) {
     this.tokenomicsData = state;
@@ -83,23 +73,30 @@ export class WalletConnectService {
     return this.data.asObservable();
   }
 
-  init(): void {
+  async init(): Promise<void> {
     const wallet = this.localStorageService.getWallet();
 
     switch( wallet ) {
       case 1:
-        this.connectToWallet(wallet);
+        await this.connectToWallet(wallet);
         break;
       case 2:
         this.connectToWalletConnect(wallet);
     }
   }
 
+  convertBalance( balance: number ): string {
+    balance = balance / 1e9;
+    balance = Math.trunc(balance);
+
+    return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
   async connectToWallet( origin = 0 ) {
     const window = this.windowRef.nativeWindow.ethereum;
     try {
       if ( typeof window !== 'undefined' && typeof window !== undefined ) {
-        await this.windowRef.nativeWindow.ethereum.enable();
+        await this.windowRef.nativeWindow.ethereum.request({ method: this.ETH_REQUEST_ACCOUNTS });
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
         
         let currentNetwork = await this.provider.getNetwork();
@@ -111,18 +108,17 @@ export class WalletConnectService {
         await this.getAccountAddress();
         this.localStorageService.setWallet(1);
         // Subscribe to accounts change
-        this.windowRef.nativeWindow.ethereum.on( this.ACCOUNTS_CHANGED, (accounts: string[]) => {
+        this.windowRef.nativeWindow.ethereum.on( this.ACCOUNTS_CHANGED, async (accounts: string[]) => {
           if(accounts.length == 0) { 
             // MetaMask is locked or the user has not connected any accounts
-            console.log('Please connect to metamask');
             this.setWalletDisconnected();
           } else
-            this.connectToWallet();
+            await this.connectToWallet();
         });
 
         // Subscribe to session disconnection
-        this.windowRef.nativeWindow.ethereum.on( this.NETWORK_CHANGED, (code: number, reason: string) => {
-          this.connectToWallet();
+        this.windowRef.nativeWindow.ethereum.on( this.CHAIN_CHANGED, async (code: number, reason: string) => {
+          await this.connectToWallet();
           this.setWalletConnected();
         });
 
@@ -160,7 +156,7 @@ export class WalletConnectService {
       provider.on( this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected() );
 
       // Subscribe to session disconnection
-      provider.on( this.NETWORK_CHANGED, (code: number, reason: string) => {
+      provider.on( this.CHAIN_CHANGED, (code: number, reason: string) => {
         this.connectToWalletConnect();
         this.setWalletDisconnected();
       });
@@ -280,13 +276,8 @@ export class WalletConnectService {
     return promise;
   }
 
-  async getBalanceOfUser( userAddress: string ) {
-    const promise = new Promise( (resolve, reject) => {
-      this.SilverContract.balanceOf(userAddress)
-        .then( (params: any) => resolve(params) );
-    });
-
-    return promise;
+  async getUserBalance( userAddress: string ): Promise<number> {
+    return Number( await this.SilverContract.balanceOf(userAddress) );
   }
 
   async getTransactionHashForBetSubmit( lootBoxId: any, seed: string, noOfBets: number, userAddress: string ) {

@@ -27,7 +27,7 @@ export class ArtistMoonboxComponent implements OnInit {
   public lootboxfloating = ['wood','silver','gold','diamond']
   data: any;
   supplyDetails: any = [];
-  balanceOfMoon: any;
+  balance: any;
   artistAddress: string;
   artistDetails: any;
   moonBoxLimitDetails: any;
@@ -74,12 +74,8 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
-    this.walletConnectService.getBalanceOfUser(this.data.address)
-      .then((response: any) => {
-        this.balanceOfMoon = response;
-      });
-
-      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
+    this.balance = await this.walletConnectService.getUserBalance( this.data.address );
+    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
   }
 
   plus(index: number) {
@@ -160,7 +156,7 @@ export class ArtistMoonboxComponent implements OnInit {
       return false;
     }
     var moonShootLimit = this.moonBoxLimitDetails[index-1];
-   if(Number(this.balanceOfMoon)<Number(moonShootLimit))
+   if(Number(this.balance)<Number(moonShootLimit))
    {
      this.httpApi.showToastr("You are not eligible for this Tier",false)
      return false;
@@ -182,7 +178,7 @@ export class ArtistMoonboxComponent implements OnInit {
         lootBoxName: this.lootBoxDetails[index-1].name,
         data: this.data,
         index: index,
-        balance: this.balanceOfMoon,
+        balance: this.balance,
         isArtistLootBox: true,
         artistDetails: {
           lootBoxId: this.supplyDetails[index - 1].id,

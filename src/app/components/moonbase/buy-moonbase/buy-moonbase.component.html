@@ -4,7 +4,7 @@
         <div class="moonbox-container flex1 flex-column flex-center">
             <div class="relative flex-center">
                 <div class="relative moonbox wood"></div>
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
             <div class="text-center">
                 <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[0].name}} <span *ngIf="maxSupply[0] !== undefined">({{maxSupply[0]}})</span></p>
@@ -30,7 +30,7 @@
         <div class="moonbox-container flex1 flex-center flex-column">
             <div class="relative flex-center">
                 <div class="relative moonbox silver"></div>
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId2/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
             <div class="text-center">
                 <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[1].name}} <span *ngIf="maxSupply[1] !== undefined">({{maxSupply[1]}})</span></p>
@@ -57,7 +57,7 @@
         <div class="moonbox-container flex1 flex-column flex-center">
             <div class="relative flex-center">
                 <div class="relative moonbox gold"></div>
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
             <div class="text-center">
                 <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[2].name}} <span *ngIf="maxSupply[2] !== undefined">({{maxSupply[2]}})</span></p>
@@ -84,7 +84,7 @@
         <div class="moonbox-container flex1 flex-center flex-column">
             <div class="relative flex-center">
                 <div class="relative moonbox diamond"></div>
-                <img *ngIf="!isConnected || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                <img *ngIf="!isConnected || (balance/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
             <div class="text-center">
                 <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[3].name}} <span *ngIf="maxSupply[3] !== undefined">({{maxSupply[3]}})</span></p>
@@ -118,7 +118,7 @@
             <div class="relative center">
                 <div class="relative moonbox {{lootboxfloating[current]}}"></div>
                 <!-- <img src={{lootBoxDetails[current].img}} alt="moonticket" /> -->
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || (supplyDetails && supplyDetails[current]?.isUpcoming)" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                <img *ngIf="!isConnected  || (balance/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || (supplyDetails && supplyDetails[current]?.isUpcoming)" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
             <div class="round-mini-button" (click)="next()">
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>

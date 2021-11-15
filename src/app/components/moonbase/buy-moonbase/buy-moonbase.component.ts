@@ -29,7 +29,7 @@ export class BuyMoonbaseComponent implements OnInit {
 
   data: any;
   supplyDetails: any;
-  balanceOfMoon: any;
+  balance: any;
   moonBoxLimitDetails: any;
   maxSupply = [];
   fadeOut: boolean = false;
@@ -80,11 +80,7 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
-    this.walletConnectService.getBalanceOfUser(this.data.address)
-      .then((response: any) => {
-        this.balanceOfMoon = response;
-      });
-
+    this.balance = await this.walletConnectService.getUserBalance( this.data.address );
     this.getBoxPrices();
   }
 
@@ -145,7 +141,7 @@ export class BuyMoonbaseComponent implements OnInit {
       return false;
     }
     var moonShootLimit = this.moonBoxLimitDetails[index - 1];
-    if (Number(this.balanceOfMoon) < Number(moonShootLimit)) {
+    if (Number(this.balance) < Number(moonShootLimit)) {
       this.httpApi.showToastr("You are not eligible for this Tier", false)
       return false;
     }
@@ -165,7 +161,7 @@ export class BuyMoonbaseComponent implements OnInit {
         lootBoxName: this.lootBoxDetails[index - 1].name,
         data: this.data,
         index: index,
-        balance: this.balanceOfMoon,
+        balance: this.balance,
         isArtistLootBox: false
       },
       panelClass: 'custom-modalbox'

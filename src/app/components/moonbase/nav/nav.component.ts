@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -18,7 +17,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 export class NavComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
-  balanceOfMoon: any = 0;
+  balance: any = 0;
   moonCountData: any;
   isNSFWStatus = false;
   menuItem = false;
@@ -87,24 +86,21 @@ export class NavComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
     this.getNSFWStatus();
     
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        if (data !== undefined && data.address != undefined) {
-          this.data = data;
-          this.isConnected = true;
-          if (this.data.networkId.chainId == environment.chainId) {
-            this.getMoonShootBalance();
-          }
+    
+    this.walletConnectService.getData().subscribe((data) => {
+      if (data !== undefined && data.address != undefined) {
+        this.data = data;
+        this.isConnected = true;
+        if (this.data.networkId.chainId == environment.chainId) {
+          this.getMoonShootBalance();
         }
-        else {
-          this.balanceOfMoon = "Awaiting Connection";
-        }
-      });
-
-    }, 1000);
+      }
+      else {
+        this.balance = "Awaiting Connection";
+      }
+    });
   }
 
   openDialog(): void {
@@ -117,11 +113,8 @@ export class NavComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
-    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
-
-    this.balanceOfMoon /= 1e9;
-    this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
-    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    const balance = Number( await this.walletConnectService.getUserBalance(this.data.address) );
+    this.balance = this.walletConnectService.convertBalance( balance );
   }
 
   menuopen() {

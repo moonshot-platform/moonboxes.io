@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { WalletConnectService } from './wallet-connect.service';
 import { Observable, Subject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
@@ -47,9 +46,8 @@ export class HttpApiService {
   
   constructor(
     private httpClient: HttpClient,
-    private walletConnectService: WalletConnectService,
     private toastrService:ToastrService
-  ) { this.data = this.walletConnectService.getData(); }
+  ) {  }
 
   submitBet( data: any ): Observable<any> {
     const url = `${baseURL}userBid`;

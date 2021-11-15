@@ -16,7 +16,7 @@ export class UpcomingComponent implements OnInit {
   listOfArtistCollection = [];
   listOfArtistUpcoming = [];
   listOfRecentDrops = [];
-  isNSFWStatus = false;
+  NSFWToggleState = false;
   activeTab = 1;
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
@@ -41,8 +41,11 @@ export class UpcomingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isNSFWStatus = this.localStorage.getNSFW();
-    this.checkNSFWStatus();
+    this.NSFWToggleState = this.localStorage.getNSFW();
+    
+    this.localStorage.whenNSFWToggled().subscribe( (NSFWToggleState) => {
+      this.NSFWToggleState = NSFWToggleState;
+    } );
 
     this.route
       .data
@@ -130,10 +133,9 @@ export class UpcomingComponent implements OnInit {
     }
   }
 
-  async
-  getAllCollections() {
+  async getAllCollections() {
 
-    this.httpService.getAllCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
+    this.httpService.getAllCollections(this.NSFWToggleState, this.userAddress).subscribe((response) => {
 
       this.listOfArtistCollection = response.data.live_data_array;
 
@@ -147,7 +149,7 @@ export class UpcomingComponent implements OnInit {
 
     });
 
-    this.httpService.getUpcomingArtistCollections(this.isNSFWStatus, this.userAddress).subscribe((response) => {
+    this.httpService.getUpcomingArtistCollections(this.NSFWToggleState, this.userAddress).subscribe((response) => {
 
       this.listOfArtistUpcoming = response.data;
 
@@ -164,23 +166,6 @@ export class UpcomingComponent implements OnInit {
   trackByFn(index, item) {
     return item.title;
   }
-
-  checkNSFWStatus() {
-    setInterval(() => {
-      this.checkNSFWStatusFromStorage()
-    }, 4000);
-
-  }
-
-  checkNSFWStatusFromStorage() {
-    let tempstatus = this.localStorage.getNSFW();
-    if (this.isNSFWStatus != tempstatus) {
-      this.isNSFWStatus = tempstatus;
-      this.getAllCollections();
-    }
-  }
-
-
 
   setSelected(index: number, item: any) {
     this.lootBoxDetailsAttributes = [];
