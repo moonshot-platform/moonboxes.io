@@ -6,6 +6,12 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 
+enum DROPS_CATEGORY {
+  RECENT = 0,
+  LIVE = 1,
+  UPCOMING = 2
+}
+
 @Component({
   selector: 'app-upcoming',
   templateUrl: './upcoming.component.html',
@@ -13,21 +19,21 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 })
 export class UpcomingComponent implements OnInit {
   static readonly routeName: string = 'upcoming';
-  listOfArtistCollection = [];
-  listOfArtistUpcoming = [];
-  listOfRecentDrops = [];
+  
+  public dropsCategory = DROPS_CATEGORY;
+  list = [ [/* RECENT */], [/* LIVE */], [/* RECENT */] ];
+  currentCategory: number;
+
   NSFWToggleState = false;
-  activeTab = 1;
+  
   lootBoxDetailsAttributes = [];
   lootBoxDetailsAttributesMobile = [];
   artistDetails: any;
-  listData = [];
-  public innerWidth: any;
-  singleView = 4;
+
   data: any;
-  userAddress: any;
-  reveal = false;
-  public isTooltipActive: boolean[] = [];
+  address: string;
+  selectedIndex: number;
+  
 
   constructor(
     private httpService: HttpApiService,
@@ -47,73 +53,34 @@ export class UpcomingComponent implements OnInit {
       this.NSFWToggleState = NSFWToggleState;
     } );
 
-    this.route
-      .data
-      .subscribe((value) => {
-        switch (value.activeTab) {
-          case 1:
-            this.activeTab = 1;
-            break;
-          case 2:
-            this.activeTab = 2;
-            break;
-          case 3:
-            this.activeTab = 3;
-            break;
-          default:
-            this.activeTab = 2;
-            break;
-        }
-      });
+    this.route.data.subscribe( ( data ) => { this.currentCategory = data.activeTab ?? 2; } );
     this.getConnectedAccount();
 
-    if (window.innerWidth < 768) {
-      this.singleView = 1;
-    }
-
     this.route.url.subscribe(url => {
-      
       switch (url[0].path) {
-
         case 'recent':
-          this.activeTab = 3;
+          this.currentCategory = DROPS_CATEGORY.RECENT;
+          this.title.setTitle('Moonbox drops - recent');
           break;
         case 'live':
-          this.activeTab = 2;
+          this.currentCategory = DROPS_CATEGORY.LIVE;
+          this.title.setTitle('Moonbox drops - live');
           break;
         case 'upcoming':
-          this.activeTab = 1;
+          this.currentCategory = DROPS_CATEGORY.UPCOMING;
+          this.title.setTitle('Moonbox drops - upcoming');
           break;
       }
     })
   }
 
-  changeTab(tabIndex: number) {
+  changeTab(tabIndex: DROPS_CATEGORY) {
     this.closeAttributes();
-    this.activeTab = tabIndex;
+    this.currentCategory = tabIndex;
 
-    if (this.activeTab == 1) {
-      this.title.setTitle('Moonbox drops - Upcoming');
-      this.location.go('/upcoming');
-
-      this.listData = [];
-      this.listData = this.listOfArtistUpcoming;
-    }
-
-    else if (this.activeTab == 2) {
-      this.title.setTitle('Moonbox drops - Live');
-      this.location.go('/live');
-      this.listData = this.listOfArtistCollection;
-    }
-
-    else if (this.activeTab == 3) {
-      this.title.setTitle('Moonbox drops - Recent');
-      this.location.go('/recent');
-      this.listData = this.listOfRecentDrops;
-    }
-    for (let index = 0; index < this.listData.length; index++) {
-      this.isTooltipActive[index] = false;
-    }
+    const categoryName = (Object.values(DROPS_CATEGORY)[tabIndex]).toString().toLowerCase();
+    this.title.setTitle(`Moonbox drops - ${categoryName}`);
+    this.location.go(`/${categoryName}`);
   }
 
 
@@ -122,7 +89,7 @@ export class UpcomingComponent implements OnInit {
     this.walletConnectService.getData().subscribe((data) => {
       if (this.data != data && data != undefined && data.address != undefined) {
         this.data = data;
-        this.userAddress = data.address;
+        this.address = data.address;
 
         this.getAllCollections();
       }
@@ -135,36 +102,14 @@ export class UpcomingComponent implements OnInit {
 
   async getAllCollections() {
 
-    this.httpService.getAllCollections(this.NSFWToggleState, this.userAddress).subscribe((response) => {
-
-      this.listOfArtistCollection = response.data.live_data_array;
-
-      this.listOfRecentDrops = response.data.recent_data_array;
-      if (this.activeTab == 2) {
-        this.listData = this.listOfArtistCollection;
-      }
-      else if (this.activeTab == 3) {
-        this.listData = this.listOfRecentDrops;
-      }
-
+    this.httpService.getAllCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
+      this.list[DROPS_CATEGORY.LIVE] = response.data.live_data_array;
+      this.list[DROPS_CATEGORY.RECENT] = response.data.recent_data_array;
     });
 
-    this.httpService.getUpcomingArtistCollections(this.NSFWToggleState, this.userAddress).subscribe((response) => {
-
-      this.listOfArtistUpcoming = response.data;
-
-      if (this.activeTab == 1) {
-        this.listData = [];
-        this.listData = this.listOfArtistUpcoming;
-      }
-      for (let index = 0; index < this.listData.length; index++) {
-        this.isTooltipActive[index] = false;
-      }
+    this.httpService.getUpcomingArtistCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
+      this.list[DROPS_CATEGORY.UPCOMING] = response.data;
     });
-  }
-
-  trackByFn(index, item) {
-    return item.title;
   }
 
   setSelected(index: number, item: any) {
@@ -197,4 +142,7 @@ export class UpcomingComponent implements OnInit {
     }
   }
 
+  trackByFn(index, item) {
+    return item.title;
+  }
 }

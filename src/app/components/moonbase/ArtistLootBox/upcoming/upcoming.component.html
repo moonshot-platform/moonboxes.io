@@ -7,23 +7,18 @@
                         <div class="flex1 flex flex-col flex-center">
                             <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb30">MoonBox Drops </p>
                             <div class="tabs-container flex flex-xs-col mb30">
-                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 3 ? 'button' : 'outlined-button' " (click)="changeTab(3)">Recent</a>
-                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 2 ? 'button' : 'outlined-button' " (click)="changeTab(2)">Live</a>
-                                <a class="tab mb20 text-inherit" [ngClass]=" activeTab === 1 ? 'button' : 'outlined-button' " (click)="changeTab(1)">Upcoming</a>
+                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.RECENT ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.RECENT)">Recent</a>
+                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.LIVE ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.LIVE)">Live</a>
+                                <a class="tab mb20 text-inherit" [ngClass]="currentCategory === dropsCategory.UPCOMING ? 'button' : 'outlined-button' " (click)="changeTab(dropsCategory.UPCOMING)">Upcoming</a>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <div class="flex flex-col flex2">
-                    <!-- <div class="flex">
-              <div class="flex1 flex flex-col">
-                <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10">Live Drops </p>
-              </div>
-            </div> -->
+                    
                     <div class="upcoming flex flex-wrap wrap">
-                        <div class="full-div" *ngFor="let details of listData | slice:0:(listData?.length/singleView)+1;let j=index; trackBy: trackByFn;">
-                            <div *ngFor="let item of (listData| slice:(j*singleView):(j*singleView)+singleView); let i = index;" class="flex-column flex-center p-3 grid-4">
+                            <div *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;" class="flex-column flex-center p-3 grid-4">
                                 <div class="flex1 nft_img">
 
                                     <div class="flex-column flex-center">
@@ -38,21 +33,7 @@
                                             <p class="color-primary">{{item.ArtistName}}</p>
                                         </div>
                                     </div>
-                                    <!-- <div class="flex justify-center" *ngIf="activeTab!=3">
-                                        <div class="flex align-center" style="padding: 10px;border: 1px solid;border-radius: 30px;margin: .5rem;justify-content: center;">
-                                            <div class="round-mini-button" style="width: 30px; height: 30px; margin-right: 10px; font-size: 10px; background: green; border: 1px solid green;">
-                                            </div>
-                                            <p class="color-primary flex" *ngIf="activeTab==1">
-
-                                            </p>
-                                            <p class="color-primary flex" *ngIf="activeTab==2">
-                                                <span>Open</span>
-                                            </p>
-                                            <div class="round-mini-button" style="width: 30px; height: 30px; margin-left: 10px; font-size: 10px;">
-                                                <mat-icon role="img" fontset="material-icons" aria-hidden="true" ng-reflect-font-set="material-icons" data-mat-icon-type="font" class="mat-icon notranslate color-primary material-icons mat-icon-no-color">done</mat-icon>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                    
                                     <div class="border-top-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
@@ -64,44 +45,44 @@
                                         </div>
                                     </div>
 
-                                    <div *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button" (mouseover)="isTooltipActive[i] = true" (mouseleave)="isTooltipActive[i] = false">
-                                        <div class="tooltip" [class.reveal]="isTooltipActive[i]">
+                                    <div *ngIf="currentCategory === dropsCategory.UPCOMING" class="button text-inherit mb20 coundown-button">
+                                        <div class="tooltip">
                                             <div class="row">Available soon</div>
-                                            <i></i>
                                         </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
-                                    <a *ngIf="activeTab==2" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
+                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy
                                         Moonbox</a>
-                                    <a class="outlined-button mb20 text-inherit" (click)="setSelected(j,item)">Collection info</a>
+                                    <a class="outlined-button mb20 text-inherit" (click)="setSelected(selectedIndex,item)">Collection info</a>
                                 </div>
                             </div>
+
                             <!------ List  -->
-                            <div class="collection-info" *ngIf="lootBoxDetailsAttributes[j] != undefined">
+                            <div class="collection-info" *ngIf="lootBoxDetailsAttributes[selectedIndex] != undefined">
                                 <div class="collection-inner">
                                     <div class="left relative flex-col">
 
-                                        <img src="{{lootBoxDetailsAttributes[j].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
+                                        <img src="{{lootBoxDetailsAttributes[selectedIndex].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
                                         <div class="border-bottom mt10 mb20">
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10 mt10">Price</p>
-                                                <p class="color-primary mb10 mt10">{{lootBoxDetailsAttributes[j].minPrice}} BNB</p>
+                                                <p class="color-primary mb10 mt10">{{lootBoxDetailsAttributes[selectedIndex].minPrice}} BNB</p>
                                             </div>
                                             <div class="flex justify-space-between">
                                                 <p class="color-primary mb10">Availability</p>
                                                 <p class="color-primary mb10">
-                                                    {{lootBoxDetailsAttributes[j].supply}}/{{lootBoxDetailsAttributes[j].TotalMaxSupply}}</p>
+                                                    {{lootBoxDetailsAttributes[selectedIndex].supply}}/{{lootBoxDetailsAttributes[selectedIndex].TotalMaxSupply}}</p>
                                             </div>
                                         </div>
                                         <div class="flex justify-space-between">
-                                            <a *ngIf="activeTab==1" class="button text-inherit mb20 coundown-button w100">
+                                            <a *ngIf="currentCategory === dropsCategory.UPCOMING" class="button text-inherit mb20 coundown-button w100">
                                                 <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                                <app-countdown-timer [date]="lootBoxDetailsAttributes[j].revealDate"></app-countdown-timer>
+                                                <app-countdown-timer [date]="lootBoxDetailsAttributes[selectedIndex].revealDate"></app-countdown-timer>
                                             </a>
 
-                                            <a *ngIf="activeTab==2" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetailsAttributes[j].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[j].walletAddress] ">Buy
+                                            <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" [routerLink]="lootBoxDetailsAttributes[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',lootBoxDetailsAttributes[selectedIndex].walletAddress] ">Buy
                                                 Moonbox</a>
                                         </div>
                                     </div>
@@ -112,8 +93,8 @@
 
                                         <div class="flex justify-space-between flex-align-start border-bottom">
                                             <div class="flex flex-col">
-                                                <p class="p18 w700 mt10">{{lootBoxDetailsAttributes[j].name}}</p>
-                                                <p class="mb20 mt10">{{lootBoxDetailsAttributes[j].rarity}}
+                                                <p class="p18 w700 mt10">{{lootBoxDetailsAttributes[selectedIndex].name}}</p>
+                                                <p class="mb20 mt10">{{lootBoxDetailsAttributes[selectedIndex].rarity}}
                                                 </p>
                                             </div>
                                             <div class="flex-center" (click)="closeAttributes()">
@@ -130,36 +111,36 @@
                                             </div>
                                         </div>
 
-                                        <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetailsAttributes[j]?.description}}</textarea>
+                                        <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetailsAttributes[selectedIndex]?.description}}</textarea>
 
                                         <div class="social-icons-container flex-center flex-wrap justify-space-between w-100">
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].discord}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].discord}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/discord.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].twitter}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].twitter}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/twitter.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].telegram}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].telegram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/telegram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].instagram}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].instagram}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/instagram.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].opensea}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].opensea}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/opensea.svg">
                                                 </a>
                                             </div>
                                             <div class="image-bb">
-                                                <a href="{{lootBoxDetailsAttributes[j].website}}" target="_blank">
+                                                <a href="{{lootBoxDetailsAttributes[selectedIndex].website}}" target="_blank">
                                                     <img src="assets/media/icons/moonbase/global.svg">
                                                 </a>
                                             </div>
@@ -171,8 +152,8 @@
 
                                     <div class="flex justify-space-between flex-align-start border-bottom">
                                         <div class="flex flex-col">
-                                            <p class="p18 w700">{{lootBoxDetailsAttributes[j].name}}</p>
-                                            <p class="mb20 mt10">{{lootBoxDetailsAttributes[j].rarity}}
+                                            <p class="p18 w700">{{lootBoxDetailsAttributes[selectedIndex].name}}</p>
+                                            <p class="mb20 mt10">{{lootBoxDetailsAttributes[selectedIndex].rarity}}
                                             </p>
                                         </div>
                                         <div class="flex-center" (click)="closeAttributes()">
@@ -190,13 +171,13 @@
                                     </div>
 
                                     <p class="mt20 mb20 justify-space-between flex">
-                                        {{lootBoxDetailsAttributes[j]?.description}}
+                                        {{lootBoxDetailsAttributes[selectedIndex]?.description}}
                                     </p>
 
                                 </div>
                             </div>
                             <!----list-->
-                        </div>
+                        
                     </div>
                 </div>
 

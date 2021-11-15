@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { formatDate } from '@angular/common';
 
 import { interval, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-countdown-timer',
