@@ -25,6 +25,12 @@ export class ModalForTransactionComponent implements OnInit {
     "assets/media/videos/Moonboxes_GOLD.webm",
     "assets/media/videos/Moonboxes_DIAMOND.webm"
   ]
+  videoSourceFallback = [
+    "assets/media/videos/Moonboxes_WOOD_fallback.webm",
+    "assets/media/videos/Moonboxes_SILVER_fallback.webm",
+    "assets/media/videos/Moonboxes_GOLD_fallback.webm",
+    "assets/media/videos/Moonboxes_DIAMOND_fallback.webm"
+  ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
@@ -67,10 +73,10 @@ export class ModalForTransactionComponent implements OnInit {
       this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
 
@@ -143,10 +149,10 @@ export class ModalForTransactionComponent implements OnInit {
       this.closeDialog();
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
 
@@ -180,16 +186,16 @@ export class ModalForTransactionComponent implements OnInit {
     var transactionDetails: any;
     try {
       transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
-        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature,this.data.artistDetails.limit);
+        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature, this.data.artistDetails.limit);
     }
     catch (e) {
       this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
 
@@ -249,7 +255,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   checkFileType(url: string) {
     const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg","MP4", "3GP", "OGG"]
+    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
