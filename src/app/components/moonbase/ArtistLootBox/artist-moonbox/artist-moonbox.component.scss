@@ -85,6 +85,10 @@
     transition: all 1s ease;
     cursor: pointer;
     margin: 0 auto;
+
+    &.disabled {
+        filter: saturate(0);
+    }
 }
 
 .wood {
@@ -145,6 +149,10 @@
     border: 1px solid #fff;
 }
 
+.soldout {
+    margin: 28px 0;
+}
+
 .border.plus_minus.flex {
     max-width: 200px;
     border-radius: 30px;
@@ -176,6 +184,10 @@
 @media only screen and (max-width: $md-header) {
     .boxes-title-container {
         padding-top: 0px;
+    }
+    
+    .soldout {
+        margin: 23px 0;
     }
 }
 

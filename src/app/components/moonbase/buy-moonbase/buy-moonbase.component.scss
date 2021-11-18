@@ -1,3 +1,5 @@
+@import 'includes';
+
 .scroller {
     max-height: calc(100vh - 110px);
     overflow: auto;
@@ -86,10 +88,6 @@
     border: 1px solid #fff;
 }
 
-.soldout {
-    margin: 28px 0;
-}
-
 .border.plus_minus.flex {
     max-width: 200px;
     border-radius: 30px;
@@ -118,6 +116,14 @@
     transition: all 1s ease;
     cursor: pointer;
     margin: 0 auto;
+
+    &.disabled {
+        filter: saturate(0);
+    }
+}
+
+.soldout {
+    margin: 28px 0;
 }
 
 .wood {
@@ -181,5 +187,11 @@
         background-color: black;
         box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
         margin-top: 5px;
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+    .soldout {
+        margin: 23px 0;
     }
 }
