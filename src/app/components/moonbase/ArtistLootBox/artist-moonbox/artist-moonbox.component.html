@@ -73,7 +73,8 @@
         <div class="flex all-boxes w-100">
             <div class="flex1 flex-col flex-center">
                 <div class="relative">
-                    <div class="relative moonbox wood" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming"></div>
+                    <!-- <div class="relative moonbox wood" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming"></div> -->
+                    <div class="relative moonbox wood" [class.disabled]="isItEligibleTier(0) || (inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming)"></div>
                     <img *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
@@ -107,7 +108,7 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[0]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" (mouseover)="isTierTooltipActive[0] = true" (mouseleave)="isTierTooltipActive[0] = false" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming"
+                    <a *ngIf="!isWrongNetwork" (mouseover)="isTierTooltipActive[0] = true" (mouseleave)="isTierTooltipActive[0] = false" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="isItEligibleTier(0) || (inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming)"
                         (click)="buyMoonBase(1)">Buy</a>
                     <div *ngIf="isItEligibleTier(0)" class="tooltip" [class.reveal]="isTierTooltipActive[0]" (mouseover)="isTierTooltipActive[0] = true" (mouseleave)="isTierTooltipActive[0] = false">
                         <div class="row">You are not eligible for this Tier</div>
@@ -119,7 +120,8 @@
             </div>
             <div class="flex1 flex-center flex-col">
                 <div class="relative">
-                    <div class="relative moonbox silver" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming"></div>
+                    <!-- <div class="relative moonbox silver" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming"></div> -->
+                    <div class="relative moonbox silver" [class.disabled]="isItEligibleTier(1) || (inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming)"></div>
                     <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
@@ -153,7 +155,8 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[1]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming" (click)="buyMoonBase(2)" (mouseover)="isTierTooltipActive[1] = true" (mouseleave)="isTierTooltipActive[1] = false">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="isItEligibleTier(1) || (inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming)" (click)="buyMoonBase(2)" (mouseover)="isTierTooltipActive[1] = true"
+                        (mouseleave)="isTierTooltipActive[1] = false">Buy</a>
                     <div *ngIf="isItEligibleTier(1)" class="tooltip" [class.reveal]="isTierTooltipActive[1]" (mouseover)="isTierTooltipActive[1] = true" (mouseleave)="isTierTooltipActive[1] = false">
                         <div class="row">You are not eligible for this Tier</div>
                         <i></i>
@@ -164,7 +167,8 @@
             </div>
             <div class="flex1 flex-col flex-center">
                 <div class="relative">
-                    <div class="relative moonbox gold" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming"></div>
+                    <!-- <div class="relative moonbox gold" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming"></div> -->
+                    <div class="relative moonbox gold" [class.disabled]="isItEligibleTier(2) || (inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming)"></div>
                     <img *ngIf="!isConnected   || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
@@ -198,7 +202,7 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[2]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming" (click)="buyMoonBase(3)" (mouseover)="isTierTooltipActive[2] = true" (mouseleave)="isTierTooltipActive[2] = false">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="isItEligibleTier(2) || (inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming)" (click)="buyMoonBase(3)" (mouseover)="isTierTooltipActive[2] = true" (mouseleave)="isTierTooltipActive[2] = false">Buy</a>
                     <div *ngIf="isItEligibleTier(2)" class="tooltip" [class.reveal]="isTierTooltipActive[2]" (mouseover)="isTierTooltipActive[2] = true" (mouseleave)="isTierTooltipActive[2] = false">
                         <div class="row">You are not eligible for this Tier</div>
                         <i></i>
@@ -209,7 +213,8 @@
             </div>
             <div class="flex1 flex-center flex-col">
                 <div class="relative">
-                    <div class="relative moonbox diamond" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming"></div>
+                    <!-- <div class="relative moonbox diamond" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming"></div> -->
+                    <div class="relative moonbox diamond" [class.disabled]="isItEligibleTier(3) || (inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming)"></div>
                     <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
@@ -243,7 +248,7 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[3]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming" (click)="buyMoonBase(4)" (mouseover)="isTierTooltipActive[3] = true" (mouseleave)="isTierTooltipActive[3] = false">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="isItEligibleTier(3) ||(inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming)" (click)="buyMoonBase(4)" (mouseover)="isTierTooltipActive[3] = true" (mouseleave)="isTierTooltipActive[3] = false">Buy</a>
                     <div *ngIf="isItEligibleTier(3)" class="tooltip" [class.reveal]="isTierTooltipActive[3]" (mouseover)="isTierTooltipActive[3] = true" (mouseleave)="isTierTooltipActive[3] = false">
                         <div class="row">You are not eligible for this Tier</div>
                         <i></i>
@@ -332,7 +337,8 @@
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
             </div>
             <div class="relative">
-                <div class="relative moonbox {{lootboxfloating[current]}}" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming"></div>
+                <!-- <div class="relative moonbox {{lootboxfloating[current]}}" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming"></div> -->
+                <div class="relative moonbox {{lootboxfloating[current]}}" [class.disabled]="isItEligibleTier(current) || (inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming)"></div>
                 <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
                 <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class=" lock">
             </div>
@@ -370,7 +376,7 @@
             <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
                 Coming soon!
             </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (mouseover)="isTierTooltipActive[current] = true" (mouseleave)="isTierTooltipActive[current] = false" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming"
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (mouseover)="isTierTooltipActive[current] = true" (mouseleave)="isTierTooltipActive[current] = false" [class.disabled]="isItEligibleTier(current) || (inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming)"
                 (click)="buyMoonBase(current+1)">Buy</a>
             <div *ngIf="isItEligibleTier(current)" class="tooltip" [class.reveal]="isTierTooltipActive[current]" (mouseover)="isTierTooltipActive[current] = true" (mouseleave)="isTierTooltipActive[current] = false">
                 <div class="row">You are not eligible for this Tier</div>

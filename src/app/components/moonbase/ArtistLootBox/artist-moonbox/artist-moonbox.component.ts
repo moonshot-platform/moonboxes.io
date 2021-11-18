@@ -80,6 +80,8 @@ export class ArtistMoonboxComponent implements OnInit {
       });
 
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimitArtist();
+    //console.log("moonBoxLimitDetails len : " + this.moonBoxLimitDetails.length);
+
   }
 
   plus(index: number) {
@@ -161,6 +163,8 @@ export class ArtistMoonboxComponent implements OnInit {
     }
     var moonShootLimit = this.moonBoxLimitDetails[index - 1];
     if (Number(this.balanceOfMoon) < Number(moonShootLimit)) {
+      // console.log("balance Of Moon : " + Number(this.balanceOfMoon));
+      // console.log("moonshot Limit : " + Number(moonShootLimit));
       this.httpApi.showToastr("You are not eligible for this Tier", false)
       return false;
     }
