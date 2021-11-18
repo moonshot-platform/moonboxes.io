@@ -107,8 +107,12 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[0]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming" (click)="buyMoonBase(1)">Buy</a>
-
+                    <a *ngIf="!isWrongNetwork" (mouseover)="isTierTooltipActive[0] = true" (mouseleave)="isTierTooltipActive[0] = false" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming"
+                        (click)="buyMoonBase(1)">Buy</a>
+                    <div *ngIf="isItEligibleTier(0)" class="tooltip" [class.reveal]="isTierTooltipActive[0]" (mouseover)="isTierTooltipActive[0] = true" (mouseleave)="isTierTooltipActive[0] = false">
+                        <div class="row">You are not eligible for this Tier</div>
+                        <i></i>
+                    </div>
                     <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
 
                 </div>
@@ -149,7 +153,11 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[1]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming" (click)="buyMoonBase(2)">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit with-transition" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming" (click)="buyMoonBase(2)" (mouseover)="isTierTooltipActive[1] = true" (mouseleave)="isTierTooltipActive[1] = false">Buy</a>
+                    <div *ngIf="isItEligibleTier(1)" class="tooltip" [class.reveal]="isTierTooltipActive[1]" (mouseover)="isTierTooltipActive[1] = true" (mouseleave)="isTierTooltipActive[1] = false">
+                        <div class="row">You are not eligible for this Tier</div>
+                        <i></i>
+                    </div>
                     <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
 
                 </div>
@@ -190,7 +198,11 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[2]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming" (click)="buyMoonBase(3)">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming" (click)="buyMoonBase(3)" (mouseover)="isTierTooltipActive[2] = true" (mouseleave)="isTierTooltipActive[2] = false">Buy</a>
+                    <div *ngIf="isItEligibleTier(2)" class="tooltip" [class.reveal]="isTierTooltipActive[2]" (mouseover)="isTierTooltipActive[2] = true" (mouseleave)="isTierTooltipActive[2] = false">
+                        <div class="row">You are not eligible for this Tier</div>
+                        <i></i>
+                    </div>
                     <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
 
                 </div>
@@ -231,7 +243,11 @@
                     <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[3]?.isUpcoming">
                         Coming soon!
                     </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming" (click)="buyMoonBase(4)">Buy</a>
+                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming" (click)="buyMoonBase(4)" (mouseover)="isTierTooltipActive[3] = true" (mouseleave)="isTierTooltipActive[3] = false">Buy</a>
+                    <div *ngIf="isItEligibleTier(3)" class="tooltip" [class.reveal]="isTierTooltipActive[3]" (mouseover)="isTierTooltipActive[3] = true" (mouseleave)="isTierTooltipActive[3] = false">
+                        <div class="row">You are not eligible for this Tier</div>
+                        <i></i>
+                    </div>
                     <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
 
                 </div>
@@ -354,7 +370,12 @@
             <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
                 Coming soon!
             </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming" (click)="buyMoonBase(current+1)">Buy</a>
+            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" (mouseover)="isTierTooltipActive[current] = true" (mouseleave)="isTierTooltipActive[current] = false" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming"
+                (click)="buyMoonBase(current+1)">Buy</a>
+            <div *ngIf="isItEligibleTier(current)" class="tooltip" [class.reveal]="isTierTooltipActive[current]" (mouseover)="isTierTooltipActive[current] = true" (mouseleave)="isTierTooltipActive[current] = false">
+                <div class="row">You are not eligible for this Tier</div>
+                <i></i>
+            </div>
             <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
         </div>
     </div>
