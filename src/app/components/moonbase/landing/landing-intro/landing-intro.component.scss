@@ -155,6 +155,10 @@ swiper {
         max-height: 250px;
         max-width: 250px;
     }
+    section.landing-carousel {
+        max-width: 200px !important;
+        max-height: 200px !important;
+    }
 }
 
 @media only screen and (max-width: $md-header) {
@@ -204,5 +208,13 @@ swiper {
             height: 100%;
             background: transparent;
         }
+    }
+    .nft-image-container {
+        max-height: 250px;
+        max-width: 250px;
+    }
+    section.landing-carousel {
+        max-width: 200px !important;
+        max-height: 200px !important;
     }
 }
