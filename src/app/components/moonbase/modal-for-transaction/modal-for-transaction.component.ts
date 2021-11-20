@@ -206,7 +206,7 @@ export class ModalForTransactionComponent implements OnInit {
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
         type: this.data.lootBoxName,
-        quantity: this.data.inputNumber[this.data.index],
+        quantity: this.data.inputNumber,
         id: this.data.artistDetails.lootBoxId
       }).subscribe((response: any) => {
         if (response.isSuccess) {

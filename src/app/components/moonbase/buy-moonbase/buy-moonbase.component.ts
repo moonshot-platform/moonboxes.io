@@ -46,10 +46,10 @@ export class BuyMoonbaseComponent implements OnInit {
     this.walletConnectService.init();
 
     (async () => {
+      this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
       this.walletConnectService.getData().subscribe((data) => {
         if (data !== undefined && data.address != undefined && data != this.data) {
           this.data = data;
-          this.isConnected = this.walletConnectService.isWalletConnected();
           
           if (this.data.networkId.chainId != environment.chainId) {
             this.isWrongNetwork = true;

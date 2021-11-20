@@ -42,7 +42,7 @@ export class UpcomingComponent implements OnInit {
     private title: Title,
     private location: Location
   ) {
-
+    this.walletConnectService.init();
   }
 
   ngOnInit(): void {

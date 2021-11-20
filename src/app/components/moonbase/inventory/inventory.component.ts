@@ -54,22 +54,18 @@ export class InventoryComponent implements OnInit {
     } );
     
     this.walletConnectService.init();
-    setTimeout( () => {
-
-      
-      this.walletConnectService.getData().subscribe((data) => {
-        this.data = data ?? {};
-
-        if( Object.keys(this.data).length > 0 ) {
-          this.isConnected = this.walletConnectService.isWalletConnected();
-          this.getUserData();
-        } else {
-          this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
-        }
-      });
-
-    }, 100);
     
+    this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
+      
+    this.walletConnectService.getData().subscribe((data) => {
+      this.data = data ?? {};
+
+      if( Object.keys(this.data).length > 0 ) {
+        this.getUserData();
+      } else {
+        this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
+      }
+    });
   }
 
   getUserData() {

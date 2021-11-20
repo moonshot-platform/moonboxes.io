@@ -46,7 +46,8 @@ export class WalletConnectService {
   private readonly DISCONNECT: string = 'disconnect';
   private readonly ETH_REQUEST_ACCOUNTS: string = 'eth_requestAccounts';
 
-  public data = new BehaviorSubject<any>({});
+  public data = new Subject<any>();
+  private connectedStateSubject = new Subject<boolean>();
   public tokenomicsData: any;
   public oldPancakeAddress = true;
   private isConnected = false;
@@ -81,7 +82,8 @@ export class WalletConnectService {
         await this.connectToWallet(wallet);
         break;
       case 2:
-        this.connectToWalletConnect(wallet);
+        await this.connectToWalletConnect(wallet);
+        break;
     }
   }
 
@@ -94,6 +96,7 @@ export class WalletConnectService {
 
   async connectToWallet( origin = 0 ) {
     const window = this.windowRef.nativeWindow.ethereum;
+
     try {
       if ( typeof window !== 'undefined' && typeof window !== undefined ) {
         await this.windowRef.nativeWindow.ethereum.request({ method: this.ETH_REQUEST_ACCOUNTS });
@@ -108,18 +111,21 @@ export class WalletConnectService {
         await this.getAccountAddress();
         this.localStorageService.setWallet(1);
         // Subscribe to accounts change
+        
         this.windowRef.nativeWindow.ethereum.on( this.ACCOUNTS_CHANGED, async (accounts: string[]) => {
           if(accounts.length == 0) { 
             // MetaMask is locked or the user has not connected any accounts
             this.setWalletDisconnected();
-          } else
+          } else {
             await this.connectToWallet();
+            console.log('c1');
+          }
         });
 
         // Subscribe to session disconnection
         this.windowRef.nativeWindow.ethereum.on( this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
-          this.setWalletConnected();
+          this.setWalletState(true);
         });
 
         // Subscribe to session disconnection
@@ -127,8 +133,8 @@ export class WalletConnectService {
           if( provider.close ) provider.close();
           this.setWalletDisconnected();
         });
-
-        this.setWalletConnected();
+        
+        this.setWalletState(true);
 
         if( origin == 0 ) location.reload();
        
@@ -161,7 +167,7 @@ export class WalletConnectService {
         this.setWalletDisconnected();
       });
 
-      this.setWalletConnected();
+      this.setWalletState(true);
 
       if( origin === 0 ) location.reload();
     }
@@ -406,16 +412,17 @@ redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAd
     return await this.NFTContract.safeTransferFrom( address, toAddress, nftId, 1, '0x00' );
   }
 
-  isWalletConnected() {
+  setWalletState( connected: boolean ) {
+    this.connectedStateSubject.next( connected );
     return this.isConnected;
+  }
+
+  onWalletStateChanged() {
+    return this.connectedStateSubject.asObservable();
   }
 
   getAccount() {
     return this.account;
-  }
-
-  setWalletConnected() {
-    this.isConnected = true;
   }
 
   setWalletDisconnected() {

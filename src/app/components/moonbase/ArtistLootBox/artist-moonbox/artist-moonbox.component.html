@@ -1,4 +1,6 @@
-<section class="artist-moonbox scroller" [ngClass]="{'invinsible':invisible}">
+<section class="artist-moonbox scroller" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    
+    <img *ngIf="!isConnected" class="flex mx-auto" src="assets/media/videos/Loading.gif" alt="loading" />
 
     <div class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
         <div class="flex w-100">
@@ -22,11 +24,11 @@
         </div>
 
 
-        <div class="flex all-boxes w-100" *ngIf="moonBoxLimitDetails !== undefined">
-            <div *ngFor="let box of boxTypes; let i = index" class="flex1 flex-col flex-center">
+        <div class="flex all-boxes w-100">
+            <div *ngFor="let box of boxTypes; let i = index; trackBy: trackByFn;" class="flex1 flex-col flex-center">
                 <div class="relative">
                     <div class="relative moonbox {{box}}"></div>
-                    <img *ngIf="!isConnected  || (balance < moonBoxLimitDetails['_moonboxId{{i}}'])" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    <img *ngIf="hasEnoughMoonshots(i)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                 </div>
                 <div class="text-center">
                     <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} ({{supplyDetails[i]?.currentSupply}})</p>

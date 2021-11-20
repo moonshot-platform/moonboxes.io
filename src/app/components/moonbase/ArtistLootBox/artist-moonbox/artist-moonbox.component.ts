@@ -15,24 +15,19 @@ import { Artist, Supply } from 'src/app/models/artist.model';
   styleUrls: ['./artist-moonbox.component.scss']
 })
 export class ArtistMoonboxComponent implements OnInit {
-  
+
+  static readonly routeName: string = 'artist_moonbase/:artistAddress';
+
+  readonly boxTypes = [ 'wood', 'silver', 'gold', 'diamond' ]
+
   current = 0;
-
-  readonly boxTypes = [
-    'wood',
-    'silver',
-    'gold',
-    'diamond'
-  ]
-
   supply: number[] = [];
   
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
   popupClosed: boolean = false;
   fadeOut: boolean = false;
-  static readonly routeName: string = 'artist_moonbase/:artistAddress';
-
+  invisible: boolean = false;
 
   public lootBoxDetails: any = [];
   data: any;
@@ -40,37 +35,54 @@ export class ArtistMoonboxComponent implements OnInit {
   balance: any;
   artistDetails: Artist;
   moonBoxLimitDetails: any;
-  invisible: boolean = false;
 
-  constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService, public dialog: MatDialog,
-    public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
+  constructor(
+    public walletConnectService: WalletConnectService, 
+    private toastrService:ToastrService, 
+    public dialog: MatDialog,
+    public httpApi: HttpApiService, 
+    private activatedRoute: ActivatedRoute
+  ) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
   }
 
   ngOnInit(): void {
     this.walletConnectService.init();
+    this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
+    this.walletConnectService.getData().subscribe((data) => {
 
-    setTimeout( async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        if( data != undefined && data.address != undefined && this.data != data ) {
-          this.data = data;
-          this.isConnected = this.walletConnectService.isWalletConnected();
-          
-          if (this.data.networkId.chainId != environment.chainId) {
-            this.isWrongNetwork = true;
-            this.toastrService.error("You are on the wrong network");
-          } else this.getMoonShootBalance();
-        }
-       
-        this.getMaxSupply();
-      });
-    }, 1000 );
-    
+      if( data.address === undefined ) {
+        this.toastrService.error("You are on the wrong network");
+        return;
+      }
+        
+      if ( data.networkId.chainId != environment.chainId ) {
+        this.isWrongNetwork = true;
+        this.toastrService.error("You are on the wrong network");
+        return;
+      }
+
+      this.data = data;
+      
+      this.getMoonShootBalance();
+      this.getMaxSupply();
+
+    });
+  }
+
+  hasEnoughMoonshots( index: number ) {
+    if( this.balance != null && this.moonBoxLimitDetails != null)
+      return ( Number(this.balance) < Number(this.moonBoxLimitDetails[index]) );
+
+    return true;
   }
 
   async getMoonShootBalance() {
     this.balance = await this.walletConnectService.getUserBalance( this.data.address );
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
+
+    console.log(this.balance, this.moonBoxLimitDetails);
+    
   }
 
   onIncreaseSupplyInterestAmount(index: number) {
@@ -109,8 +121,7 @@ export class ArtistMoonboxComponent implements OnInit {
         this.supplyDetails.forEach((item: Supply) => {
           this.supply.push( item.hasSupply() ? 1 : 0 );
         });
-        
-      }
+      } else this.httpApi.showToastr( 'Couldn\'t get max supply, please try again later', false );
     })
   }
 
@@ -136,14 +147,10 @@ export class ArtistMoonboxComponent implements OnInit {
       return false;
     }
 
-    if ( this.supplyDetails[index]?.isUpcoming )
-      return false;
+    if ( this.supplyDetails[index]?.isUpcoming ) return false;
 
     this.invisible = true;
     this.fadeOut = true;
-
-    console.log('asd');
-    
 
     let dialogRef = this.dialog.open( ModalForTransactionComponent, {
       width: 'auto',
@@ -179,6 +186,10 @@ export class ArtistMoonboxComponent implements OnInit {
 
   openDialogWithTemplateRef (templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
+  }
+
+  trackByFn(index: number, item: any) {
+    return item;
   }
 
 }

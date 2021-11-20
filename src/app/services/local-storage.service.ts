@@ -34,11 +34,11 @@ export class LocalStorageService {
     }
 
     setWallet(wallet: number): void {
-        localStorage.setItem( this.NSFW_KEY, JSON.stringify( wallet ) );
+        localStorage.setItem( this.WALLET_KEY, JSON.stringify( wallet ) );
     }
 
     getWallet(): number {
-        return JSON.parse( localStorage.getItem( this.NSFW_KEY ) );
+        return JSON.parse( localStorage.getItem( this.WALLET_KEY ) );
     }
 
     removeWallet(): void {
@@ -46,11 +46,11 @@ export class LocalStorageService {
     }
 
     setAddress(address: string): void {
-        localStorage.setItem( this.NSFW_KEY, address );
+        localStorage.setItem( this.ADDRESS_KEY, address );
     }
 
     getAddress(): string {
-        return localStorage.getItem( this.NSFW_KEY );
+        return localStorage.getItem( this.ADDRESS_KEY );
     }
 
 }
