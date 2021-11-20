@@ -43,11 +43,6 @@
     height: 70px;
 }
 
-.connect_popup {
-    background: #090d16;
-    border-top: 6px solid #d5a642;
-}
-
 .border-thick:hover {
     border-bottom: 4px solid #d5a642;
 }
@@ -112,19 +107,15 @@
     }
 }
 
-.bg-primary {
-    background-color: #000000;
-}
-
-.invisible {
-    visibility: hidden;
+.soldout {
+    margin: 28px 0;
 }
 
 .artist-popup {
-    max-height: calc(100vh - 280px) !important;
-    min-height: calc(100vh - 280px) !important;
-    margin-top: 20px !important;
-    position: relative;
+    background: #090d16;
+    border-top: 6px solid #d5a642;
+    max-height: calc(100vh - 280px);
+    min-height: calc(100vh - 280px);
 }
 
 .plus_minus div,
@@ -136,9 +127,22 @@
     color: white;
 }
 
+.plus_minus button {
+    padding-top: 0.65rem;
+}
+
 .plus_minus div.border_left_right {
     border-left: 1px solid #fff;
     border-right: 1px solid #fff;
+}
+
+button.plus, button.minus {
+    &:hover > svg > path {
+        fill: $primary;
+    }
+    &:active > svg > path {
+        fill: white;
+    }
 }
 
 .border {

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, Subject } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
+import { Artist } from '../models/artist.model';
 
 const baseURL: any = environment.baseURL;
 
@@ -101,11 +103,11 @@ export class HttpApiService {
     return this.httpClient.get( url, { headers: this.headers, params } );
   } 
   
-  getArtistMoonboxData( artistWalletAddress: string, userAddress: string ): Observable<any> {
+  getArtistMoonboxData( artistWalletAddress: string, userAddress: string ): Observable<Artist> {
     const params = { artistWalletAddress, userAddress };
     const url = `${baseURL}getArtistMoonboxData`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
+    return this.httpClient.get<Artist>( url, { headers: this.headers, params } );
   } 
 
   submitBetForArtistApi( data: any ): Observable<any> {

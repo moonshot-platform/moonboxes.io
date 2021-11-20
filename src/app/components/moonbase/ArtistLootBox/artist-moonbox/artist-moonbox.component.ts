@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-for-transaction.component';
 import { environment } from 'src/environments/environment';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
+import { Artist, Supply } from 'src/app/models/artist.model';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -15,7 +16,15 @@ import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/c
 })
 export class ArtistMoonboxComponent implements OnInit {
   current = 0;
-  inputnumber = [...Array(5).fill(0)];
+  readonly boxTypes = [
+    'wood',
+    'silver',
+    'gold',
+    'diamond'
+  ]
+
+  supplies: number[] = [];
+  maxSupply: number[] = [];
   
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
@@ -25,20 +34,16 @@ export class ArtistMoonboxComponent implements OnInit {
 
 
   public lootBoxDetails: any = [];
-  public lootboxfloating = ['wood','silver','gold','diamond']
   data: any;
-  supplyDetails: any = [];
+  supplyDetails: Supply[] = [];
   balance: any;
-  artistAddress: string;
-  artistDetails: any;
+  artistDetails: Artist;
   moonBoxLimitDetails: any;
   invisible: boolean = false;
 
   constructor(public walletConnectService: WalletConnectService, private toastrService:ToastrService, public dialog: MatDialog,
     public httpApi: HttpApiService, private activatedRoute: ActivatedRoute) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
-
-    this.artistAddress = this.activatedRoute.snapshot.paramMap.get("artistAddress")
   }
 
   ngOnInit(): void {
@@ -71,18 +76,16 @@ export class ArtistMoonboxComponent implements OnInit {
   async getMoonShootBalance() {
     this.balance = await this.walletConnectService.getUserBalance( this.data.address );
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
+    console.log(this.moonBoxLimitDetails);
+    
   }
 
   plus(index: number) {
-    
-    if (this.supplyDetails[index - 1].currentSupply > this.inputnumber[index]) {
-      this.inputnumber[index] = this.inputnumber[index] + 1;
-    }
+    this.supplies[index] += this.supplyDetails[index].currentSupply > this.supplies[index] ? 1 : 0;
   }
+
   minus(index: number) {
-    if (this.inputnumber[index] != 1) {
-      this.inputnumber[index] = this.inputnumber[index] - 1;
-    }
+    this.supplies[index] -= this.supplies[index] > 1 ? 1 : 0;
   }
 
   next() {
@@ -113,43 +116,57 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   getMaxSupply() {
-    
-    this.httpApi.getArtistMoonboxData(this.artistAddress,this.data?.address).subscribe((response: any) => {
+    this.httpApi.getArtistMoonboxData(
+      this.activatedRoute.snapshot.params['artistAddress'],
+      this.data?.address
+    ).subscribe((response: Artist) => {
       if (response.isSuccess) {
-        this.supplyDetails = response.data;
-        this.artistDetails = response;
+        console.log(response);
         
-        this.inputnumber[0] = 1;
-        if (this.supplyDetails[0].currentSupply > 0)
-          this.inputnumber[1] = 1;
-        if (this.supplyDetails[1].currentSupply > 0)
-          this.inputnumber[2] = 1;
-        if (this.supplyDetails[2].currentSupply > 0)
-          this.inputnumber[3] = 1;
-        if (this.supplyDetails[3].currentSupply > 0)
-          this.inputnumber[4] = 1;
+        this.artistDetails = response;
+        this.supplyDetails = this.artistDetails.data;
+
+        console.log(this.supplyDetails);
+        
+        this.supplyDetails.forEach((item: Supply) => {
+          console.log(item);
+          
+          this.supplies.push( item.currentSupply > 0 ? 1 : 0 );
+
+          this.maxSupply.push( item.currentSupply );
+        });
+
+        console.log(this.supplies);
+        
       }
     })
+  }
+
+  canBuyWithinSupplyAmount( supply: number, interestAmount: number ) {
+      return ( supply === 0 ) ? false : interestAmount >= 1 && interestAmount <= supply;
   }
 
   buyMoonBase(index: number) {
     if (this.data === undefined || this.data.address === undefined) {
       this.openDialog();
-    }
-    else {
+    } else {
       this.submitBetToContract(index);
     }
   }
 
   async submitBetToContract(index: number) {
-    var maxSupply = this.supplyDetails[index - 1].currentSupply;
-    if (maxSupply == 0) {
-      return false;
-    }
-    if (maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
-      alert("invalid no of bet");
-      return false;
-    }
+    const item: Supply = this.supplyDetails[index];
+
+    
+    console.log(index, this.supplies[index], item);
+
+    return false;
+    
+    
+    // if ( maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
+    //   alert("invalid no of bet");
+    //   return false;
+    // }
     var moonShootLimit = this.moonBoxLimitDetails[index-1];
    if(Number(this.balance)<Number(moonShootLimit))
    {
@@ -169,18 +186,18 @@ export class ArtistMoonboxComponent implements OnInit {
       width: 'auto',
       disableClose : true,
       data: {
-        inputNumber: this.inputnumber,
-        lootBoxName: this.lootBoxDetails[index-1].name,
+        inputNumber: this.supplies[index],
+        lootBoxName: this.lootBoxDetails[index].name,
         data: this.data,
         index: index,
         balance: this.balance,
         isArtistLootBox: true,
         artistDetails: {
-          lootBoxId: this.supplyDetails[index - 1].id,
-          price: this.supplyDetails[index - 1].price,
+          lootBoxId: this.supplyDetails[index].id,
+          price: this.supplyDetails[index].price,
           address: this.artistDetails.walletAddress,
-          signature: this.supplyDetails[index - 1].signature,
-          limit : this.supplyDetails[index - 1].limitPerTxn
+          signature: this.supplyDetails[index].signature,
+          limit : this.supplyDetails[index].limitPerTxn
         }
       },
       panelClass: 'custom-modalbox'
