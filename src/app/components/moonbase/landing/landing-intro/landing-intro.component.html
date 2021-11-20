@@ -5,7 +5,7 @@
                 <source src="assets/media/videos/moonbase-intro.mov" type='video/qt; codecs="hvc1"'>
         </video> -->
         <section class="landing-carousel">
-            <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+            <swiper [config]="config">
                 <ng-container *ngFor="let slide of slides; index as i">
                     <ng-template swiperSlide>
                         <div class="nft-image-container">
@@ -49,7 +49,7 @@
             <source src="assets/media/videos/moonbase-intro.mov" type='video/qt; codecs="hvc1"'>
         </video> -->
         <section class="landing-carousel">
-            <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+            <swiper [config]="config">
                 <ng-container *ngFor="let slide of slides; index as i">
                     <ng-template swiperSlide>
                         <div class="nft-image-container">

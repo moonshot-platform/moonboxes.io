@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import SwiperCore, { EffectCoverflow, Swiper, Autoplay } from 'swiper';
+import SwiperCore, { EffectCoverflow, EffectFade, Swiper, Autoplay } from 'swiper';
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
-SwiperCore.use([EffectCoverflow]);
+SwiperCore.use([EffectFade]);
 SwiperCore.use([Autoplay]);
 @Component({
   selector: 'app-landing-intro',
@@ -43,26 +43,21 @@ export class LandingIntroComponent implements OnInit {
     },
   ];
 
-  initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
-  sliderIndex = this.initialSlideStartIndex;
-  currentSliderName = this.slides[this.sliderIndex].name;
-
 
   config: SwiperOptions = {
     slidesPerView: 0.98,
-    effect: 'coverflow',
-    direction: 'horizontal',
+    effect: 'fade',
     centeredSlides: true,
     enabled: true,
     autoHeight: true,
     autoplay: {
-      delay: 1000,
+      delay: 1400,
       disableOnInteraction: false,
       stopOnLastSlide: false,
       pauseOnMouseEnter: true,
       reverseDirection: true,
     },
-    speed: 300,
+    speed: 1000,
     centerInsufficientSlides: false,
     freeMode: {
       enabled: false,
@@ -95,19 +90,6 @@ export class LandingIntroComponent implements OnInit {
   constructor() {
   }
   ngOnInit(): void {
-
-  }
-
-
-  onSlideChange(index: any): void {
-    if (index.swipeDirection == "next") {
-      this.sliderIndex++;
-
-    } else if (index.swipeDirection == "prev") {
-      this.sliderIndex--;
-    }
-    this.sliderIndex = (this.sliderIndex) % (this.slides.length);
-    this.currentSliderName = this.slides[this.sliderIndex].name;
 
   }
 
