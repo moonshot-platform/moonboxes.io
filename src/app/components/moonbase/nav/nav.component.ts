@@ -51,7 +51,7 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
       'alt': 'inventory',
-      'tooltip': 'This is your inventory. An overview of all NFTs you received out of the MoonBoxes.',
+      'tooltip': 'This is your wallet inventory. An overview of all NFTs you received out of the MoonBoxes.',
       'click': null,
       'routerLink': ['/inventory'],
       'route': '/inventory'
@@ -144,7 +144,7 @@ export class NavComponent implements OnInit {
   }
 
   goBack() {
-    if( this.router.url.replace('/', '') !== MoonbaseComponent.routeName )
+    if (this.router.url.replace('/', '') !== MoonbaseComponent.routeName)
       this.location.back();
   }
   toggleTokenomics() {

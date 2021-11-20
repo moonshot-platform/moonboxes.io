@@ -13,7 +13,6 @@
     margin-left: auto;
     margin-right: auto;
     flex-direction: column;
-
     >.inner {
         width: 100%;
     }
@@ -85,7 +84,6 @@
     transition: all 1s ease;
     cursor: pointer;
     margin: 0 auto;
-
     &.disabled {
         filter: saturate(0);
     }
@@ -170,6 +168,51 @@
     height: auto;
 }
 
+.tooltip {
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    //top: 0px;
+    width: 210px;
+    padding: 20px 10px;
+    color: white;
+    background-color: black;
+    justify-content: center;
+    align-content: center;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    margin-top: -145px;
+    margin-left: -15px;
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.8s;
+    -webkit-transition: .3s all;
+    -webkit-transition-delay: .3s;
+    -moz-transition: .3s all;
+    -moz-transition-delay: .3s;
+    -ms-transition: .3s all;
+    -ms-transition-delay: .3s;
+    -o-transition: .3s all;
+    -o-transition-delay: .3s;
+    transition: .3s all;
+    transition-delay: .3s;
+    &.reveal {
+        opacity: 1;
+        visibility: visible;
+    }
+    >i::after {
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        left: 50%;
+        transform: translate(-50%, 200%) rotate( 45deg) scaleY(-1);
+        background-color: black;
+        box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
+        margin-top: 20px;
+    }
+}
+
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
     .pt-md-200 {
         padding-top: 0px; //200px;
@@ -185,9 +228,14 @@
     .boxes-title-container {
         padding-top: 0px;
     }
-    
     .soldout {
         margin: 23px 0;
+    }
+}
+
+@media only screen and (max-width: $md) {
+    .tooltip {
+        margin-top: 48px;
     }
 }
 
