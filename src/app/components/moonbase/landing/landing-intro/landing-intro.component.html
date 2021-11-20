@@ -1,9 +1,20 @@
 <section class="landing-intro">
     <div class="landing-into-nft-image-container-mobile">
-        <video width="100%" height="auto" playsinline muted autoplay loop playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
+        <!-- <video width="100%" height="auto" playsinline muted autoplay loop playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
                 <source src="assets/media/videos/moonbase-intro.webm" type="video/webm" />
                 <source src="assets/media/videos/moonbase-intro.mov" type='video/qt; codecs="hvc1"'>
-        </video>
+        </video> -->
+        <!-- <section class="landing-carousel">
+            <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+                <ng-container *ngFor="let slide of slides; index as i">
+                    <ng-template swiperSlide>
+                        <div class="nft-image-container">
+                            <img src="{{slide.img}}" alt="{{slide.name}}">
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </swiper>
+        </section> -->
     </div>
     <div class="info">
         <div class="line-container ">
@@ -33,9 +44,20 @@
     </div>
 
     <div class="landing-into-nft-image-container">
-        <video width="100%" height="auto" playsinline muted autoplay loop oncanplay="this.play()" onloadedmetadata="this.muted = true">
+        <!-- <video width="100%" height="auto" playsinline muted autoplay loop oncanplay="this.play()" onloadedmetadata="this.muted = true">
             <source src="assets/media/videos/moonbase-intro.webm" type="video/webm" />
             <source src="assets/media/videos/moonbase-intro.mov" type='video/qt; codecs="hvc1"'>
-        </video>
+        </video> -->
+        <section class="landing-carousel">
+            <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+                <ng-container *ngFor="let slide of slides; index as i">
+                    <ng-template swiperSlide>
+                        <div class="nft-image-container">
+                            <img src="{{slide.img}}" alt="{{slide.name}}">
+                        </div>
+                    </ng-template>
+                </ng-container>
+            </swiper>
+        </section>
     </div>
 </section>
