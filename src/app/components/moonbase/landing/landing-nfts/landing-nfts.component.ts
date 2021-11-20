@@ -5,11 +5,11 @@ import 'swiper/scss';
 SwiperCore.use([EffectCoverflow]);
 
 @Component({
-  selector: 'app-limited',
-  templateUrl: './limited.component.html',
-  styleUrls: ['./limited.component.scss']
+  selector: 'app-landing-nfts',
+  templateUrl: './landing-nfts.component.html',
+  styleUrls: ['./landing-nfts.component.scss']
 })
-export class LimitedComponent implements OnInit {
+export class LandingNftsComponent implements OnInit {
 
 
   slides: any[] = [

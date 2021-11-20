@@ -31,11 +31,11 @@ import { WalletConnectModule } from '../base/wallet/connect/connect.module';
 import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
 import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
-import { LimitedComponent } from './landing/limited/limited.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { InfoComponent } from './info/info.component';
 import { TransferComponent } from './modal-for-transaction/transfer/transfer.component';
 import { LandingMoonboxesComponent } from './landing/landing-moonboxes/landing-moonboxes.component';
+import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
 
 
 @NgModule({
@@ -58,10 +58,10 @@ import { LandingMoonboxesComponent } from './landing/landing-moonboxes/landing-m
     LandingComponent,
     RarityComponent,
     LandingIntroComponent,
-    LimitedComponent,
     InfoComponent,
     TransferComponent,
     LandingMoonboxesComponent,
+    LandingNftsComponent,
   ],
   imports: [
     MatIconModule,
