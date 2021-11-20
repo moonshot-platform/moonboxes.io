@@ -2,46 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import SwiperCore, { EffectCoverflow, Swiper } from 'swiper';
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
+import { SliderModel } from '../models/slider.model';
+import { nftSlider } from '../consts/nft-slider.const';
 SwiperCore.use([EffectCoverflow]);
 
 @Component({
-  selector: 'app-limited',
-  templateUrl: './limited.component.html',
-  styleUrls: ['./limited.component.scss']
+  selector: 'app-landing-nfts',
+  templateUrl: './landing-nfts.component.html',
+  styleUrls: ['./landing-nfts.component.scss']
 })
-export class LimitedComponent implements OnInit {
+export class LandingNftsComponent implements OnInit {
 
 
-  slides: any[] = [
-    {
-      "img": "assets/media/images/moonbox/landing/322.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/950.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/951.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/068.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/372.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/741.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/575.jpg",
-      "name": "The Moonshooter",
-    },
-  ];
+  slides: SliderModel[] = nftSlider;
 
   initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
   sliderIndex = this.initialSlideStartIndex;
@@ -64,7 +37,7 @@ export class LimitedComponent implements OnInit {
     },
     grabCursor: true,
     initialSlide: this.initialSlideStartIndex,
-    loop: false,
+    loop: true,
     coverflowEffect: {
       depth: 400,
       slideShadows: false,
@@ -88,23 +61,17 @@ export class LimitedComponent implements OnInit {
     }
 
   };
-  constructor() {
+
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  onSlideChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
   }
-  ngOnInit(): void {
 
-  }
-
-
-  onSlideChange(index: any): void {
-    if (index.swipeDirection == "next") {
-      this.sliderIndex++;
-
-    } else if (index.swipeDirection == "prev") {
-      this.sliderIndex--;
-    }
-    this.sliderIndex = (this.sliderIndex) % (this.slides.length);
-    this.currentSliderName = this.slides[this.sliderIndex].name;
-
+  onActiveIndexChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
   }
 
   scrollToElement(page: string, fragment: string): void {

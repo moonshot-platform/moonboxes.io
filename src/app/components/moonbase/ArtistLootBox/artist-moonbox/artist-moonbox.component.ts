@@ -154,7 +154,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
     let dialogRef = this.dialog.open( ModalForTransactionComponent, {
       width: 'auto',
-      disableClose : true,
+      disableClose: true,
       data: {
         inputNumber: this.supply[index],
         lootBoxName: this.lootBoxDetails[index].name,
@@ -173,18 +173,18 @@ export class ArtistMoonboxComponent implements OnInit {
       panelClass: 'custom-modalbox'
     });
 
-     dialogRef.afterClosed().subscribe(result => {
-       this.getMaxSupply();
-       this.invisible = false;
-       this.fadeOut = result;
-       this.popupClosed = true;
+    dialogRef.afterClosed().subscribe(result => {
+      this.getMaxSupply();
+      this.invisible = false;
+      this.fadeOut = result;
+      this.popupClosed = true;
     });
 
 
     return true;
   }
 
-  openDialogWithTemplateRef (templateRef: TemplateRef<any>) {
+  openDialogWithTemplateRef(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
   }
 

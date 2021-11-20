@@ -3,13 +3,18 @@
 
         <div class="moonbox-container flex1 flex-column flex-center">
             <div class="relative flex-center">
+<<<<<<< HEAD
                 <div class="relative moonbox wood"></div>
                 <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+=======
+                <div class="relative moonbox wood" [class.disabled]="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming"></div>
+                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+>>>>>>> 7a7310446ec6ed65977bb2f5d96638c783d98e9c
             </div>
             <div class="text-center">
-                <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[0].name}} <span *ngIf="maxSupply[0] !== undefined">({{maxSupply[0]}})</span></p>
-                <p *ngIf="inputnumber[1]!=0" class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-                <div class="border plus_minus flex mb20">
+                <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[0].name}} (<span *ngIf="maxSupply[0] !== undefined">{{maxSupply[0]}}</span>)</p>
+                <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
+                <div class="border plus_minus flex mb20" *ngIf="inputnumber[1]>0">
                     <!-- *ngIf="isConnected && !isWrongNetwork && maxSupply[0]>0" -->
 
                     <div class="flex1">
@@ -17,7 +22,7 @@
                     </div>
 
                 </div>
-                <div class="plus_minus flex mb20 justify-center" *ngIf="inputnumber[1] == 0 && this.maxSupply[0] === 0">Sold Out</div>
+                <div class="soldout plus_minus flex justify-center" *ngIf="inputnumber[1] == 0 && this.maxSupply[0] === 0">Sold Out</div>
                 <div class="tooltip" [class.reveal]="isTooltipActive[0] && !isConnected">
                     <div class="row">Please connect your wallet</div>
                 </div>
@@ -29,20 +34,25 @@
         </div>
         <div class="moonbox-container flex1 flex-center flex-column">
             <div class="relative flex-center">
+<<<<<<< HEAD
                 <div class="relative moonbox silver"></div>
                 <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId2/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+=======
+                <div class="relative moonbox silver" [class.disabled]="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming"></div>
+                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+>>>>>>> 7a7310446ec6ed65977bb2f5d96638c783d98e9c
             </div>
             <div class="text-center">
-                <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[1].name}} <span *ngIf="maxSupply[1] !== undefined">({{maxSupply[1]}})</span></p>
-                <p *ngIf="inputnumber[2]!=0" class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-                <div class="border plus_minus flex mb20">
+                <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[1]?.name}} (<span *ngIf="maxSupply[1] !== undefined">{{maxSupply[1]}}</span>)</p>
+                <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
+                <div class="border plus_minus flex mb20" *ngIf="inputnumber[2]>0">
 
                     <div class="flex1 ">
                         <input type="text" class="form-control" [(ngModel)]="inputnumber[2]" readonly>
                     </div>
 
                 </div>
-                <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[2]==0 && this.maxSupply[1] === 0">
+                <div class="soldout plus_minus flex justify-center" *ngIf="inputnumber[2]==0 && this.maxSupply[1] === 0">
                     Sold Out
                 </div>
                 <div class="tooltip" [class.reveal]="isTooltipActive[1] && !isConnected">
@@ -56,20 +66,25 @@
         </div>
         <div class="moonbox-container flex1 flex-column flex-center">
             <div class="relative flex-center">
+<<<<<<< HEAD
                 <div class="relative moonbox gold"></div>
                 <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+=======
+                <div class="relative moonbox gold" [class.disabled]="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming"></div>
+                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9)  || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+>>>>>>> 7a7310446ec6ed65977bb2f5d96638c783d98e9c
             </div>
             <div class="text-center">
-                <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[2].name}} <span *ngIf="maxSupply[2] !== undefined">({{maxSupply[2]}})</span></p>
-                <p *ngIf="inputnumber[3]!=0" class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-                <div class="border plus_minus flex mb20">
+                <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[2].name}} (<span *ngIf="maxSupply[2] !== undefined">{{maxSupply[2]}}</span>)</p>
+                <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
+                <div class="border plus_minus flex mb20" *ngIf="inputnumber[3]>0">
 
                     <div class="flex1 ">
                         <input type="text" class="form-control" [(ngModel)]="inputnumber[3]" readonly>
                     </div>
 
                 </div>
-                <div class=" plus_minus flex mb20 justify-center" *ngIf="inputnumber[3]==0 && this.maxSupply[2] === 0">
+                <div class="soldout plus_minus flex justify-center" *ngIf="inputnumber[3]==0 && this.maxSupply[2] === 0">
                     Sold Out
                 </div>
                 <div class="tooltip" [class.reveal]="isTooltipActive[2] && !isConnected">
@@ -83,13 +98,18 @@
         </div>
         <div class="moonbox-container flex1 flex-center flex-column">
             <div class="relative flex-center">
+<<<<<<< HEAD
                 <div class="relative moonbox diamond"></div>
                 <img *ngIf="!isConnected || (balance/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+=======
+                <div class="relative moonbox diamond" [class.disabled]="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming"></div>
+                <img *ngIf="!isConnected || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails?.isUpcoming" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+>>>>>>> 7a7310446ec6ed65977bb2f5d96638c783d98e9c
             </div>
             <div class="text-center">
-                <p class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[3].name}} <span *ngIf="maxSupply[3] !== undefined">({{maxSupply[3]}})</span></p>
+                <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">{{lootBoxDetails[3].name}} (<span *ngIf="maxSupply[3] !== undefined">{{maxSupply[3]}}</span>)</p>
                 <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-                <div class="border plus_minus flex mb20" *ngIf="isConnected && !isWrongNetwork && maxSupply[3]>0">
+                <div class="border plus_minus flex mb20" *ngIf="inputnumber[4]>0">
 
                     <div class="flex1">
                         <input type="text" class="form-control" [(ngModel)]="inputnumber[4]" readonly>
@@ -116,7 +136,7 @@
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
             </div>
             <div class="relative center">
-                <div class="relative moonbox {{lootboxfloating[current]}}"></div>
+                <div class="relative moonbox {{lootboxfloating[current]}}" [class.disabled]="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming"></div>
                 <!-- <img src={{lootBoxDetails[current].img}} alt="moonticket" /> -->
                 <img *ngIf="!isConnected  || (balance/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || (supplyDetails && supplyDetails[current]?.isUpcoming)" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
             </div>
@@ -126,16 +146,16 @@
         </div>
 
         <div class="flex-col text-center">
-            <p class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}} <span *ngIf="maxSupply[current] !== undefined">({{maxSupply[current]}})</span></p>
+            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{lootBoxDetails[current].name}} (<span *ngIf="maxSupply[current] !== undefined">{{maxSupply[current]}}</span>)</p>
             <p class="p-white-span-primary p16d14m mb10">{{priceForMoonBox == 0 ? '-' : priceForMoonBox}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="isConnected && !isWrongNetwork && maxSupply[current]>0">
+            <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
 
                 <div class="flex1">
                     <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
                 </div>
 
             </div>
-            <div class="soldout flex justify-center" *ngIf="inputnumber[current+1]==0">
+            <div class="soldout plus_minus flex justify-center" *ngIf="inputnumber[current+1]==0">
                 Sold Out
             </div>
             <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails && supplyDetails[current]?.isUpcoming">

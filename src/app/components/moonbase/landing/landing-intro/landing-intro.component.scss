@@ -12,6 +12,44 @@ section.landing-intro {
     z-index: 0;
 }
 
+section.landing-carousel {
+    max-width: 470px !important;
+    max-height: 470px !important;
+    width: 100%;
+    height: 100%;
+    padding-right: 20px;
+    padding-left: 20px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+}
+
+swiper {
+    padding-top: 0px !important;
+}
+
+.nft-image-container {
+    max-height: 470px;
+    max-width: 470px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    img {
+        height: 100%;
+        width: 100%;
+        align-self: center;
+    }
+}
+
 .landing-into-nft-image-container-mobile {
     display: none;
 }
@@ -21,7 +59,7 @@ section.landing-intro {
     margin-left: -75px;
     max-width: 470px;
     max-height: 470px;
-    background: black;
+    background: transparent;
     width: 100%;
     height: 100%;
     z-index: -1;
@@ -108,6 +146,20 @@ section.landing-intro {
     }
 }
 
+@media only screen and (max-width: $sm) {
+    section.landing-intro {
+        margin-top: 80px;
+    }
+    .nft-image-container {
+        max-height: 250px;
+        max-width: 250px;
+    }
+    section.landing-carousel {
+        max-width: 200px !important;
+        max-height: 200px !important;
+    }
+}
+
 @media only screen and (max-width: $md-header) {
     section.landing-intro {
         margin-top: 80px;
@@ -145,17 +197,23 @@ section.landing-intro {
         z-index: -1;
         position: relative;
         display: block;
-
         display: flex;
         justify-content: flex-end;
         width: 100%;
-
-        > video {
+        >video {
             max-width: 240px;
             max-height: 240px;
             width: 100%;
             height: 100%;
-            background: black;
+            background: transparent;
         }
+    }
+    .nft-image-container {
+        max-height: 250px;
+        max-width: 250px;
+    }
+    section.landing-carousel {
+        max-width: 200px !important;
+        max-height: 200px !important;
     }
 }
