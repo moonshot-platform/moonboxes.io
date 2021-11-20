@@ -1,5 +1,5 @@
 @import "includes";
-section.limited {
+section.landing-nfts {
     display: flex;
     flex-direction: column;
     max-width: 770px;
@@ -150,7 +150,7 @@ p.slider-name {
 }
 
 @media only screen and (max-width: 810px) {
-    section.limited {
+    section.landing-nfts {
         padding-top: 100px;
     }
     .detail-container {
