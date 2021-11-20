@@ -175,12 +175,18 @@ export class ModalForTransactionComponent implements OnInit {
 
 
   async submitBetForArtist() {
-
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
-      transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
-        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature,this.data.artistDetails.limit);
+      transactionDetails = await this.walletConnectService
+        .redeemBulkTransactionArtist(
+          this.data.artistDetails.lootBoxId,
+          this.data.inputNumber,
+          this.data.artistDetails.price, 
+          this.data.artistDetails.address,
+          this.data.artistDetails.signature,
+          this.data.artistDetails.limit
+        );
     }
     catch (e) {
       this.closeDialog()
@@ -192,7 +198,8 @@ export class ModalForTransactionComponent implements OnInit {
       this.httpApi.showToastr(e.hash?.error?.message,false);
       return false;
     }
-
+    console.log('ewr');
+    
     if (transactionDetails.status) {
       this.btn1Text = "Submitting data";
       this.httpApi.submitBetForArtistApi({

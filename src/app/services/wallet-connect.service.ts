@@ -353,6 +353,7 @@ redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAd
     const params: any = ethers.utils.parseEther( price.toString() );
     const spliSign = ethers.utils.splitSignature( signature );
 
+    console.log( lootBoxId, noOfBets, price, artistAddress, signature, betlimit );
     const promise = new Promise( ( resolve, reject ) => {
       try {
         this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit, spliSign.v, spliSign.r, spliSign.s, {

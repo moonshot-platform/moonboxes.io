@@ -1,7 +1,13 @@
-export interface Artist {
+import 'reflect-metadata';
+import { Type } from 'class-transformer';
+
+export class Artist {
     status:        number;
     isSuccess:     boolean;
+    
+    @Type(() => Supply)
     data:          Supply[];
+    
     walletAddress: string;
     ArtistName:    string;
     name:          string;
@@ -9,7 +15,7 @@ export interface Artist {
     filePath:      string;
 }
 
-export interface Supply {
+export class Supply {
     type:          string;
     price:         number;
     signature:     string;
@@ -18,4 +24,12 @@ export interface Supply {
     limitPerTxn:   number;
     isUpcoming:    boolean;
     currentSupply: number;
+
+    public hasSupply() {
+        return this.currentSupply > 1;
+    }
+
+    public canBuyWithinSupplyAmount( interestAmount: number ) {
+        return ( this.currentSupply === 0 ) ? false : interestAmount >= 1 && interestAmount <= this.currentSupply;
+    }
 }

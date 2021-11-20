@@ -15,7 +15,9 @@ import { Artist, Supply } from 'src/app/models/artist.model';
   styleUrls: ['./artist-moonbox.component.scss']
 })
 export class ArtistMoonboxComponent implements OnInit {
+  
   current = 0;
+
   readonly boxTypes = [
     'wood',
     'silver',
@@ -23,8 +25,7 @@ export class ArtistMoonboxComponent implements OnInit {
     'diamond'
   ]
 
-  supplies: number[] = [];
-  maxSupply: number[] = [];
+  supply: number[] = [];
   
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
@@ -49,68 +50,49 @@ export class ArtistMoonboxComponent implements OnInit {
   ngOnInit(): void {
     this.walletConnectService.init();
 
-    setTimeout(async () => {
+    setTimeout( async () => {
       this.walletConnectService.getData().subscribe((data) => {
-        if(data!=undefined && data.address!=undefined && this.data !=data)
-        {
+        if( data != undefined && data.address != undefined && this.data != data ) {
           this.data = data;
           this.isConnected = this.walletConnectService.isWalletConnected();
+          
           if (this.data.networkId.chainId != environment.chainId) {
             this.isWrongNetwork = true;
             this.toastrService.error("You are on the wrong network");
-          }
-          else
-          {
-            this.getMoonShootBalance();
-          }
+          } else this.getMoonShootBalance();
         }
        
         this.getMaxSupply();
-      
       });
-     
-    }, 1000);
+    }, 1000 );
     
   }
 
   async getMoonShootBalance() {
     this.balance = await this.walletConnectService.getUserBalance( this.data.address );
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
-    console.log(this.moonBoxLimitDetails);
-    
   }
 
-  plus(index: number) {
-    this.supplies[index] += this.supplyDetails[index].currentSupply > this.supplies[index] ? 1 : 0;
+  onIncreaseSupplyInterestAmount(index: number) {
+    this.supply[index] += this.supply[index] < this.supplyDetails[index].currentSupply ? 1 : 0;
   }
 
-  minus(index: number) {
-    this.supplies[index] -= this.supplies[index] > 1 ? 1 : 0;
+  onDecreaseSupplyInterestAmount(index: number) {
+    this.supply[index] -= this.supply[index] > 1 ? 1 : 0;
   }
 
-  next() {
-    this.current = this.current < this.lootBoxDetails.length - 1 ? this.current + 1 : 0;
-  }
-
-  prev() {
-    this.current = this.current > 0 ? this.current - 1 : this.lootBoxDetails.length - 1;
+  next( by: number ) {
+    const boxes = this.lootBoxDetails.length;
+    this.current = ( this.current + by ) - boxes * Math.floor( ( this.current + by ) / boxes);
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(WalletConnectComponent, {
-      width: 'auto',
-      // data: { name: this.name, animal: this.animal }
-    });
+    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe( (_) => {
       this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
-        if (this.data.address !== undefined) {
-          this.isConnected = true;
-        }
-        else {
-          this.isConnected = false;
-        }
+        this.isConnected = this.data.address !== undefined;
       })
     });
   }
@@ -121,72 +103,53 @@ export class ArtistMoonboxComponent implements OnInit {
       this.data?.address
     ).subscribe((response: Artist) => {
       if (response.isSuccess) {
-        console.log(response);
-        
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
 
-        console.log(this.supplyDetails);
-        
         this.supplyDetails.forEach((item: Supply) => {
-          console.log(item);
-          
-          this.supplies.push( item.currentSupply > 0 ? 1 : 0 );
-
-          this.maxSupply.push( item.currentSupply );
+          this.supply.push( item.hasSupply() ? 1 : 0 );
         });
-
-        console.log(this.supplies);
         
       }
     })
   }
 
-  canBuyWithinSupplyAmount( supply: number, interestAmount: number ) {
-      return ( supply === 0 ) ? false : interestAmount >= 1 && interestAmount <= supply;
-  }
-
   buyMoonBase(index: number) {
-    if (this.data === undefined || this.data.address === undefined) {
+    if (this.data === undefined || this.data.address === undefined)
       this.openDialog();
-    } else {
+    else
       this.submitBetToContract(index);
-    }
   }
 
   async submitBetToContract(index: number) {
     const item: Supply = this.supplyDetails[index];
 
-    
-    console.log(index, this.supplies[index], item);
+    if( item.currentSupply === 0 ) return false;
 
-    return false;
-    
-    
-    // if ( maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
-    //   alert("invalid no of bet");
-    //   return false;
-    // }
-    var moonShootLimit = this.moonBoxLimitDetails[index-1];
-   if(Number(this.balance)<Number(moonShootLimit))
-   {
-     this.httpApi.showToastr("You are not eligible for this Tier",false)
-     return false;
-   }
-
-    const isUpcoming = this.supplyDetails[index]?.isUpcoming;
-    if(isUpcoming)
-    {
+    if ( !item.canBuyWithinSupplyAmount( this.supply[index] ) ) {
+      this.httpApi.showToastr( 'Invalid no of bet', false );
       return false;
     }
+
+    if( Number( this.balance ) < Number( this.moonBoxLimitDetails[index] ) ) {
+      this.httpApi.showToastr( 'You are not eligible for this Tier', false );
+      return false;
+    }
+
+    if ( this.supplyDetails[index]?.isUpcoming )
+      return false;
+
     this.invisible = true;
     this.fadeOut = true;
 
-    let dialogRef = this.dialog.open(ModalForTransactionComponent, {
+    console.log('asd');
+    
+
+    let dialogRef = this.dialog.open( ModalForTransactionComponent, {
       width: 'auto',
       disableClose : true,
       data: {
-        inputNumber: this.supplies[index],
+        inputNumber: this.supply[index],
         lootBoxName: this.lootBoxDetails[index].name,
         data: this.data,
         index: index,

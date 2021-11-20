@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
 import { Artist } from '../models/artist.model';
 
+import { plainToClass } from 'class-transformer';
+
 const baseURL: any = environment.baseURL;
 
 @Injectable({
@@ -107,7 +109,8 @@ export class HttpApiService {
     const params = { artistWalletAddress, userAddress };
     const url = `${baseURL}getArtistMoonboxData`;
 
-    return this.httpClient.get<Artist>( url, { headers: this.headers, params } );
+    return this.httpClient.get( url, { headers: this.headers, params } )
+      .pipe( map( (r: Response) => plainToClass(Artist, r) ) );
   } 
 
   submitBetForArtistApi( data: any ): Observable<any> {
