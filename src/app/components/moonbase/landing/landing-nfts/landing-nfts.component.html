@@ -1,7 +1,7 @@
 <section id="landing-nfts" class="landing-nfts">
     <!-- This is the 3D Owl Carousel -->
     <section class="landing-carousel">
-        <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+        <swiper [config]="config" (activeIndexChange)="onActiveIndexChange($event)" (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let slide of slides; index as i">
                 <ng-template swiperSlide>
                     <div class="nft-image-container">

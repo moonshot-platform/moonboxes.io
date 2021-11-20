@@ -17,6 +17,8 @@ export class LandingNftsComponent implements OnInit {
     // quantity : 13
     // Males 
     // quantity : 19
+    // Moonshooter
+    // quantity : 7
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-33.jpg",
       "name": "Ra8bit #4964",
@@ -27,7 +29,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-52.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4965",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02100.png",
@@ -35,7 +37,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-56.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4966",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02101.png",
@@ -43,7 +45,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-00.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4967",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02102.png",
@@ -51,7 +53,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-03.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4968",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02299.png",
@@ -59,7 +61,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-06.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4969",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02284.png",
@@ -67,7 +69,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-08.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4970",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02319.png",
@@ -75,7 +77,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-11.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4971",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02328.png",
@@ -83,7 +85,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-14.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4972",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-04329.png",
@@ -91,7 +93,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-16.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4973",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-04335.png",
@@ -99,7 +101,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-19.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4974",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/Ra8bit_6490_Jennifer_Miller.jpg",
@@ -107,7 +109,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-22.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4975",
     },
     {
       "img": "assets/media/images/moonbox/landing/322.jpg",
@@ -115,7 +117,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-24.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4976",
     },
     {
       "img": "assets/media/images/moonbox/landing/950.jpg",
@@ -123,7 +125,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-28.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4977",
     },
     {
       "img": "assets/media/images/moonbox/landing/951.jpg",
@@ -131,7 +133,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-31.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4978",
     },
     {
       "img": "assets/media/images/moonbox/landing/068.jpg",
@@ -139,7 +141,7 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-33.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4979",
     },
     {
       "img": "assets/media/images/moonbox/landing/372.jpg",
@@ -147,30 +149,28 @@ export class LandingNftsComponent implements OnInit {
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-36.jpg",
-      "name": "Ra8bit #4964",
+      "name": "Ra8bit #4980",
     },
     {
       "img": "assets/media/images/moonbox/landing/741.jpg",
       "name": "The Moonshooter #741",
     },
     {
-      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit #4964 Darren Tavares.jpg",
-      "name": "Ra8bit #4964 Darren Tavares",
+      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit_4964_Darren_Tavares.jpg",
+      "name": "Ra8bit #4981 Darren Tavares",
     },
     {
       "img": "assets/media/images/moonbox/landing/575.jpg",
       "name": "The Moonshooter #575",
     },
     {
-      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit #5901 Reginald Elliot.jpg",
+      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit_5901_Reginald_Elliot.jpg",
       "name": "Ra8bit #5901 Reginald Elliot",
     },
     {
       "img": "assets/media/images/moonbox/landing/nfts/females/character-02106.png",
       "name": "Ra8bit #02106",
     },
-    // Moonshooter
-    // quantity : 7
   ];
 
   initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
@@ -219,22 +219,19 @@ export class LandingNftsComponent implements OnInit {
 
   };
   constructor() {
+    console.log(this.slides.length);
+
   }
   ngOnInit(): void {
 
   }
 
 
-  onSlideChange(index: any): void {
-    if (index.swipeDirection == "next") {
-      this.sliderIndex++;
-
-    } else if (index.swipeDirection == "prev") {
-      this.sliderIndex--;
-    }
-    this.sliderIndex = (this.sliderIndex) % (this.slides.length);
-    this.currentSliderName = this.slides[this.sliderIndex].name;
-
+  onSlideChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
+  }
+  onActiveIndexChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
   }
 
   scrollToElement(page: string, fragment: string): void {
