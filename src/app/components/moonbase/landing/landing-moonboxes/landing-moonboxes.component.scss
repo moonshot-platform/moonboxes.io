@@ -1,5 +1,5 @@
 @import "includes";
-section.raise-stakes {
+section.landing-moonboxes {
     display: block;
     flex-direction: column;
     max-width: 770px;
@@ -161,7 +161,7 @@ section.raise-stakes {
 }
 
 @media only screen and (max-width: 810px) {
-    section.raise-stakes {
+    section.landing-moonboxes {
         padding-top: 100px;
         max-width: 500px;
         width: calc(100vw - 40px);
