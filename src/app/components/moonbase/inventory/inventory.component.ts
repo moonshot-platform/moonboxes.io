@@ -125,7 +125,7 @@ export class InventoryComponent implements OnInit {
   async claimRewardTransaction(data: any, nftId, supply: Number, index: any) {
     try {
       //debugger
-      var txnstatus: any = await this.walletConnectService.claimRewardTransaction(
+      const txnstatus: any = await this.walletConnectService.claimRewardTransaction(
         data.junkAmount, nftId, supply, data.id, data.id, data.signHash
       );
 
@@ -195,12 +195,11 @@ export class InventoryComponent implements OnInit {
   }
 
   public downloadImage(data: any) {
-    console.log(data.logo_path);
     this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
-      //console.log(base64data);
+
       this.base64Image = 'data:image/jpg;base64,' + base64data;
-      // save image to disk
-      var link = document.createElement("a");
+
+      const link = document.createElement("a");
 
       document.body.appendChild(link); // for Firefox
 

@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { waitForAsync } from '@angular/core/testing';
+import { Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { HttpApiService } from 'src/app/services/http-api.service';
@@ -11,7 +10,7 @@ import Web3 from 'web3';
   templateUrl: './transfer.component.html',
   styleUrls: ['./transfer.component.scss']
 })
-export class TransferComponent implements OnInit {
+export class TransferComponent {
   btnText: string="Transfer";
   showError: boolean = false;
 
@@ -21,10 +20,6 @@ export class TransferComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private walletConnectService:WalletConnectService,
     private httpApi:HttpApiService) { }
-
-  ngOnInit(): void {
-    console.log(this.data);
-  }
 
   async transfer(userAddress:any)
   {

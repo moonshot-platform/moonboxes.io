@@ -204,7 +204,6 @@ export class ModalForTransactionComponent implements OnInit {
         this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
-    console.log('ewr');
     
     if (transactionDetails.status) {
       this.btn1Text = "Submitting data";

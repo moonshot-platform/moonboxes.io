@@ -118,7 +118,6 @@ export class WalletConnectService {
             this.setWalletDisconnected();
           } else {
             await this.connectToWallet();
-            console.log('c1');
           }
         });
 
@@ -146,8 +145,7 @@ export class WalletConnectService {
   }
 
   async connectToWalletConnect( origin = 0 ) {    
-    console.log( 'connectToWalletConnect ', origin );
-
+    
     try {
       this.provider = new ethers.providers.Web3Provider(provider);
       await provider.enable();
@@ -173,7 +171,6 @@ export class WalletConnectService {
     }
 
     catch(e) {
-      console.log(e.message);
       this.setWalletDisconnected();
       location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it
     }
@@ -359,7 +356,6 @@ redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAd
     const params: any = ethers.utils.parseEther( price.toString() );
     const spliSign = ethers.utils.splitSignature( signature );
 
-    console.log( lootBoxId, noOfBets, price, artistAddress, signature, betlimit );
     const promise = new Promise( ( resolve, reject ) => {
       try {
         this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit, spliSign.v, spliSign.r, spliSign.s, {

@@ -80,9 +80,6 @@ export class ArtistMoonboxComponent implements OnInit {
   async getMoonShootBalance() {
     this.balance = await this.walletConnectService.getUserBalance( this.data.address );
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
-
-    console.log(this.balance, this.moonBoxLimitDetails);
-    
   }
 
   onIncreaseSupplyInterestAmount(index: number) {
