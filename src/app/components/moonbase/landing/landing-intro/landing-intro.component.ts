@@ -3,6 +3,8 @@ import SwiperCore, { EffectCoverflow, EffectFade, Swiper, Autoplay } from 'swipe
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
+import { nftSlider } from '../consts/nft-slider.const';
+import { SliderModel } from '../models/slider.model';
 SwiperCore.use([EffectFade]);
 SwiperCore.use([Autoplay]);
 @Component({
@@ -12,37 +14,7 @@ SwiperCore.use([Autoplay]);
 })
 export class LandingIntroComponent implements OnInit {
 
-  slides: any[] = [
-    {
-      "img": "assets/media/images/moonbox/landing/322.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/950.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/951.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/068.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/372.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/741.jpg",
-      "name": "The Moonshooter",
-    },
-    {
-      "img": "assets/media/images/moonbox/landing/575.jpg",
-      "name": "The Moonshooter",
-    },
-  ];
-
+  slides: SliderModel[] = nftSlider;
 
   config: SwiperOptions = {
     slidesPerView: 0.98,
@@ -87,8 +59,10 @@ export class LandingIntroComponent implements OnInit {
     // }
 
   };
+
   constructor() {
   }
+
   ngOnInit(): void {
 
   }
@@ -99,5 +73,4 @@ export class LandingIntroComponent implements OnInit {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }
-
 }
