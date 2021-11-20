@@ -13,34 +13,164 @@ export class LandingNftsComponent implements OnInit {
 
 
   slides: any[] = [
+    //females
+    // quantity : 13
+    // Males 
+    // quantity : 19
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-33.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-00118.png",
+      "name": "Ra8bit #00118",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-52.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02100.png",
+      "name": "Ra8bit #02100",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-11-56.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02101.png",
+      "name": "Ra8bit #02101",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-00.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02102.png",
+      "name": "Ra8bit #02102",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-03.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02299.png",
+      "name": "Ra8bit #02299",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-06.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02284.png",
+      "name": "Ra8bit #02284",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-08.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02319.png",
+      "name": "Ra8bit #02319",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-11.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02328.png",
+      "name": "Ra8bit #02328",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-14.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-04329.png",
+      "name": "Ra8bit #04329",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-16.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-04335.png",
+      "name": "Ra8bit #04335",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-19.jpg",
+      "name": "Ra8bit #4964",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/Ra8bit_6490_Jennifer_Miller.jpg",
+      "name": "Ra8bit #6490 Jennifer Miller",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-22.jpg",
+      "name": "Ra8bit #4964",
+    },
     {
       "img": "assets/media/images/moonbox/landing/322.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #322",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-24.jpg",
+      "name": "Ra8bit #4964",
     },
     {
       "img": "assets/media/images/moonbox/landing/950.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #950",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-28.jpg",
+      "name": "Ra8bit #4964",
     },
     {
       "img": "assets/media/images/moonbox/landing/951.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #951",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-31.jpg",
+      "name": "Ra8bit #4964",
     },
     {
       "img": "assets/media/images/moonbox/landing/068.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #068",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-33.jpg",
+      "name": "Ra8bit #4964",
     },
     {
       "img": "assets/media/images/moonbox/landing/372.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #372",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/photo_2021-09-29_18-12-36.jpg",
+      "name": "Ra8bit #4964",
     },
     {
       "img": "assets/media/images/moonbox/landing/741.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #741",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit #4964 Darren Tavares.jpg",
+      "name": "Ra8bit #4964 Darren Tavares",
     },
     {
       "img": "assets/media/images/moonbox/landing/575.jpg",
-      "name": "The Moonshooter",
+      "name": "The Moonshooter #575",
     },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/males/Ra8bit #5901 Reginald Elliot.jpg",
+      "name": "Ra8bit #5901 Reginald Elliot",
+    },
+    {
+      "img": "assets/media/images/moonbox/landing/nfts/females/character-02106.png",
+      "name": "Ra8bit #02106",
+    },
+    // Moonshooter
+    // quantity : 7
   ];
 
   initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
