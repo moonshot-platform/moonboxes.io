@@ -64,7 +64,7 @@ export class LandingNftsComponent implements OnInit {
     },
     grabCursor: true,
     initialSlide: this.initialSlideStartIndex,
-    loop: false,
+    loop: true,
     coverflowEffect: {
       depth: 400,
       slideShadows: false,
