@@ -218,14 +218,10 @@ export class LandingNftsComponent implements OnInit {
     }
 
   };
-  constructor() {
-    console.log(this.slides.length);
 
-  }
-  ngOnInit(): void {
+  constructor() { }
 
-  }
-
+  ngOnInit(): void { }
 
   onSlideChange(event: any): void {
     this.currentSliderName = this.slides[event.activeIndex - 3].name;
