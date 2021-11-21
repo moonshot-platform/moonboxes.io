@@ -329,6 +329,7 @@ tbody td {
         padding: 10px 20px;
         box-sizing: border-box;
         border-bottom: 1px solid $primary;
+        align-self: center;
     }
     &:hover {
         >p {
