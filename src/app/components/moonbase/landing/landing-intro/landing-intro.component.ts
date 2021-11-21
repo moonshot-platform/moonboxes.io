@@ -23,13 +23,14 @@ export class LandingIntroComponent implements OnInit {
     enabled: true,
     autoHeight: true,
     autoplay: {
-      delay: 1400,
+      delay: 3000,
       disableOnInteraction: false,
       stopOnLastSlide: false,
       pauseOnMouseEnter: true,
       reverseDirection: true,
     },
-    speed: 1000,
+    initialSlide: 0,
+    speed: 3000,
     centerInsufficientSlides: false,
     freeMode: {
       enabled: false,
