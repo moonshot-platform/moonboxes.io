@@ -1226,6 +1226,18 @@ svg.interactable {
             fill: white;
         }
     }
+
+    &.wrapped {
+        width: auto;
+    }
+}
+
+.h-auto {
+    height: auto;
+}
+
+.w-auto {
+    width: auto;
 }
 
 svg#moonbox_icon path {

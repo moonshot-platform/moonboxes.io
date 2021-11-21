@@ -181,6 +181,7 @@ export class ModalForTransactionComponent implements OnInit {
 
 
   async submitBetForArtist() {
+
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
@@ -252,7 +253,7 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this.dialog.open(SocialShareComponent, {
+    this.dialog.open(SocialShareComponent, {
       width: 'auto',
       data: { name: this.nftImgRevealed }
     });
