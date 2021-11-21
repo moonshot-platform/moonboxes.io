@@ -4,9 +4,9 @@
         <swiper [config]="config" (activeIndexChange)="onActiveIndexChange($event)" (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let slide of slides; index as i">
                 <ng-template swiperSlide>
-                    <div class="nft-image-container">
+                    <a class="nft-image-container" href="/live">
                         <img src="{{slide.img}}" alt="{{slide.name}}">
-                    </div>
+                    </a>
                 </ng-template>
             </ng-container>
         </swiper>
