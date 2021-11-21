@@ -17,26 +17,21 @@ export class LandingIntroComponent implements OnInit {
   slides: SliderModel[] = nftSlider;
 
   config: SwiperOptions = {
-    slidesPerView: 0.98,
+    slidesPerView: 1,
     effect: 'fade',
-    centeredSlides: true,
-    enabled: true,
-    autoHeight: true,
+    allowTouchMove: false,
     autoplay: {
       delay: 3000,
       disableOnInteraction: false,
       stopOnLastSlide: false,
       pauseOnMouseEnter: true,
-      reverseDirection: true,
     },
-    initialSlide: 0,
     speed: 3000,
-    centerInsufficientSlides: false,
     freeMode: {
       enabled: false,
       sticky: true,
     },
-    grabCursor: true,
+    grabCursor: false,
     loop: true,
     coverflowEffect: {
       depth: 500,
