@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LimitedComponent } from './limited.component';
+import { LandingNftsComponent } from './landing-nfts.component';
 
-describe('LimitedComponent', () => {
-  let component: LimitedComponent;
-  let fixture: ComponentFixture<LimitedComponent>;
+describe('LandingNftsComponent', () => {
+  let component: LandingNftsComponent;
+  let fixture: ComponentFixture<LandingNftsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LimitedComponent ]
+      declarations: [ LandingNftsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LimitedComponent);
+    fixture = TestBed.createComponent(LandingNftsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

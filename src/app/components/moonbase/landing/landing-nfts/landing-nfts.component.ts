@@ -1,0 +1,84 @@
+import { Component, OnInit } from '@angular/core';
+import SwiperCore, { EffectCoverflow, Swiper, Autoplay } from 'swiper';
+import { SwiperOptions } from 'swiper/types/swiper-options';
+import 'swiper/scss';
+import { SliderModel } from '../models/slider.model';
+import { nftSlider } from '../consts/nft-slider.const';
+SwiperCore.use([EffectCoverflow]);
+SwiperCore.use([Autoplay]);
+
+@Component({
+  selector: 'app-landing-nfts',
+  templateUrl: './landing-nfts.component.html',
+  styleUrls: ['./landing-nfts.component.scss']
+})
+export class LandingNftsComponent implements OnInit {
+
+
+  slides: SliderModel[] = nftSlider;
+
+  initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
+  sliderIndex = this.initialSlideStartIndex;
+  currentSliderName = this.slides[this.sliderIndex].name;
+
+  config: SwiperOptions = {
+    slidesPerView: 3,
+    effect: 'coverflow',
+    direction: 'horizontal',
+    centeredSlides: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    speed: 1000,
+    centerInsufficientSlides: true,
+    freeMode: {
+      enabled: false,
+      sticky: true,
+    },
+    grabCursor: true,
+    initialSlide: this.initialSlideStartIndex,
+    loop: true,
+    coverflowEffect: {
+      depth: 400,
+      slideShadows: false,
+      rotate: 0,
+      stretch: 0,
+    },
+    breakpoints: {
+      700: {
+        slidesPerView: 3,
+      },
+      600: {
+        slidesPerView: 3,
+      },
+      500: {
+        slidesPerView: 3,
+      },
+      300: {
+        slidesPerView: 1.76,
+      }
+
+    }
+
+  };
+
+  constructor() { }
+
+  ngOnInit(): void { }
+
+  onSlideChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
+  }
+
+  onActiveIndexChange(event: any): void {
+    this.currentSliderName = this.slides[event.activeIndex - 3].name;
+  }
+
+  scrollToElement(page: string, fragment: string): void {
+    const element = document.querySelector(`#${fragment}`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+}

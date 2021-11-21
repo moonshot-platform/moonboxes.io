@@ -1,10 +1,10 @@
-<section id="limited" class="limited">
+<section id="landing-nfts" class="landing-nfts">
     <!-- This is the 3D Owl Carousel -->
     <section class="landing-carousel">
-        <swiper [config]="config" (activeIndexChange)="onSlideChange($event)">
+        <swiper [config]="config" (activeIndexChange)="onActiveIndexChange($event)" (slideChange)="onSlideChange($event)">
             <ng-container *ngFor="let slide of slides; index as i">
                 <ng-template swiperSlide>
-                    <div class="nft-image-container">
+                    <div class="nft-image-container" [routerLink]="['/live']" routerLinkActive="router-link-active">
                         <img src="{{slide.img}}" alt="{{slide.name}}">
                     </div>
                 </ng-template>
@@ -21,20 +21,20 @@
             <div class="bottom flex pv20">
                 <div class="bottom-only no-padding ">
                     <p class="mb20  info-text"><a href="http://moonboxes.io/">MoonBoxes.io</a> offers you a complete overview of upcoming, active and recent NFT drops.<br><br> <a href="http://moonboxes.io/" target="_blank">MoonBoxes.io</a> will be home to collectors and amazing
-                        NFT artists.<br><br> Artists will be able to LAUNCH their new collections and collectors will have the first opportunity to purchase their NFTs through our MoonBoxes.</p>
+                        NFT artists.
+                    </p>
                 </div>
             </div>
             <div class="buttons-container">
                 <div class="buy-moonshot-button">
                     <a [routerLink]="['/upcoming']" class="button">Explore</a>
                 </div>
-                <div class="arrow-down">
+                <!-- <div class="arrow-down">
                     <div class="round-mini-button" (click)="scrollToElement('', 'rarity')">
                         <mat-icon fontSet="material-icons" class="color-primary">arrow_downward</mat-icon>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
-
 </section>

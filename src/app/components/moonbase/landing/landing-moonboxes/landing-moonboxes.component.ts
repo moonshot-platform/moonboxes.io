@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-raise-stakes',
-  templateUrl: './raise-stakes.component.html',
-  styleUrls: ['./raise-stakes.component.scss']
+  selector: 'app-landing-moonboxes',
+  templateUrl: './landing-moonboxes.component.html',
+  styleUrls: ['./landing-moonboxes.component.scss']
 })
-export class RaiseStakesComponent implements OnInit {
+export class LandingMoonboxesComponent implements OnInit {
 
   boxes: any[] = [
     {
