@@ -36,6 +36,7 @@ import { InfoComponent } from './info/info.component';
 import { TransferComponent } from './modal-for-transaction/transfer/transfer.component';
 import { LandingMoonboxesComponent } from './landing/landing-moonboxes/landing-moonboxes.component';
 import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.compon
     SidebarModule,
     WalletConnectModule,
     SwiperModule,
-    UiSwitchModule
+    UiSwitchModule,
+    ClipboardModule
   ]
 })
 export class MoonbaseModule { }
