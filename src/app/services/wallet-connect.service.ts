@@ -297,6 +297,7 @@ export class WalletConnectService {
   }
 
   redeemBulkTransaction( lootBoxId: any, price: any, noOfBets: number, userAddress: string ) {
+    
     const promise = new Promise( ( resolve, reject ) => {
       try {
         this.LootboxContract.submitBet( lootBoxId, price, noOfBets, { value:( price*noOfBets ).toString() } )
@@ -306,6 +307,8 @@ export class WalletConnectService {
             reject({ hash: e, status: false });
           })
       } catch (e) {
+        console.log(e);
+        
        reject( { hash: '', status: false } );
       }
     });

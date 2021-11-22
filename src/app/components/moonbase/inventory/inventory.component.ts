@@ -71,7 +71,7 @@ export class InventoryComponent implements OnInit {
   getUserData() {
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
-      nsfwstatus: this.NSFWToggleState
+      nsfwstatus: true
     }).then((response: any) => {
       const {isSuccess, status} = response;
 

@@ -76,6 +76,10 @@
     fill: #d5a642;
 }
 
+.round-mini-button {
+    display: none;
+}
+
 .moonbox {
     width: 210px !important;
     height: calc(12600px / 60) !important;
@@ -236,8 +240,23 @@ button.plus, button.minus {
     .boxes-title-container {
         padding-top: 0px;
     }
-    .soldout {
-        margin: 23px 0;
+
+    .all-boxes {
+        justify-content: center;
+    }
+
+    .moonbox-container {
+        display: none;
+        flex: initial;
+        > .content { padding: 0 10px; }
+
+        &.selected {
+            display: flex;
+        }
+    }
+
+    .round-mini-button {
+        display: flex;
     }
 }
 

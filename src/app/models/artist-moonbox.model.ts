@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Type } from 'class-transformer';
 
-export class Artist {
+export class ArtistMoonbox {
     status:        number;
     isSuccess:     boolean;
     
@@ -26,7 +26,7 @@ export class Supply {
     currentSupply: number;
 
     public hasSupply() {
-        return this.currentSupply > 1;
+        return this.currentSupply >= 1;
     }
 
     public canBuyWithinSupplyAmount( interestAmount: number ) {

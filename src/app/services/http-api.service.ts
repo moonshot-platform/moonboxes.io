@@ -4,9 +4,10 @@ import { Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { environment } from 'src/environments/environment';
-import { Artist } from '../models/artist.model';
+import { ArtistMoonbox } from '../models/artist-moonbox.model';
 
 import { plainToClass } from 'class-transformer';
+import { AdminMoonbox } from '../models/admin-moonbox.model';
 
 const baseURL: any = environment.baseURL;
 
@@ -43,11 +44,12 @@ export class HttpApiService {
     return this.httpClient.post( url, data, { headers: this.headers } );
   }
 
-  getMaxSupply( userWalletAddress: string ): Observable<any> {
+  getMaxSupply( userWalletAddress: string ): Observable<AdminMoonbox> {
     const params = { userWalletAddress, ArtistwalletAddress: environment.ownerAddress };
     const url = `${baseURL}typeCount`;
 
-    return this.httpClient.get( url, { headers: this.headers, params} );
+    return this.httpClient.get( url, { headers: this.headers, params } )
+      .pipe( map( (r: Response) => plainToClass(AdminMoonbox, r) ) );
   }
 
   getUserBetData( data: any ): Observable<any> {
@@ -105,12 +107,12 @@ export class HttpApiService {
     return this.httpClient.get( url, { headers: this.headers, params } );
   } 
   
-  getArtistMoonboxData( artistWalletAddress: string, userAddress: string ): Observable<Artist> {
+  getArtistMoonboxData( artistWalletAddress: string, userAddress: string ): Observable<ArtistMoonbox> {
     const params = { artistWalletAddress, userAddress };
     const url = `${baseURL}getArtistMoonboxData`;
 
     return this.httpClient.get( url, { headers: this.headers, params } )
-      .pipe( map( (r: Response) => plainToClass(Artist, r) ) );
+      .pipe( map( (r: Response) => plainToClass(ArtistMoonbox, r) ) );
   } 
 
   submitBetForArtistApi( data: any ): Observable<any> {

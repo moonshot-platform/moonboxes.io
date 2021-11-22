@@ -100,7 +100,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4975",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/322.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/322.jpg",
         "The Moonshooter #322",
     ),
     new SliderModel(
@@ -108,7 +108,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4976",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/950.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/950.jpg",
         "The Moonshooter #950",
     ),
     new SliderModel(
@@ -116,7 +116,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4977",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/951.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/951.jpg",
         "The Moonshooter #951",
     ),
     new SliderModel(
@@ -124,7 +124,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4978",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/068.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/068.jpg",
         "The Moonshooter #068",
     ),
     new SliderModel(
@@ -132,7 +132,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4979",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/372.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/372.jpg",
         "The Moonshooter #372",
     ),
     new SliderModel(
@@ -140,7 +140,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4980",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/741.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/741.jpg",
         "The Moonshooter #741",
     ),
     new SliderModel(
@@ -148,7 +148,7 @@ export const nftSlider: SliderModel[] = [
         "Ra8bit #4981 Darren Tavares",
     ),
     new SliderModel(
-        "assets/media/images/moonbox/landing/575.jpg",
+        "assets/media/images/moonbox/landing/nfts/moonshooter/575.jpg",
         "The Moonshooter #575",
     ),
     new SliderModel(

@@ -20,7 +20,7 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
+    "emitDecoratorMetadata": false,
     "lib": [
       "es2018",
       "dom"

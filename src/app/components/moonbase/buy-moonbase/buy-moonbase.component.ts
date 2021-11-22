@@ -8,6 +8,8 @@ import { environment } from './../../../../environments/environment';
 
 import { ToastrService } from 'ngx-toastr';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
+import { AdminMoonbox, Supply } from 'src/app/models/admin-moonbox.model';
+import { Moonbox } from 'src/app/models/moonbox.model';
 
 @Component({
   selector: 'app-buy-moonbase',
@@ -16,19 +18,23 @@ import { WalletConnectComponent } from '../../base/wallet/connect/connect.compon
 })
 export class BuyMoonbaseComponent implements OnInit {
 
+  static readonly routeName: string = 'buy_moonbase';
+
   current = 0;
-  inputnumber = [...Array(5).fill(0)];
-  public lootboxfloating = ['wood', 'silver', 'gold', 'diamond']
+
+  supply: Moonbox[];
+  inputnumber = [];
+  
+  readonly boxTypes = [ 'wood', 'silver', 'gold', 'diamond' ]
+
   isConnected: boolean = false;
   isWrongNetwork: boolean = false;
   invisible: boolean = false;
   popupClosed: boolean = false;
-  static readonly routeName: string = 'buy_moonbase';
+  
   public isTooltipActive: boolean[] = [false, false, false, false];
-  public lootBoxDetails: any = [];
 
   data: any;
-  supplyDetails: any;
   balance: any;
   moonBoxLimitDetails: any;
   maxSupply = [];
@@ -40,29 +46,28 @@ export class BuyMoonbaseComponent implements OnInit {
     private toastrService:ToastrService,
     public dialog: MatDialog,
     public httpApi: HttpApiService
-  ) { this.lootBoxDetails = httpApi.lootBoxDetails; }
+  ) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
 
-    (async () => {
-      this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
-      this.walletConnectService.getData().subscribe((data) => {
-        if (data !== undefined && data.address != undefined && data != this.data) {
-          this.data = data;
-          
-          if (this.data.networkId.chainId != environment.chainId) {
-            this.isWrongNetwork = true;
-            this.toastrService.error("You are on the wrong network");
-          }
-          else {
-            this.getMoonShootBalance();
-          }
-        } 
-      });
+    
+    this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
+    this.walletConnectService.getData().subscribe((data) => {
+      if (data !== undefined && data.address != undefined && data != this.data) {
+        this.data = data;        
 
-      this.getMaxSupply();
-    })();
+        if (this.data.networkId.chainId != environment.chainId) {
+          this.isWrongNetwork = true;
+          this.toastrService.error("You are on the wrong network");
+        }
+        else {
+          this.getMoonShootBalance();
+        }
+      } 
+    });
+
+    this.getMaxSupply();
   }
 
   async getBoxPrices() {
@@ -81,12 +86,9 @@ export class BuyMoonbaseComponent implements OnInit {
     this.getBoxPrices();
   }
 
-  next() {
-    this.current = this.current < this.lootBoxDetails.length - 1 ? this.current + 1 : 0;
-  }
-
-  prev() {
-    this.current = this.current > 0 ? this.current - 1 : this.lootBoxDetails.length - 1;
+  next( by: number ) {
+    const boxes = this.boxTypes.length;
+    this.current = ( this.current + by ) - boxes * Math.floor( ( this.current + by ) / boxes);
   }
 
   openDialog(): void {
@@ -101,18 +103,20 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   getMaxSupply() {
-    this.httpApi.getMaxSupply(this.data?.address).subscribe( ( response: any ) => {
-      if( response.isSuccess ) {
-        this.supplyDetails  = response.data.data;
-
-        for (let i = 0; i < this.inputnumber.length ; i++) {
-          if( this.supplyDetails[ this.lootBoxDetails[i].name ] > 0 )
-            this.inputnumber[i+1] = 1;
-
-          this.maxSupply[i] = this.supplyDetails[this.lootBoxDetails[i].name];
-        }
-      }
-    } )
+    this.httpApi.getMaxSupply(
+      this.data?.address
+    ).subscribe((response: AdminMoonbox) => {
+      
+      if (response.isSuccess) {
+        this.supply = response.data.get();
+        
+        this.supply.forEach((item: Moonbox) => {
+          this.inputnumber.push( item.currentSupply >= 1 ? 1 : 0 );
+        });
+        
+        
+      } else this.httpApi.showToastr( 'Couldn\'t get max supply, please try again later', false );
+    })
   }
 
   buyMoonBase(index: number) {
@@ -123,44 +127,47 @@ export class BuyMoonbaseComponent implements OnInit {
   }
 
   async submitBetToContract(index: number) {
-    var maxSupply = this.supplyDetails[this.lootBoxDetails[index - 1].name];
-    if (maxSupply == 0) {
+    const maxSupply = this.supply[index].currentSupply;
+    if ( maxSupply === 0 ) return false;
+
+    if( Number( this.balance ) < Number( this.moonBoxLimitDetails[index] ) ) {
+      this.httpApi.showToastr( 'You are not eligible for this Tier', false );
       return false;
     }
-    var moonShootLimit = this.moonBoxLimitDetails[index - 1];
-    if (Number(this.balance) < Number(moonShootLimit)) {
-      this.httpApi.showToastr("You are not eligible for this Tier", false)
-      return false;
-    }
-    if (maxSupply < this.inputnumber[index] || this.inputnumber[index] == 0) {
-      alert("Invalid bet");
+    
+    if ( this.inputnumber[index] > maxSupply || this.inputnumber[index] == 0) {
+      this.httpApi.showToastr( 'Invalid no of bet', false );
       return false;
     }
 
     this.invisible = true;
     this.fadeOut = true;
 
-    let dialogRef = this.dialog.open(ModalForTransactionComponent, {
+    let dialogRef = this.dialog.open( ModalForTransactionComponent, {
       width: 'auto',
       disableClose: true,
       data: {
-        inputNumber: this.inputnumber,
-        lootBoxName: this.lootBoxDetails[index - 1].name,
+        inputNumber: this.inputnumber[index],
+        lootBoxName: this.supply[index].type,
         data: this.data,
         index: index,
         balance: this.balance,
         isArtistLootBox: false
       },
       panelClass: 'custom-modalbox'
-    });
+    } );
 
     dialogRef.afterClosed().subscribe(result => {
       this.invisible = false;
-      this.getMaxSupply();
+      // this.getMaxSupply();
       this.fadeOut = false;
       this.popupClosed = true;
     });
 
     return true;
+  }
+
+  trackByFn(index: number, item: any) {
+    return item;
   }
 }

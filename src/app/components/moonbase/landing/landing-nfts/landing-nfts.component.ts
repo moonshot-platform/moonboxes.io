@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import SwiperCore, { EffectCoverflow, Swiper } from 'swiper';
+import SwiperCore, { EffectCoverflow, Swiper, Autoplay } from 'swiper';
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import { SliderModel } from '../models/slider.model';
 import { nftSlider } from '../consts/nft-slider.const';
 SwiperCore.use([EffectCoverflow]);
+SwiperCore.use([Autoplay]);
 
 @Component({
   selector: 'app-landing-nfts',

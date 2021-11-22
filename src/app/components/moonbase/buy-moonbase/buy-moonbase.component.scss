@@ -32,6 +32,10 @@
     background-color: transparent;
 }
 
+.round-mini-button {
+    display: none;
+}
+
 .inner img {
     width: 200px;
     height: 200px;
@@ -187,7 +191,24 @@
 }
 
 @media only screen and (max-width: $md-header) {
-    .soldout {
-        margin: 23px 0;
+
+    .scroller {
+        max-height: initial;
+        height: calc(100vh - 110px);
+    }
+
+    .moonbox-container {
+        display: none;
+        flex: initial;
+
+        > .content { padding: 0 10px; }
+
+        &.selected {
+            display: flex;
+        }
+    }
+
+    .round-mini-button {
+        display: flex;
     }
 }

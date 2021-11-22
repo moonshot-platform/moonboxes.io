@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-for-transaction.component';
 import { environment } from 'src/environments/environment';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
-import { Artist, Supply } from 'src/app/models/artist.model';
+import { ArtistMoonbox, Supply } from 'src/app/models/artist-moonbox.model';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -33,7 +33,7 @@ export class ArtistMoonboxComponent implements OnInit {
   data: any;
   supplyDetails: Supply[] = [];
   balance: any;
-  artistDetails: Artist;
+  artistDetails: ArtistMoonbox;
   moonBoxLimitDetails: any;
 
   constructor(
@@ -110,7 +110,7 @@ export class ArtistMoonboxComponent implements OnInit {
     this.httpApi.getArtistMoonboxData(
       this.activatedRoute.snapshot.params['artistAddress'],
       this.data?.address
-    ).subscribe((response: Artist) => {
+    ).subscribe((response: ArtistMoonbox) => {
       if (response.isSuccess) {
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
