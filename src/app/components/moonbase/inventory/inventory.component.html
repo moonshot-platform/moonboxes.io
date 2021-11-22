@@ -13,7 +13,7 @@
         </li>
     </ul>
   </div>
-  <div class="flex-center main-message-container w-100 h-100 text-center pa20" *ngIf="mainMessage !== null">{{mainMessage}}</div>
+  <div class="flex-center main-message-container w-100 h-100 text-center pa20" *ngIf="mainMessage !== null">{{mainMessage}}<img *ngIf="mainMessage === messages.IDLE" class="flex mx-auto" src="assets/media/videos/Loading.gif" alt="loading" /></div>
   <div class="inner flex-wrap">
       <ng-container *ngFor="let item of inventoryList; let i = index; trackBy: trackByFn;">
         <div class="box flex-center col pb100" *ngIf="!(this.NSFWToggleState && item['NSFW'])">

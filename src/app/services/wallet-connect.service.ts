@@ -74,7 +74,7 @@ export class WalletConnectService {
     return this.data.asObservable();
   }
 
-  async init(): Promise<void> {
+  async init(): Promise<string> {
     const wallet = this.localStorageService.getWallet();
 
     switch( wallet ) {
@@ -85,6 +85,8 @@ export class WalletConnectService {
         await this.connectToWalletConnect(wallet);
         break;
     }
+
+    return this.localStorageService.getAddress();
   }
 
   convertBalance( balance: number ): string {

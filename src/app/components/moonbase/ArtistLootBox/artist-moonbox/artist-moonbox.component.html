@@ -30,11 +30,11 @@
                 </div>
                 <div class="content flex-center flex-col">
                     <div class="relative">
-                        <div class="relative moonbox {{box}}"></div>
-                        <img *ngIf="hasEnoughMoonshots(i)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                        <div class="relative moonbox {{box}}" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0"></div>
+                        <img *ngIf="!hasEnoughMoonshots(i)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                     </div>
                     <div class="text-center">
-                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} ({{supplyDetails[i]?.currentSupply}})</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} (<span>{{supplyDetails[i]?.currentSupply}}</span>)</p>
                         <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[i]?.price}} BNB</p>
                         
                         <div class="border plus_minus flex mb20" *ngIf="supply[i]>0">
@@ -48,9 +48,9 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="#fff" d="M11 5.75v1.5q0 .312-.219.531T10.25 8H7v3.25q0 .312-.219.531T6.25 12h-1.5q-.312 0-.531-.219T4 11.25V8H.75q-.312 0-.531-.219T0 7.25v-1.5q0-.312.219-.531T.75 5H4V1.75q0-.312.219-.531T4.75 1h1.5q.312 0 .531.219T7 1.75V5h3.25q.312 0 .531.219T11 5.75z"/></svg>
                             </button>
                         </div>
-                        <div class="soldout" *ngIf="supply[i]==0">Sold Out</div>
+                        <div class="soldout" *ngIf="supply[i] === 0">Sold Out</div>
 
-                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled-button': supply[i]==0}" (click)="buyMoonBase(i)">Buy</a>
+                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0" (click)="buyMoonBase(i)">Buy</a>
                         <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
                     </div>
                 </div>

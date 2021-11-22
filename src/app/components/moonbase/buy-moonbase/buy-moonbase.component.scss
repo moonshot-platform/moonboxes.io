@@ -118,7 +118,6 @@
     height: calc(12600px / 60);
     animation: animate 2s steps(60) infinite;
     transition: all 1s ease;
-    cursor: pointer;
     margin: 0 auto;
 
     &.disabled {

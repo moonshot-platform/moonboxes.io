@@ -126,11 +126,18 @@ export class BuyMoonbaseComponent implements OnInit {
       this.submitBetToContract(index);
   }
 
+  hasEnoughMoonshots( index: number ) {
+    if( this.balance != null && this.moonBoxLimitDetails != null)
+      return ( Number(this.balance) >= Number(this.moonBoxLimitDetails[index]) );
+
+    return false;
+  }
+
   async submitBetToContract(index: number) {
     const maxSupply = this.supply[index].currentSupply;
     if ( maxSupply === 0 ) return false;
 
-    if( Number( this.balance ) < Number( this.moonBoxLimitDetails[index] ) ) {
+    if( !this.hasEnoughMoonshots(index) ) {
       this.httpApi.showToastr( 'You are not eligible for this Tier', false );
       return false;
     }

@@ -64,17 +64,21 @@ export class ArtistMoonboxComponent implements OnInit {
 
       this.data = data;
       
-      this.getMoonShootBalance();
-      this.getMaxSupply();
+      (async () => {
+        await this.getMoonShootBalance();
+        this.getMaxSupply();
+
+        console.log(this.balance);
+      })();
 
     });
   }
 
   hasEnoughMoonshots( index: number ) {
     if( this.balance != null && this.moonBoxLimitDetails != null)
-      return ( Number(this.balance) < Number(this.moonBoxLimitDetails[index]) );
+      return ( Number(this.balance) >= Number(this.moonBoxLimitDetails[index]) );
 
-    return true;
+    return false;
   }
 
   async getMoonShootBalance() {
@@ -139,7 +143,7 @@ export class ArtistMoonboxComponent implements OnInit {
       return false;
     }
 
-    if( Number( this.balance ) < Number( this.moonBoxLimitDetails[index] ) ) {
+    if( !this.hasEnoughMoonshots(index) ) {
       this.httpApi.showToastr( 'You are not eligible for this Tier', false );
       return false;
     }
