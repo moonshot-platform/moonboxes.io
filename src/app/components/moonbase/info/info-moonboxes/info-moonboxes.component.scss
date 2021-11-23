@@ -163,6 +163,12 @@ section.info-moonboxes {
     display: none;
 }
 
+@media only screen and (max-width: $sm) {
+    .detail-container .description-container {
+        max-width: 100%;
+    }
+}
+
 @media only screen and (max-width: 810px) {
     section.info-moonboxes {
         padding-top: 100px;
