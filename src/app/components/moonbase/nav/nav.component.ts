@@ -67,7 +67,7 @@ export class NavComponent implements OnInit {
     {
       'icon': 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
       'alt': 'info',
-      'tooltip': 'This is an overview of all information about the MoonBase dApp. Coming soon!',
+      'tooltip': 'Here you can find more information about the MoonBoxes tiers.',
       'click': null,
       'routerLink': ['/info'],
       'route': '/info'
