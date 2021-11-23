@@ -24,10 +24,10 @@ export class NavComponent implements OnInit {
   public isTooltipActive = true;
 
   public navItems: any[] = [
-    {
-      'name': 'MoonBoxes',
-      'path': ''
-    },
+    // {
+    //   'name': 'MoonBoxes',
+    //   'path': ''
+    // },
   ];
 
 
