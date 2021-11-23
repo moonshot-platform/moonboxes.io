@@ -107,7 +107,7 @@ section.info-moonboxes {
     }
     .buttons-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: 100%;
@@ -123,11 +123,13 @@ section.info-moonboxes {
         text-align: left;
         color: $primary;
     }
-    .buy-moonshot-button {
+    .buy-moonshot-button,
+    .read-more-button {
         display: flex;
-        width: 170px;
-        .button {
-            max-width: 170px;
+        width: 100%;
+        margin-bottom: 20px;
+        .button,
+        .outlined-button {
             min-width: 170px;
             width: 100%;
             font-size: 16px;
