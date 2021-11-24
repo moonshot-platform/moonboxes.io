@@ -99,7 +99,7 @@ section.info-moonboxes {
     .description-container {
         display: flex;
         flex-direction: column;
-        max-width: 270px;
+        max-width: 340px;
         width: 100%;
         justify-content: center;
         align-items: center;
@@ -192,10 +192,14 @@ section.info-moonboxes {
     .detail-container {
         margin-top: 110px;
         flex-direction: column;
-        max-width: 370px;
-        width: calc(100vw - 40px);
+        max-width: 400px;
+        width: 100%;
         .description-container {
             border-top: none;
+            max-width: 400px;
+        }
+        .heading-container {
+            max-width: 400px;
         }
     }
     .round-mini-button {
