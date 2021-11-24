@@ -1,11 +1,12 @@
 @import "includes";
-section.landing-moonboxes {
+section.info-moonboxes {
     display: block;
     flex-direction: column;
     max-width: 770px;
     width: 100%;
-    padding-top: 180px;
-    justify-content: start;
+    margin-top: 00px;
+    margin-bottom: 180px;
+    justify-content: center;
     align-items: center;
 }
 
@@ -98,7 +99,7 @@ section.landing-moonboxes {
     .description-container {
         display: flex;
         flex-direction: column;
-        max-width: 270px;
+        max-width: 340px;
         width: 100%;
         justify-content: center;
         align-items: center;
@@ -106,7 +107,7 @@ section.landing-moonboxes {
     }
     .buttons-container {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: center;
         width: 100%;
@@ -122,11 +123,13 @@ section.landing-moonboxes {
         text-align: left;
         color: $primary;
     }
-    .buy-moonshot-button {
+    .buy-moonshot-button,
+    .read-more-button {
         display: flex;
-        width: 170px;
-        .button {
-            max-width: 170px;
+        width: 100%;
+        margin-bottom: 20px;
+        .button,
+        .outlined-button {
             min-width: 170px;
             width: 100%;
             font-size: 16px;
@@ -160,8 +163,14 @@ section.landing-moonboxes {
     display: none;
 }
 
+@media only screen and (max-width: $sm) {
+    .detail-container .description-container {
+        max-width: 100%;
+    }
+}
+
 @media only screen and (max-width: 810px) {
-    section.landing-moonboxes {
+    section.info-moonboxes {
         padding-top: 100px;
         max-width: 500px;
         width: calc(100vw - 40px);
@@ -183,10 +192,14 @@ section.landing-moonboxes {
     .detail-container {
         margin-top: 110px;
         flex-direction: column;
-        max-width: 370px;
-        width: calc(100vw - 40px);
+        max-width: 400px;
+        width: 100%;
         .description-container {
             border-top: none;
+            max-width: 400px;
+        }
+        .heading-container {
+            max-width: 400px;
         }
     }
     .round-mini-button {

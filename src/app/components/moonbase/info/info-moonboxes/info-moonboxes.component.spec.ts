@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LandingMoonboxesComponent } from './landing-moonboxes.component';
+import { InfoMoonboxesComponent } from './info-moonboxes.component';
 
-describe('LandingMoonboxesComponent', () => {
-  let component: LandingMoonboxesComponent;
-  let fixture: ComponentFixture<LandingMoonboxesComponent>;
+describe('InfoMoonboxesComponent', () => {
+  let component: InfoMoonboxesComponent;
+  let fixture: ComponentFixture<InfoMoonboxesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ LandingMoonboxesComponent ]
+      declarations: [ InfoMoonboxesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LandingMoonboxesComponent);
+    fixture = TestBed.createComponent(InfoMoonboxesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

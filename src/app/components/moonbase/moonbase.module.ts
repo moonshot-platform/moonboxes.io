@@ -34,9 +34,9 @@ import { LandingIntroComponent } from './landing/landing-intro/landing-intro.com
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { InfoComponent } from './info/info.component';
 import { TransferComponent } from './modal-for-transaction/transfer/transfer.component';
-import { LandingMoonboxesComponent } from './landing/landing-moonboxes/landing-moonboxes.component';
 import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.component';
 
 
 @NgModule({
@@ -61,8 +61,8 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     LandingIntroComponent,
     InfoComponent,
     TransferComponent,
-    LandingMoonboxesComponent,
     LandingNftsComponent,
+    InfoMoonboxesComponent,
   ],
   imports: [
     MatIconModule,
