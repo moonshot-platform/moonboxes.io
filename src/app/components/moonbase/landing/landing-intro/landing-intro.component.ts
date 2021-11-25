@@ -14,7 +14,7 @@ SwiperCore.use([Autoplay]);
 })
 export class LandingIntroComponent implements OnInit {
 
-  slides: SliderModel[] = nftSlider.reverse();
+  slides: SliderModel[] = nftSlider;
 
   config: SwiperOptions = {
     slidesPerView: 1,
