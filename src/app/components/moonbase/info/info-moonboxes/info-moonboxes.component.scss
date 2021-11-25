@@ -104,6 +104,7 @@ section.info-moonboxes {
         justify-content: center;
         align-items: center;
         border-top: 1px solid $primary;
+        font-weight: 400;
     }
     .buttons-container {
         display: flex;
@@ -115,7 +116,7 @@ section.info-moonboxes {
     .info-text {
         font-family: $primary-font;
         font-size: 16px;
-        font-weight: 500;
+        font-weight: 400;
         font-stretch: normal;
         font-style: normal;
         line-height: 1.69;
@@ -163,9 +164,56 @@ section.info-moonboxes {
     display: none;
 }
 
+.tier-table {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 270px;
+    padding-bottom: 30px;
+    .table-columns-titles {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: space-between;
+        font-weight: 700;
+        width: 100%;
+        border-bottom: 1px solid $primary;
+        padding-bottom: 10px;
+        .pr {
+            padding-right: 30px;
+        }
+    }
+    .table-columns {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: space-between;
+        width: 100%;
+        padding-top: 10px;
+        font-weight: 400;
+        .item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: space-between;
+            padding-bottom: 8px;
+        }
+    }
+}
+
 @media only screen and (max-width: $sm) {
     .detail-container .description-container {
         max-width: 100%;
+    }
+    .tier-table {
+        max-width: 100%;
+        // .table-columns-titles {
+        //     .pr {
+        //         padding-right: 0px;
+        //     }
+        // }
     }
 }
 
