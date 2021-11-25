@@ -109,6 +109,9 @@ export class InventoryComponent implements OnInit {
 
     this.NFTDetails = item;
     this.selectedIndex = index;
+
+    console.log(item);
+    
     
     
     setTimeout(() => {

@@ -35,9 +35,9 @@
             </video>
           </div>
 
-          <div class="text-center">
-            <p class="p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
-            <a (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</a>
+          <div class="item-details text-center">
+            <p class="item-name p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
+            <button (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</button>
           </div>
         </div>
       </ng-container>
@@ -79,7 +79,8 @@
               <div class="flex flex-col">
                 <p class="p-white-span-primary p16d14m mb10 mt10">{{ NFTDetails['name'] }}</p>
                 <p class="p-white-span-primary p16d14m mb10 mt10">{{ NFTDetails['description'] }}</p>
-                <p class="p-white-span-primary p16d14m mb30 mt10">{{ NFTDetails['rarity'] }}</p>
+                <p class="p-white-span-primary p16d14m mb10 mt10">{{ NFTDetails['rarity'] }}</p>
+                <p class="p-white-span-primary p16d14m mb30 mt10">NFT ID: {{ NFTDetails['nftId'] }}</p>
               </div>
               <div class="flex-center pointer" (click)="closeAttributes()">
                 <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#d5a642"/></svg>
