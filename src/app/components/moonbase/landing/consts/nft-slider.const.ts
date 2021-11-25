@@ -123,6 +123,16 @@ export const nftSlider: SliderModel[] = [
         "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/males/Ra8bit_5901_Reginald_Elliot.jpg",
+        "The Ra8bitsNFT Series",
+        "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/females/character-02106.png",
+        "The Female Ra8bits Series",
+        "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/moonshooter/322.jpg",
         "The Moonshooter Series",
         "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
@@ -186,15 +196,5 @@ export const nftSlider: SliderModel[] = [
         "assets/media/images/moonbox/landing/nfts/moonshooter/575.jpg",
         "The Moonshooter Series",
         "buy_moonbase"
-    ),
-    new SliderModel(
-        "assets/media/images/moonbox/landing/nfts/males/Ra8bit_5901_Reginald_Elliot.jpg",
-        "The Ra8bitsNFT Series",
-        "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
-    ),
-    new SliderModel(
-        "assets/media/images/moonbox/landing/nfts/females/character-02106.png",
-        "The Female Ra8bits Series",
-        "artist_moonbase/0x522C8228f61f6102F0b8bC138ea2E00D616811Ee",
     ),
 ];
