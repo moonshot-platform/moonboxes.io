@@ -122,9 +122,6 @@ export class BuyMoonbaseComponent implements OnInit {
       if (response.isSuccess) {
         this.supply = response.data.get();
         [this.supply[1], this.supply[2]] = [this.supply[2], this.supply[1]];
-
-        console.log(this.supply);
-        
         
         this.supply.forEach((item: Moonbox) => {
           this.inputnumber.push( item.currentSupply >= 1 ? 1 : 0 );
