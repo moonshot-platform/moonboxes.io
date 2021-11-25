@@ -1,8 +1,12 @@
 <section class="artist-moonbox scroller" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
     
-    <img *ngIf="!isConnected" class="flex mx-auto" src="assets/media/videos/Loading.gif" alt="loading" />
+    <div *ngIf="!supplyDetails" class="flex-center main-message-container w-100 h-100 text-center pa20">
+        {{mainMessage}}
+        <img *ngIf="mainMessage === messages.IDLE && isConnected" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+        <p *ngIf="mainMessage === messages.IDLE && !isConnected" class="mt50 fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
+    </div>
     
-    <div *ngIf="isConnected" class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    <div *ngIf="supplyDetails" class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
         <div class="flex w-100">
             <div class="flex flex-col w-100 boxes-title-container">
                 <div class="artist-details flex-center flex-col">
@@ -50,8 +54,7 @@
                         </div>
                         <div class="soldout" *ngIf="supply[i] === 0">Sold Out</div>
 
-                        <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0" (click)="buyMoonBase(i)">Buy</a>
-                        <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
+                        <a class="buy_button outlined-button mb10 text-inherit" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0" (click)="buyMoonBase(i)">Buy</a>
                     </div>
                 </div>
                 <div class="round-mini-button" (click)="next(+1)">
@@ -62,5 +65,4 @@
             
     </div>
 
-    <p *ngIf="!isConnected" class="mt50 fade-in pointer" (click)="openDialog()">Please connect your wallet</p>
 </section>

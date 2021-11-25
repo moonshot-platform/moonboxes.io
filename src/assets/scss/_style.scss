@@ -1248,12 +1248,30 @@ svg#closenft path {
     fill: #d5a642;
 }
 
+.opacity0 {
+    opacity: 0;
+}
+
+.opacity1 {
+    opacity: 1;
+}
+
 .fade-in {
     animation: fadeIn ease 5s;
     -webkit-animation: fadeIn ease 5s;
     -moz-animation: fadeIn ease 5s;
     -o-animation: fadeIn ease 5s;
     -ms-animation: fadeIn ease 5s;
+}
+
+.fade-in-delayed {
+    opacity: 0;
+
+    animation: fadeIn ease 5s 1s forwards;
+    -webkit-animation: fadeIn ease 5s 1s forwards;
+    -moz-animation: fadeIn ease 5s 1s forwards;
+    -o-animation: fadeIn ease 5s 1s forwards;
+    -ms-animation: fadeIn ease 5s 1s forwards;
 }
 
 @keyframes fadeIn {

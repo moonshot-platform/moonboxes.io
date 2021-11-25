@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 import { AdminMoonbox, Supply } from 'src/app/models/admin-moonbox.model';
 import { Moonbox } from 'src/app/models/moonbox.model';
+import { MESSAGES } from 'src/app/messages.enum';
 
 @Component({
   selector: 'app-buy-moonbase',
@@ -19,6 +20,9 @@ import { Moonbox } from 'src/app/models/moonbox.model';
 export class BuyMoonbaseComponent implements OnInit {
 
   static readonly routeName: string = 'buy_moonbase';
+
+  readonly messages = MESSAGES;
+  mainMessage: string = MESSAGES.IDLE;
 
   current = 0;
 
@@ -49,22 +53,30 @@ export class BuyMoonbaseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
+    this.walletConnectService.init().then( ( data: string ) => {
+      this.isConnected = data !== null;
+    });
 
-    
     this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
     this.walletConnectService.getData().subscribe((data) => {
-      if (data !== undefined && data.address != undefined && data != this.data) {
-        this.data = data;        
+      
+      if( data === undefined || data.address === undefined ) {
+        this.mainMessage = MESSAGES.UNABLE_TO_CONNECT;
+        return;
+      }
+        
+      if ( data.networkId.chainId != environment.chainId ) {
+        this.mainMessage = MESSAGES.UNABLE_TO_CONNECT;
+        return;
+      }
 
-        if (this.data.networkId.chainId != environment.chainId) {
-          this.isWrongNetwork = true;
-          this.toastrService.error("You are on the wrong network");
-        }
-        else {
-          this.getMoonShootBalance();
-        }
-      } 
+      this.data = data;
+
+      if (this.data.networkId.chainId != environment.chainId) {
+        this.isWrongNetwork = true;
+        this.toastrService.error("You are on the wrong network");
+      } else
+        this.getMoonShootBalance();
     });
 
     this.getMaxSupply();
@@ -97,7 +109,7 @@ export class BuyMoonbaseComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.walletConnectService.getData().subscribe((data) => {
         this.data = data;
-        this.isConnected = (data.address !== undefined)
+        this.isConnected = this.data.address !== undefined;
       });
     });
   }

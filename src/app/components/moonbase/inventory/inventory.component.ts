@@ -7,14 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
 import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
 import { Observable, Observer } from 'rxjs';
-
-enum MESSAGES {
-  IDLE = '',
-  WALLET_NOT_CONNECTED = 'Please connect your wallet',
-  EMPTY_WALLET = 'No MoonBase NFTs found in your wallet.',
-  UNABLE_TO_CONNECT = 'Unable to connect to your wallet. Please check your wallet network and try again.',
-  NO_WALLET_DATA_FROM_SERVER = 'Could not receive wallet data from the server.',
-};
+import { MESSAGES } from 'src/app/messages.enum';
+import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-inventory',
@@ -24,6 +18,9 @@ enum MESSAGES {
 export class InventoryComponent implements OnInit {
 
   static readonly routeName: string = 'inventory';
+
+  readonly messages = MESSAGES;
+  mainMessage: string = MESSAGES.IDLE;
 
   data: any;
   inventoryList: any;
@@ -37,8 +34,6 @@ export class InventoryComponent implements OnInit {
   isConnected = false;
 
   selectedIndex: number;
-  messages = MESSAGES;
-  mainMessage: string = MESSAGES.IDLE;
 
   constructor(
     private walletConnectService: WalletConnectService,
@@ -55,9 +50,8 @@ export class InventoryComponent implements OnInit {
       this.NSFWToggleState = NSFWToggleState;
     } );
     
-    this.walletConnectService.init().then((address: string) => {
-      if( address === null )
-        this.mainMessage = MESSAGES.WALLET_NOT_CONNECTED;
+    this.walletConnectService.init().then( ( data: string ) => {
+      this.isConnected = data !== null;
     });
       
     this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => {
@@ -177,6 +171,16 @@ export class InventoryComponent implements OnInit {
     let dialogRef = this.dialog.open(SocialShareComponent, {
       width: 'auto',
       data: { imageUrl: data.logo_path, name: data.name, url: '' }
+    });
+  }
+
+  openWalletDialog(): void {
+    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
+
+    dialogRef.afterClosed().subscribe( (_) => {
+      this.walletConnectService.getData().subscribe((data) => {
+        this.isConnected = data.address !== undefined;
+      })
     });
   }
 

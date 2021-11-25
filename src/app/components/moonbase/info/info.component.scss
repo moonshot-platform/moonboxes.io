@@ -1,7 +1,17 @@
 section.info {
-    height: 100%;
+    margin-top: 200px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media only screen and (max-width: 810px) {
+    section.info {
+        margin-top: 100px;
+    }
+}
+
+.scroller {
+    max-height: calc(100vh - 110px) !important;
 }

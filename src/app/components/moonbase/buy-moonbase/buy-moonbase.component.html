@@ -1,6 +1,15 @@
 <section class="scroller buy_moonbase" [ngClass]="{'bg-primary':invisible}">
 
-    <img *ngIf="!isConnected" class="flex mx-auto" src="assets/media/videos/Loading.gif" alt="loading" />
+    <div class="flex-center main-message-container w-100 h-100 text-center pa20">
+        {{mainMessage}}
+        <div *ngIf="isConnected; else loggedOut">
+            <img *ngIf="mainMessage === messages.IDLE && !supply" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+        </div>
+        
+        <ng-template #loggedOut>
+            <p class="mt50 fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
+        </ng-template>
+    </div>
 
     <div *ngIf="isConnected" class="flex-center align-items-center w-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
@@ -39,6 +48,4 @@
         </div>
 
     </div>
-
-    <p *ngIf="!isConnected" class="mt50 fade-in pointer" (click)="openDialog()">Please connect your wallet</p>
 </section>

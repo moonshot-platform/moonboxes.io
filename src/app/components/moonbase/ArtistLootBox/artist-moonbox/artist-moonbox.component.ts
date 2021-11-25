@@ -8,6 +8,7 @@ import { ModalForTransactionComponent } from '../../modal-for-transaction/modal-
 import { environment } from 'src/environments/environment';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 import { ArtistMoonbox, Supply } from 'src/app/models/artist-moonbox.model';
+import { MESSAGES } from 'src/app/messages.enum';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -18,20 +19,22 @@ export class ArtistMoonboxComponent implements OnInit {
 
   static readonly routeName: string = 'artist_moonbase/:artistAddress';
 
+  readonly messages = MESSAGES;
+  mainMessage: string = MESSAGES.IDLE;
+
   readonly boxTypes = [ 'wood', 'silver', 'gold', 'diamond' ]
 
   current = 0;
   supply: number[] = [];
   
   isConnected: boolean = false;
-  isWrongNetwork: boolean = false;
   popupClosed: boolean = false;
   fadeOut: boolean = false;
   invisible: boolean = false;
 
   public lootBoxDetails: any = [];
   data: any;
-  supplyDetails: Supply[] = [];
+  supplyDetails: Supply[];
   balance: any;
   artistDetails: ArtistMoonbox;
   moonBoxLimitDetails: any;
@@ -51,14 +54,13 @@ export class ArtistMoonboxComponent implements OnInit {
     this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => this.isConnected = state );
     this.walletConnectService.getData().subscribe((data) => {
 
-      if( data.address === undefined ) {
-        this.toastrService.error("You are on the wrong network");
+      if( data === undefined || data.address === undefined ) {
+        this.mainMessage = MESSAGES.UNABLE_TO_CONNECT;
         return;
       }
         
       if ( data.networkId.chainId != environment.chainId ) {
-        this.isWrongNetwork = true;
-        this.toastrService.error("You are on the wrong network");
+        this.mainMessage = MESSAGES.UNABLE_TO_CONNECT;
         return;
       }
 
@@ -122,7 +124,9 @@ export class ArtistMoonboxComponent implements OnInit {
         this.supplyDetails.forEach((item: Supply) => {
           this.supply.push( item.hasSupply() ? 1 : 0 );
         });
-      } else this.httpApi.showToastr( 'Couldn\'t get max supply, please try again later', false );
+      } else {
+        this.mainMessage = MESSAGES.NO_SUPPLY;
+      }
     })
   }
 
@@ -139,7 +143,7 @@ export class ArtistMoonboxComponent implements OnInit {
     if( item.currentSupply === 0 ) return false;
 
     if ( !item.canBuyWithinSupplyAmount( this.supply[index] ) ) {
-      this.httpApi.showToastr( 'Invalid no of bet', false );
+      this.httpApi.showToastr( MESSAGES.INVALID_NUMBER_OF_BET, false );
       return false;
     }
 

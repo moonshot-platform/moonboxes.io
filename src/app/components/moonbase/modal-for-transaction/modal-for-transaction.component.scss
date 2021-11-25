@@ -98,14 +98,6 @@
     background: #010001;
 }
 
-.opacity0 {
-    opacity: 0;
-}
-
-.opacity1 {
-    opacity: 1;
-}
-
 .amount-of-nft {
     color: $primary;
     font-size: 16px;
@@ -181,14 +173,6 @@
     100% {
         transform: translate(-50%, -50%) scale(10000%);
     }
-}
-
-.fade-in {
-    animation: fadeIn ease 5s;
-    -webkit-animation: fadeIn ease 5s;
-    -moz-animation: fadeIn ease 5s;
-    -o-animation: fadeIn ease 5s;
-    -ms-animation: fadeIn ease 5s;
 }
 
 @keyframes fadeIn {
