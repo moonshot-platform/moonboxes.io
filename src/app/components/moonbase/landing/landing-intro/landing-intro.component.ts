@@ -21,7 +21,7 @@ export class LandingIntroComponent implements OnInit {
     effect: 'fade',
     allowTouchMove: false,
     autoplay: {
-      delay: 3000,
+      delay: 2500,
       disableOnInteraction: false,
       stopOnLastSlide: false,
       pauseOnMouseEnter: true,
