@@ -28,7 +28,7 @@ export class InventoryComponent implements OnInit {
   base64Image: any;
   
   lootBoxDetails = [];
-  lootBoxDetailsAttributes = [];
+  NFTDetails: any;
   
   NSFWToggleState = false;
   isConnected = false;
@@ -86,12 +86,16 @@ export class InventoryComponent implements OnInit {
   }
 
   setSelected(index: number, item: any) {
-    this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributes[index] = item;
-    this.lootBoxDetailsAttributes[index].disabled = false;
-    this.selectedIndex = index;
 
-    this.lootBoxDetailsAttributes[index].properties.forEach((property: any) => {
+    let tempIndex: number;
+    item['properties'].forEach((property: any, i: number) => {
+      if( property.hasOwnProperty('key') ) {
+          if( property.key === 'Rarity Score' ) {
+            item['rarity'] = `Rarity score: ${property.value}`;
+            tempIndex = i;
+          }
+      }
+
       if( property.hasOwnProperty('probability') ) {
         Object.defineProperty(
           property, 'rarity', 
@@ -100,11 +104,14 @@ export class InventoryComponent implements OnInit {
         delete property['probability'];
       }
     });
+
+    item['properties'].splice(tempIndex, 1);
+
+    console.log(item);
+
+    this.NFTDetails = item;
+    this.selectedIndex = index;
     
-    if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
-      const score = this.lootBoxDetailsAttributes[index].rarityScore;
-      this.lootBoxDetailsAttributes[index].rarity = `Rarity score: ${score}`;
-    }
     
     setTimeout(() => {
       this.scrollToElement('', 'attribute-info');
@@ -112,56 +119,7 @@ export class InventoryComponent implements OnInit {
   }
 
   closeAttributes() {
-    this.lootBoxDetailsAttributes = [];
-  }
-
-  claimReward(details: any, event: any, index: any) {
-    this.lootBoxDetailsAttributes[index].disabled = true;
-
-    this.httpApi.claimRewardDetails({
-      userAddress: this.data.address,
-      nftId: details.nftId
-    }).subscribe((response) => {
-      if (response.isSuccess) {
-        this.claimRewardTransaction(response.data, details.nftId, details.total, index);
-      }
-      else {
-        this.lootBoxDetailsAttributes[index].disabled = false;
-      }
-
-    })
-
-  }
-
-  async claimRewardTransaction(data: any, nftId, supply: Number, index: any) {
-    try {
-      //debugger
-      const txnstatus: any = await this.walletConnectService.claimRewardTransaction(
-        data.junkAmount, nftId, supply, data.id, data.id, data.signHash
-      );
-
-      if (txnstatus.status) {
-        txnstatus.hash.wait(1);
-        this.httpApi.claimRewardTransactionHashUpdate({
-          userAddress: this.data.address,
-          id: data.id,
-          transactionHash: txnstatus.hash.hash
-        }).subscribe((response: any) => {
-          if (response.isSuccess) {
-            this.lootBoxDetailsAttributes[index].isRewardAvailable = false;
-            this.httpApi.showToastr(response.data.message, true);
-          }
-          else {
-            this.lootBoxDetailsAttributes[index].disabled = false;
-            this.httpApi.showToastr(response.data.message, false);
-          }
-          //debugger
-        })
-      }
-    }
-    catch (e) {
-      this.lootBoxDetailsAttributes[index].disabled = false;
-    }
+    this.NFTDetails = [];
   }
 
   fileTypeIsImage(url: string) {
