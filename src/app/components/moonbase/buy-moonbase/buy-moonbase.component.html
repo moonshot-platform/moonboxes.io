@@ -13,6 +13,16 @@
 
     <div *ngIf="isConnected" class="flex-center align-items-center w-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
+        <div class="flex w-100">
+            <div class="flex flex-col w-100 boxes-title-container">
+                <div class="artist-details flex-center flex-col">
+                    <p class="p-white-span-primary p30d24m orbitron mb10">The Moonshooter NFT Series</p>
+                    <p class="p18 orbitron mb10">Moonshot</p>
+                </div>
+            </div>
+        </div>
+
+
         <div *ngFor="let box of supply; let i = index; trackBy: trackByFn;" class="moonbox-container flex1 align-center" [class.selected]="current === i">
             <div class="round-mini-button" (click)="next(-1)">
                 <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
