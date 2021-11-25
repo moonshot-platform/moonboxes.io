@@ -101,10 +101,10 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[selectedIndex].properties;trackBy: trackByFn;">
+                <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[selectedIndex].properties; trackBy: trackByFn;">
                   <td>{{ propertiesData.key }}</td>
                   <td>{{ propertiesData.value }}</td>
-                  <td>{{ propertiesData.probability }}%</td>
+                  <td>{{ propertiesData.rarity }}%</td>
                 </tr>
               </tbody>
             </table>

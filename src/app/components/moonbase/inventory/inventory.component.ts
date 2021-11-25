@@ -91,7 +91,15 @@ export class InventoryComponent implements OnInit {
     this.lootBoxDetailsAttributes[index].disabled = false;
     this.selectedIndex = index;
 
-    console.log(this.lootBoxDetailsAttributes[index]);
+    this.lootBoxDetailsAttributes[index].properties.forEach((property: any) => {
+      if( property.hasOwnProperty('probability') ) {
+        Object.defineProperty(
+          property, 'rarity', 
+          Object.getOwnPropertyDescriptor(property, 'probability')
+        );
+        delete property['probability'];
+      }
+    });
     
     if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
       const score = this.lootBoxDetailsAttributes[index].rarityScore;
