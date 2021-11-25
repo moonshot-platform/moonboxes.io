@@ -107,8 +107,6 @@ export class InventoryComponent implements OnInit {
 
     item['properties'].splice(tempIndex, 1);
 
-    console.log(item);
-
     this.NFTDetails = item;
     this.selectedIndex = index;
     
@@ -119,10 +117,12 @@ export class InventoryComponent implements OnInit {
   }
 
   closeAttributes() {
-    this.NFTDetails = [];
+    this.NFTDetails = null;
   }
 
   fileTypeIsImage(url: string) {
+    if( !url ) return false;
+    
     const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
     const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
