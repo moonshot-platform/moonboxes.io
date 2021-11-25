@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { timingSafeEqual } from 'crypto';
 import { Observable, Subject } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 import Web3 from 'web3';
 
@@ -13,7 +13,7 @@ import ssABI from '../../assets/web3/ss-abi.json';
 export class TokenomicsService {
     private toggle = new Subject<any>();
     private data = new Subject<any>();
-    private interval: any;
+    private _interval: Subscription;
     private serverError: boolean = false;
     public tokenomicsData: any;
     public oldPancakeAddress = true;
@@ -37,13 +37,13 @@ export class TokenomicsService {
 
     init(): void {
         this.getTokenomicsData();
-        this.interval = setInterval( () =>  this.getTokenomicsData(), 5000 );
+        this._interval = interval( 5000 ).subscribe( () =>  this.getTokenomicsData() );
     }
 
     changePancakeRouter() : number {
       this.oldPancakeAddress = !this.oldPancakeAddress;
       
-      clearInterval(this.interval);
+      this._interval.unsubscribe();
       this.init();
 
       return this.oldPancakeAddress ? 1 : 2;
@@ -103,7 +103,7 @@ export class TokenomicsService {
             this.serverError = true;
           }
         ).finally( () => {
-            if( this.serverError ) clearInterval(this.interval)
+            if( this.serverError ) this._interval.unsubscribe();
         } );
       }
     

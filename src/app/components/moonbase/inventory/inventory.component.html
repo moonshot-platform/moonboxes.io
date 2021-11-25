@@ -1,114 +1,117 @@
 <section class="custom-scroller">
-    <div class="address-container flex-center mt40 mb20">
-        <p class="color-primary mr10 p18 bold">Wallet:</p>
-        <ul class="flex">
-            <li class="flex" [cdkCopyToClipboard]=address>
-                <p class="clipboard break-chars color-primary mobile-only">{{address.slice(0,4)+"....."+address.slice(-4)}}</p>
-                <p class="clipboard break-chars color-primary desktop-only">{{address}}</p>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.8 128.8" class="copy-icon">
-                    <path
-                      d="M89.6 14v13.6h12.2c3.8 0 7.3 1.6 9.9 4.1 2.5 2.5 4.1 6 4.1 9.8v73.3c0 3.8-1.6 7.3-4.1 9.9-2.5 2.5-6 4.1-9.8 4.1H40.1c-3.8 0-7.3-1.6-9.9-4.1-2.5-2.5-4.1-6-4.1-9.8V98.4H14c-3.8 0-7.3-1.6-9.9-4.1-2.5-2.5-4.1-6-4.1-9.8V14c0-3.8 1.6-7.3 4.1-9.9 2.5-2.5 6-4.1 9.8-4.1h61.7c3.8 0 7.3 1.6 9.9 4.1 2.5 2.5 4.1 6 4.1 9.9zM79 27.6V14c0-.9-.4-1.8-1-2.4-.6-.6-1.5-1-2.4-1H14c-.9 0-1.8.4-2.4 1-.6.6-1 1.5-1 2.4v70.5c0 .9.4 1.8 1 2.4.6.6 1.5 1 2.4 1h12.2V41.5c0-3.8 1.6-7.3 4.1-9.9 2.5-2.5 6-4.1 9.8-4.1l38.9.1zm26.2 87.2V41.5c0-.9-.4-1.8-1-2.4-.6-.6-1.5-1-2.4-1H40.1c-.9 0-1.8.4-2.4 1-.6.6-1 1.5-1 2.4v73.3c0 .9.4 1.8 1 2.4.6.6 1.5 1 2.4 1h61.7c.9 0 1.8-.4 2.4-1 .6-.6 1-1.5 1-2.4z"
-                      fill-rule="evenodd" clip-rule="evenodd" fill="#d5a642" />
-                </svg>
-            </li>
-        </ul>
-    </div>
-    <div class="flex-center w-100 h-100 text-center " *ngIf="mainMessage !== null">{{mainMessage}}</div>
-    <div class="inner flex-wrap">
-        <ng-container *ngFor="let item of inventoryList; let i = index; trackBy: trackByFn;">
-            <div class="box flex-center col pb100" *ngIf="!(this.isNSFWStatus && item['NSFW'])">
+  <div *ngIf="!inventoryList" class="flex-center main-message-container w-100 h-100 text-center pa20">
+      {{mainMessage}}
+      <div *ngIf="mainMessage === messages.IDLE && isConnected; else loggedOut">
+          <img class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+      </div>
+      
+      <ng-template #loggedOut>
+          <p class="mt50 fade-in-delayed pointer" (click)="openWalletDialog()">Please connect your wallet</p>
+      </ng-template>
+  </div>
 
-                <div class="relative nft_img" *ngIf="fileTypeIsImage(item['logo_path'])">
-                    <img src="{{ item['logo_path'] }}" class="img-fluid" alt="" />
-                </div>
+  <div class="address-container flex-center mt40 mb40">
+    <p class="color-primary mr10 p18 bold">Wallet:</p>
+    <ul class="flex">
+        <li class="flex" [cdkCopyToClipboard]=data?.address>
+            <p class="clipboard break-chars color-primary mobile-only">{{data?.address.slice(0,4)+"....."+data?.address.slice(-4)}}</p>
+            <p class="clipboard break-chars color-primary desktop-only">{{data?.address}}</p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 115.8 128.8" class="copy-icon"><path d="M89.6 14v13.6h12.2c3.8 0 7.3 1.6 9.9 4.1 2.5 2.5 4.1 6 4.1 9.8v73.3c0 3.8-1.6 7.3-4.1 9.9-2.5 2.5-6 4.1-9.8 4.1H40.1c-3.8 0-7.3-1.6-9.9-4.1-2.5-2.5-4.1-6-4.1-9.8V98.4H14c-3.8 0-7.3-1.6-9.9-4.1-2.5-2.5-4.1-6-4.1-9.8V14c0-3.8 1.6-7.3 4.1-9.9 2.5-2.5 6-4.1 9.8-4.1h61.7c3.8 0 7.3 1.6 9.9 4.1 2.5 2.5 4.1 6 4.1 9.9zM79 27.6V14c0-.9-.4-1.8-1-2.4-.6-.6-1.5-1-2.4-1H14c-.9 0-1.8.4-2.4 1-.6.6-1 1.5-1 2.4v70.5c0 .9.4 1.8 1 2.4.6.6 1.5 1 2.4 1h12.2V41.5c0-3.8 1.6-7.3 4.1-9.9 2.5-2.5 6-4.1 9.8-4.1l38.9.1zm26.2 87.2V41.5c0-.9-.4-1.8-1-2.4-.6-.6-1.5-1-2.4-1H40.1c-.9 0-1.8.4-2.4 1-.6.6-1 1.5-1 2.4v73.3c0 .9.4 1.8 1 2.4.6.6 1.5 1 2.4 1h61.7c.9 0 1.8-.4 2.4-1 .6-.6 1-1.5 1-2.4z" fill-rule="evenodd" clip-rule="evenodd" fill="#d5a642"/></svg>
+        </li>
+    </ul>
+  </div>
+  
+  <div class="inner flex-wrap">
+      <ng-container *ngFor="let item of inventoryList; let i = index; trackBy: trackByFn;">
+        <div class="box flex-center col pb100" *ngIf="!(this.NSFWToggleState && item['NSFW'])">
+          
+          <div class="relative nft_img" *ngIf="fileTypeIsImage(item['logo_path'])">
+            <img src="{{ item['logo_path'] }}" class="img-fluid" alt="" />
+          </div>
 
-                <div class="relative nft_img" *ngIf="!fileTypeIsImage(item['logo_path'])">
-                    <video class="img-fluid" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
-            <source src="{{ item['logo_path'] }}" />
-          </video>
-                </div>
+          <div class="relative nft_img" *ngIf="!fileTypeIsImage(item['logo_path'])">
+            <video class="img-fluid" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
+              <source src="{{ item['logo_path'] }}" />
+            </video>
+          </div>
 
-                <div class="text-center">
-                    <p class="p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
-                    <a (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</a>
-                </div>
-            </div>
-        </ng-container>
-
-        <!------ List  -->
-        <div id="attribute-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[selectedIndex]">
-            <div class="flex1 flex-center flex-col flex-align-start">
-                <div class="relative flex-col attribute-img">
-                    <img *ngIf="fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" class="img-fluid mb30" alt="" />
-
-                    <video class="img-fluid mb30" alt="" *ngIf="!fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
-            <source src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" />
-          </video>
-
-                    <div class="input-container flex justify-space-between align-center">
-                        <div class="tooltip">
-                            <p class="outlined-button sell-button">Sell</p>
-                            <div class="bottom">
-                                <div class="row">
-                                    <p>Available soon</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <a class="outlined-button transfer-button" (click)="openTransferDialog(lootBoxDetailsAttributes[selectedIndex])">Transfer</a>
-
-                        <p (click)="downloadImage(lootBoxDetailsAttributes[selectedIndex])">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="interactable" viewBox="0 0 49 49">
-                <path d="M24.5 0C11 0 0 11 0 24.5S11 49 24.5 49 49 38 49 24.5 38 0 24.5 0zM22 20.6V9.2h5v11.4h4.8l-7.3 9.2-7.3-9.2H22zm16.7 15.6H10.3v-10h4.3v6.3h19.7v-6.3h4.3v10z" fill="#D5A642"/>
-              </svg>
-                        </p>
-
-                        <p (click)="openDialog(lootBoxDetailsAttributes[selectedIndex])">
-                            <svg class="interactable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49">
-                <g fill="#d5a642"><path d="M30.7 17.9c1.4 0 2.6-1.2 2.6-2.6s-1.2-2.6-2.6-2.6c-1.4 0-2.6 1.2-2.6 2.6s1.1 2.6 2.6 2.6zM14.2 22c-1.4 0-2.6 1.2-2.6 2.6 0 1.4 1.2 2.6 2.6 2.6s2.6-1.2 2.6-2.6c0-1.5-1.2-2.6-2.6-2.6z"/><path d="M24.5 0C11 0 0 11 0 24.5S11 49 24.5 49 49 38 49 24.5 38 0 24.5 0zm-4.8 25.9 7 3.9c1.1-1.1 2.5-1.6 4-1.6 3.1 0 5.7 2.5 5.7 5.7 0 3.1-2.5 5.7-5.7 5.7-.4 0-.9-.1-1.3-.2-3-.7-4.9-3.8-4.2-6.8l-7-3.9c-2.2 2.2-5.8 2.2-8 0s-2.2-5.8 0-8 5.8-2.2 8 0l7-3.9c-.5-1.9.1-4 1.5-5.4 2.2-2.2 5.9-2.2 8.1 0s2.2 5.9 0 8.1-5.9 2.2-8.1 0l-7 3.9c.2.7.2 1.6 0 2.5z"/><path d="M30.7 36.4c1.4 0 2.6-1.2 2.6-2.6 0-1.4-1.2-2.6-2.6-2.6-1.4 0-2.6 1.2-2.6 2.6 0 1.4 1.1 2.6 2.6 2.6z"/></g>
-              </svg>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="flex4 ml20">
-                    <div class="flex justify-space-between flex-align-start">
-                        <div class="flex flex-col">
-                            <p class="p-white-span-primary p16d14m mb10 mt10">{{ lootBoxDetailsAttributes[selectedIndex].name }}</p>
-                            <p class="p-white-span-primary p16d14m mb10 mt10">{{ lootBoxDetailsAttributes[selectedIndex].description }}</p>
-                            <p class="p-white-span-primary p16d14m mb30 mt10">{{ lootBoxDetailsAttributes[selectedIndex].rarity }}</p>
-                        </div>
-                        <div class="flex-center pointer" (click)="closeAttributes()">
-                            <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#d5a642"/></svg>
-                        </div>
-                    </div>
-
-                    <table class="wp100">
-                        <thead>
-                            <tr>
-                                <th class="w700">Attribute</th>
-                                <th class="w700">Value</th>
-                                <th>
-                                    <div class="rarity-column-text w700">Rarity
-                                        <div class="tooltip">
-                                            <div class="row">These percentages express the given attribute rarity by evaluating the rarity of the items traits. A lower value is better.</div>
-                                        </div>
-                                    </div>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[selectedIndex].properties;trackBy: trackByFn;">
-                                <td>{{ propertiesData.key }}</td>
-                                <td>{{ propertiesData.value }}</td>
-                                <td>{{ propertiesData.rarity }}%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-
-                </div>
-            </div>
+          <div class="text-center">
+            <p class="p-white-span-primary p16d14m mb30 mt20">{{ item["name"] }}</p>
+            <a (click)="setSelected(i, item)" class="view-detail-button outlined-button text-inherit">View details</a>
+          </div>
         </div>
-        <!----list-->
-    </div>
+      </ng-container>
+
+      <!------ List  -->
+      <div id="attribute-info" class="outer-box" *ngIf="lootBoxDetailsAttributes[selectedIndex]">
+        <div class="flex1 flex-center flex-col flex-align-start">
+          <div class="relative flex-col attribute-img">
+            <img class="mb30" *ngIf="fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" alt="img" />
+            
+            <video class="img-fluid mb30" alt="" *ngIf="!fileTypeIsImage(lootBoxDetailsAttributes[selectedIndex].logo_path)" loop autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true">
+              <source src="{{ lootBoxDetailsAttributes[selectedIndex].logo_path }}" />
+            </video>
+
+            <div class="input-container flex justify-space-between align-center">
+              <div class="tooltip">
+                <p class="outlined-button sell-button">Sell</p>
+                <div class="bottom"><div class="row"><p>Available soon</p></div></div>
+              </div>
+
+              <a class="outlined-button transfer-button" (click)="openTransferDialog(lootBoxDetailsAttributes[selectedIndex])">Transfer</a>
+
+              <p (click)="downloadImage(lootBoxDetailsAttributes[selectedIndex])">
+                <svg xmlns="http://www.w3.org/2000/svg" class="interactable" viewBox="0 0 49 49">
+                  <path d="M24.5 0C11 0 0 11 0 24.5S11 49 24.5 49 49 38 49 24.5 38 0 24.5 0zM22 20.6V9.2h5v11.4h4.8l-7.3 9.2-7.3-9.2H22zm16.7 15.6H10.3v-10h4.3v6.3h19.7v-6.3h4.3v10z" fill="#D5A642"/>
+                </svg>
+              </p>
+
+              <p (click)="openDialog(lootBoxDetailsAttributes[selectedIndex])">
+                <svg class="interactable" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 49 49">
+                  <g fill="#d5a642"><path d="M30.7 17.9c1.4 0 2.6-1.2 2.6-2.6s-1.2-2.6-2.6-2.6c-1.4 0-2.6 1.2-2.6 2.6s1.1 2.6 2.6 2.6zM14.2 22c-1.4 0-2.6 1.2-2.6 2.6 0 1.4 1.2 2.6 2.6 2.6s2.6-1.2 2.6-2.6c0-1.5-1.2-2.6-2.6-2.6z"/><path d="M24.5 0C11 0 0 11 0 24.5S11 49 24.5 49 49 38 49 24.5 38 0 24.5 0zm-4.8 25.9 7 3.9c1.1-1.1 2.5-1.6 4-1.6 3.1 0 5.7 2.5 5.7 5.7 0 3.1-2.5 5.7-5.7 5.7-.4 0-.9-.1-1.3-.2-3-.7-4.9-3.8-4.2-6.8l-7-3.9c-2.2 2.2-5.8 2.2-8 0s-2.2-5.8 0-8 5.8-2.2 8 0l7-3.9c-.5-1.9.1-4 1.5-5.4 2.2-2.2 5.9-2.2 8.1 0s2.2 5.9 0 8.1-5.9 2.2-8.1 0l-7 3.9c.2.7.2 1.6 0 2.5z"/><path d="M30.7 36.4c1.4 0 2.6-1.2 2.6-2.6 0-1.4-1.2-2.6-2.6-2.6-1.4 0-2.6 1.2-2.6 2.6 0 1.4 1.1 2.6 2.6 2.6z"/></g>
+                </svg>
+              </p>
+            </div>
+          </div>
+          
+          <div class="flex4 ml20">
+            <div class="flex justify-space-between flex-align-start">
+              <div class="flex flex-col">
+                <p class="p-white-span-primary p16d14m mb10 mt10">{{ lootBoxDetailsAttributes[selectedIndex].name }}</p>
+                <p class="p-white-span-primary p16d14m mb10 mt10">{{ lootBoxDetailsAttributes[selectedIndex].description }}</p>
+                <p class="p-white-span-primary p16d14m mb30 mt10">{{ lootBoxDetailsAttributes[selectedIndex].rarity }}</p>
+              </div>
+              <div class="flex-center pointer" (click)="closeAttributes()">
+                <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#d5a642"/></svg>
+              </div>
+            </div>
+
+            <table class="wp100">
+              <thead>
+                <tr>
+                  <th class="w700">Attribute</th>
+                  <th class="w700">Value</th>
+                  <th>
+                    <div class="rarity-column-text w700">Rarity
+                      <div class="tooltip">
+                        <div class="row">These percentages express the given attribute rarity by evaluating the rarity of the items traits. A lower value is better.</div>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let propertiesData of lootBoxDetailsAttributes[selectedIndex].properties;trackBy: trackByFn;">
+                  <td>{{ propertiesData.key }}</td>
+                  <td>{{ propertiesData.value }}</td>
+                  <td>{{ propertiesData.rarity }}%</td>
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
+      </div>
+      <!----list-->
+  </div>
 </section>

@@ -16,13 +16,19 @@
     }
 }
 
-#attribute-info>div {
-    flex-direction: row;
-    box-sizing: border-box;
+#attribute-info > div {
+  flex-direction: row;
+  box-sizing: border-box;
 }
 
 .box {
     width: calc( 100% / 6)
+}
+
+.main-message-container {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .flex .tooltip .bottom {
@@ -150,8 +156,15 @@
 
 .inner .outer-box img,
 .inner .outer-box video {
-    height: 350px !important;
-    width: 350px !important;
+  max-width: 350px;
+  width: 100%;
+
+  border: 1px solid;
+  object-fit: cover;
+
+  &::after {
+    content: '',
+  }
 }
 
 .inner img.lock {
@@ -167,26 +180,16 @@
     right: 0;
 }
 
-.img-fluid {
-    width: 200px;
-    height: 200px;
-    border: 1px solid;
-    padding: 4px;
-    object-fit: cover;
-}
+.attribute-img > img, .attribute-img > video {
+  max-width: 350px;
+  width: 100%;
 
-.attribute-img>img {
-    max-width: 350px !important;
-    max-height: 350px !important;
-    height: 100% !important;
-    width: 100% !important;
-}
+  border: 1px solid;
+  object-fit: cover;
 
-.attribute-img>video {
-    max-width: 350px !important;
-    max-height: 350px !important;
-    height: 100% !important;
-    width: 100% !important;
+  &::after {
+    content: '',
+  }
 }
 
 .align-items-center {
@@ -366,8 +369,8 @@ tbody td {
         padding: 0;
         margin-top: 1rem;
         max-width: calc(100% - 20px);
-        margin-left: initial;
-        margin-right: initial;
+        margin-left: auto;
+        margin-right: auto;
         >div {
             padding: 1rem;
         }

@@ -1,8 +1,19 @@
 <section class="scroller">
-    <div class="pt-5 h-100 flex-space-between align-items-center res-table">
+    <div *ngIf="!historyData" class="flex-center main-message-container w-100 h-100 text-center pa20">
+        {{mainMessage}}
+        <div *ngIf="mainMessage === messages.IDLE && isConnected; else loggedOut">
+            <img class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+        </div>
+        
+        <ng-template #loggedOut>
+            <p class="mt50 fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
+        </ng-template>
+    </div>
+
+    <div *ngIf="historyData" class="pt-5 h-100 flex-space-between align-items-center res-table">
         <div class="flex1 flex-column flex-center">
             <div class="table-responsive">
-                <table class="table">
+                <table class="table mb20">
                     <thead>
                         <tr>
                             <th>Bet ID</th>
@@ -14,25 +25,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: p };let i=index">
+                        <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: page }; let i=index">
                             <td>{{item.id}}</td>
                             <td>{{item.BetTier}}</td>
                             <td>{{item.DateNFT}}</td>
                             <td>{{item.total}}</td>
                             <td>14849534</td>
                             <td>
-                                <button class="button" (click)="ClaimNft(item,i)" *ngIf="!item.isClaimed">
-                                    Claim
-                                </button>
-                                    <button class="button success" *ngIf="item.isClaimed">
-                                        Claimed
-                                </button>
+                                <button class="button" (click)="onClaimNFT(item,i)" *ngIf="!item.isClaimed">Claim</button>
+                                <button class="button success" *ngIf="item.isClaimed">Claimed</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <pagination-controls class="my-pagination" (pageChange)="p = $event"
-[maxSize]="8"></pagination-controls>
+                <pagination-controls class="my-pagination" (pageChange)="page = $event" [maxSize]="maxSize"></pagination-controls>
             </div>
         </div>
     </div>

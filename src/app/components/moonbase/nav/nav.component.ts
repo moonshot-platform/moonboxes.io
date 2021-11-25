@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -8,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
 import { MoonbaseComponent } from '../moonbase.component';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-nav',
@@ -17,7 +17,7 @@ import { WalletConnectComponent } from '../../base/wallet/connect/connect.compon
 export class NavComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
-  balanceOfMoon: any = 0;
+  balance: any = 0;
   moonCountData: any;
   isNSFWStatus = false;
   menuItem = false;
@@ -80,29 +80,27 @@ export class NavComponent implements OnInit {
     public dialog: MatDialog,
     private walletConnectService: WalletConnectService,
     private tokenomicsService: TokenomicsService,
-    private httpApi: HttpApiService,
+    private localStorage: LocalStorageService,
     public router: Router,
     private location: Location
   ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
-    this.checkNSFWStatus();
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        if (data !== undefined && data.address != undefined) {
-          this.data = data;
-          this.isConnected = true;
-          if (this.data.networkId.chainId == environment.chainId) {
-            this.getMoonShootBalance();
-          }
+    this.getNSFWStatus();
+    
+    
+    this.walletConnectService.getData().subscribe((data) => {
+      if (data !== undefined && data.address != undefined) {
+        this.data = data;
+        this.isConnected = true;
+        if (this.data.networkId.chainId == environment.chainId) {
+          this.getMoonShootBalance();
         }
-        else {
-          this.balanceOfMoon = "Awaiting Connection";
-        }
-      });
-
-    }, 1000);
+      }
+      else {
+        this.balance = "Awaiting Connection";
+      }
+    });
   }
 
   openDialog(): void {
@@ -115,20 +113,8 @@ export class NavComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
-    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
-
-    this.balanceOfMoon /= 1e9;
-    this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
-    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  }
-
-  changeNSFWStatus(event: any) {
-
-    this.httpApi.setNSFWStatus(event);
-  }
-
-  getNSFWStatus() {
-    this.isNSFWStatus = this.httpApi.getNSFWStatus();
+    const balance = Number( await this.walletConnectService.getUserBalance(this.data.address) );
+    this.balance = this.walletConnectService.convertBalance( balance );
   }
 
   menuopen() {
@@ -151,13 +137,13 @@ export class NavComponent implements OnInit {
     this.tokenomicsService.onToggle(true);
     this.closeMenu();
   }
-  checkNSFWStatus() {
-    setInterval(() => {
-      this.getNSFWStatus()
-    }, 1500);//4000
 
+  changeNSFWStatus( state: boolean ) {
+    this.localStorage.setNSFW( state );
   }
 
-
+  getNSFWStatus() {
+    this.isNSFWStatus = this.localStorage.getNSFW();
+  }
 
 }

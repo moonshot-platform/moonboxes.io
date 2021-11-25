@@ -1,11 +1,7 @@
-import {
-  Component,
-  OnInit,
-  Input
-} from '@angular/core';
-import {
-  formatDate
-} from '@angular/common';
+import { Component, OnInit, Input } from '@angular/core';
+import { formatDate } from '@angular/common';
+
+import { interval, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-countdown-timer',
@@ -13,49 +9,42 @@ import {
   styleUrls: ['./countdown-timer.component.scss']
 })
 export class CountdownTimerComponent implements OnInit {
+  
   @Input() date: string;
-  interval: any;
-  timer: any = 0;
-  checkdate = "";
-  constructor() { }
+
+  public timer: string;
+  private _interval: Subscription;
 
   ngOnDestroy() {
-    clearInterval(this.interval);
+    this._interval.unsubscribe();
   }
 
   ngOnInit(): void {
-    // Set the date we're counting down to
-    var date = new Date(this.date + " UTC");
-    var countDownDate = new Date(formatDate(date.toString(), "yyyy/MM/dd HH:mm:ss", "en-us")).getTime();
-    // Update the count down every 1 second
-    this.interval = setInterval(function () {
 
-      // Get today's date and time
-      var now = new Date().getTime();
+    const date = new Date( `${this.date} UTC` ).toString();
+    const format = 'yyyy/MM/dd HH:mm:ss';
+    const local = 'en-us';
+
+    const targetDateTime = new Date( formatDate( date, format, local ) ).getTime();
+    
+    this._interval = interval( 1000 ).subscribe( () => {
+
+      // Get now DateTime
+      const now = new Date().getTime();
 
       // Find the distance between now and the count down date
-      var distance = countDownDate - now;
+      const remainingTime = targetDateTime - now;
 
       // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      // Display the result in the element with id="demo"
-      if (days > 0 || hours > 0 || minutes > 0 || seconds > 0) {
-        this.timer = (days <= 9 ? `0${days}` : days) + " D : " +
-          (hours <= 9 ? `0${hours}` : hours) + " H : " +
-          (minutes <= 9 ? `0${minutes}` : minutes) + " M : " +
-          (seconds <= 9 ? `0${seconds}` : seconds) + " S";
-      } else {
-        this.timer = 0;
-      }
+      const d = ('0' + Math.floor(remainingTime / (1000 * 60 * 60 * 24)) ).slice(-2);
+      const h = ('0' + Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ).slice(-2);
+      const m = ('0' + Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) ).slice(-2);
+      const s = ('0' + Math.floor((remainingTime % (1000 * 60)) / 1000) ).slice(-2);
 
-      // If the count down is finished, write some text
-      if (distance < 0) {
-        clearInterval(this.interval);
-      }
-    }.bind(this), 1000);
+      this.timer = `${d} D : ${h} H : ${m} M : ${s} S`;
+
+      if ( remainingTime <= 0 ) this._interval.unsubscribe();
+    } );
   }
 
 }

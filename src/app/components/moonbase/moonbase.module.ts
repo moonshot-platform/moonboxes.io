@@ -8,7 +8,6 @@ import { NavModule } from './nav/nav.module';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgParticlesModule } from 'ng-particles';
-import { FooterComponent } from './footer/footer.component';
 import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +42,6 @@ import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.com
   declarations: [
     MoonbaseComponent,
     IntroComponent,
-    FooterComponent,
     BuyMoonbaseComponent,
     PrizePoolComponent,
     HistoryComponent,
