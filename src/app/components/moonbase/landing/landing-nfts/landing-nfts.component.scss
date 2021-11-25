@@ -24,6 +24,10 @@ section.landing-carousel {
 
 swiper {
     padding-top: 0px !important;
+    // -webkit-mask-image: -webkit-gradient(linear, 80% 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0 0, 20% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+    // -webkit-mask-composite: source-out;
+    // //mask-composite: source-out;
+    // mask-image: -webkit-gradient(linear, 80% 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0 0, 20% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
 }
 
 p.slider-name {
