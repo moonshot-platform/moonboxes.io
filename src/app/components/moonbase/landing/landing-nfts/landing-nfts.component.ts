@@ -37,7 +37,7 @@ export class LandingNftsComponent implements OnInit {
       sticky: true,
     },
     grabCursor: true,
-    initialSlide: this.initialSlideStartIndex,
+    initialSlide: 3,
     loop: true,
     coverflowEffect: {
       depth: 400,
@@ -63,12 +63,15 @@ export class LandingNftsComponent implements OnInit {
 
   };
 
-  constructor() { }
+  constructor() {
+    console.log(this.slides.length);
+
+  }
 
   ngOnInit(): void { }
 
   onIndexChange(event: any): void {
-    this.currentSliderName = this.slides[event.activeIndex - 3].name;
+    this.currentSliderName = this.slides[(event.activeIndex - 3) % 21].name;
   }
 
   scrollToElement(page: string, fragment: string): void {
