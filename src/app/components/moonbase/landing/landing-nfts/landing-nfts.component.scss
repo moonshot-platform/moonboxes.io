@@ -172,9 +172,3 @@ p.slider-name {
         display: none;
     }
 }
-
-@media only screen and (max-width: $sm) {
-    section.landing-carousel {
-        max-width: calc(100vw - 40px) !important;
-    }
-}
