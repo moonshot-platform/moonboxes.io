@@ -4,6 +4,7 @@ import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import { SliderModel } from '../models/slider.model';
 import { nftSlider } from '../consts/nft-slider.const';
+import { debug } from 'console';
 SwiperCore.use([EffectCoverflow]);
 SwiperCore.use([Autoplay]);
 
@@ -68,7 +69,7 @@ export class LandingNftsComponent implements OnInit {
   ngOnInit(): void { }
 
   onIndexChange(event: any): void {
-    this.currentSliderName = this.slides[(event.activeIndex - 3) % 21].name;
+    this.currentSliderName = this.slides[event.realIndex].name;
   }
 
   scrollToElement(page: string, fragment: string): void {
