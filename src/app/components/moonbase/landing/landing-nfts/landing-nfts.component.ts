@@ -63,10 +63,7 @@ export class LandingNftsComponent implements OnInit {
 
   };
 
-  constructor() {
-    console.log(this.slides.length);
-
-  }
+  constructor() { }
 
   ngOnInit(): void { }
 
