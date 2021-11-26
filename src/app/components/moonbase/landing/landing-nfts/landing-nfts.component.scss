@@ -24,10 +24,9 @@ section.landing-carousel {
 
 swiper {
     padding-top: 0px !important;
-    // -webkit-mask-image: -webkit-gradient(linear, 80% 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0 0, 20% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
-    // -webkit-mask-composite: source-out;
-    // //mask-composite: source-out;
-    // mask-image: -webkit-gradient(linear, 80% 0, 100% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0))), -webkit-gradient(linear, 0 0, 20% 0, from(rgba(0, 0, 0, 1)), to(rgba(0, 0, 0, 0)));
+    -webkit-mask-composite: intersect;
+    -webkit-mask-composite: source-in;
+    -webkit-mask-image: linear-gradient(to left, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent), linear-gradient(to right, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent);
 }
 
 p.slider-name {
@@ -171,5 +170,11 @@ p.slider-name {
     }
     .break-line-desktop {
         display: none;
+    }
+}
+
+@media only screen and (max-width: $sm) {
+    section.landing-carousel {
+        max-width: calc(100vw - 40px) !important;
     }
 }

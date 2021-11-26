@@ -4,6 +4,7 @@ import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import { SliderModel } from '../models/slider.model';
 import { nftSlider } from '../consts/nft-slider.const';
+import { debug } from 'console';
 SwiperCore.use([EffectCoverflow]);
 SwiperCore.use([Autoplay]);
 
@@ -37,7 +38,7 @@ export class LandingNftsComponent implements OnInit {
       sticky: true,
     },
     grabCursor: true,
-    initialSlide: this.initialSlideStartIndex,
+    initialSlide: 3,
     loop: true,
     coverflowEffect: {
       depth: 400,
@@ -53,10 +54,13 @@ export class LandingNftsComponent implements OnInit {
         slidesPerView: 3,
       },
       500: {
-        slidesPerView: 3,
+        slidesPerView: 2.4,
       },
       300: {
-        slidesPerView: 1.76,
+        slidesPerView: 1.5,
+      },
+      200: {
+        slidesPerView: 1.5,
       }
 
     }
@@ -68,7 +72,7 @@ export class LandingNftsComponent implements OnInit {
   ngOnInit(): void { }
 
   onIndexChange(event: any): void {
-    this.currentSliderName = this.slides[event.activeIndex - 3].name;
+    this.currentSliderName = this.slides[event.realIndex].name;
   }
 
   scrollToElement(page: string, fragment: string): void {
