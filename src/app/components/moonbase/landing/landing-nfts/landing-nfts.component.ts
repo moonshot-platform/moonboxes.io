@@ -54,10 +54,13 @@ export class LandingNftsComponent implements OnInit {
         slidesPerView: 3,
       },
       500: {
-        slidesPerView: 3,
+        slidesPerView: 2.4,
       },
       300: {
-        slidesPerView: 1.76,
+        slidesPerView: 1.5,
+      },
+      200: {
+        slidesPerView: 1.5,
       }
 
     }
