@@ -278,7 +278,7 @@ textarea {
         width: 25px;
         margin-right: 20px;
     }
-    &:hover {
+    &.default-cursor:hover {
         background-color: $primary;
         cursor: default;
     }
