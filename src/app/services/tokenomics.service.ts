@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { timingSafeEqual } from 'crypto';
 import { Observable, Subject } from 'rxjs';
+import { interval, Subscription } from 'rxjs';
 
 import Web3 from 'web3';
 
@@ -13,7 +13,7 @@ import ssABI from '../../assets/web3/ss-abi.json';
 export class TokenomicsService {
     private toggle = new Subject<any>();
     private data = new Subject<any>();
-    private interval: any;
+    private _interval: Subscription;
     private serverError: boolean = false;
     public tokenomicsData: any;
     public oldPancakeAddress = true;
@@ -36,22 +36,29 @@ export class TokenomicsService {
     }
 
     init(): void {
-        this.getTokenomicsData();
-        this.interval = setInterval( () =>  this.getTokenomicsData(), 5000 );
+        if( !this.getTokenomicsData() ) {
+          this._interval = interval( 5000 ).subscribe( () =>  this.getTokenomicsData() );
+        }
     }
 
     changePancakeRouter() : number {
       this.oldPancakeAddress = !this.oldPancakeAddress;
       
-      clearInterval(this.interval);
+      this._interval.unsubscribe();
       this.init();
 
       return this.oldPancakeAddress ? 1 : 2;
     }
 
     async getTokenomicsData() {
-        var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
+        const web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
+        if( !web3Provider.connected ) {
+          this._interval?.unsubscribe();
+          return false;
+        }
+
         var web3 = new Web3( web3Provider );
+        
     
         var panCakeRouter = new web3.eth.Contract(pancakeABI as any, 
           this.oldPancakeAddress ? "0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F" : "0x10ED43C718714eb63d5aA57B78B54704E256024E");
@@ -103,8 +110,10 @@ export class TokenomicsService {
             this.serverError = true;
           }
         ).finally( () => {
-            if( this.serverError ) clearInterval(this.interval)
+            if( this.serverError ) this._interval.unsubscribe();
         } );
+
+        return true;
       }
     
       formatAmount(amount: any) {

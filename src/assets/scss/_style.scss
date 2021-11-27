@@ -225,12 +225,40 @@ ul {
     margin-left: 100px;
 }
 
-.mv70 {
-    margin: 70px 0;
+.mv10 {
+    margin: 10px 0;
+}
+
+.mv20 {
+    margin: 20px 0;
 }
 
 .mv30 {
     margin: 30px 0;
+}
+
+.mv40 {
+    margin: 40px 0;
+}
+
+.mv50 {
+    margin: 50px 0;
+}
+
+.mv60 {
+    margin: 60px 0;
+}
+
+.mv70 {
+    margin: 70px 0;
+}
+
+.mv80 {
+    margin: 80px 0;
+}
+
+.mv90 {
+    margin: 90px 0;
 }
 
 .mv100 {
@@ -474,6 +502,15 @@ ul {
 
 .flex {
     display: flex;
+}
+
+.flex-wrap {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.wrap {
+    flex-wrap: wrap;
 }
 
 .align-start {
@@ -1180,15 +1217,27 @@ button.toast-close-button {
     background: #fff !important;
 }
 
-svg#share_twitter {
+svg.interactable {
     width: 50px;
-    border-radius: 50px;
+    cursor: pointer;
+    
     &:hover {
-        border-radius: 50px;
         path {
             fill: white;
         }
     }
+
+    &.wrapped {
+        width: auto;
+    }
+}
+
+.h-auto {
+    height: auto;
+}
+
+.w-auto {
+    width: auto;
 }
 
 svg#moonbox_icon path {
@@ -1199,12 +1248,30 @@ svg#closenft path {
     fill: #d5a642;
 }
 
+.opacity0 {
+    opacity: 0;
+}
+
+.opacity1 {
+    opacity: 1;
+}
+
 .fade-in {
     animation: fadeIn ease 5s;
     -webkit-animation: fadeIn ease 5s;
     -moz-animation: fadeIn ease 5s;
     -o-animation: fadeIn ease 5s;
     -ms-animation: fadeIn ease 5s;
+}
+
+.fade-in-delayed {
+    opacity: 0;
+
+    animation: fadeIn ease 5s 1s forwards;
+    -webkit-animation: fadeIn ease 5s 1s forwards;
+    -moz-animation: fadeIn ease 5s 1s forwards;
+    -o-animation: fadeIn ease 5s 1s forwards;
+    -ms-animation: fadeIn ease 5s 1s forwards;
 }
 
 @keyframes fadeIn {

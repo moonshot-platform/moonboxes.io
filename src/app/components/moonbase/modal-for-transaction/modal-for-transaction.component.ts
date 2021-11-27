@@ -25,6 +25,12 @@ export class ModalForTransactionComponent implements OnInit {
     "assets/media/videos/Moonboxes_GOLD.webm",
     "assets/media/videos/Moonboxes_DIAMOND.webm"
   ]
+  videoSourceFallback = [
+    "assets/media/videos/Moonboxes_WOOD_fallback.webm",
+    "assets/media/videos/Moonboxes_SILVER_fallback.webm",
+    "assets/media/videos/Moonboxes_GOLD_fallback.webm",
+    "assets/media/videos/Moonboxes_DIAMOND_fallback.webm"
+  ]
   nftrevealed: boolean = false;
   playvideo: boolean = false;
   social: boolean = false;
@@ -61,16 +67,16 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
-      transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
+      transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber, this.data.data.address)
     }
     catch (e) {
       this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
 
@@ -81,7 +87,7 @@ export class ModalForTransactionComponent implements OnInit {
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
         type: this.data.lootBoxName,
-        quantity: this.data.inputNumber[this.data.index]
+        quantity: this.data.inputNumber
       }).subscribe((response: any) => {
         if (response.isSuccess) {
           this.successIcon = true;
@@ -89,7 +95,6 @@ export class ModalForTransactionComponent implements OnInit {
           //this.isCompletedProcess=true;
           this.revealNft(transactionDetails.hash);
           this.httpApi.showToastr(response.data.message, true);
-
         }
         else {
           this.httpApi.showToastr(response.data.message, false)
@@ -143,10 +148,10 @@ export class ModalForTransactionComponent implements OnInit {
       this.closeDialog();
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
 
@@ -179,27 +184,34 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
-      transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
-        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature,this.data.artistDetails.limit);
+      transactionDetails = await this.walletConnectService
+        .redeemBulkTransactionArtist(
+          this.data.artistDetails.lootBoxId,
+          this.data.inputNumber,
+          this.data.artistDetails.price, 
+          this.data.artistDetails.address,
+          this.data.artistDetails.signature,
+          this.data.artistDetails.limit
+        );
     }
     catch (e) {
       this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
-      else if(e.hash?.data)
-        this.httpApi.showToastr(e.hash?.data?.message,false);
-      else if(e.hash?.error)
-      this.httpApi.showToastr(e.hash?.error?.message,false);
+      else if (e.hash?.data)
+        this.httpApi.showToastr(e.hash?.data?.message, false);
+      else if (e.hash?.error)
+        this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
-
+    
     if (transactionDetails.status) {
       this.btn1Text = "Submitting data";
       this.httpApi.submitBetForArtistApi({
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
         type: this.data.lootBoxName,
-        quantity: this.data.inputNumber[this.data.index],
+        quantity: this.data.inputNumber,
         id: this.data.artistDetails.lootBoxId
       }).subscribe((response: any) => {
         if (response.isSuccess) {
@@ -240,7 +252,7 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this.dialog.open(SocialShareComponent, {
+    this.dialog.open(SocialShareComponent, {
       width: 'auto',
       data: { name: this.nftImgRevealed }
     });
@@ -249,7 +261,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   checkFileType(url: string) {
     const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg","MP4", "3GP", "OGG"]
+    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)

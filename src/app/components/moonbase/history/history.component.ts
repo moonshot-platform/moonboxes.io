@@ -4,6 +4,8 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalForClaimComponent } from './modal-for-claim/modal-for-claim.component';
+import { MESSAGES } from 'src/app/messages.enum';
+import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-history',
@@ -13,55 +15,70 @@ import { ModalForClaimComponent } from './modal-for-claim/modal-for-claim.compon
 export class HistoryComponent implements OnInit {
 
   static readonly routeName: string = 'history';
-  data: any;
-  historyData: any;
-  p: number = 1;
-  maxSize: number = 9;
-  constructor(public toastrService: ToastrService, public httpApiService: HttpApiService, public walletConnectService: WalletConnectService,
-    public dialog: MatDialog) {
 
-  }
+  readonly messages = MESSAGES;
+  mainMessage: string = MESSAGES.IDLE;
+  
+  address: string = null;
+  historyData: any = null;
+
+  page: number = 1;
+  maxSize: number = 9;
+
+  isConnected = false;
+  
+  constructor(
+    public toastrService: ToastrService, 
+    public httpApiService: HttpApiService, 
+    public walletConnectService: WalletConnectService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
+    this.walletConnectService.init().then( ( data: string ) => {
+      this.isConnected = data !== null;
+    });
 
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
-      });
-      this.getBidHistory();
-    }, 1000);
-  }
-
-  getBidHistory() {
-    this.httpApiService.getUserBetData(
-      this.data.address
-    ).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.historyData = response.data;
-      }
-      else {
-        this.toastrService.error("Sorry, something went wrong")
-      }
-
+    this.walletConnectService.getData().subscribe( ( data: any ) => {
+      if( data ) {
+        this.address = data.address;
+        this.getBidHistory();
+      } else
+        this.toastrService.error( "Please connect your wallet" );
     });
   }
 
-  async ClaimNft(data: any, index: number) {
-    const dialogref = this.dialog.open(ModalForClaimComponent, {
+  getBidHistory() {
+    this.httpApiService.getUserBetData( this.address ).subscribe( (response: any) => {
+      if ( response.isSuccess )
+        this.historyData = response.data;
+      else
+        this.toastrService.error( "Could not fetch History data" );
+    });
+  }
+
+  onClaimNFT( data: any, index: number ) {
+    console.log(data);
+    
+    this.dialog.open( ModalForClaimComponent, {
       width: 'auto',
       disableClose: true,
       data: {
         nftDetails: data,
-        userAddress: this.data.address
+        userAddress: this.address
       }
-    });
-
-    dialogref.afterClosed().subscribe(result => {
+    }).afterClosed().subscribe( result => {
       this.historyData[index].isClaimed = result;
-
-    });
-
+    } );
   }
 
+  openDialog(): void {
+    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
+
+    dialogRef.afterClosed().subscribe( (_) => {
+      this.walletConnectService.getData().subscribe((data) => {
+        this.isConnected = data.address !== undefined;
+      })
+    });
+  }
 }

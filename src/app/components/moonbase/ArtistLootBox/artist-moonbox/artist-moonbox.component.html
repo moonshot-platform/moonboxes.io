@@ -1,317 +1,25 @@
-<!-- [ngClass]="{'invisible':invisible}" -->
-<section class="artist-moonbox scroller" [ngClass]="{'bg-primary':invisible}">
+<section class="artist-moonbox scroller" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+    
+    <div *ngIf="!supplyDetails" class="flex-center main-message-container w-100 h-100 text-center pa20">
+        {{mainMessage}}
+        <img *ngIf="mainMessage === messages.IDLE" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+    </div>
+    
+    <div *ngIf="supplyDetails" class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
-    <div class="inner desktop-only s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
         <div class="flex w-100">
             <div class="flex flex-col w-100 boxes-title-container">
-                <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row mb10">{{artistDetails?.name}}</p>
-                <p class="flex1 flex justify-center p18 orbitron flex-row mb10">{{artistDetails?.ArtistName}}</p>
-
-                <div class="flex justify-center">
-                    <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
-                        <svg version="1.1" id="more" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38" xml:space="preserve">
-                                <g>
-                                    <g>
-                                        <g>
-                                            <path
-                                                d="M19,9.2c-1.3,0-2.4,1.1-2.4,2.4S17.7,14,19,14s2.4-1.1,2.4-2.4S20.3,9.2,19,9.2z">
-                                            </path>
-                                        </g>
-                                        <g>
-                                            <path
-                                                d="M19,16.6c-1.1,0-2,0.9-2,2v8.3c0,1.1,0.9,2,2,2s2-0.9,2-2v-8.3C21,17.4,20.1,16.6,19,16.6z">
-                                            </path>
-                                        </g>
-                                        <g>
-                                            <path d="M19,1C9.1,1,1,9.1,1,19s8.1,18,18,18s18-8.1,18-18S28.9,1,19,1z M18.9,34.1c-3.8,0-7.6-1.4-10.5-4.3
-              C5.5,27,3.9,23.2,3.9,19.2c0-4,1.5-7.8,4.3-10.7c0.1-0.1,0.1-0.1,0.2-0.2c5.8-5.9,15.3-6,21.3-0.2c2.9,2.8,4.5,6.6,4.5,10.6
-              c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"></path>
-                                        </g>
-                                        <g>
-                                            <path d="M19,1C9.1,1,1,9.1,1,19s8.1,18,18,18s18-8.1,18-18S28.9,1,19,1z M18.9,34.1c-3.8,0-7.6-1.4-10.5-4.3
-              C5.5,27,3.9,23.2,3.9,19.2c0-4,1.5-7.8,4.3-10.7c0.1-0.1,0.1-0.1,0.2-0.2c5.8-5.9,15.3-6,21.3-0.2c2.9,2.8,4.5,6.6,4.5,10.6
-              c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"></path>
-                                        </g>
-                                    </g>
-                                </g>
-                            </svg>
-                    </a>
+                <div class="artist-details flex-center flex-col">
+                    <p class="p-white-span-primary p30d24m orbitron mb10">{{artistDetails?.name}}</p>
+                    <p class="p18 orbitron mb10">{{artistDetails?.ArtistName}}</p>
+                    <svg (click)="openDialogWithTemplateRef(dialog)" class="info-icon pointer" xmlns="http://www.w3.org/2000/svg" width="30" viewBox="0 0 38 38" xml:space="preserve"><g fill="#d5a642"><path d="M19 9.2c-1.3 0-2.4 1.1-2.4 2.4S17.7 14 19 14s2.4-1.1 2.4-2.4-1.1-2.4-2.4-2.4zM19 16.6c-1.1 0-2 .9-2 2v8.3c0 1.1.9 2 2 2s2-.9 2-2v-8.3c0-1.2-.9-2-2-2z"/><path d="M19 1C9.1 1 1 9.1 1 19s8.1 18 18 18 18-8.1 18-18S28.9 1 19 1zm-.1 33.1c-3.8 0-7.6-1.4-10.5-4.3-2.9-2.8-4.5-6.6-4.5-10.6s1.5-7.8 4.3-10.7l.2-.2c5.8-5.9 15.3-6 21.3-.2 2.9 2.8 4.5 6.6 4.5 10.6s-1.5 7.8-4.3 10.7l-.2.2c-3 3-6.9 4.5-10.8 4.5z"/><path d="M19 1C9.1 1 1 9.1 1 19s8.1 18 18 18 18-8.1 18-18S28.9 1 19 1zm-.1 33.1c-3.8 0-7.6-1.4-10.5-4.3-2.9-2.8-4.5-6.6-4.5-10.6s1.5-7.8 4.3-10.7l.2-.2c5.8-5.9 15.3-6 21.3-.2 2.9 2.8 4.5 6.6 4.5 10.6s-1.5 7.8-4.3 10.7l-.2.2c-3 3-6.9 4.5-10.8 4.5z"/></g></svg>
                 </div>
 
-                <ng-template #myDialog>
-                    <section class="scroller artist-popup">
-                        <div class="justify-center align-items-center flex-col align-start">
-                            <div class="empty flex1"></div>
-                            <div class="connect_popup info flex2">
-                                <div class="line-container flex">
-                                    <div class="line flex2"></div>
-                                    <div class="empty flex1"></div>
-                                </div>
-                                <div class="info">
-                                    <div class="bottom flex justify-center">
-                                        <div class="mw-50 p-3 flex-xs-col align-center">
-                                            <div class="mb30 group-img text-center">
-                                                <img src="{{artistDetails?.filePath}}" alt="Artist" class="img-fluid img-cover ">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
-                                                    {{artistDetails?.description}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="empty flex1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="empty flex1"></div>
-                        </div>
-                    </section>
-
-                </ng-template>
-
-            </div>
-        </div>
-        <div class="flex all-boxes w-100">
-            <div class="flex1 flex-col flex-center">
-                <div class="relative">
-                    <div class="relative moonbox wood"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon < moonBoxLimitDetails?._moonboxId1) || supplyDetails[0]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
-                </div>
-                <div class="text-center">
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
-                        {{supplyDetails[0]?.type}} ({{supplyDetails[0]?.currentSupply}})</p>
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-                        {{supplyDetails[0]?.price}} BNB</p>
-                    <div class="border plus_minus flex mb20" *ngIf="inputnumber[1]>0">
-
-                        <button class="flex1 toggle-less" (click)="minus(1)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                        <div class="flex1 border_left_right">
-                            <input type="text" class="form-control" [(ngModel)]="inputnumber[1]" readonly>
-                        </div>
-                        <button class="flex1 toggle-more" (click)="plus(1)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                    </div>
-                    <div class=" plus_minus flex mb20 mt25 justify-center" *ngIf="inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming">
-                        Sold Out
-                    </div>
-                    <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[0]?.isUpcoming">
-                        Coming soon!
-                    </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled-button': inputnumber[1]==0 && !supplyDetails[0]?.isUpcoming}" (click)="buyMoonBase(1)">Buy</a>
-
-                    <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
-
-                </div>
-            </div>
-            <div class="flex1 flex-center flex-col">
-                <div class="relative">
-                    <div class="relative moonbox silver"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId2/1e9) || supplyDetails[1]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
-                </div>
-                <div class="text-center">
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-                        {{supplyDetails[1]?.type}} ({{supplyDetails[1]?.currentSupply}})</p>
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-                        {{supplyDetails[1]?.price}} BNB</p>
-                    <div class="border plus_minus flex mb20" *ngIf="inputnumber[2]>0" readonly>
-
-                        <button class="flex1 toggle-less" (click)="minus(2)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                        <div class="flex1 border_left_right">
-                            <input type="text" class="form-control" [(ngModel)]="inputnumber[2]" readonly>
-                        </div>
-                        <button class="flex1 toggle-more" (click)="plus(2)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                    </div>
-                    <div class=" plus_minus flex mb20 mt25 justify-center" *ngIf="inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming">
-                        Sold Out
-                    </div>
-                    <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[1]?.isUpcoming">
-                        Coming soon!
-                    </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled': inputnumber[2]==0 && !supplyDetails[1]?.isUpcoming}" (click)="buyMoonBase(2)">Buy</a>
-                    <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
-
-                </div>
-            </div>
-            <div class="flex1 flex-col flex-center">
-                <div class="relative">
-                    <div class="relative moonbox gold"></div>
-                    <img *ngIf="!isConnected   || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId3/1e9) || supplyDetails[2]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
-                </div>
-                <div class="text-center">
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">
-                        {{supplyDetails[2]?.type}} ({{supplyDetails[2]?.currentSupply}})</p>
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-                        {{supplyDetails[2]?.price}} BNB</p>
-                    <div class="border plus_minus flex mb20" *ngIf="inputnumber[3]>0">
-
-                        <button class="flex1 toggle-less" (click)="minus(3)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                        <div class="flex1 border_left_right">
-                            <input type="text" class="form-control" [(ngModel)]="inputnumber[3]" readonly>
-                        </div>
-                        <button class="flex1 toggle-more" (click)="plus(3)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                    </div>
-                    <div class=" plus_minus flex mb20 mt25 justify-center" *ngIf="inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming">
-                        Sold Out
-                    </div>
-                    <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[2]?.isUpcoming">
-                        Coming soon!
-                    </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled': inputnumber[3]==0 && !supplyDetails[2]?.isUpcoming}" (click)="buyMoonBase(3)">Buy</a>
-                    <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
-
-                </div>
-            </div>
-            <div class="flex1 flex-center flex-col">
-                <div class="relative">
-                    <div class="relative moonbox diamond"></div>
-                    <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < moonBoxLimitDetails?._moonboxId4/1e9) || supplyDetails[3]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
-                </div>
-                <div class="text-center">
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-                        {{supplyDetails[3]?.type}} ({{supplyDetails[3]?.currentSupply}})</p>
-                    <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-                        {{supplyDetails[3]?.price}} BNB</p>
-                    <div class="border plus_minus flex mb20" *ngIf="inputnumber[4]>0">
-
-                        <button class="flex1 toggle-less" (click)="minus(4)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                        <div class="flex1 border_left_right">
-                            <input type="text" class="form-control" [(ngModel)]="inputnumber[4]" readonly>
-                        </div>
-                        <button class="flex1 toggle-more" (click)="plus(4)">
-                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg"
-                                    xmlns:xlink="http://www.w3.org/1999/xlink" width="11" height="14"
-                                    viewBox="0 0 11 14">
-                                    <path fill="#fff"
-                                        d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
-                                </svg>
-                            </button>
-                    </div>
-                    <div class=" plus_minus flex mb20 mt25 justify-center" *ngIf="inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming">
-                        Sold Out
-                    </div>
-                    <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[3]?.isUpcoming">
-                        Coming soon!
-                    </div>
-                    <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled': inputnumber[4]==0 && !supplyDetails[3]?.isUpcoming}" (click)="buyMoonBase(4)">Buy</a>
-                    <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="h-100 mobile-only shirts-carousel flex-col align-center justify-start px-3 pt30" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
-
-        <div class="flex">
-            <div class="flex2 flex flex-col mb30">
-                <p class="flex1 flex justify-center p-white-span-primary p30d24m orbitron flex-row flex1 mb10">
-                    {{artistDetails?.name}}</p>
-                <p class="flex1 flex justify-center p30d24m orbitron flex-row flex1 mb10"> {{artistDetails?.ArtistName}}
-                </p>
-
-                <div class="flex justify-center">
-                    <a href="javascript:void(0)" (click)="openDialogWithTemplateRef(myDialog)">
-                        <svg version="1.1" id="more" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="30" viewBox="0 0 38 38" xml:space="preserve">
-                            <g>
-                                <g>
-                                    <g>
-                                        <path
-                                            d="M19,9.2c-1.3,0-2.4,1.1-2.4,2.4S17.7,14,19,14s2.4-1.1,2.4-2.4S20.3,9.2,19,9.2z">
-                                        </path>
-                                    </g>
-                                    <g>
-                                        <path
-                                            d="M19,16.6c-1.1,0-2,0.9-2,2v8.3c0,1.1,0.9,2,2,2s2-0.9,2-2v-8.3C21,17.4,20.1,16.6,19,16.6z">
-                                        </path>
-                                    </g>
-                                    <g>
-                                        <path d="M19,1C9.1,1,1,9.1,1,19s8.1,18,18,18s18-8.1,18-18S28.9,1,19,1z M18.9,34.1c-3.8,0-7.6-1.4-10.5-4.3
-                C5.5,27,3.9,23.2,3.9,19.2c0-4,1.5-7.8,4.3-10.7c0.1-0.1,0.1-0.1,0.2-0.2c5.8-5.9,15.3-6,21.3-0.2c2.9,2.8,4.5,6.6,4.5,10.6
-                c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"></path>
-                                    </g>
-                                    <g>
-                                        <path d="M19,1C9.1,1,1,9.1,1,19s8.1,18,18,18s18-8.1,18-18S28.9,1,19,1z M18.9,34.1c-3.8,0-7.6-1.4-10.5-4.3
-                C5.5,27,3.9,23.2,3.9,19.2c0-4,1.5-7.8,4.3-10.7c0.1-0.1,0.1-0.1,0.2-0.2c5.8-5.9,15.3-6,21.3-0.2c2.9,2.8,4.5,6.6,4.5,10.6
-                c0,4-1.5,7.8-4.3,10.7c-0.1,0.1-0.1,0.1-0.2,0.2C26.7,32.6,22.8,34.1,18.9,34.1z"></path>
-                                    </g>
-                                </g>
-                            </g>
-                        </svg>
-                    </a>
-                </div>
-
-                <ng-template #myDialog>
-                    <section>
-                        <div class="h-100 justify-center align-items-center flex-xs-col">
-                            <div class="empty flex1"></div>
-                            <div class="connect_popup info flex2">
-                                <div class="line-container flex">
-                                    <div class="line flex2"></div>
-                                    <div class="empty flex1"></div>
-                                </div>
-                                <div class="info">
-                                    <div class="bottom p-3 flex justify-center">
-                                        <div class="mw-50 p-3 flex-xs-col align-center">
-                                            <div class="mb30 group-img text-center">
-                                                <img src="{{artistDetails?.filePath}}" class=" img-cover" alt="Artist">
-                                            </div>
-                                            <div class="text-center">
-                                                <p class="flex1 flex text-justify justify-center p-white-span-primary mb20 flex-row flex1 mb10">
-                                                    {{artistDetails?.description}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="empty flex1"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="empty flex1"></div>
+                <ng-template #dialog>
+                    <section class="artist-popup mt20 relative">
+                        <div class="info mw-50 p-3 align-center flex-center flex-col">
+                            <img src="{{artistDetails?.filePath}}" alt="Artist" class="img-fluid img-cover">
+                            <p class="text-center p-white-span-primary mt20">{{artistDetails?.description}}</p>
                         </div>
                     </section>
                 </ng-template>
@@ -319,53 +27,43 @@
             </div>
         </div>
 
-        <div class="shirts-carousel flex group-img justify-space-between align-center wp100">
-            <div class="round-mini-button" (click)="prev()">
-                <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
-            </div>
-            <div class="relative">
-                <div class="relative moonbox {{lootboxfloating[current]}}"></div>
-                <!-- <img src={{lootBoxDetails[current].img}} class="moonbox" alt="moonticket" /> -->
-                <img *ngIf="!isConnected  || (balanceOfMoon/1e9 < (moonBoxLimitDetails && moonBoxLimitDetails[current]/1e9))  || supplyDetails[current]?.isUpcoming" src="./../../../../assets/media/images/moonbox/Lock_moonbox.svg" alt="" class=" lock">
-            </div>
-            <div class="round-mini-button" (click)="next()">
-                <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
-            </div>
-        </div>
-
-        <div class="flex-col text-center">
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10 mt10">
-                {{supplyDetails[current]?.type}} ({{supplyDetails[current]?.currentSupply}})</p>
-            <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">
-                {{supplyDetails[current]?.price}} BNB</p>
-            <div class="border plus_minus flex mb20" *ngIf="inputnumber[current+1]>0">
-                <button class="flex1 toggle-less" (click)="minus(current+1)">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        width="11" height="14" viewBox="0 0 11 14">
-                        <path fill="#fff"
-                            d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-9.5q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h9.5q0.312 0 0.531 0.219t0.219 0.531z" />
-                    </svg>
-                </button>
-                <div class="flex1 border_left_right">
-                    <input type="text" class="form-control" [(ngModel)]="inputnumber[current+1]" readonly>
+        <div class="all-boxes flex w-100">
+            <div *ngFor="let box of boxTypes; let i = index; trackBy: trackByFn;" class="moonbox-container flex1 flex-center" [class.selected]="current === i">
+                <div class="round-mini-button" (click)="next(-1)">
+                    <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
                 </div>
-                <button class="flex1 toggle-more" (click)="plus(current+1)">
-                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-                        width="11" height="14" viewBox="0 0 11 14">
-                        <path fill="#fff"
-                            d="M11 5.75v1.5q0 0.312-0.219 0.531t-0.531 0.219h-3.25v3.25q0 0.312-0.219 0.531t-0.531 0.219h-1.5q-0.312 0-0.531-0.219t-0.219-0.531v-3.25h-3.25q-0.312 0-0.531-0.219t-0.219-0.531v-1.5q0-0.312 0.219-0.531t0.531-0.219h3.25v-3.25q0-0.312 0.219-0.531t0.531-0.219h1.5q0.312 0 0.531 0.219t0.219 0.531v3.25h3.25q0.312 0 0.531 0.219t0.219 0.531z" />
-                    </svg>
-                </button>
-            </div>
-            <div class=" plus_minus flex mb20 mt25 justify-center" *ngIf="inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming">
-                Sold Out
-            </div>
-            <div class="plus_minus flex mb20 justify-center" *ngIf="supplyDetails[current]?.isUpcoming">
-                Coming soon!
-            </div>
-            <a *ngIf="!isWrongNetwork" class="buy_button outlined-button mb10 text-inherit" [ngClass]="{'disabled': inputnumber[current+1]==0 && !supplyDetails[current]?.isUpcoming}" (click)="buyMoonBase(current+1)">Buy</a>
-            <a *ngIf="isWrongNetwork" class="buy_button outlined-button mb10 text-inherit">You are connected to the wrong network</a>
+                <div class="content flex-center flex-col">
+                    <div class="relative">
+                        <div class="relative moonbox {{box}}" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0"></div>
+                        <img *ngIf="!hasEnoughMoonshots(i)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
+                    </div>
+                    <div class="text-center">
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} (<span>{{supplyDetails[i]?.currentSupply}}</span>)</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[i]?.price}} BNB</p>
+                        
+                        <div class="border plus_minus flex mb20" *ngIf="supply[i]>0">
+                            <button class="minus flex1 pointer" (click)="onDecreaseSupplyInterestAmount(i)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="#fff" d="M11 5.75v1.5q0 .312-.219.531T10.25 8H.75q-.312 0-.531-.219T0 7.25v-1.5q0-.312.219-.531T.75 5h9.5q.312 0 .531.219T11 5.75z"/></svg>
+                            </button>
+                            <div class="flex1 border_left_right">
+                                <input type="text" class="form-control" [(ngModel)]="supply[i]" readonly>
+                            </div>
+                            <button class="plus flex1 pointer" (click)="onIncreaseSupplyInterestAmount(i)">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="#fff" d="M11 5.75v1.5q0 .312-.219.531T10.25 8H7v3.25q0 .312-.219.531T6.25 12h-1.5q-.312 0-.531-.219T4 11.25V8H.75q-.312 0-.531-.219T0 7.25v-1.5q0-.312.219-.531T.75 5H4V1.75q0-.312.219-.531T4.75 1h1.5q.312 0 .531.219T7 1.75V5h3.25q.312 0 .531.219T11 5.75z"/></svg>
+                            </button>
+                        </div>
+                        <div class="soldout" *ngIf="supply[i] === 0">Sold Out</div>
+
+                        <a class="buy_button outlined-button mb10 text-inherit" [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0" (click)="buyMoonBase(i)">Buy</a>
+                    </div>
+                </div>
+                <div class="round-mini-button" (click)="next(+1)">
+                    <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
+                </div>
+            </div>    
         </div>
+        
+        <p *ngIf="!isConnected" class="mt20 fade-in-delayed pointer text-center" (click)="openDialog()">Please connect your wallet</p>
     </div>
-    <p *ngIf="!isConnected" class="mt50 fade-in pointer" (click)="openDialog()">Please connect your wallet</p>
+
 </section>

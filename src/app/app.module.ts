@@ -13,12 +13,16 @@ import { GtagModule } from 'angular-gtag';
 import { MoonbaseModule } from './components/moonbase/moonbase.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
+import { LocalStorageService } from './services/local-storage.service';
+import { UserDetailsProvider } from './services/user-details.provider';
 
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
-  overrides = <any>{
-    'swipe': { direction: Hammer.DIRECTION_ALL }
+  overrides = < any > {
+    'swipe': {
+      direction: Hammer.DIRECTION_ALL
+    }
   };
 }
 
@@ -32,20 +36,25 @@ export class HammerConfig extends HammerGestureConfig {
     MatIconModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    GtagModule.forRoot({ trackingId: 'G-5Q9LF9T9Q6', trackPageviews: true }),
+    GtagModule.forRoot({
+      trackingId: 'G-5Q9LF9T9Q6',
+      trackPageviews: true
+    }),
     MoonbaseModule,
     MatDialogModule,
     HttpClientModule,
     ToastrModule.forRoot(),
   ],
-  providers: [
-  {
-    provide: HAMMER_GESTURE_CONFIG,
-    useClass: HammerConfig
-  }],
+  providers: [{
+      provide: HAMMER_GESTURE_CONFIG,
+      useClass: HammerConfig,
+    },
+    LocalStorageService,
+    UserDetailsProvider
+  ],
   bootstrap: [AppComponent],
   exports: [
     AppRoutingModule
   ]
 })
-export class AppModule { }
+export class AppModule {}
