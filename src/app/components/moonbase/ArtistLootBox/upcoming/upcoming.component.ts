@@ -102,10 +102,42 @@ export class UpcomingComponent implements OnInit {
 
     this.httpService.getUpcomingArtistCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
       this.list[DROPS_CATEGORY.UPCOMING] = response.data;
+
+      this.list[DROPS_CATEGORY.UPCOMING].push(
+        {
+          "walletAddress": "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC",
+          "ArtistName": "by YOU",
+          "description": "sadasd asdasd asdsdf",
+          "twitter": "",
+          "website": "",
+          "discord": "",
+          "instagram": "",
+          "telegram": "",
+          "rarible": "",
+          "opensea": "",
+          "NSFW": false,
+          "revealDate": "Application form",
+          "isAdmin": true,
+          "supply": '- ',
+          "TotalMaxSupply": ' -',
+          "minPrice": '-',
+          "Wood": -1,
+          "Silver": -1,
+          "Gold": -1,
+          "Diamond": -1,
+          "filePath": "assets/media/images/apply-banner.png",
+          "transactionhash": "0x711a34ab69aa6027721caaec78b332edefe1f822cbe50880ab0533e94605755a",
+          "name": "Awesome NFT Collection",
+          "id": 1
+      }
+    );
     });
   }
 
   setSelected(index: number, item: any) {
+    if( item.revealDate === 'Application form' )
+      return;
+
     this.selectedIndex = index;
 
     this.clearLootboxDetails();
