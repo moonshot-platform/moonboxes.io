@@ -14,6 +14,7 @@ import { MoonbaseModule } from './components/moonbase/moonbase.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { LocalStorageService } from './services/local-storage.service';
+import { UserDetailsProvider } from './services/user-details.provider';
 
 
 @Injectable()
@@ -48,7 +49,8 @@ export class HammerConfig extends HammerGestureConfig {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: HammerConfig,
     },
-    LocalStorageService
+    LocalStorageService,
+    UserDetailsProvider
   ],
   bootstrap: [AppComponent],
   exports: [

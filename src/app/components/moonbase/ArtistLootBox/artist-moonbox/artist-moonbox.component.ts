@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 import { ArtistMoonbox, Supply } from 'src/app/models/artist-moonbox.model';
 import { MESSAGES } from 'src/app/messages.enum';
+import { UserDetailsProvider } from 'src/app/services/user-details.provider';
+import { UserDetailsModel } from 'src/app/models/user-details.model';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -44,7 +46,8 @@ export class ArtistMoonboxComponent implements OnInit {
     private toastrService:ToastrService, 
     public dialog: MatDialog,
     public httpApi: HttpApiService, 
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private userProvider: UserDetailsProvider
   ) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
   }
@@ -65,15 +68,16 @@ export class ArtistMoonboxComponent implements OnInit {
       }
 
       this.data = data;
-      
-      (async () => {
-        await this.getMoonShootBalance();
-        this.getMaxSupply();
-
-        console.log(this.balance);
-      })();
-
     });
+
+    this.userProvider.onReceive().subscribe( (userData: UserDetailsModel) => {
+      this.balance = userData.balance;
+      
+      this.getMaxSupply();
+      this.getMoonboxTierLimits();
+    } );
+
+    if( !this.isConnected ) this.getMaxSupply();
   }
 
   hasEnoughMoonshots( index: number ) {
@@ -83,9 +87,9 @@ export class ArtistMoonboxComponent implements OnInit {
     return false;
   }
 
-  async getMoonShootBalance() {
-    this.balance = await this.walletConnectService.getUserBalance( this.data.address );
-    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
+  async getMoonboxTierLimits() {
+    if( this.balance )
+      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
   }
 
   onIncreaseSupplyInterestAmount(index: number) {

@@ -2,11 +2,11 @@
     
     <div *ngIf="!supplyDetails" class="flex-center main-message-container w-100 h-100 text-center pa20">
         {{mainMessage}}
-        <img *ngIf="mainMessage === messages.IDLE && isConnected" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
-        <p *ngIf="mainMessage === messages.IDLE && !isConnected" class="mt50 fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
+        <img *ngIf="mainMessage === messages.IDLE" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
     </div>
     
     <div *ngIf="supplyDetails" class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
+
         <div class="flex w-100">
             <div class="flex flex-col w-100 boxes-title-container">
                 <div class="artist-details flex-center flex-col">
@@ -62,7 +62,8 @@
                 </div>
             </div>    
         </div>
-            
+        
+        <p *ngIf="!isConnected" class="mt20 fade-in-delayed pointer text-center" (click)="openDialog()">Please connect your wallet</p>
     </div>
 
 </section>

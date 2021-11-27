@@ -237,6 +237,16 @@ button.plus, button.minus {
 }
 
 @media only screen and (max-width: $md-header) {
+    
+    .scroller {
+        max-height: initial;
+        height: calc(100vh - 110px);
+        
+        > .inner {
+            justify-content: center;
+        }
+    }
+    
     .boxes-title-container {
         padding-top: 0px;
     }

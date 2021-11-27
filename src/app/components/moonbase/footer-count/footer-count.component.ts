@@ -3,6 +3,8 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserDetailsProvider } from 'src/app/services/user-details.provider';
+import { UserDetailsModel } from 'src/app/models/user-details.model';
 
 @Component({
   selector: 'app-footer-count',
@@ -20,8 +22,12 @@ export class FooterCountComponent implements OnInit {
   subscription: Subscription;
   bgChange: boolean = false;
 
-  constructor(private walletConnectService: WalletConnectService,
-    private httpApi: HttpApiService) {
+  constructor(
+    private walletConnectService: WalletConnectService,
+    private httpApi: HttpApiService,
+    private userProvider: UserDetailsProvider,
+  ) {
+    this.userProvider.onShare( <UserDetailsModel>{} );
     this.subscription = this.httpApi.getMessage().subscribe(message => {
       this.bgChange = message.text;
     });
@@ -65,6 +71,10 @@ export class FooterCountComponent implements OnInit {
     this.moonCountData = (await this.httpApi.getMoonCount(this.data.address)).data;
     
     this.balance = this.walletConnectService.convertBalance( balance );
+
+    const userData = new UserDetailsModel( this.data.address, balance );
+
+    this.userProvider.onShare( userData );
   }
 
   ngOnDestroy() {
