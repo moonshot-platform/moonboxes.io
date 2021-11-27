@@ -1,0 +1,84 @@
+<section id="info-moonboxes" class="info-moonboxes">
+    <div class="all-boxes">
+        <div class="box-container" *ngFor="let box of boxes">
+            <div class="box-card">
+                <img class="rounded-image" src={{box.img}} alt="moonboxes">
+                <div class="desc">
+                    <p>{{box.name}}</p>
+                    <!-- <p class="quantity">{{box.quantity}}</p> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="all-boxes-mobile">
+        <div class="round-mini-button" (click)="prevBox()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_back</mat-icon>
+        </div>
+        <div class="box-container">
+            <div class="box-card">
+                <img class="rounded-image" src={{boxForMobile.img}} alt="moonboxes">
+                <div class="desc">
+                    <p>{{boxForMobile.name}}</p>
+                    <!-- <p class="quantity">{{boxForMobile.quantity}}</p> -->
+                </div>
+            </div>
+        </div>
+        <div class="round-mini-button" (click)="nextBox()">
+            <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
+        </div>
+    </div>
+
+    <div class="detail-container">
+        <div class="heading-container top futuristic-container bottom-only">
+            <p class="p-white-span-primary p34 orbitron">Hold enough MOONSHOT<br><span>to open all MoonBoxes.</span></p>
+        </div>
+        <div class="description-container">
+            <div class="bottom flex pv20 mb30">
+                <div class="bottom-only no-padding ">
+                    <p class="mb30  info-text">
+                        There are four types of MoonBoxes.
+                        <br>
+                        <br> To open them, you need to hold the following amount of MOONSHOT:
+                    </p>
+
+                    <div class="tier-table">
+                        <div class="table-columns-titles">
+                            <p>Tier</p>
+                            <p class="pr">MOONSHOT</p>
+                        </div>
+                        <div class="table-columns">
+                            <div class="item">
+                                <p>Wood</p>
+                                <p>no requirement</p>
+                            </div>
+                            <div class="item">
+                                <p>Silver</p>
+                                <p>75,000,000,000</p>
+                            </div>
+                            <div class="item">
+                                <p>Gold</p>
+                                <p>150,000,000,000</p>
+                            </div>
+                            <div class="item">
+                                <p>Diamond</p>
+                                <p>250,000,000,000</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="info-text">
+                        <br> These Tiers currently enable a discount<br class="desktop-only"> on the MoonBoxes. In the near future, Collections will be added where Tier holders have an increased chance of winning rare and exclusive NFTs. Diamond Tier
+                        holders have one hour early access before the sale is opened to the public.<br><br> Note: when holding a specific Tier, you <br class="desktop-only">are also eligible to open MoonBoxes below your Tier.
+                    </p>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <div class="read-more-button">
+                    <a href="https://project-moonshot.me" target="_blank" class="outlined-button">Discover Moonshot</a>
+                </div>
+                <div class="buy-moonshot-button">
+                    <a href="https://exchange.pancakeswap.finance/#/swap?inputCurrency=0xd27D3F7f329D93d897612E413F207A4dbe8bF799" target="_blank" class="button">Buy Moonshot</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

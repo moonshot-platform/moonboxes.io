@@ -67,7 +67,7 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
-      transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber[this.data.index], this.data.data.address)
+      transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber, this.data.data.address)
     }
     catch (e) {
       this.closeDialog()
@@ -87,7 +87,7 @@ export class ModalForTransactionComponent implements OnInit {
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
         type: this.data.lootBoxName,
-        quantity: this.data.inputNumber[this.data.index]
+        quantity: this.data.inputNumber
       }).subscribe((response: any) => {
         if (response.isSuccess) {
           this.successIcon = true;
@@ -95,7 +95,6 @@ export class ModalForTransactionComponent implements OnInit {
           //this.isCompletedProcess=true;
           this.revealNft(transactionDetails.hash);
           this.httpApi.showToastr(response.data.message, true);
-
         }
         else {
           this.httpApi.showToastr(response.data.message, false)
@@ -185,8 +184,15 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
-      transactionDetails = await this.walletConnectService.redeemBulkTransactionArtist(this.data.artistDetails.lootBoxId, this.data.inputNumber[this.data.index],
-        this.data.artistDetails.price, this.data.artistDetails.address, this.data.artistDetails.signature, this.data.artistDetails.limit);
+      transactionDetails = await this.walletConnectService
+        .redeemBulkTransactionArtist(
+          this.data.artistDetails.lootBoxId,
+          this.data.inputNumber,
+          this.data.artistDetails.price, 
+          this.data.artistDetails.address,
+          this.data.artistDetails.signature,
+          this.data.artistDetails.limit
+        );
     }
     catch (e) {
       this.closeDialog()
@@ -198,14 +204,14 @@ export class ModalForTransactionComponent implements OnInit {
         this.httpApi.showToastr(e.hash?.error?.message, false);
       return false;
     }
-
+    
     if (transactionDetails.status) {
       this.btn1Text = "Submitting data";
       this.httpApi.submitBetForArtistApi({
         userAddress: this.data.data.address,
         transactionHash: transactionDetails.hash,
         type: this.data.lootBoxName,
-        quantity: this.data.inputNumber[this.data.index],
+        quantity: this.data.inputNumber,
         id: this.data.artistDetails.lootBoxId
       }).subscribe((response: any) => {
         if (response.isSuccess) {
@@ -246,7 +252,7 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   openDialog() {
-    let dialogRef = this.dialog.open(SocialShareComponent, {
+    this.dialog.open(SocialShareComponent, {
       width: 'auto',
       data: { name: this.nftImgRevealed }
     });

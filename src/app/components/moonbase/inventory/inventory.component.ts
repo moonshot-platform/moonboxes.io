@@ -1,11 +1,14 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
 import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
 import { Observable, Observer } from 'rxjs';
+import { MESSAGES } from 'src/app/messages.enum';
+import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
 @Component({
   selector: 'app-inventory',
@@ -13,198 +16,120 @@ import { Observable, Observer } from 'rxjs';
   styleUrls: ['./inventory.component.scss']
 })
 export class InventoryComponent implements OnInit {
+
   static readonly routeName: string = 'inventory';
+
+  readonly messages = MESSAGES;
+  mainMessage: string = MESSAGES.IDLE;
+
   data: any;
   inventoryList: any;
 
   base64Image: any;
-
-  p: number = 1;
-  maxSize: number = 9;
-  inventoryListUpcoming: any;
+  
   lootBoxDetails = [];
-  lootBoxDetailsAttributes = [];
-  lootBoxDetailsAttributesMobile = [];
-  isNSFWStatus = false;
-  isRarityTooltipActive: boolean = false;
+  NFTDetails: any;
+  
+  NSFWToggleState = false;
   isConnected = false;
-  address = "";
 
-  constructor(private walletConnectService: WalletConnectService,
-    private httpApi: HttpApiService, private toastrService: ToastrService,
-    public dialog: MatDialog) {
-    this.lootBoxDetails = httpApi.lootBoxDetails;
-  }
+  selectedIndex: number;
+
+  constructor(
+    private walletConnectService: WalletConnectService,
+    private httpApi: HttpApiService, 
+    private localStorage: LocalStorageService,
+    private toastrService: ToastrService,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init();
-    this.isNSFWStatus = this.httpApi.getNSFWStatus();
-    this.checkNSFWStatus();
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
-      });
-      if (this.data !== undefined && this.data.address != undefined) {
+    this.NSFWToggleState = this.localStorage.getNSFW();
+
+    this.localStorage.whenNSFWToggled().subscribe( (NSFWToggleState) => {
+      this.NSFWToggleState = NSFWToggleState;
+    } );
+    
+    this.walletConnectService.init().then( ( data: string ) => {
+      this.isConnected = data !== null;
+    });
+      
+    this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => {
+      this.isConnected = state
+    } );
+      
+    this.walletConnectService.getData().subscribe((data) => {
+      this.data = data ?? {};
+
+      if( Object.keys(this.data).length > 0 ) {
         this.getUserData();
+      } else {
+        this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
       }
-      this.isConnected = this.walletConnectService.isWalletConnected();
-      this.address = this.walletConnectService.getAccount();
-    }, 1000);
+    });
   }
+
   getUserData() {
     this.httpApi.getUserInventory({
       userAddress: this.data.address,
-      nsfwstatus: this.isNSFWStatus
-    }).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.inventoryList = response.data.data;
-      }
-      else {
+      nsfwstatus: true
+    }).then((response: any) => {
+      const {isSuccess, status} = response;
+
+      if (isSuccess && status === 200) {
+        this.inventoryList = response.data.data ?? [];
+        this.mainMessage = this.inventoryList.length == 0 ? MESSAGES.EMPTY_WALLET : null;
+      } else {
         this.toastrService.error("something went wrong");
       }
     });
-
-    this.httpApi.getuserUpcomingNft({
-      userAddress: this.data.address,
-      nsfwstatus: this.isNSFWStatus
-    }).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.inventoryListUpcoming = response.data.data;
-
-      }
-      else {
-        this.toastrService.error("something went wrong");
-      }
-    });
-  }
-
-
-
-  getImagePath(type) {
-    if (type == "Wood") {
-      return this.lootBoxDetails[0].img;
-    }
-    else if (type == "Silver") {
-      return this.lootBoxDetails[1].img;
-    }
-    else if (type == "Gold") {
-      return this.lootBoxDetails[2].img;
-    }
-    else {
-      return this.lootBoxDetails[3].img;
-    }
   }
 
   setSelected(index: number, item: any) {
-    this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributes[index] = item;
-    this.lootBoxDetailsAttributes[index].disabled = false;
 
-    if( this.lootBoxDetailsAttributes[index].hasOwnProperty('rarityScore') ) {
-      this.lootBoxDetailsAttributes[index].rarity = `Rarity score:`;
-    }
+    let tempIndex: number;
+    item['properties'].forEach((property: any, i: number) => {
+      if( property.hasOwnProperty('key') ) {
+          if( property.key === 'Rarity Score' ) {
+            item['rarity'] = `Rarity score: ${property.value}`;
+            tempIndex = i;
+          }
+      }
+
+      if( property.hasOwnProperty('probability') ) {
+        Object.defineProperty(
+          property, 'rarity', 
+          Object.getOwnPropertyDescriptor(property, 'probability')
+        );
+        delete property['probability'];
+      }
+    });
+
+    item['properties'].splice(tempIndex, 1);
+
+    this.NFTDetails = item;
+    this.selectedIndex = index;
     
     setTimeout(() => {
       this.scrollToElement('', 'attribute-info');
     }, 100);
   }
 
-  setSelectedMobile(index: number, item: any) {
-    this.lootBoxDetailsAttributesMobile = [];
-    this.lootBoxDetailsAttributesMobile[index] = item;
-    this.lootBoxDetailsAttributesMobile[index].disabled = false;
-    
-    if( this.lootBoxDetailsAttributesMobile[index].hasOwnProperty('rarityScore') ) {
-      this.lootBoxDetailsAttributesMobile[index].rarity = `Rarity score:`;
-    }
-
-    setTimeout(() => {
-      this.scrollToElement('', 'attribute-info-mobile');
-    }, 100);
-  }
-
   closeAttributes() {
-    this.lootBoxDetailsAttributes = [];
-    this.lootBoxDetailsAttributesMobile = [];
+    this.NFTDetails = null;
   }
 
-  claimReward(details: any, event: any, index: any) {
-    this.lootBoxDetailsAttributes[index].disabled = true;
-
-    this.httpApi.claimRewardDetails({
-      userAddress: this.data.address,
-      nftId: details.nftId
-    }).subscribe((response) => {
-      if (response.isSuccess) {
-        this.claimRewardTransaction(response.data, details.nftId, details.total, index);
-      }
-      else {
-        this.lootBoxDetailsAttributes[index].disabled = false;
-      }
-
-    })
-
-  }
-
-  async claimRewardTransaction(data: any, nftId, supply: Number, index: any) {
-    try {
-      //debugger
-      var txnstatus: any = await this.walletConnectService.claimRewardTransaction(
-        data.junkAmount, nftId, supply, data.id, data.id, data.signHash
-      );
-
-      if (txnstatus.status) {
-        txnstatus.hash.wait(1);
-        this.httpApi.claimRewardTransactionHashUpdate({
-          userAddress: this.data.address,
-          id: data.id,
-          transactionHash: txnstatus.hash.hash
-        }).subscribe((response: any) => {
-          if (response.isSuccess) {
-            this.lootBoxDetailsAttributes[index].isRewardAvailable = false;
-            this.httpApi.showToastr(response.data.message, true);
-          }
-          else {
-            this.lootBoxDetailsAttributes[index].disabled = false;
-            this.httpApi.showToastr(response.data.message, false);
-          }
-          //debugger
-        })
-      }
-    }
-    catch (e) {
-      this.lootBoxDetailsAttributes[index].disabled = false;
-    }
-  }
-
-
-  checkNSFWStatus() {
-    setInterval(() => {
-      this.checkNSFWStatusFromStorage()
-    }, 4000);
-
-  }
-
-  checkNSFWStatusFromStorage() {
-    let tempstatus = this.httpApi.getNSFWStatus();
-    if (this.isNSFWStatus != tempstatus && this.isNSFWStatus != undefined) {
-      this.isNSFWStatus = tempstatus;
-      this.getUserData();
-    }
-  }
-
-  checkFileType(url: string) {
-    const images = ["jpg", "gif", "png", "jpeg", "JPG", "GIF", "PNG", "JPEG"]
-    const videos = ["mp4", "3gp", "ogg", "MP4", "3GP", "OGG"]
+  fileTypeIsImage(url: string) {
+    if( !url ) return false;
+    
+    const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
+    const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
 
-    if (images.includes(extension)) {
-      return "true"
-    } else if (videos.includes(extension)) {
-      return false;
-    }
+    if (images.includes(extension)) return true;
+
     return false;
   }
 
@@ -213,6 +138,16 @@ export class InventoryComponent implements OnInit {
     let dialogRef = this.dialog.open(SocialShareComponent, {
       width: 'auto',
       data: { imageUrl: data.logo_path, name: data.name, url: '' }
+    });
+  }
+
+  openWalletDialog(): void {
+    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
+
+    dialogRef.afterClosed().subscribe( (_) => {
+      this.walletConnectService.getData().subscribe((data) => {
+        this.isConnected = data.address !== undefined;
+      })
     });
   }
 
@@ -228,7 +163,7 @@ export class InventoryComponent implements OnInit {
   }
 
   openTransferDialog(data: any) {
-    let dialogRef = this.dialog.open(TransferComponent, {
+    this.dialog.open(TransferComponent, {
       width: 'auto',
       data: {
         details: data,
@@ -237,14 +172,12 @@ export class InventoryComponent implements OnInit {
     });
   }
 
-
   public downloadImage(data: any) {
-    console.log(data.logo_path);
     this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
-      //console.log(base64data);
-      this.base64Image = "data:image/jpg;base64," + base64data;
-      // save image to disk
-      var link = document.createElement("a");
+
+      this.base64Image = 'data:image/jpg;base64,' + base64data;
+
+      const link = document.createElement("a");
 
       document.body.appendChild(link); // for Firefox
 

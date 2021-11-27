@@ -64,7 +64,7 @@ section.upcoming-container {
 }
 
 .grid-4 {
-    flex-basis: calc(25% - 40px);
+    flex-basis: calc(25% - 32px);
 }
 
 .nft_img {
@@ -80,6 +80,7 @@ section.upcoming-container {
 
 .upcoming {
     padding: 0 1rem;
+    justify-content: center;
 }
 
 .upcoming .full_banner {
@@ -97,6 +98,7 @@ section.upcoming-container {
         @extend %flex-center;
         @extend %max-width-center;
 
+        align-items: flex-start;
         border: 1px solid;
         padding: 1rem;
         box-sizing: border-box;
@@ -230,18 +232,6 @@ textarea {
     display: none !important;
 }
 
-svg#attibute_close {
-    cursor: pointer;
-    path {
-        fill: #d5a642;
-    }
-    &:hover {
-        path {
-            fill: #ffffff;
-        }
-    }
-}
-
 .desktop-md-block {
     display: block !important;
 }
@@ -308,6 +298,7 @@ svg#attibute_close {
     .grid-4 {
         flex-basis: 100%;
     }
+
     .d-block {
         display: block;
     }

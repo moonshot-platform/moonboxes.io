@@ -8,7 +8,6 @@ import { NavModule } from './nav/nav.module';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgParticlesModule } from 'ng-particles';
-import { FooterComponent } from './footer/footer.component';
 import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
@@ -30,19 +29,19 @@ import { SidebarModule } from '../base/sidebar/sidebar.module';
 import { WalletConnectModule } from '../base/wallet/connect/connect.module';
 import { LandingComponent } from './landing/landing.component';
 import { RarityComponent } from './rarity/rarity.component';
-import { RaiseStakesComponent } from './landing/raise-stakes/raise-stakes.component';
 import { LandingIntroComponent } from './landing/landing-intro/landing-intro.component';
-import { LimitedComponent } from './landing/limited/limited.component';
 import { UiSwitchModule } from 'ngx-ui-switch';
 import { InfoComponent } from './info/info.component';
 import { TransferComponent } from './modal-for-transaction/transfer/transfer.component';
+import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
+import { ClipboardModule } from '@angular/cdk/clipboard';
+import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.component';
 
 
 @NgModule({
   declarations: [
     MoonbaseComponent,
     IntroComponent,
-    FooterComponent,
     BuyMoonbaseComponent,
     PrizePoolComponent,
     HistoryComponent,
@@ -57,11 +56,11 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
     SocialShareComponent,
     LandingComponent,
     RarityComponent,
-    RaiseStakesComponent,
     LandingIntroComponent,
-    LimitedComponent,
     InfoComponent,
     TransferComponent,
+    LandingNftsComponent,
+    InfoMoonboxesComponent,
   ],
   imports: [
     MatIconModule,
@@ -77,7 +76,8 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
     SidebarModule,
     WalletConnectModule,
     SwiperModule,
-    UiSwitchModule
+    UiSwitchModule,
+    ClipboardModule
   ]
 })
 export class MoonbaseModule { }

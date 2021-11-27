@@ -3,6 +3,8 @@ import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { UserDetailsProvider } from 'src/app/services/user-details.provider';
+import { UserDetailsModel } from 'src/app/models/user-details.model';
 
 @Component({
   selector: 'app-footer-count',
@@ -12,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class FooterCountComponent implements OnInit {
   data: any;
   isConnected: boolean = false;
-  balanceOfMoon: any = "-";
+  balance: any = "-";
   moonCountData: any;
   moonBoxLimitDetails: any;
   eligibleTier = "-";
@@ -20,53 +22,59 @@ export class FooterCountComponent implements OnInit {
   subscription: Subscription;
   bgChange: boolean = false;
 
-  constructor(private walletConnectService: WalletConnectService,
-    private httpApi: HttpApiService) {
+  constructor(
+    private walletConnectService: WalletConnectService,
+    private httpApi: HttpApiService,
+    private userProvider: UserDetailsProvider,
+  ) {
+    this.userProvider.onShare( <UserDetailsModel>{} );
     this.subscription = this.httpApi.getMessage().subscribe(message => {
       this.bgChange = message.text;
     });
   }
 
   ngOnInit(): void {
-    setTimeout(async () => {
-      this.walletConnectService.getData().subscribe((data) => {
-        if (data != undefined && data.address != undefined && this.data != data) {
-          this.data = data;
-          this.isConnected = true;
-          if (this.data.networkId.chainId == environment.chainId) {
-            this.getMoonShootBalance();
-          }
+    this.walletConnectService.getData().subscribe((data) => {
+      if (data != undefined && data.address != undefined && this.data != data) {
+        this.data = data;
+        this.isConnected = true;
+
+        if (this.data.networkId.chainId == environment.chainId) {
+          this.getMoonShootBalance();
         }
-      });
+      }
+    });
+  }
 
-
-    }, 1000);
+  async getTier(moonBalance: number) {
+    const tiers = [
+      "Wood",
+      "Silver",
+      "Gold",
+      "Diamond"
+    ];
+    
+    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+    for( let i = this.moonBoxLimitDetails.length - 1; i >= 0; i-- ) {
+      if( moonBalance >= Number(this.moonBoxLimitDetails[i]) ) {
+        this.eligibleTier = tiers[i]
+        break;
+      }
+    }
   }
 
   async getMoonShootBalance() {
-    this.balanceOfMoon = await this.walletConnectService.getBalanceOfUser(this.data.address);
+    const balance = await this.walletConnectService.getUserBalance( this.data.address );
     
-    this.httpApi.getMoonCount(this.data.address)
-      .subscribe((response: any) => {
-        this.moonCountData = response.data;
-      });
-    this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
+    await this.getTier( balance );
 
-    if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[3])) {
-      this.eligibleTier = "Diamond";
-    }
-    else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[2])) {
-      this.eligibleTier = "Gold";
-    }
-    else if (Number(this.balanceOfMoon) >= Number(this.moonBoxLimitDetails[1])) {
-      this.eligibleTier = "Silver";
-    }
-    else {
-      this.eligibleTier = "Wood";
-    }
-    this.balanceOfMoon /= 1e9;
-    this.balanceOfMoon = Math.trunc(this.balanceOfMoon);
-    this.balanceOfMoon = this.balanceOfMoon.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    this.moonCountData = (await this.httpApi.getMoonCount(this.data.address)).data;
+    
+    this.balance = this.walletConnectService.convertBalance( balance );
+
+    const userData = new UserDetailsModel( this.data.address, balance );
+
+    this.userProvider.onShare( userData );
   }
 
   ngOnDestroy() {

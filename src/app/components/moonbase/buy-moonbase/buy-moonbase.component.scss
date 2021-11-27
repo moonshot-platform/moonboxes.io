@@ -1,3 +1,5 @@
+@import 'includes';
+
 .scroller {
     max-height: calc(100vh - 110px);
     overflow: auto;
@@ -28,6 +30,10 @@
 
 .scroller::-webkit-scrollbar-thumb {
     background-color: transparent;
+}
+
+.round-mini-button {
+    display: none;
 }
 
 .inner img {
@@ -86,10 +92,6 @@
     border: 1px solid #fff;
 }
 
-.soldout {
-    margin: 28px 0;
-}
-
 .border.plus_minus.flex {
     max-width: 200px;
     border-radius: 30px;
@@ -116,8 +118,15 @@
     height: calc(12600px / 60);
     animation: animate 2s steps(60) infinite;
     transition: all 1s ease;
-    cursor: pointer;
     margin: 0 auto;
+
+    &.disabled {
+        filter: saturate(0);
+    }
+}
+
+.soldout {
+    margin: 28px 0;
 }
 
 .wood {
@@ -149,10 +158,6 @@
     background-color: #000000;
 }
 
-.invisible {
-    visibility: hidden;
-}
-
 .tooltip {
     display: none;
     position: absolute;
@@ -181,5 +186,28 @@
         background-color: black;
         box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
         margin-top: 5px;
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+
+    .scroller {
+        max-height: initial;
+        height: calc(100vh - 110px);
+    }
+
+    .moonbox-container {
+        display: none;
+        flex: initial;
+
+        > .content { padding: 0 10px; }
+
+        &.selected {
+            display: flex;
+        }
+    }
+
+    .round-mini-button {
+        display: flex;
     }
 }
