@@ -37,7 +37,7 @@ export class ArtistMoonboxComponent implements OnInit {
   public lootBoxDetails: any = [];
   data: any;
   supplyDetails: Supply[];
-  balance: any;
+  balance: number;
   artistDetails: ArtistMoonbox;
   moonBoxLimitDetails: any;
 
@@ -88,7 +88,7 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   async getMoonboxTierLimits() {
-    if( this.balance )
+    if( this.balance >= 0 )
       this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
   }
 
