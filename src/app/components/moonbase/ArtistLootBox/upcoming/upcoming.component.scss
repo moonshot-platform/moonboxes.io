@@ -74,8 +74,11 @@ section.upcoming-container {
     width: 100%;
     justify-content: center;
     position: relative;
-    z-index: -1;
     border: 2px solid #d5a642;
+
+    &:hover {
+        border-color: white;
+    }
 }
 
 .upcoming {

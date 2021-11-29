@@ -19,13 +19,14 @@
                     <div class="upcoming flex flex-wrap wrap">
                         <ng-container *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;">
                             <div *ngIf="!(this.NSFWToggleState && item['NSFW'])" class="flex-column flex-center p-3 grid-4">
-                                <div class="flex1 nft_img">
 
-                                    <div class="flex-column flex-center">
-                                        <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
-                                    </div>
-
-                                </div>
+                                <a *ngIf="currentCategory === dropsCategory.LIVE" class="flex1 nft_img flex-center" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+                                    <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
+                                </a>
+                                
+                                <a *ngIf="item.revealDate === 'Application form'" href="{{item.url}}" target="_blank" class="flex1 nft_img flex-center">
+                                    <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
+                                </a>
 
                                 <div class="flex flex-col flex1 w100 mt10">
                                     <div class="text-center word-break">
@@ -54,12 +55,12 @@
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
-                                    <a href="#" *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" class="pointer button text-inherit mb20 coundown-button">
+                                    <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
                                         <img src="assets/media/images/form.svg" alt="coundown-button">
-                                        <p>{{item.revealDate}}</p>    
+                                        <p>{{item.revealDate}}</p>  
                                     </a>
 
-                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress] ">Buy Moonbox</a>
+                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">Buy MoonBoxes</a>
                                     <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="setSelected(selectedIndex,item)">Collection info</a>
                                 </div>
                             </div>
