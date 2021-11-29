@@ -12,7 +12,7 @@
                 <div class="content flex-center flex-column">
                     <div class="relative flex-center">
                         <div class="relative moonbox {{box.type.toLowerCase()}}" [class.disabled]="!hasEnoughMoonshots(i) || box.currentSupply === 0"></div>
-                        <img *ngIf="!isConnected  || (balance/1e9 < moonBoxLimitDetails?._moonboxId1/1e9)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="img-fluid lock">
+                        <img *ngIf="!hasEnoughMoonshots(i)" src="assets/media/images/moonbox/Lock_moonbox.svg" alt="" class="lock">
                     </div>
                     <div class="text-center">
                         <p class="p-white-span-primary p16d14m  mb10 mt10">{{box.type}} (<span>{{box.currentSupply}}</span>)</p>
