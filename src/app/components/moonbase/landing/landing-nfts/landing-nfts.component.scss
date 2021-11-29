@@ -49,17 +49,18 @@ p.slider-name {
     height: 100%;
     background: black;
     border: 1px solid $primary;
-    padding: 10px;
     overflow: hidden;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     align-self: center;
+    padding: 10px;
     img {
+        display: flex;
         height: 100%;
         width: 100%;
         align-self: center;
+        object-fit: contain;
     }
 }
 
@@ -152,6 +153,8 @@ p.slider-name {
 .break-line-desktop {
     display: flex;
 }
+
+@media only screen and (max-width: $sm) {}
 
 @media only screen and (max-width: 810px) {
     section.landing-nfts {
