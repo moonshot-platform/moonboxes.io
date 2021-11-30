@@ -184,19 +184,15 @@ section.info-moonboxes {
             padding-right: 40px;
         }
     }
-    .table-columns {
+    .table-row {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         justify-content: space-between;
         align-items: space-between;
         width: 100%;
         padding-top: 10px;
         font-weight: 400;
-        .item {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: space-between;
+        p {
             padding-bottom: 8px;
         }
     }
