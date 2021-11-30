@@ -39,7 +39,7 @@
                                     <div class="border-top-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
-                                            <p class="color-primary mb10 mt10">{{item.minPrice}} BNB</p>
+                                            <p class="color-primary mb10 mt10">{{getMinPrice(item)}} BNB</p>
                                         </div>
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10">Availability</p>
@@ -75,7 +75,7 @@
                                     <div class="border-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
-                                            <p class="color-primary mb10 mt10">{{lootBoxDetails[selectedIndex].minPrice}} BNB</p>
+                                            <p class="color-primary mb10 mt10">{{getMinPrice(lootBoxDetails[selectedIndex])}} BNB</p>
                                         </div>
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10">Availability</p>
@@ -89,7 +89,7 @@
                                         </a>
 
                                         <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" 
-                                        [routerLink]="lootBoxDetails[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase', lootBoxDetails[selectedIndex].walletAddress] ">BuyMoonbox</a>
+                                        [routerLink]="lootBoxDetails[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase', lootBoxDetails[selectedIndex].walletAddress] ">Buy Moonboxes</a>
                                     </div>
                                 </div>
 
@@ -110,38 +110,38 @@
 
                                     <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetails[selectedIndex]?.description}}</textarea>
 
-                                    <div class="social-icons-container flex-center flex-wrap justify-space-between w-100">
-                                        <div class="image-bb">
+                                    <ul class="social-icons-container flex-center flex-wrap justify-space-between w-100">
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].discord}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/discord.svg">
                                             </a>
-                                        </div>
-                                        <div class="image-bb">
+                                        </li>
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].twitter}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/twitter.svg">
                                             </a>
-                                        </div>
-                                        <div class="image-bb">
+                                        </li>
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].telegram}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/telegram.svg">
                                             </a>
-                                        </div>
-                                        <div class="image-bb">
+                                        </li>
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].instagram}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/instagram.svg">
                                             </a>
-                                        </div>
-                                        <div class="image-bb">
+                                        </li>
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].opensea}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/opensea.svg">
                                             </a>
-                                        </div>
-                                        <div class="image-bb">
+                                        </li>
+                                        <li>
                                             <a href="{{lootBoxDetails[selectedIndex].website}}" target="_blank">
                                                 <img src="assets/media/icons/moonbase/global.svg">
                                             </a>
-                                        </div>
-                                    </div>
+                                        </li>
+                                    </ul>
 
                                 </div>
                             </div>

@@ -11,10 +11,8 @@ section.upcoming-container {
     overflow: hidden;
 }
 
-.image-bb {
+.social-icons-container > li {
     @extend %flex-center;
-
-    width: calc(100% / 6);
     margin-top: 20px;
 
     a {
@@ -23,7 +21,12 @@ section.upcoming-container {
         border-radius: 50px;
         width: fit-content;
         padding: 15px;
+
+        &:hover {
+            background-color: white;
+        }
     }
+
     img {
         width: 30px;
         height: 30px;
@@ -292,10 +295,13 @@ textarea {
         align-self: flex-start;
         padding-top: 4rem;
     }
+    
     .collection-info > .collection-inner {
         flex-direction: column;
 
-        > .left { width: 100%; }
+        > .left {
+            display: none;
+        }
     }
     
     .grid-4 {
@@ -313,16 +319,21 @@ textarea {
 
 @media only screen and (max-width: $sm) {
 
-    .collection-inner > .left {
-        display: none;
-    }
-
     .desktop-md-block {
         width: 100%;
         margin-top: 20px;
     }
     .social-icons-container {
-        flex-wrap: wrap;
+        justify-content: flex-start;
+        
+        > li { 
+            width: calc(100%/3 - (20px/3));
+            margin-right: 10px;
+            
+            &:nth-child(3n+3) {
+                margin-right: 0;
+            }
+        }
     }
 
     .image-bb {
