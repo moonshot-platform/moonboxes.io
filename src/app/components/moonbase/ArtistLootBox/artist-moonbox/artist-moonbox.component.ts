@@ -11,8 +11,6 @@ import { ArtistMoonbox, Supply } from 'src/app/models/artist-moonbox.model';
 import { MESSAGES } from 'src/app/messages.enum';
 import { UserDetailsProvider } from 'src/app/services/user-details.provider';
 import { UserDetailsModel } from 'src/app/models/user-details.model';
-import { SliderModel } from '../../landing/models/slider.model';
-import { nftSlider } from '../../landing/consts/nft-slider.const';
 import { SwiperOptions } from 'swiper';
 
 @Component({
@@ -24,7 +22,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
   static readonly routeName: string = 'artist_moonbase/:artistAddress';
 
-  slides: SliderModel[] = nftSlider;
+  slides: any[] = [];
 
   swiperConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -154,6 +152,9 @@ export class ArtistMoonboxComponent implements OnInit {
     });
 
     if (!this.isConnected) this.getMaxSupply();
+
+
+    this.getSliderImages();
   }
 
   hasEnoughMoonshots(index: number) {
@@ -280,5 +281,9 @@ export class ArtistMoonboxComponent implements OnInit {
   trackByFn(index: number, item: any) {
     return item;
   }
+
+  getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(this.activatedRoute.snapshot.params['artistAddress']).then((res) => {
+    this.slides = res.data;
+  });
 
 }
