@@ -355,6 +355,15 @@ swiper {
     height: 100%;
 }
 
+.only-desktop{
+
+    display: flex  !important;
+}
+
+.only-mobile-and-tablet{
+    display: none  !important;
+}
+
 section.carousel-mobile {
     display: none;
     swiper {
@@ -431,6 +440,14 @@ section.carousel-mobile {
     .series-detail {
         justify-content: space-between;
         margin-bottom: 20px;
+    }
+    .only-desktop{
+
+        display: none  !important;
+    }
+    
+    .only-mobile-and-tablet{
+        display: flex  !important;
     }
 }
 
