@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ArtistMoonboxComponent } from './ArtistLootBox/artist-moonbox/artist-moonbox.component';
 import { UpcomingComponent } from './ArtistLootBox/upcoming/upcoming.component';
-import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { HistoryComponent } from './history/history.component';
 import { InfoComponent } from './info/info.component';
 import { IntroComponent } from './intro/intro.component';
@@ -24,10 +23,6 @@ const routes: Routes = [
       {
         path: IntroComponent.routeName,
         component: IntroComponent
-      },
-      {
-        path: BuyMoonbaseComponent.routeName,
-        component: BuyMoonbaseComponent
       },
       {
         path: PrizePoolComponent.routeName,
