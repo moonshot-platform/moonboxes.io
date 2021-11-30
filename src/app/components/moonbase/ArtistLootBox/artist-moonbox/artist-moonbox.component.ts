@@ -124,6 +124,8 @@ export class ArtistMoonboxComponent implements OnInit {
     private userProvider: UserDetailsProvider
   ) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
+
+    this.getSliderImages();
   }
 
   ngOnInit(): void {
@@ -152,9 +154,6 @@ export class ArtistMoonboxComponent implements OnInit {
     });
 
     if (!this.isConnected) this.getMaxSupply();
-
-
-    this.getSliderImages();
   }
 
   hasEnoughMoonshots(index: number) {
