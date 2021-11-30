@@ -39,21 +39,6 @@ export class LandingIntroComponent implements OnInit {
       rotate: -40,
       stretch: 100,
     },
-    // breakpoints: {
-    //   700: {
-    //     slidesPerView: 1,
-    //   },
-    //   600: {
-    //     slidesPerView: 3,
-    //   },
-    //   500: {
-    //     slidesPerView: 3,
-    //   },
-    //   300: {
-    //     slidesPerView: 1.76,
-    //   }
-    // }
-
   };
 
   constructor() {
