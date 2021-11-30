@@ -93,6 +93,14 @@ export class UpcomingComponent implements OnInit {
     this.getAllCollections();
   }
 
+  getMinPrice( item: any ) {
+    const { Diamond, Wood, Silver, Gold } = item;
+    if( Diamond == Wood && Diamond == Silver && Diamond && Gold  )
+      return item['minPrice'];
+
+    return `from ${item['minPrice']}`;
+  }
+
   async getAllCollections() {
 
     this.httpService.getAllCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
