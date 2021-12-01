@@ -163,7 +163,6 @@ export class HttpApiService {
   getRandomCollectionImageListFromArtist(artistAddress: string): Promise<any> {
     const params = { artistAddress: artistAddress };
     const url = `${baseURL}randCollectionImageListArtist`;
-    //It throws errors when on testnet ( because of codetankle... backend link)
 
     return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
   }
