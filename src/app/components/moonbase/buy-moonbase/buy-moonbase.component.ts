@@ -11,6 +11,8 @@ import { WalletConnectComponent } from '../../base/wallet/connect/connect.compon
 import { AdminMoonbox, Supply } from 'src/app/models/admin-moonbox.model';
 import { Moonbox } from 'src/app/models/moonbox.model';
 import { MESSAGES } from 'src/app/messages.enum';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-buy-moonbase',
@@ -49,8 +51,16 @@ export class BuyMoonbaseComponent implements OnInit {
     public walletConnectService: WalletConnectService, 
     private toastrService:ToastrService,
     public dialog: MatDialog,
-    public httpApi: HttpApiService
-  ) { }
+    public httpApi: HttpApiService,
+    route: ActivatedRoute
+  ) {
+    const state = route.paramMap
+      .pipe(map(() => window.history.state))
+    
+    state.subscribe(data =>{
+      if( data.hasOwnProperty('Diamond')) this.priceForMoonBox = data['Diamond'];
+    })
+  }
 
   ngOnInit(): void {
     this.walletConnectService.init().then( ( data: string ) => {
