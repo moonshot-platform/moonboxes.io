@@ -60,7 +60,7 @@
                                         <p>{{item.revealDate}}</p>
                                     </a>
 
-                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]" [state]="item">Buy MoonBoxes</a>
+                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist_moonbase',item.walletAddress]">Buy MoonBoxes</a>
                                     <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="setSelected(selectedIndex,item)">Collection info</a>
                                 </div>
                             </div>
