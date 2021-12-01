@@ -15,7 +15,7 @@
                     </div>
                 </div>
 
-                <div class="flex flex-col">    
+                <div class="flex flex-col">
                     <div class="upcoming flex flex-wrap wrap">
                         <ng-container *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;">
                             <div *ngIf="!(this.NSFWToggleState && item['NSFW'])" class="flex-col flex-center p-3 grid-4">
@@ -23,7 +23,7 @@
                                 <a *ngIf="currentCategory === dropsCategory.LIVE" class="flex1 nft_img flex-center" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
-                                
+
                                 <a *ngIf="item.revealDate === 'Application form'" href="{{item.url}}" target="_blank" class="flex1 nft_img flex-center">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
@@ -35,7 +35,7 @@
                                             <p class="color-primary">{{item.ArtistName}}</p>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="border-top-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
@@ -57,7 +57,7 @@
 
                                     <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
                                         <img src="assets/media/images/form.svg" alt="coundown-button">
-                                        <p>{{item.revealDate}}</p>  
+                                        <p>{{item.revealDate}}</p>
                                     </a>
 
                                     <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]" [state]="item">Buy MoonBoxes</a>
@@ -88,8 +88,7 @@
                                             <app-countdown-timer [date]="lootBoxDetails[selectedIndex].revealDate"></app-countdown-timer>
                                         </a>
 
-                                        <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" 
-                                        [routerLink]="lootBoxDetails[selectedIndex].isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase', lootBoxDetails[selectedIndex].walletAddress] ">Buy Moonboxes</a>
+                                        <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" [routerLink]="['/artist_moonbase', lootBoxDetails[selectedIndex].walletAddress] ">Buy Moonboxes</a>
                                     </div>
                                 </div>
 
@@ -145,10 +144,10 @@
 
                                 </div>
                             </div>
-                            
+
                         </div>
                         <!----list-->
-                        
+
                     </div>
                 </div>
 
