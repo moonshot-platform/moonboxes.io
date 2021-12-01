@@ -23,6 +23,7 @@ export class ArtistMoonboxComponent implements OnInit {
   static readonly routeName: string = 'artist_moonbase/:artistAddress';
 
   slides: any[] = [];
+  artistData: any;
 
   swiperConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -281,8 +282,10 @@ export class ArtistMoonboxComponent implements OnInit {
     return item;
   }
 
-  getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(this.activatedRoute.snapshot.params['artistAddress']).then((res) => {
-    this.slides = res.data;
-  });
+  getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(
+    this.activatedRoute.snapshot.params['artistAddress']).then((res) => {
+      this.slides = res.data;
+      this.artistData = res.artistData;
+    });
 
 }

@@ -115,6 +115,13 @@ export class HttpApiService {
       .pipe(map((r: Response) => plainToClass(ArtistMoonbox, r)));
   }
 
+  getRandomCollectionImageListFromArtist(artistAddress: string): Promise<any> {
+    const params = { artistAddress: artistAddress };
+    const url = `${baseURL}randCollectionImageListArtist`;
+
+    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
+  }
+
   submitBetForArtistApi(data: any): Observable<any> {
     const url = `${baseURL}BidForArtist`;
     return this.httpClient.post(url, data, { headers: this.headers });
@@ -159,12 +166,4 @@ export class HttpApiService {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   }
-
-  getRandomCollectionImageListFromArtist(artistAddress: string): Promise<any> {
-    const params = { artistAddress: artistAddress };
-    const url = `${baseURL}randCollectionImageListArtist`;
-
-    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
-  }
-
 }

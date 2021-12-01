@@ -355,13 +355,12 @@ swiper {
     height: 100%;
 }
 
-.only-desktop{
-
-    display: flex  !important;
+.only-desktop {
+    display: flex !important;
 }
 
-.only-mobile-and-tablet{
-    display: none  !important;
+.only-mobile-and-tablet {
+    display: none !important;
 }
 
 section.carousel-mobile {
@@ -441,14 +440,17 @@ section.carousel-mobile {
         justify-content: space-between;
         margin-bottom: 20px;
     }
-    .only-desktop{
+    .only-desktop {
+        display: none !important;
+    }
+    .only-mobile-and-tablet {
+        display: flex !important;
+    }
+}
 
-        display: none  !important;
-    }
-    
-    .only-mobile-and-tablet{
-        display: flex  !important;
-    }
+.disabled-icon {
+    background: gray !important;
+    cursor: unset !important;
 }
 
 @media only screen and (max-width: $md) {
