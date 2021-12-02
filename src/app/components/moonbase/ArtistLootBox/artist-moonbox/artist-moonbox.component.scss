@@ -239,7 +239,7 @@ button.minus {
     margin-left: 20px;
     .descripton-section {
         border: 1px solid $primary;
-        min-width: 375px;
+        //min-width: 420px;
         max-height: 350px;
         height: 100%;
         width: 100%;
@@ -251,26 +251,31 @@ button.minus {
             overflow: auto;
         }
     }
-    .social-icons-container>li {
-        overflow: auto;
-        margin-right: 10px;
-        margin-left: 10px;
-        @extend %flex-center;
-        margin-top: 20px;
-        a {
-            display: flex;
-            background: #d5a642;
-            border-radius: 50px;
-            width: fit-content;
-            padding: 15px;
-            &:hover {
-                background-color: white;
+    .social-icons-container {
+        display: grid;
+        max-width: 100%;
+        grid-template-columns: repeat(6, minmax(60px, 150px));
+        align-items: flex-start;
+        justify-content: space-between;
+        li {
+            overflow: auto;
+            @extend %flex-center;
+            margin-top: 20px;
+            a {
+                display: flex;
+                background: #d5a642;
+                border-radius: 50px;
+                width: fit-content;
+                padding: 15px;
+                &:hover {
+                    background-color: white;
+                }
             }
-        }
-        img {
-            width: 30px;
-            height: 30px;
-            border: none;
+            img {
+                width: 30px;
+                height: 30px;
+                border: none;
+            }
         }
     }
 }
@@ -422,16 +427,17 @@ section.carousel-mobile {
         margin-left: 0px;
         .descripton-section {
             min-width: 0px;
-            max-height: 250px;
+            height: 20vh;
         }
     }
     .artist-info-popup {
-        max-height: 90%;
+        max-height: 90vh;
         flex-direction: column;
+        margin-top: 80px;
     }
     .nft-image-container {
-        max-width: 150px;
-        max-height: 150px;
+        max-width: 100px;
+        max-height: 100px;
         padding: 10px;
         border: 1px solid $primary;
         background-color: black;
@@ -467,5 +473,11 @@ section.carousel-mobile {
     .pt-md-100 {
         padding-top: 0px; //200px;
         box-sizing: border-box;
+    }
+    .artist-popup-info-container {
+        .social-icons-container {
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(2, 1fr);
+        }
     }
 }
