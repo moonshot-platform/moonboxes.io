@@ -1,10 +1,10 @@
 <section class="artist-moonbox scroller" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
-    
+
     <div *ngIf="!supplyDetails" class="flex-center main-message-container w-100 h-100 text-center pa20">
         {{mainMessage}}
         <img *ngIf="mainMessage === messages.IDLE" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
     </div>
-    
+
     <div *ngIf="supplyDetails" class="inner s-100 justify-content-evenly flex-col pt-md-100" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
         <div class="flex w-100">
@@ -16,10 +16,102 @@
                 </div>
 
                 <ng-template #dialog>
-                    <section class="artist-popup mt20 relative">
-                        <div class="info mw-50 p-3 align-center flex-center flex-col">
-                            <img src="{{artistDetails?.filePath}}" alt="Artist" class="img-fluid img-cover">
-                            <p class="text-center p-white-span-primary mt20">{{artistDetails?.description}}</p>
+                    <section class="artist-info-popup flex flex-start flex-row mt20 relative">
+                        <section class="carousel">
+                            <swiper [config]="swiperConfig">
+                                <ng-container *ngFor="let slide of slides; index as i">
+                                    <ng-template swiperSlide>
+                                        <div class="nft-image-container">
+                                            <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                                        </div>
+                                    </ng-template>
+                                </ng-container>
+                            </swiper>
+                        </section>
+
+                        <div class="series-detail only-mobile-and-tablet flex flex-row pb10">
+                            <div class="name-section flex flex-col">
+                                <p class="series-name">{{artistDetails?.name}}</p>
+                                <p class="series-artist-name">{{artistDetails?.ArtistName}}</p>
+                            </div>
+                            <svg class="close-collection-info-popup" (click)="closeCollectionInfoDialog()" _ngcontent-kul-c121="" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g _ngcontent-kul-c121="" id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path _ngcontent-kul-c121="" d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z" id="Combined-Shape" fill="#000000"></path></g></svg>
+                        </div>
+
+                        <section class="carousel-mobile">
+                            <swiper [config]="swiperConfigMobile">
+                                <ng-container *ngFor="let slide of slides; index as i">
+                                    <ng-template swiperSlide>
+                                        <div class="nft-image-container">
+                                            <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                                        </div>
+                                    </ng-template>
+                                </ng-container>
+                            </swiper>
+                        </section>
+
+                        <div class="artist-popup-info-container flex flex-col ml-20">
+                            <div class="series-detail only-desktop flex flex-row pb10">
+                                <div class="name-section flex flex-col">
+                                    <p class="series-name">{{artistDetails?.name}}</p>
+                                    <p class="series-artist-name">{{artistDetails?.ArtistName}}</p>
+                                </div>
+                                <svg class="close-collection-info-popup" (click)="closeCollectionInfoDialog()" _ngcontent-kul-c121="" width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g _ngcontent-kul-c121="" id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><path _ngcontent-kul-c121="" d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z" id="Combined-Shape" fill="#000000"></path></g></svg>
+                            </div>
+                            <div class="descripton-section flex flex-start mt10">
+                                <p class="text-center p-white-span-primary ">
+                                    {{artistDetails?.description}}
+                                </p>
+                            </div>
+                            <ul class="social-icons-container flex-center flex-wrap justify-space-between w-100">
+                                <li>
+                                    <a *ngIf="artistData.discord == ''" class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/discord.svg">
+                                    </a>
+                                    <a *ngIf="artistData.discord != ''" href="{{artistData.discord}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/discord.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a *ngIf="artistData.twitter == ''" class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/twitter.svg">
+                                    </a>
+                                    <a *ngIf="artistData.twitter != ''" href="{{artistData.twitter}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/twitter.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a *ngIf="artistData.telegram == ''" class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/telegram.svg">
+                                    </a>
+                                    <a *ngIf="artistData.telegram != ''" href="{{artistData.telegram}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/telegram.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a *ngIf="artistData.instagram == ''" class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/instagram.svg">
+                                    </a>
+                                    <a *ngIf="artistData.instagram != ''" href="{{artistData.instagram}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/instagram.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a *ngIf="artistData.opensea == ''" class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/opensea.svg">
+                                    </a>
+                                    <a *ngIf="artistData.opensea != ''" href="{{artistData.opensea}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/opensea.svg">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a *ngIf="artistData.website == '' " class="disabled-icon">
+                                        <img src="assets/media/icons/moonbase/global.svg">
+                                    </a>
+                                    <a *ngIf="artistData.website != '' " href="{{artistData.website}}" target="_blank">
+                                        <img src="assets/media/icons/moonbase/global.svg">
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </section>
                 </ng-template>
@@ -40,7 +132,7 @@
                     <div class="text-center">
                         <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} (<span>{{supplyDetails[i]?.currentSupply}}</span>)</p>
                         <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[i]?.price}} BNB</p>
-                        
+
                         <div class="border plus_minus flex mb20" *ngIf="supply[i]>0">
                             <button class="minus flex1 pointer" (click)="onDecreaseSupplyInterestAmount(i)">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14"><path fill="#fff" d="M11 5.75v1.5q0 .312-.219.531T10.25 8H.75q-.312 0-.531-.219T0 7.25v-1.5q0-.312.219-.531T.75 5h9.5q.312 0 .531.219T11 5.75z"/></svg>
@@ -60,9 +152,9 @@
                 <div class="round-mini-button" (click)="next(+1)">
                     <mat-icon fontSet="material-icons" class="color-primary">arrow_forward</mat-icon>
                 </div>
-            </div>    
+            </div>
         </div>
-        
+
         <p *ngIf="!isConnected" class="mt20 fade-in-delayed pointer text-center" (click)="openDialog()">Please connect your wallet</p>
     </div>
 
