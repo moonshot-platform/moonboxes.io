@@ -459,6 +459,23 @@ section.carousel-mobile {
     cursor: unset !important;
 }
 
+.disabled-plus-minus {
+    cursor: unset !important;
+    pointer-events: none;
+    color: gray !important;
+    border-color: gray;
+    svg>path {
+        fill: gray;
+    }
+    div.border_left_right {
+        color: gray;
+        border-color: gray;
+        input {
+            color: gray;
+        }
+    }
+}
+
 @media only screen and (max-width: $md) {
     .tooltip {
         margin-top: 48px;
