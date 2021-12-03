@@ -9,6 +9,7 @@ import { TransferComponent } from '../modal-for-transaction/transfer/transfer.co
 import { Observable, Observer } from 'rxjs';
 import { MESSAGES } from 'src/app/messages.enum';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
+import { ItemOverviewComponent } from '../../base/dialogs/item-overview/item-overview.component';
 
 @Component({
   selector: 'app-inventory',
@@ -133,14 +134,6 @@ export class InventoryComponent implements OnInit {
     return false;
   }
 
-  openDialog(data: any) {
-
-    let dialogRef = this.dialog.open(SocialShareComponent, {
-      width: 'auto',
-      data: { imageUrl: data.logo_path, name: data.name, url: '' }
-    });
-  }
-
   openWalletDialog(): void {
     let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
 
@@ -162,69 +155,38 @@ export class InventoryComponent implements OnInit {
     this.dialog.open(templateRef);
   }
 
-  openTransferDialog(data: any) {
-    this.dialog.open(TransferComponent, {
-      width: 'auto',
-      data: {
-        details: data,
-        walletAddress: this.data.address
-      }
-    });
-  }
-
-  public downloadImage(data: any) {
-    this.getBase64ImageFromURL(data.logo_path).subscribe(base64data => {
-
-      this.base64Image = 'data:image/jpg;base64,' + base64data;
-
-      const link = document.createElement("a");
-
-      document.body.appendChild(link); // for Firefox
-
-      if (data.logo_path.slice(-3) == 'gif') {
-        link.setAttribute("href", data.logo_path);
-        link.setAttribute("download", `${data.name}.gif`);
-      } else {
-        link.setAttribute("href", this.base64Image);
-        link.setAttribute("download", `${data.name}.jpg`);
-      }
-      link.click();
-    });
-  }
-
-  getBase64ImageFromURL(url: string) {
-    return Observable.create((observer: Observer<string>) => {
-      const img: HTMLImageElement = new Image();
-      img.crossOrigin = "Anonymous";
-      img.src = url;
-      if (!img.complete) {
-        img.onload = () => {
-          observer.next(this.getBase64Image(img));
-          observer.complete();
-        };
-        img.onerror = err => {
-          observer.error(err);
-        };
-      } else {
-        observer.next(this.getBase64Image(img));
-        observer.complete();
-      }
-    });
-  }
-
-  getBase64Image(img: HTMLImageElement) {
-    const canvas: HTMLCanvasElement = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-    const ctx: CanvasRenderingContext2D = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-    const dataURL: string = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-  }
-
   trackByFn(index, item) {
     return item.title;
+  }
+
+  viewDetails( item: any, index: number ): void {
+
+    let tempIndex: number;
+    item['properties'].forEach((property: any, i: number) => {
+      if( property.hasOwnProperty('key') ) {
+          if( property.key === 'Rarity Score' ) {
+            item['rarity'] = `Rarity score: ${property.value}`;
+            tempIndex = i;
+          }
+      }
+
+      if( property.hasOwnProperty('probability') ) {
+        Object.defineProperty(
+          property, 'rarity', 
+          Object.getOwnPropertyDescriptor(property, 'probability')
+        );
+        delete property['probability'];
+      }
+    });
+
+    item['properties'].splice(tempIndex, 1);
+
+    item['address'] = this.data.address;
+
+    this.NFTDetails = item;
+    this.selectedIndex = index;
+
+    this.dialog.open(ItemOverviewComponent, { width: '100%', maxWidth: '1000px', data:item });
   }
 
 }

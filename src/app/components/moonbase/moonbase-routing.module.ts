@@ -21,6 +21,11 @@ const routes: Routes = [
         component: LandingComponent
       },
       {
+        path: 'application',
+        component: LandingComponent,
+        data: { scroll: 'join-application' }
+      },
+      {
         path: IntroComponent.routeName,
         component: IntroComponent
       },

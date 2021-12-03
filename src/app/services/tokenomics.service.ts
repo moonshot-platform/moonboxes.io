@@ -42,7 +42,6 @@ export class TokenomicsService {
         });
       }catch(e) {
         console.log(e);
-        
       }
     }
 

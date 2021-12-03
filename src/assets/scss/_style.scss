@@ -101,6 +101,10 @@ ul {
     margin-top: 10px;
 }
 
+.mt15 {
+    margin-top: 15px;
+}
+
 .mt20 {
     margin-top: 20px;
 }
@@ -768,6 +772,10 @@ ul {
     &.top-only {
         border-bottom: 0;
     }
+    &.no-lines {
+        border-top: 0;
+        border-bottom: 0;
+    }
     &.top-line-thin {
         border-top: 1px solid $primary;
     }
@@ -777,9 +785,12 @@ ul {
 }
 
 .mat-dialog-container {
-    padding: 0 !important;
-    background-color: transparent !important;
+    background: transparent;
     box-shadow: none !important;
+}
+
+.cdk-overlay-dark-backdrop {
+    background: rgba(0,0,0,.8);
 }
 
 .p-white-span-primary {
@@ -985,10 +996,6 @@ ul {
     .py-xs-6 {
         padding-bottom: 6rem !important;
         padding-top: 6rem !important;
-    }
-    .cdk-overlay-pane {
-        position: relative !important;
-        transform: translate(0px, -35px);
     }
 }
 

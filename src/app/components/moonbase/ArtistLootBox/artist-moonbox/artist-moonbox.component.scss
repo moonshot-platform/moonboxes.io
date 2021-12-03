@@ -86,7 +86,6 @@
     animation: animate 2s steps(60) infinite;
     transition: all 1s ease;
     margin: 0 auto;
-
     &.disabled {
         filter: saturate(0);
     }
@@ -146,11 +145,12 @@
     border-right: 1px solid #fff;
 }
 
-button.plus, button.minus {
-    &:hover > svg > path {
+button.plus,
+button.minus {
+    &:hover>svg>path {
         fill: $primary;
     }
-    &:active > svg > path {
+    &:active>svg>path {
         fill: white;
     }
 }
@@ -181,36 +181,46 @@ button.plus, button.minus {
 }
 
 .tooltip {
-    visibility: hidden;
-    display: flex;
-    position: absolute;
-    //top: 0px;
-    width: 210px;
-    padding: 20px 10px;
+    position: fixed;
+    visibility: visible;
+    width: 100%;
+    padding: 20px;
     color: white;
     background-color: black;
     justify-content: center;
     align-content: center;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    margin-top: -145px;
-    margin-left: -15px;
+    margin-top: -80px;
+    margin-left: -40px;
     border-radius: 10px;
     opacity: 0;
     transition: opacity 0.8s;
-    -webkit-transition: .3s all;
-    -webkit-transition-delay: .3s;
-    -moz-transition: .3s all;
-    -moz-transition-delay: .3s;
-    -ms-transition: .3s all;
-    -ms-transition-delay: .3s;
-    -o-transition: .3s all;
-    -o-transition-delay: .3s;
-    transition: .3s all;
-    transition-delay: .3s;
+    -webkit-transition: 0.3s all;
+    -webkit-transition-delay: 0.3s;
+    -moz-transition: 0.3s all;
+    -moz-transition-delay: 0.3s;
+    -ms-transition: 0.3s all;
+    -ms-transition-delay: 0.3s;
+    -o-transition: 0.3s all;
+    -o-transition-delay: 0.3s;
+    transition: 0.3s all;
+    transition-delay: 0.3s;
+    overflow: visible;
+    max-width: 260px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 25px;
+    padding-right: 15px;
+    z-index: -1000;
     &.reveal {
+        z-index: 12000;
         opacity: 1;
         visibility: visible;
+        -webkit-transition-delay: 0s;
+        -moz-transition-delay: 0s;
+        -ms-transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
     }
     >i::after {
         content: "";
@@ -218,10 +228,164 @@ button.plus, button.minus {
         width: 15px;
         height: 15px;
         left: 50%;
-        transform: translate(-50%, 200%) rotate( 45deg) scaleY(-1);
+        top: 0px;
+        transform: translate(-70%, -100%) rotate(45deg) scaleY(-1);
         background-color: black;
-        box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
-        margin-top: 20px;
+        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+        margin-top: 10px;
+    }
+}
+
+.artist-info-popup {
+    background: #090d16;
+    border: 1px solid #d5a642;
+    max-height: 500px;
+    padding: 15px;
+}
+
+.artist-popup-info-container {
+    width: 100%;
+    justify-self: flex-start;
+    align-items: flex-start;
+    margin-left: 20px;
+    .descripton-section {
+        border: 1px solid $primary;
+        //min-width: 420px;
+        max-height: 350px;
+        height: 100%;
+        width: 100%;
+        p {
+            word-break: break-word;
+            text-align: left;
+            width: 100%;
+            padding: 10px;
+            overflow: auto;
+        }
+    }
+    .social-icons-container {
+        display: grid;
+        max-width: 100%;
+        grid-template-columns: repeat(6, minmax(60px, 150px));
+        align-items: flex-start;
+        justify-content: space-between;
+        li {
+            overflow: auto;
+            @extend %flex-center;
+            margin-top: 20px;
+            a {
+                display: flex;
+                background: #d5a642;
+                border-radius: 50px;
+                width: fit-content;
+                padding: 15px;
+                &:hover {
+                    background-color: white;
+                }
+            }
+            img {
+                width: 30px;
+                height: 30px;
+                border: none;
+            }
+        }
+    }
+}
+
+.series-detail {
+    width: 100%;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid $primary;
+    .name-section {
+        width: 100%;
+        justify-self: flex-start;
+        align-items: flex-start;
+        .series-name {
+            color: #fff;
+            font-family: $primary-font;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: left;
+        }
+        .series-artist-name {
+            color: $primary;
+            font-family: $primary-font;
+            font-size: 17px;
+            font-weight: 700;
+            text-align: left;
+        }
+    }
+    svg path {
+        fill: #d5a642;
+    }
+}
+
+section.carousel {
+    max-height: 470px;
+    max-width: 470px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #d5a642;
+}
+
+swiper {
+    padding-top: 0px !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.nft-image-container {
+    max-height: 470px;
+    max-width: 470px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    img {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-self: center;
+        object-fit: contain;
+    }
+}
+
+.landing-intro-nft-image-container-mobile {
+    display: none;
+}
+
+.nft-image-container {
+    max-width: 470px;
+    max-height: 470px;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+.only-desktop {
+    display: flex !important;
+}
+
+.only-mobile-and-tablet {
+    display: none !important;
+}
+
+section.carousel-mobile {
+    display: none;
+    swiper {
+        padding-top: 0px !important;
+        -webkit-mask-composite: intersect;
+        -webkit-mask-composite: source-in;
+        -webkit-mask-image: linear-gradient(to left, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent), linear-gradient(to right, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent);
     }
 }
 
@@ -237,44 +401,97 @@ button.plus, button.minus {
 }
 
 @media only screen and (max-width: $md-header) {
-    
     .scroller {
         max-height: initial;
         height: calc(100vh - 110px);
-        
-        > .inner {
+        >.inner {
             justify-content: center;
         }
     }
-    
     .boxes-title-container {
         padding-top: 0px;
     }
-
     .all-boxes {
         justify-content: center;
     }
-
     .moonbox-container {
         display: none;
         flex: initial;
-        > .content { padding: 0 10px; }
-
+        >.content {
+            padding: 0 10px;
+        }
         &.selected {
             display: flex;
         }
     }
-
     .round-mini-button {
         display: flex;
     }
-}
-
-@media only screen and (max-width: $md) {
+    section.carousel-mobile {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    section.carousel {
+        display: none;
+    }
+    .artist-popup-info-container {
+        margin-left: 0px;
+        .descripton-section {
+            min-width: 0px;
+            height: 20vh;
+        }
+    }
+    .artist-info-popup {
+        max-height: 90vh;
+        flex-direction: column;
+        margin-top: 80px;
+    }
+    .nft-image-container {
+        max-width: 100px;
+        max-height: 100px;
+        padding: 10px;
+        border: 1px solid $primary;
+        background-color: black;
+    }
+    .series-detail {
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .only-mobile-and-tablet {
+        display: flex !important;
+    }
     .tooltip {
-        margin-top: 48px;
+        margin-top: -80px;
+        margin-left: -40px;
     }
 }
+
+.disabled-icon {
+    background: gray !important;
+    cursor: unset !important;
+}
+
+.disabled-plus-minus {
+    cursor: unset !important;
+    pointer-events: none;
+    color: gray !important;
+    border-color: gray;
+    svg>path {
+        fill: gray;
+    }
+    div.border_left_right {
+        color: gray;
+        border-color: gray;
+        input {
+            color: gray;
+        }
+    }
+}
+
+@media only screen and (max-width: $md) {}
 
 @media only screen and (max-width: $sm) {
     .pt-md-200 {
@@ -284,5 +501,11 @@ button.plus, button.minus {
     .pt-md-100 {
         padding-top: 0px; //200px;
         box-sizing: border-box;
+    }
+    .artist-popup-info-container {
+        .social-icons-container {
+            grid-template-columns: repeat(3, 60px);
+            grid-template-rows: repeat(2, 1fr);
+        }
     }
 }
