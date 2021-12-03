@@ -115,6 +115,7 @@ export class ArtistMoonboxComponent implements OnInit {
   balance: number;
   artistDetails: ArtistMoonbox;
   moonBoxLimitDetails: any;
+  public infoHoverList: boolean[] = [false, false, false, false];
 
   constructor(
     public walletConnectService: WalletConnectService,
