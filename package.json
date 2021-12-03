@@ -50,6 +50,7 @@
     "quokka": "^0.0.7",
     "quokka-treasure-chest": "^1.0.2",
     "rxjs": "~6.6.0",
+    "smoothscroll-polyfill": "^0.4.4",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
     "swiper": "^7.0.3",
