@@ -18,13 +18,12 @@ const routes: Routes = [
     children: [
       {
         path: LandingComponent.routeName,
+        component: LandingComponent
+      },
+      {
+        path: 'application',
         component: LandingComponent,
-        children: [
-          {
-            path: 'application',
-            component: LandingComponent
-          },
-        ]
+        data: { scroll: 'join-application' }
       },
       {
         path: IntroComponent.routeName,

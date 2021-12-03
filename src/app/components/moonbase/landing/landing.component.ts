@@ -16,24 +16,11 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.fragment.subscribe(fragment => {
-      // this.fragment = fragment;
-      console.log(fragment);
-      
-    });
-
     this.route.data.subscribe(data => {
-      console.log(data);
-      
-      const anchor = data?.anchor?.toString();
-      if ( anchor !== undefined ) {
-        this.scrollToElement( anchor );
+      const scrollTo = data?.['scroll'];
+      if ( scrollTo !== undefined ) {
+        document.querySelector('#' + scrollTo).scrollIntoView();
       }
     });
   }
-
-  scrollToElement(anchor: string): void {
-    this.router.navigate(['/'], { fragment: anchor })
-  }
-
 }
