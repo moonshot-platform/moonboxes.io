@@ -115,7 +115,24 @@ export class ArtistMoonboxComponent implements OnInit {
   balance: number;
   artistDetails: ArtistMoonbox;
   moonBoxLimitDetails: any;
-  public infoHoverList: boolean[] = [false, false, false, false];
+  public infoHoverList: any[] = [
+    {
+      "isHovered": false,
+      "tooltipText": "You Need XXX Moonshot tokens to open a Wood MoonBox."
+    },
+    {
+      "isHovered": false,
+      "tooltipText": "You Need XXX Moonshot tokens to open a Silver MoonBox."
+    },
+    {
+      "isHovered": false,
+      "tooltipText": "You Need XXX Moonshot tokens to open a Gold MoonBox."
+    },
+    {
+      "isHovered": false,
+      "tooltipText": "You Need XXX Moonshot tokens to open a Diamond MoonBox."
+    },
+  ];
 
   constructor(
     public walletConnectService: WalletConnectService,
