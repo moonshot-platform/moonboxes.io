@@ -61,92 +61,10 @@
                                     </a>
 
                                     <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist_moonbase',item.walletAddress]">Buy MoonBoxes</a>
-                                    <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="setSelected(selectedIndex,item)">Collection info</a>
+                                    <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="viewDetails(item)">Collection info</a>
                                 </div>
                             </div>
                         </ng-container>
-
-                        <!------ List  -->
-                        <div id="collection-info" class="collection-info" *ngIf="lootBoxDetails[selectedIndex] != undefined">
-                            <div class="collection-inner">
-                                <div class="left relative flex-col">
-
-                                    <img src="{{lootBoxDetails[selectedIndex].filePath}}" class="img-fluid mb30 collection-info-img" alt="">
-                                    <div class="border-bottom mt10 mb20">
-                                        <div class="flex justify-space-between">
-                                            <p class="color-primary mb10 mt10">Price</p>
-                                            <p class="color-primary mb10 mt10">{{getMinPrice(lootBoxDetails[selectedIndex])}} BNB</p>
-                                        </div>
-                                        <div class="flex justify-space-between">
-                                            <p class="color-primary mb10">Availability</p>
-                                            <p class="color-primary mb10">{{lootBoxDetails[selectedIndex].supply}}/{{lootBoxDetails[selectedIndex].TotalMaxSupply}}</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex justify-space-between">
-                                        <a *ngIf="currentCategory === dropsCategory.UPCOMING" class="button text-inherit mb20 coundown-button w100">
-                                            <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                            <app-countdown-timer [date]="lootBoxDetails[selectedIndex].revealDate"></app-countdown-timer>
-                                        </a>
-
-                                        <a *ngIf="currentCategory === dropsCategory.LIVE" class="button mb10 text-inherit w100" [routerLink]="['/artist_moonbase', lootBoxDetails[selectedIndex].walletAddress] ">Buy Moonboxes</a>
-                                    </div>
-                                </div>
-
-                                <div class="flex1"></div>
-
-                                <div class="right flex4 desktop-md-block w-100">
-
-                                    <div class="flex justify-space-between flex-align-start border-bottom">
-                                        <div class="flex flex-col">
-                                            <p class="p18 w700 mt10">{{lootBoxDetails[selectedIndex].name}}</p>
-                                            <p class="mb20 mt10">{{lootBoxDetails[selectedIndex].rarity}}
-                                            </p>
-                                        </div>
-                                        <div class="flex-center" (click)="clearLootboxDetails()">
-                                            <svg class="interactable wrapped" width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#d5a642"/></svg>
-                                        </div>
-                                    </div>
-
-                                    <textarea readonly class="mt20 justify-space-between flex">{{lootBoxDetails[selectedIndex]?.description}}</textarea>
-
-                                    <ul class="social-icons-container flex-center flex-wrap justify-space-between w-100">
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].discord}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/discord.svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].twitter}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/twitter.svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].telegram}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/telegram.svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].instagram}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/instagram.svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].opensea}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/opensea.svg">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{lootBoxDetails[selectedIndex].website}}" target="_blank">
-                                                <img src="assets/media/icons/moonbase/global.svg">
-                                            </a>
-                                        </li>
-                                    </ul>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <!----list-->
 
                     </div>
                 </div>
