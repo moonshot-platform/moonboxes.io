@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -12,14 +12,14 @@ export class LandingComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
     this.route.data.subscribe(data => {
       const scrollTo = data?.['scroll'];
       if ( scrollTo !== undefined ) {
-        document.querySelector('#' + scrollTo).scrollIntoView();
+        const element = document.querySelector(`#${scrollTo}`)
+        if (element) setTimeout(() => element.scrollIntoView({ behavior: 'smooth', block: 'start' }), 500);
       }
     });
   }
