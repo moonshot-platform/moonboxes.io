@@ -34,6 +34,7 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
 import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.component';
+import { JoinApplicationComponent } from './join-application/join-application.component';
 
 
 @NgModule({
@@ -57,6 +58,7 @@ import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.com
     TransferComponent,
     LandingNftsComponent,
     InfoMoonboxesComponent,
+    JoinApplicationComponent,
   ],
   imports: [
     MatIconModule,

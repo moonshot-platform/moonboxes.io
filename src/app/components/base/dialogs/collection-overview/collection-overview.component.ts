@@ -14,8 +14,6 @@ export class CollectionOverviewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.item = data;
-    console.log(data);
-    
   }
 
   ngOnInit(): void {

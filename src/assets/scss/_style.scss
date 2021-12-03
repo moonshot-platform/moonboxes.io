@@ -101,6 +101,10 @@ ul {
     margin-top: 10px;
 }
 
+.mt15 {
+    margin-top: 15px;
+}
+
 .mt20 {
     margin-top: 20px;
 }
@@ -766,6 +770,10 @@ ul {
         border-top: 3px solid $primary;
     }
     &.top-only {
+        border-bottom: 0;
+    }
+    &.no-lines {
+        border-top: 0;
         border-bottom: 0;
     }
     &.top-line-thin {

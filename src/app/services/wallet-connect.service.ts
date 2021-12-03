@@ -310,8 +310,7 @@ export class WalletConnectService {
           })
       } catch (e) {
         console.log(e);
-        
-       reject( { hash: '', status: false } );
+        reject( { hash: '', status: false } );
       }
     });
 
@@ -331,7 +330,7 @@ export class WalletConnectService {
               reject( { hash: e, status: false } );
             });
         } catch (e) {
-          console.log(e)
+          console.log(e);
           reject( { hash: '', status: false } );
         }
       } else {
@@ -344,7 +343,7 @@ export class WalletConnectService {
             });
         }
         catch (e) {
-          console.log(e)
+          console.log(e);
           reject({ hash: '', status: false });
         }
       }

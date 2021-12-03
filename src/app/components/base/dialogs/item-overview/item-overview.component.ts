@@ -18,7 +18,6 @@ export class ItemOverviewComponent implements OnInit {
     public dialog: MatDialog,
   ) {
     this.item = data;
-    console.log(data);
   }
 
   ngOnInit(): void {

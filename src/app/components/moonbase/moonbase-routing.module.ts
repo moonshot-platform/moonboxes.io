@@ -18,7 +18,13 @@ const routes: Routes = [
     children: [
       {
         path: LandingComponent.routeName,
-        component: LandingComponent
+        component: LandingComponent,
+        children: [
+          {
+            path: 'application',
+            component: LandingComponent
+          },
+        ]
       },
       {
         path: IntroComponent.routeName,

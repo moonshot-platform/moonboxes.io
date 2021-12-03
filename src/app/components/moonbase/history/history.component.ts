@@ -58,8 +58,6 @@ export class HistoryComponent implements OnInit {
   }
 
   onClaimNFT( data: any, index: number ) {
-    console.log(data);
-    
     this.dialog.open( ModalForClaimComponent, {
       width: 'auto',
       disableClose: true,
