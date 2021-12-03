@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RevealNftPopupComponent } from './reveal-nft-popup.component';
+import { CollectionOverviewComponent } from './collection-overview.component';
 
-describe('RevealNftPopupComponent', () => {
-  let component: RevealNftPopupComponent;
-  let fixture: ComponentFixture<RevealNftPopupComponent>;
+describe('CollectionOverviewComponent', () => {
+  let component: CollectionOverviewComponent;
+  let fixture: ComponentFixture<CollectionOverviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RevealNftPopupComponent ]
+      declarations: [ CollectionOverviewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RevealNftPopupComponent);
+    fixture = TestBed.createComponent(CollectionOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

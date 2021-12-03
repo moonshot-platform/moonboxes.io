@@ -8,7 +8,6 @@ import { NavModule } from './nav/nav.module';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
 import { NgParticlesModule } from 'ng-particles';
-import { BuyMoonbaseComponent } from './buy-moonbase/buy-moonbase.component';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
@@ -21,7 +20,6 @@ import { UpcomingComponent } from './ArtistLootBox/upcoming/upcoming.component';
 import { AngularCountdownDateTimeModule } from 'angular-countdown-date-time';
 import { CountdownTimerComponent } from './ArtistLootBox/upcoming/countdown-timer/countdown-timer.component';
 import { ModalForClaimComponent } from './history/modal-for-claim/modal-for-claim.component';
-import { RevealNftPopupComponent } from './buy-moonbase/reveal-nft-popup/reveal-nft-popup.component';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { SocialShareComponent } from './modal-for-transaction/social-share/social-share.component';
@@ -36,13 +34,13 @@ import { TransferComponent } from './modal-for-transaction/transfer/transfer.com
 import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.component';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.component';
+import { JoinApplicationComponent } from './join-application/join-application.component';
 
 
 @NgModule({
   declarations: [
     MoonbaseComponent,
     IntroComponent,
-    BuyMoonbaseComponent,
     PrizePoolComponent,
     HistoryComponent,
     InventoryComponent,
@@ -52,7 +50,6 @@ import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.com
     UpcomingComponent,
     CountdownTimerComponent,
     ModalForClaimComponent,
-    RevealNftPopupComponent,
     SocialShareComponent,
     LandingComponent,
     RarityComponent,
@@ -61,6 +58,7 @@ import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.com
     TransferComponent,
     LandingNftsComponent,
     InfoMoonboxesComponent,
+    JoinApplicationComponent,
   ],
   imports: [
     MatIconModule,

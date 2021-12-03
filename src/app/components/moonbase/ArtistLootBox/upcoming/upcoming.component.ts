@@ -3,8 +3,10 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { MatDialog } from '@angular/material/dialog';
+import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
 
 enum DROPS_CATEGORY {
   RECENT = 0,
@@ -40,7 +42,8 @@ export class UpcomingComponent implements OnInit {
     private walletConnectService: WalletConnectService,
     private route: ActivatedRoute,
     private title: Title,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog,
   ) {
     this.walletConnectService.init();
   }
@@ -159,5 +162,9 @@ export class UpcomingComponent implements OnInit {
 
   getButtonType( tabButton: DROPS_CATEGORY ) {
     return this.currentCategory === tabButton ? 'button' : 'outlined-button';
+  }
+
+  viewDetails( data: any ): void {
+    this.dialog.open(CollectionOverviewComponent, { width: '100%', maxWidth: '1000px', data });
   }
 }

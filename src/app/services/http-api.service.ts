@@ -15,9 +15,9 @@ const baseURL: any = environment.baseURL;
   providedIn: 'root'
 })
 export class HttpApiService {
-  
+
   userInfo: any;
-  data:any;
+  data: any;
 
   private subject = new Subject();
 
@@ -29,126 +29,133 @@ export class HttpApiService {
   ];
 
   headers = new HttpHeaders()
-  .set('Content-Type', 'application/json')
-  .set('APPKEY', 'mTb+T!5!crBEQEL2!$PJ9&JSjeT3M6Hs*RytA-eaDSBS5UU@8-fCJHu6F?kp@s+JTu2-_-V8L#?5');
+    .set('Content-Type', 'application/json')
+    .set('APPKEY', 'mTb+T!5!crBEQEL2!$PJ9&JSjeT3M6Hs*RytA-eaDSBS5UU@8-fCJHu6F?kp@s+JTu2-_-V8L#?5');
   vendor: any;
-  
+
   constructor(
     private httpClient: HttpClient,
-    private toastrService:ToastrService
-  ) {  }
+    private toastrService: ToastrService
+  ) { }
 
-  submitBet( data: any ): Observable<any> {
+  submitBet(data: any): Observable<any> {
     const url = `${baseURL}userBid`;
 
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  getMaxSupply( userWalletAddress: string ): Observable<AdminMoonbox> {
+  getMaxSupply(userWalletAddress: string): Observable<AdminMoonbox> {
     const params = { userWalletAddress, ArtistwalletAddress: environment.ownerAddress };
     const url = `${baseURL}typeCount`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } )
-      .pipe( map( (r: Response) => plainToClass(AdminMoonbox, r) ) );
+    return this.httpClient.get(url, { headers: this.headers, params })
+      .pipe(map((r: Response) => plainToClass(AdminMoonbox, r)));
   }
 
-  getUserBetData( data: any ): Observable<any> {
+  getUserBetData(data: any): Observable<any> {
     const params = { userAddress: data };
     const url = `${baseURL}userBetData`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
+    return this.httpClient.get(url, { headers: this.headers, params });
   }
 
-  getUserInventory( data: any ): Promise<any> {
+  getUserInventory(data: any): Promise<any> {
     const params = { userAddress: data.userAddress, NSFW: data.nsfwstatus };
     const url = `${baseURL}userData`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } ).toPromise();
+    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
   }
 
-  getuserUpcomingNft( data: any ): Observable<any> {
+  getuserUpcomingNft(data: any): Observable<any> {
     const params = { userAddress: data.userAddress, nsfw: data.nsfwstatus };
     const url = `${baseURL}userUpcomingNft`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
+    return this.httpClient.get(url, { headers: this.headers, params });
   }
 
-  verifyBetHash( data: any ): Observable<any> {
+  verifyBetHash(data: any): Observable<any> {
     const url = `${baseURL}verifyBetHash`;
 
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  changeStatusClaim( data: any ): Observable<any> {
+  changeStatusClaim(data: any): Observable<any> {
     const url = `${baseURL}userClaim`;
 
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
-  
-  getMoonCount( userAddress: string ): Promise<any> {
+
+  getMoonCount(userAddress: string): Promise<any> {
     const params = { userAddress };
     const url = `${baseURL}landingPageData`;
 
-    return this.httpClient.get( url,{ headers: this.headers,params } ).toPromise();
-  } 
+    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
+  }
 
   /***** Artist pages apis *****/
-  getAllCollections( NSFW: boolean, walletAddress: string ): Observable<any> {
+  getAllCollections(NSFW: boolean, walletAddress: string): Observable<any> {
     const params = { NSFW, walletAddress };
     const url = `${baseURL}allArtistBanners`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
+    return this.httpClient.get(url, { headers: this.headers, params });
   }
-  
-  getUpcomingArtistCollections( NSFW: boolean, walletAddress: string ): Observable<any> {
+
+  getUpcomingArtistCollections(NSFW: boolean, walletAddress: string): Observable<any> {
     const params = { NSFW, walletAddress };
     const url = `${baseURL}upcomingArtistBanners`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } );
-  } 
-  
-  getArtistMoonboxData( artistWalletAddress: string, userAddress: string ): Observable<ArtistMoonbox> {
+    return this.httpClient.get(url, { headers: this.headers, params });
+  }
+
+  getArtistMoonboxData(artistWalletAddress: string, userAddress: string): Observable<ArtistMoonbox> {
     const params = { artistWalletAddress, userAddress };
     const url = `${baseURL}getArtistMoonboxData`;
 
-    return this.httpClient.get( url, { headers: this.headers, params } )
-      .pipe( map( (r: Response) => plainToClass(ArtistMoonbox, r) ) );
-  } 
+    return this.httpClient.get(url, { headers: this.headers, params })
+      .pipe(map((r: Response) => plainToClass(ArtistMoonbox, r)));
+  }
 
-  submitBetForArtistApi( data: any ): Observable<any> {
+  getRandomCollectionImageListFromArtist(artistAddress: string): Promise<any> {
+    const params = { artistAddress: artistAddress };
+    const url = `${baseURL}randCollectionImageListArtist`;
+
+    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
+  }
+
+  submitBetForArtistApi(data: any): Observable<any> {
     const url = `${baseURL}BidForArtist`;
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  claimRewardDetails( data: any ): Observable<any> {
+  claimRewardDetails(data: any): Observable<any> {
     const url = `${baseURL}getReward`;
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  claimRewardTransactionHashUpdate( data: any ): Observable<any> {
+  claimRewardTransactionHashUpdate(data: any): Observable<any> {
     const url = `${baseURL}transactionHashForReward`;
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  transferNft( data: any ): Observable<any> {
+  transferNft(data: any): Observable<any> {
     const url = `${baseURL}transferNft`;
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  
-  revealData( data: any ): Observable<any> {
+
+  revealData(data: any): Observable<any> {
     const url = `${baseURL}revealData`;
-    return this.httpClient.post( url, data, { headers: this.headers } );
+    return this.httpClient.post(url, data, { headers: this.headers });
   }
 
-  showToastr( message: string, isSuccess: boolean ): void {
-    if( isSuccess )
+  showToastr(message: string, isSuccess: boolean): void {
+    if (isSuccess)
       this.toastrService.success(message);
     else
       this.toastrService.error(message);
   }
 
-  sendMessage( message: boolean ): void {
+  sendMessage(message: boolean): void {
     this.subject.next({ text: message });
   }
 

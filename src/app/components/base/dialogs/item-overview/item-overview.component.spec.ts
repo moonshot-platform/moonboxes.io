@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BuyMoonbaseComponent } from './buy-moonbase.component';
+import { ItemOverviewComponent } from './item-overview.component';
 
-describe('BuyMoonbaseComponent', () => {
-  let component: BuyMoonbaseComponent;
-  let fixture: ComponentFixture<BuyMoonbaseComponent>;
+describe('ItemOverviewComponent', () => {
+  let component: ItemOverviewComponent;
+  let fixture: ComponentFixture<ItemOverviewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyMoonbaseComponent ]
+      declarations: [ ItemOverviewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BuyMoonbaseComponent);
+    fixture = TestBed.createComponent(ItemOverviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
