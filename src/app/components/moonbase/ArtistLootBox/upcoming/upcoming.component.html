@@ -20,7 +20,7 @@
                         <ng-container *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;">
                             <div *ngIf="!(this.NSFWToggleState && item['NSFW'])" class="flex-col flex-center p-3 grid-4">
 
-                                <a *ngIf="currentCategory === dropsCategory.LIVE || currentCategory === dropsCategory.RECENT" class="flex1 nft_img flex-center" [routerLink]="item.isAdmin ? ['/buy_moonbase'] : ['/artist_moonbase',item.walletAddress]">
+                                <a *ngIf="currentCategory === dropsCategory.LIVE || currentCategory === dropsCategory.RECENT" class="flex1 nft_img flex-center" [routerLink]="['/artist',item.walletAddress]">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 
@@ -60,7 +60,7 @@
                                         <p>{{item.revealDate}}</p>
                                     </a>
 
-                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist_moonbase',item.walletAddress]">Buy MoonBoxes</a>
+                                    <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist',item.walletAddress]">Buy MoonBoxes</a>
                                     <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="viewDetails(item)">Collection info</a>
                                 </div>
                             </div>

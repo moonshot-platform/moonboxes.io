@@ -20,7 +20,7 @@ import { SwiperOptions } from 'swiper';
 })
 export class ArtistMoonboxComponent implements OnInit {
 
-  static readonly routeName: string = 'artist_moonbase/:artistAddress';
+  static readonly routeName: string = 'artist/:artistAddress';
 
   slides: any[] = [];
   artistData: any;
