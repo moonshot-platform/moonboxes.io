@@ -165,6 +165,11 @@ export class UpcomingComponent implements OnInit {
   }
 
   viewDetails( data: any ): void {
+    console.log(data);
+    
+    if( data === null || data['revealDate'] === 'Application form' )
+      return;
+
     this.dialog.open(CollectionOverviewComponent, { width: '100%', maxWidth: '1000px', data });
   }
 }
