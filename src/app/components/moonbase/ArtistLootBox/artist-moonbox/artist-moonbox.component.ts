@@ -118,19 +118,19 @@ export class ArtistMoonboxComponent implements OnInit {
   public infoHoverList: any[] = [
     {
       "isHovered": false,
-      "tooltipText": "You Need 0 Moonshot token\nto open a Wood MoonBox."
+      "tooltipText": "You need 0 Moonshot token\nto open a Wood MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 75,000,000,000 Moonshot tokens to open a Silver MoonBox."
+      "tooltipText": "You need 75,000,000,000 Moonshot tokens to open a Silver MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 150,000,000,000 Moonshot tokens to open a Gold MoonBox."
+      "tooltipText": "You need 150,000,000,000 Moonshot tokens to open a Gold MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 250,000,000,000 Moonshot tokens to open a Diamond MoonBox."
+      "tooltipText": "You need 250,000,000,000 Moonshot tokens to open a Diamond MoonBox."
     },
   ];
 
