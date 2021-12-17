@@ -224,8 +224,9 @@ section.upcoming-container {
 }
 
 textarea {
+    display: flex;
+    flex: max-content;
     width: 100%;
-    height: 300px;
     background-color: transparent;
     border: 1px solid $primary;
     color: white;
