@@ -12,6 +12,7 @@ import { MESSAGES } from 'src/app/messages.enum';
 import { UserDetailsProvider } from 'src/app/services/user-details.provider';
 import { UserDetailsModel } from 'src/app/models/user-details.model';
 import { SwiperOptions } from 'swiper';
+import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -219,7 +220,6 @@ export class ArtistMoonboxComponent implements OnInit {
       if (response.isSuccess) {
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
-
         this.supplyDetails.forEach((item: Supply) => {
           this.supply.push(item.hasSupply() ? 1 : 0);
         });
@@ -298,6 +298,20 @@ export class ArtistMoonboxComponent implements OnInit {
 
   trackByFn(index: number, item: any) {
     return item;
+  }
+
+  viewDetails(): void {
+    if (this.slides === null || this.artistData === null)
+      return;
+
+    this.dialog.open(
+      CollectionOverviewComponent,
+      {
+        width: '100%',
+        maxWidth: '1000px',
+        data: { "slides": this.slides, "artistData": this.artistData }
+      }
+    );
   }
 
   getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(
