@@ -309,7 +309,8 @@ export class ArtistMoonboxComponent implements OnInit {
       {
         width: '100%',
         maxWidth: '1000px',
-        data: { "slides": this.slides, "artistData": this.artistData }
+        data: { "slides": this.slides, "artistData": this.artistData },
+        panelClass: 'collection-info-popup-panel',
       }
     );
   }
