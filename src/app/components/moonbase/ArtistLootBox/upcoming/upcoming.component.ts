@@ -21,20 +21,25 @@ enum DROPS_CATEGORY {
 })
 export class UpcomingComponent implements OnInit {
   static readonly routeName: string = 'upcoming';
-  
+
   public dropsCategory = DROPS_CATEGORY;
-  list = [ [/* RECENT */], [/* LIVE */], [/* RECENT */] ];
+  list = [[/* RECENT */], [/* LIVE */], [/* RECENT */]];
   currentCategory: number;
 
   NSFWToggleState = false;
-  
+
   lootBoxDetails = [];
   artistDetails: any;
 
   data: any;
   address: string;
   selectedIndex: number;
-  
+
+
+  slides: any[] = [];
+  artistData: any;
+
+  isCollectionDataLoading: boolean = false;
 
   constructor(
     private httpService: HttpApiService,
@@ -50,12 +55,12 @@ export class UpcomingComponent implements OnInit {
 
   ngOnInit(): void {
     this.NSFWToggleState = this.localStorage.getNSFW();
-    
-    this.localStorage.whenNSFWToggled().subscribe( (NSFWToggleState) => {
-      this.NSFWToggleState = NSFWToggleState;
-    } );
 
-    this.route.data.subscribe( ( data ) => { this.currentCategory = data.activeTab ?? 2; } );
+    this.localStorage.whenNSFWToggled().subscribe((NSFWToggleState) => {
+      this.NSFWToggleState = NSFWToggleState;
+    });
+
+    this.route.data.subscribe((data) => { this.currentCategory = data.activeTab ?? 2; });
     this.getConnectedAccount();
 
     this.route.url.subscribe(url => {
@@ -89,16 +94,16 @@ export class UpcomingComponent implements OnInit {
 
   async getConnectedAccount() {
     this.walletConnectService.getData().subscribe((data) => {
-        this.data = data;
-        this.address = data.address;
+      this.data = data;
+      this.address = data.address;
     });
 
     this.getAllCollections();
   }
 
-  getMinPrice( item: any ) {
+  getMinPrice(item: any) {
     const { Diamond, Wood, Silver, Gold } = item;
-    if( Diamond == Wood && Diamond == Silver && Diamond && Gold  )
+    if (Diamond == Wood && Diamond == Silver && Diamond && Gold)
       return item['minPrice'];
 
     return `from ${item['minPrice']}`;
@@ -106,12 +111,12 @@ export class UpcomingComponent implements OnInit {
 
   async getAllCollections() {
 
-    this.httpService.getAllCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
+    this.httpService.getAllCollections(this.NSFWToggleState, this.address).subscribe((response) => {
       this.list[DROPS_CATEGORY.LIVE] = response.data.live_data_array;
       this.list[DROPS_CATEGORY.RECENT] = response.data.recent_data_array;
     });
 
-    this.httpService.getUpcomingArtistCollections( this.NSFWToggleState, this.address ).subscribe((response) => {
+    this.httpService.getUpcomingArtistCollections(this.NSFWToggleState, this.address).subscribe((response) => {
       this.list[DROPS_CATEGORY.UPCOMING] = response.data;
 
       this.list[DROPS_CATEGORY.UPCOMING].push(
@@ -126,13 +131,13 @@ export class UpcomingComponent implements OnInit {
           "minPrice": '-',
           "filePath": "assets/media/images/apply-banner.png",
           "name": "Awesome NFT Collection"
-      }
-    );
+        }
+      );
     });
   }
 
   setSelected(index: number, item: any) {
-    if( item.revealDate === 'Application form' )
+    if (item.revealDate === 'Application form')
       return;
 
     this.selectedIndex = index;
@@ -160,16 +165,37 @@ export class UpcomingComponent implements OnInit {
     return item.title;
   }
 
-  getButtonType( tabButton: DROPS_CATEGORY ) {
+  getButtonType(tabButton: DROPS_CATEGORY) {
     return this.currentCategory === tabButton ? 'button' : 'outlined-button';
   }
 
-  viewDetails( data: any ): void {
-    console.log(data);
-    
-    if( data === null || data['revealDate'] === 'Application form' )
+  viewDetails(data: any): void {
+    if (data === null || data['revealDate'] === 'Application form')
       return;
 
-    this.dialog.open(CollectionOverviewComponent, { width: '100%', maxWidth: '1000px', data });
+    this.isCollectionDataLoading = true;
+
+    this.getSliderImages(data.walletAddress).then((val) => {
+      let collectionData = {
+        "slides": this.slides,
+        "artistData": this.artistData
+      }
+
+      this.isCollectionDataLoading = false;
+
+      this.dialog.open(
+        CollectionOverviewComponent,
+        {
+          width: '100%',
+          maxWidth: '1000px',
+          data: collectionData
+        }
+      );
+    });
   }
+
+  getSliderImages = (walletAddress: any) => this.httpService.getRandomCollectionImageListFromArtist(walletAddress).then((res) => {
+    this.slides = res.data;
+    this.artistData = res.artistData;
+  });
 }
