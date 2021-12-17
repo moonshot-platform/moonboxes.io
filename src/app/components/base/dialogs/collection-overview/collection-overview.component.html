@@ -1,51 +1,92 @@
 <div id="collection-info" class="collection-info">
     <div class="collection-inner">
-        
-        <div class="left flex1" [style.background]="'url('+item.filePath+')'"></div>
+
+        <div class="left flex1">
+            <section class="carousel">
+                <swiper [config]="swiperConfig">
+                    <ng-container *ngFor="let slide of slides; index as i">
+                        <ng-template swiperSlide>
+                            <div class="nft-image-container">
+                                <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </swiper>
+            </section>
+        </div>
 
         <div class="right flex1 ml20">
 
             <div class="flex justify-space-between flex-align-start border-bottom">
                 <div class="flex flex-col">
-                    <p class="p18 w700 mt10 color-white">{{item.name}}</p>
-                    <p class="mb20 mt10 color-primary">{{item.ArtistName}}
-                    </p>
+                    <p class="p18 w700 mt10 color-white">{{artistData.collectionName}}</p>
+                    <p class="mb20 mt10 color-primary">{{artistData.artistName}}</p>
                 </div>
                 <div class="flex-center" [mat-dialog-close]="">
                     <svg class="interactable wrapped" width="27" height="27" xmlns="http://www.w3.org/2000/svg"><path d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z" fill="#d5a642"/></svg>
                 </div>
             </div>
 
-            <textarea readonly class="mt20 justify-space-between flex">{{item?.description}}</textarea>
+            <section class="carousel-mobile">
+                <swiper [config]="swiperConfigMobile">
+                    <ng-container *ngFor="let slide of slides; index as i">
+                        <ng-template swiperSlide>
+                            <div class="nft-image-container">
+                                <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                            </div>
+                        </ng-template>
+                    </ng-container>
+                </swiper>
+            </section>
+
+            <textarea readonly class="mt20 justify-space-between flex description">{{artistData?.description}}</textarea>
 
             <ul class="social-icons-container flex-center flex-wrap justify-space-between w-100">
                 <li>
-                    <a href="{{item.discord}}" target="_blank">
+                    <a *ngIf="artistData.discord == ''" class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/discord.svg">
+                    </a>
+                    <a *ngIf="artistData.discord != ''" href="{{artistData.discord}}" target="_blank">
                         <img src="assets/media/icons/moonbase/discord.svg">
                     </a>
                 </li>
                 <li>
-                    <a href="{{item.twitter}}" target="_blank">
+                    <a *ngIf="artistData.twitter == ''" class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/twitter.svg">
+                    </a>
+                    <a *ngIf="artistData.twitter != ''" href="{{artistData.twitter}}" target="_blank">
                         <img src="assets/media/icons/moonbase/twitter.svg">
                     </a>
                 </li>
                 <li>
-                    <a href="{{item.telegram}}" target="_blank">
+                    <a *ngIf="artistData.telegram == ''" class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/telegram.svg">
+                    </a>
+                    <a *ngIf="artistData.telegram != ''" href="{{artistData.telegram}}" target="_blank">
                         <img src="assets/media/icons/moonbase/telegram.svg">
                     </a>
                 </li>
                 <li>
-                    <a href="{{item.instagram}}" target="_blank">
+                    <a *ngIf="artistData.instagram == ''" class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/instagram.svg">
+                    </a>
+                    <a *ngIf="artistData.instagram != ''" href="{{artistData.instagram}}" target="_blank">
                         <img src="assets/media/icons/moonbase/instagram.svg">
                     </a>
                 </li>
                 <li>
-                    <a href="{{item.opensea}}" target="_blank">
+                    <a *ngIf="artistData.opensea == ''" class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/opensea.svg">
+                    </a>
+                    <a *ngIf="artistData.opensea != ''" href="{{artistData.opensea}}" target="_blank">
                         <img src="assets/media/icons/moonbase/opensea.svg">
                     </a>
                 </li>
                 <li>
-                    <a href="{{item.website}}" target="_blank">
+                    <a *ngIf="artistData.website == '' " class="disabled-icon">
+                        <img src="assets/media/icons/moonbase/global.svg">
+                    </a>
+                    <a *ngIf="artistData.website != '' " href="{{artistData.website}}" target="_blank">
                         <img src="assets/media/icons/moonbase/global.svg">
                     </a>
                 </li>
