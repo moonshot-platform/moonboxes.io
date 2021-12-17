@@ -1,5 +1,9 @@
 <div class="upcoming-container">
     <section class="scroller">
+        <div *ngIf="isCollectionDataLoading" class="flex-center main-message-container w-100 h-100 text-center pa20">
+            <img *ngIf="isCollectionDataLoading" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+        </div>
+
         <div class="pt-5 flex1 h-100 flex-space-between align-self">
             <div class="flex-col flex1">
                 <div class="flex flex-col">
