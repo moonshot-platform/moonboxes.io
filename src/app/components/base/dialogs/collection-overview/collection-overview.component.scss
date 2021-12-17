@@ -11,22 +11,19 @@ section.upcoming-container {
     overflow: hidden;
 }
 
-.social-icons-container > li {
+.social-icons-container>li {
     @extend %flex-center;
     margin-top: 20px;
-
     a {
         display: flex;
         background: #d5a642;
         border-radius: 50px;
         width: fit-content;
         padding: 15px;
-
         &:hover {
             background-color: white;
         }
     }
-
     img {
         width: 30px;
         height: 30px;
@@ -37,7 +34,9 @@ section.upcoming-container {
 .tabs-container {
     flex-wrap: wrap;
     justify-content: center;
-    > .tab { margin: 10px 5px; }
+    >.tab {
+        margin: 10px 5px;
+    }
 }
 
 .scroller {
@@ -78,7 +77,6 @@ section.upcoming-container {
     justify-content: center;
     position: relative;
     border: 2px solid #d5a642;
-
     &:hover {
         border-color: white;
     }
@@ -101,15 +99,12 @@ section.upcoming-container {
     padding: 1rem;
     box-sizing: border-box;
     border: 1px solid #d5a642;
-
-    > .collection-inner {
+    >.collection-inner {
         @extend %flex-center;
         @extend %max-width-center;
-
         align-items: stretch;
         box-sizing: border-box;
-
-        > .left {
+        >.left {
             background-position: center !important;
             background-size: cover !important;
         }
@@ -229,14 +224,16 @@ section.upcoming-container {
 }
 
 textarea {
+    display: flex;
+    flex: 1;
     width: 100%;
-    height: 300px;
     background-color: transparent;
     border: 1px solid $primary;
     color: white;
     padding: 10px;
     box-sizing: border-box;
     resize: none;
+    font-family: $primary-font;
 }
 
 .close-tooltip {
@@ -295,63 +292,171 @@ textarea {
     }
 }
 
-@media only screen and (max-width: $md) {
+section.carousel {
+    max-height: 470px;
+    max-width: 470px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #d5a642;
+}
+
+swiper {
+    padding-top: 0px !important;
+}
+
+::ng-deep.collection-info-popup-panel {
+    height: unset !important;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.nft-image-container {
+    max-height: 470px;
+    max-width: 470px;
+    width: 100%;
+    height: 100%;
+    background: black;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    img {
+        display: flex;
+        height: 100%;
+        width: 100%;
+        align-self: center;
+        object-fit: contain;
+    }
+}
+
+.landing-intro-nft-image-container-mobile {
+    display: none;
+}
+
+.disabled-icon {
+    background: gray !important;
+    cursor: unset !important;
+}
+
+.nft-image-container {
+    max-width: 470px;
+    max-height: 470px;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+}
+
+.only-desktop {
+    display: flex !important;
+}
+
+.only-mobile-and-tablet {
+    display: none !important;
+}
+
+section.carousel-mobile {
+    display: none;
+    swiper {
+        padding-top: 0px !important;
+        -webkit-mask-composite: intersect;
+        -webkit-mask-composite: source-in;
+        -webkit-mask-image: linear-gradient(to left, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent), linear-gradient(to right, rgb(0, 0, 0) 80%, rgba(0, 0, 0, 0) 100%, transparent);
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+    section.carousel-mobile {
+        display: flex;
+        margin-bottom: 10px;
+    }
+    section.carousel {
+        display: none;
+    }
+     ::ng-deep.collection-info-popup-panel {
+        height: 100% !important;
+    }
+    .artist-popup-info-container {
+        margin-left: 0px;
+        .descripton-section {
+            min-width: 0px;
+            height: 20vh;
+        }
+    }
+    .artist-info-popup {
+        max-height: 90vh;
+        flex-direction: column;
+        margin-top: 80px;
+    }
+    .nft-image-container {
+        max-width: 100px;
+        max-height: 100px;
+        padding: 10px;
+        border: 1px solid $primary;
+        background-color: black;
+    }
+    .series-detail {
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+    .only-desktop {
+        display: none !important;
+    }
+    .only-mobile-and-tablet {
+        display: flex !important;
+    }
+}
+
+@media only screen and (max-width: $md-header) {
     .scroller>div {
         align-self: flex-start;
         padding-top: 4rem;
     }
-    
-    .collection-info > .collection-inner {
+    .collection-info>.collection-inner {
         flex-direction: column;
-
-        > .left {
+        >.left {
             display: none;
         }
-
-        > .right {
+        >.right {
             margin: 0;
         }
     }
-    
     .grid-4 {
         flex-basis: 100%;
     }
-
     .d-block {
         display: block;
     }
-
-    .full-div > div {
+    .full-div>div {
         max-width: 600px;
     }
 }
 
 @media only screen and (max-width: $sm) {
-
     .desktop-md-block {
         width: 100%;
         margin-top: 20px;
     }
     .social-icons-container {
         justify-content: flex-start;
-        
-        > li { 
+        >li {
             width: calc(100%/3 - (20px/3));
             margin-right: 10px;
-            
             &:nth-child(3n+3) {
                 margin-right: 0;
             }
         }
     }
-
     .image-bb {
         width: calc(100% / 3);
-
         &:nth-child(3n+1) {
             justify-content: flex-start;
         }
-
         &:nth-child(3n+3) {
             justify-content: flex-end;
         }
