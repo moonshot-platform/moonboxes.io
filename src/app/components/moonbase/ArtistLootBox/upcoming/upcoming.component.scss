@@ -11,22 +11,24 @@ section.upcoming-container {
     overflow: hidden;
 }
 
-.social-icons-container > li {
+.main-message-container {
+    position: fixed;
+    z-index: 1300;
+}
+
+.social-icons-container>li {
     @extend %flex-center;
     margin-top: 20px;
-
     a {
         display: flex;
         background: #d5a642;
         border-radius: 50px;
         width: fit-content;
         padding: 15px;
-
         &:hover {
             background-color: white;
         }
     }
-
     img {
         width: 30px;
         height: 30px;
@@ -37,7 +39,9 @@ section.upcoming-container {
 .tabs-container {
     flex-wrap: wrap;
     justify-content: center;
-    > .tab { margin: 10px 5px; }
+    >.tab {
+        margin: 10px 5px;
+    }
 }
 
 .scroller {
@@ -78,7 +82,6 @@ section.upcoming-container {
     justify-content: center;
     position: relative;
     border: 2px solid #d5a642;
-
     &:hover {
         border-color: white;
     }
@@ -99,11 +102,9 @@ section.upcoming-container {
     width: 100%;
     padding: 1rem;
     box-sizing: border-box;
-
-    > .collection-inner {
+    >.collection-inner {
         @extend %flex-center;
         @extend %max-width-center;
-
         align-items: flex-start;
         border: 1px solid;
         padding: 1rem;
@@ -295,54 +296,43 @@ textarea {
         align-self: flex-start;
         padding-top: 4rem;
     }
-    
-    .collection-info > .collection-inner {
+    .collection-info>.collection-inner {
         flex-direction: column;
-
-        > .left {
+        >.left {
             display: none;
         }
     }
-    
     .grid-4 {
         flex-basis: 100%;
     }
-
     .d-block {
         display: block;
     }
-
-    .full-div > div {
+    .full-div>div {
         max-width: 600px;
     }
 }
 
 @media only screen and (max-width: $sm) {
-
     .desktop-md-block {
         width: 100%;
         margin-top: 20px;
     }
     .social-icons-container {
         justify-content: flex-start;
-        
-        > li { 
+        >li {
             width: calc(100%/3 - (20px/3));
             margin-right: 10px;
-            
             &:nth-child(3n+3) {
                 margin-right: 0;
             }
         }
     }
-
     .image-bb {
         width: calc(100% / 3);
-
         &:nth-child(3n+1) {
             justify-content: flex-start;
         }
-
         &:nth-child(3n+3) {
             justify-content: flex-end;
         }

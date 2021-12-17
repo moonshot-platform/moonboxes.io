@@ -12,6 +12,7 @@ import { MESSAGES } from 'src/app/messages.enum';
 import { UserDetailsProvider } from 'src/app/services/user-details.provider';
 import { UserDetailsModel } from 'src/app/models/user-details.model';
 import { SwiperOptions } from 'swiper';
+import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
 
 @Component({
   selector: 'app-artist-moonbox',
@@ -118,19 +119,19 @@ export class ArtistMoonboxComponent implements OnInit {
   public infoHoverList: any[] = [
     {
       "isHovered": false,
-      "tooltipText": "You Need 0 Moonshot token\nto open a Wood MoonBox."
+      "tooltipText": "You need 0 Moonshot token\nto open a Wood MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 75,000,000,000 Moonshot tokens to open a Silver MoonBox."
+      "tooltipText": "You need 75,000,000,000 Moonshot tokens to open a Silver MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 150,000,000,000 Moonshot tokens to open a Gold MoonBox."
+      "tooltipText": "You need 150,000,000,000 Moonshot tokens to open a Gold MoonBox."
     },
     {
       "isHovered": false,
-      "tooltipText": "You Need 250,000,000,000 Moonshot tokens to open a Diamond MoonBox."
+      "tooltipText": "You need 250,000,000,000 Moonshot tokens to open a Diamond MoonBox."
     },
   ];
 
@@ -219,7 +220,6 @@ export class ArtistMoonboxComponent implements OnInit {
       if (response.isSuccess) {
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
-
         this.supplyDetails.forEach((item: Supply) => {
           this.supply.push(item.hasSupply() ? 1 : 0);
         });
@@ -298,6 +298,21 @@ export class ArtistMoonboxComponent implements OnInit {
 
   trackByFn(index: number, item: any) {
     return item;
+  }
+
+  viewDetails(): void {
+    if (this.slides === null || this.artistData === null)
+      return;
+
+    this.dialog.open(
+      CollectionOverviewComponent,
+      {
+        width: '100%',
+        maxWidth: '1000px',
+        data: { "slides": this.slides, "artistData": this.artistData },
+        panelClass: 'collection-info-popup-panel',
+      }
+    );
   }
 
   getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(
