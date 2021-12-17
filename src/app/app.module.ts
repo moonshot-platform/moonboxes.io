@@ -17,11 +17,13 @@ import { LocalStorageService } from './services/local-storage.service';
 import { UserDetailsProvider } from './services/user-details.provider';
 import { ItemOverviewComponent } from './components/base/dialogs/item-overview/item-overview.component';
 import { CollectionOverviewComponent } from './components/base/dialogs/collection-overview/collection-overview.component';
+import { SwiperModule } from 'swiper/angular';
+import { CollectionOverviewModule } from './components/base/dialogs/collection-overview/collection-overview.module';
 
 
 @Injectable()
 export class HammerConfig extends HammerGestureConfig {
-  overrides = < any > {
+  overrides = <any>{
     'swipe': {
       direction: Hammer.DIRECTION_ALL
     }
@@ -40,6 +42,7 @@ export class HammerConfig extends HammerGestureConfig {
     MatIconModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    CollectionOverviewModule,
     GtagModule.forRoot({
       trackingId: 'G-5Q9LF9T9Q6',
       trackPageviews: true
@@ -47,12 +50,13 @@ export class HammerConfig extends HammerGestureConfig {
     MoonbaseModule,
     MatDialogModule,
     HttpClientModule,
+    SwiperModule,
     ToastrModule.forRoot(),
   ],
   providers: [{
-      provide: HAMMER_GESTURE_CONFIG,
-      useClass: HammerConfig,
-    },
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: HammerConfig,
+  },
     LocalStorageService,
     UserDetailsProvider
   ],
@@ -61,4 +65,4 @@ export class HammerConfig extends HammerGestureConfig {
     AppRoutingModule
   ]
 })
-export class AppModule {}
+export class AppModule { }
