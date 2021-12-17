@@ -188,6 +188,7 @@ export class UpcomingComponent implements OnInit {
         {
           width: '100%',
           maxWidth: '1000px',
+          height: '100%',
           data: collectionData
         }
       );
