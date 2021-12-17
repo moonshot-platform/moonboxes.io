@@ -225,7 +225,7 @@ section.upcoming-container {
 
 textarea {
     display: flex;
-    flex: max-content;
+    flex: 1;
     width: 100%;
     background-color: transparent;
     border: 1px solid $primary;
@@ -308,6 +308,10 @@ swiper {
     padding-top: 0px !important;
 }
 
+::ng-deep.collection-info-popup-panel {
+    height: unset !important;
+}
+
 .cursor-pointer {
     cursor: pointer;
 }
@@ -373,6 +377,9 @@ section.carousel-mobile {
     }
     section.carousel {
         display: none;
+    }
+     ::ng-deep.collection-info-popup-panel {
+        height: 100% !important;
     }
     .artist-popup-info-container {
         margin-left: 0px;
