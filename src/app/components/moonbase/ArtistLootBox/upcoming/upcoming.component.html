@@ -24,7 +24,7 @@
                         <ng-container *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;">
                             <div *ngIf="!(this.NSFWToggleState && item['NSFW'])" class="flex-col flex-center p-3 grid-4">
 
-                                <a *ngIf="currentCategory === dropsCategory.LIVE || currentCategory === dropsCategory.RECENT" class="flex1 nft_img flex-center" [routerLink]="['/artist',item.walletAddress]">
+                                <a *ngIf="item.revealDate !== 'Application form'" class="flex1 nft_img flex-center" [routerLink]="['/artist',item.walletAddress]">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 
