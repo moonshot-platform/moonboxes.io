@@ -1,12 +1,25 @@
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
 export const environment = {
-  production: true,
-  chainId : 56,
-  providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",    
+  production: false,
+  chainId: 97,
+  providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
-  baseURL: "https://moonboxes.io/api/api/",
-  ownerAddress : "0x66A7B9f608378e59105022aB00b0F541666e8c4d",
-  silverAddress: "0xd27D3F7f329D93d897612E413F207A4dbe8bF799",
-  lootboxAddress: "0x83350dB1Ab42c8ac82FAf74FdA7C0160919d2a40",
-  NFTAddress: "0x82A3E038048CF02C19e60856564bE209899d4F12",
-  artistNFTAddress: "0xa8e67efd3DDAD234947d8BC80F36aa8F9eb35dF0",
+  baseURL: "http://codetentacles-006-site31.htempurl.com/api/",
+  ownerAddress: "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC",
+  silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
+  lootboxAddress: "0xeA2c12cb5f65832dc68E694C3894001ba353aBDf",
+  NFTAddress: "0x68bac4a2fe7aA005Bc370da6139Dac6F2EFDB39C",
+  artistNFTAddress: "0xd1bA88C3D03e9Eaf0Cb766Cd4E7202620D3CcFC2"
 };
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
