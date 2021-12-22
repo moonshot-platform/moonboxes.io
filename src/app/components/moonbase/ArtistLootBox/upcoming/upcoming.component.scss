@@ -16,6 +16,10 @@ section.upcoming-container {
     z-index: 1300;
 }
 
+a.disabledBorder {
+    border: 2px solid gray !important;
+}
+
 .social-icons-container>li {
     @extend %flex-center;
     margin-top: 20px;
