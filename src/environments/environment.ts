@@ -12,7 +12,7 @@ export const environment = {
   silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
   lootboxAddress: "0xeA2c12cb5f65832dc68E694C3894001ba353aBDf",
   NFTAddress: "0x68bac4a2fe7aA005Bc370da6139Dac6F2EFDB39C",
-  artistNFTAddress: "0xd1bA88C3D03e9Eaf0Cb766Cd4E7202620D3CcFC2"
+  artistNFTAddress: "0xF21Ae2f6469B4a38F49d98173f218d77165C9b2f"
 };
 
 /*

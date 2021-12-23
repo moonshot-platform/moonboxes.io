@@ -24,7 +24,7 @@
                         <ng-container *ngFor="let item of list[currentCategory]; let i = index; trackBy: trackByFn;">
                             <div *ngIf="!(this.NSFWToggleState && item['NSFW'])" class="flex-col flex-center p-3 grid-4">
 
-                                <a *ngIf="item.revealDate !== 'Application form'" class="flex1 nft_img flex-center" [class.disabledBorder]="currentCategory === dropsCategory.UPCOMING" [routerLink]="currentCategory === dropsCategory.UPCOMING ? null : ['/artist',item.walletAddress]">
+                                <a *ngIf="currentCategory === dropsCategory.LIVE || currentCategory === dropsCategory.RECENT" class="flex1 nft_img flex-center" [routerLink]="['/artist',item.walletAddress]">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 
@@ -43,7 +43,7 @@
                                     <div class="border-top-bottom mt10 mb20">
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
-                                            <p class="color-primary mb10 mt10">{{getMinPrice(item)}} BNB</p>
+                                            <p class="color-primary mb10 mt10">{{getMinPrice(item)}} {{item.tokenName}}</p>
                                         </div>
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10">Availability</p>
