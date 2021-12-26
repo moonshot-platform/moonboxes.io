@@ -184,6 +184,15 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
+      if(this.data.artistDetails.tokenAddress!='0x0000000000000000000000000000000000000000'){
+        let allowance:any = await this.walletConnectService.checkAllowance(this.data.artistDetails.tokenAddress,this.data.artistDetails.price);
+        if(allowance.status && !allowance.allowance)
+        {
+          this.btn1Text = "Approve Token..."
+          let txn:any = await this.walletConnectService.approveToken(this.data.artistDetails.price,this.data.artistDetails.tokenAddress);
+          await txn.hash.wait(3);
+        }
+    }
       transactionDetails = await this.walletConnectService
         .redeemBulkTransactionArtist(
           this.data.artistDetails.lootBoxId,
@@ -191,7 +200,8 @@ export class ModalForTransactionComponent implements OnInit {
           this.data.artistDetails.price, 
           this.data.artistDetails.address,
           this.data.artistDetails.signature,
-          this.data.artistDetails.limit
+          this.data.artistDetails.limit,
+          this.data.artistDetails.tokenAddress
         );
     }
     catch (e) {
