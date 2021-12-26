@@ -42,12 +42,6 @@
         "internalType": "address",
         "name": "artist",
         "type": "address"
-      },
-      {
-        "indexed": false,
-        "internalType": "address",
-        "name": "tokenAddress",
-        "type": "address"
       }
     ],
     "name": "Bet",
@@ -365,11 +359,6 @@
         "internalType": "uint256",
         "name": "betLimit",
         "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "tokenAddress",
-        "type": "address"
       },
       {
         "internalType": "uint8",

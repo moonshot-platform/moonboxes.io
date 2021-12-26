@@ -166,6 +166,18 @@
     display: flex;
 }
 
+.share-button {
+    height: 50px;
+    width: 50px;
+    margin-top: 10px;
+    cursor: pointer;
+    &:hover {
+        svg>g {
+            fill: white;
+        }
+    }
+}
+
 @keyframes expand {
     0% {
         transform: translate(-50%, -50%) scale(1);

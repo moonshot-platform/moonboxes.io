@@ -110,7 +110,6 @@ export class UpcomingComponent implements OnInit {
   }
 
   async getAllCollections() {
-
     this.httpService.getAllCollections(this.NSFWToggleState, this.address).subscribe((response) => {
       this.list[DROPS_CATEGORY.LIVE] = response.data.live_data_array;
       this.list[DROPS_CATEGORY.RECENT] = response.data.recent_data_array;

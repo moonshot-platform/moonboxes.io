@@ -41,8 +41,10 @@ export class HistoryComponent implements OnInit {
 
     this.walletConnectService.getData().subscribe( ( data: any ) => {
       if( data ) {
+        if(data.address!=this.address){
         this.address = data.address;
         this.getBidHistory();
+        }
       } else
         this.toastrService.error( "Please connect your wallet" );
     });

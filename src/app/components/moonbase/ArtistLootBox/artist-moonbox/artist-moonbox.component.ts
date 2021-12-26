@@ -265,13 +265,14 @@ export class ArtistMoonboxComponent implements OnInit {
         data: this.data,
         index: index,
         balance: this.balance,
-        isArtistLootBox: true,
+        isArtistLootBox: this.artistDetails.walletAddress==environment.ownerAddress ? false : true,
         artistDetails: {
           lootBoxId: this.supplyDetails[index].id,
           price: this.supplyDetails[index].price,
           address: this.artistDetails.walletAddress,
           signature: this.supplyDetails[index].signature,
-          limit: this.supplyDetails[index].limitPerTxn
+          limit: this.supplyDetails[index].limitPerTxn,
+          tokenAddress : this.supplyDetails[index].tokenAddress
         }
       },
       panelClass: 'custom-modalbox'

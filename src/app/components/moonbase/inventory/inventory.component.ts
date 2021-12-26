@@ -60,6 +60,7 @@ export class InventoryComponent implements OnInit {
     } );
       
     this.walletConnectService.getData().subscribe((data) => {
+      if(this.data===undefined ||  this.data.address!=data.address){
       this.data = data ?? {};
 
       if( Object.keys(this.data).length > 0 ) {
@@ -67,6 +68,7 @@ export class InventoryComponent implements OnInit {
       } else {
         this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
       }
+    }
     });
   }
 

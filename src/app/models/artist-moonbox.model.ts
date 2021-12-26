@@ -24,6 +24,9 @@ export class Supply {
     limitPerTxn:   number;
     isUpcoming:    boolean;
     currentSupply: number;
+    tokenAddress : string;
+    tokenName:     string;
+
 
     public hasSupply() {
         return this.currentSupply >= 1;

@@ -320,7 +320,7 @@ export class WalletConnectService {
   async getRedeemBulk( id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string ) {
     const promise = new Promise((resolve, reject) => {
       const spliSign = ethers.utils.splitSignature(signature);
-      
+      debugger
       if( isArtist ){
         try {
           this.artistLootBoxContract.redeemBulk( NFTAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s )
@@ -356,14 +356,25 @@ export class WalletConnectService {
   
 
 /** Artist  **/
-redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAddress: string, signature: any, betlimit: number ) {
-    const params: any = ethers.utils.parseEther( price.toString() );
+async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAddress: string, signature: any, betlimit: number, tokenAddress : string ) {
+    let params: any = ethers.utils.parseEther( price.toString() );
     const spliSign = ethers.utils.splitSignature( signature );
+    let callValue:string = "0" ;
+    if(tokenAddress=='0x0000000000000000000000000000000000000000'){
+      callValue = ( params * noOfBets ).toString();
+    }
+    else
+    {
+      let contract  = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
+      let decimals = await contract.decimals();
+      params =((10**decimals)*price).toString();
+    }
 
     const promise = new Promise( ( resolve, reject ) => {
       try {
-        this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit, spliSign.v, spliSign.r, spliSign.s, {
-            value : ( params * noOfBets ).toString()
+       
+        this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit,tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+            value : callValue
           }
         ).then( ( transactionHash: any ) => {
           resolve( { hash: transactionHash.hash, status: true } );
@@ -430,4 +441,53 @@ redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAd
     this.account = '';
     this.localStorageService.removeWallet();
   }
+
+
+
+  //Token based payments
+  async checkAllowance(tokenAddress:any,amount:any) {
+    let tokenContract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
+    debugger
+    let decimals = await tokenContract.decimals();
+    var promise = new Promise((resolve, reject) => {
+      try {
+    const params2 =(10**decimals)*amount;
+     tokenContract.allowance(this.account, ArtistNFTAddress)
+      .then(async function (allowanceAmount:any) {
+        if(allowanceAmount>=params2){
+          resolve({ hash: "", status: true,allowance:true });
+        }
+        else{
+          resolve({hash:"",status:true,allowance:false})
+        }
+        })
+      }
+      catch (e) {
+        reject({ hash: e, status: false });
+      }
+    });
+    return promise
+  }
+
+  async approveToken(amount:any,tokenAddress:any)
+  {
+    let tokenContract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
+    let decimals = await tokenContract.decimals();
+    const params2 =(10**decimals)*amount;
+
+    var promise = new Promise(async (resolve, reject) => {
+      try {
+        let tx =await tokenContract.approve(ArtistNFTAddress, (params2).toString())
+         
+          
+          resolve({hash:tx,status:true,allowance:false})     
+      }
+      catch (e) {
+        
+        reject({ hash: e, status: false });
+      }
+    });
+    return promise
+  }
+
 }

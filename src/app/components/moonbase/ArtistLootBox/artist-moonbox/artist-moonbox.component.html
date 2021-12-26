@@ -38,7 +38,7 @@
 
                     <div class="text-center">
                         <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m  mb10 mt10">{{supplyDetails[i]?.type}} (<span>{{supplyDetails[i]?.currentSupply}}</span>)</p>
-                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[i]?.price}} BNB</p>
+                        <p *ngIf="supplyDetails!==undefined" class="p-white-span-primary p16d14m mb10">{{supplyDetails[i]?.price}} {{supplyDetails[i]?.tokenName}}</p>
 
                         <div class="border plus_minus flex mb20" *ngIf="supply[i]>0" [ngClass]="{'disabled-plus-minus': !hasEnoughMoonshots(i)}">
                             <button class="minus flex1 pointer" (click)="onDecreaseSupplyInterestAmount(i)">
