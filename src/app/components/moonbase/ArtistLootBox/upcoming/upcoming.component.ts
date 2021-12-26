@@ -96,6 +96,7 @@ export class UpcomingComponent implements OnInit {
     this.walletConnectService.getData().subscribe((data) => {
       this.data = data;
       this.address = data.address;
+      this.getAllCollections();
     });
 
     this.getAllCollections();
