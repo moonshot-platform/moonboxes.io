@@ -5,6 +5,7 @@
             <ng-container *ngFor="let slide of slides; index as i">
                 <ng-template swiperSlide>
                     <div class="nft-image-container" [routerLink]="['/'+slide.url]" routerLinkActive="router-link-active">
+
                         <img src="{{slide.img}}" alt="{{slide.name}}">
                     </div>
                 </ng-template>
