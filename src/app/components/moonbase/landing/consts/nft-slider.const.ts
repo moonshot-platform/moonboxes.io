@@ -32,9 +32,19 @@ export const nftSlider: SliderModel[] = [
         "artist/0x66A7B9f608378e59105022aB00b0F541666e8c4d"
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/sharpei/236.webp",
+        "SharPei",
+        "",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06106.webp",
         "The Ra8bitsNFT Series",
         "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/fractal-art/Da-Vinci-Mona-Lisa.webp",
+        "Fractal Art",
+        "artist/0x24B5BF0aE8F4EeC63549B413F3De903C64B2e101",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02438.webp",
@@ -47,9 +57,19 @@ export const nftSlider: SliderModel[] = [
         "artist/0x66A7B9f608378e59105022aB00b0F541666e8c4d"
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/sharpei/170.webp",
+        "SharPei",
+        "",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06071.webp",
         "The Ra8bitsNFT Series",
         "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/fractal-art/Hokusai-The-Great-Wave-off-Kanagawa.webp",
+        "Fractal Art",
+        "artist/0x24B5BF0aE8F4EeC63549B413F3De903C64B2e101",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02478.webp",
@@ -62,9 +82,19 @@ export const nftSlider: SliderModel[] = [
         "artist/0x66A7B9f608378e59105022aB00b0F541666e8c4d"
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/sharpei/40.webp",
+        "SharPei",
+        "",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06045.webp",
         "The Ra8bitsNFT Series",
         "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/fractal-art/Liechtenstein-Girl-with-Hair-Ribbon.webp",
+        "Fractal Art",
+        "artist/0x24B5BF0aE8F4EeC63549B413F3De903C64B2e101",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02532.webp",
@@ -77,9 +107,24 @@ export const nftSlider: SliderModel[] = [
         "artist/0x66A7B9f608378e59105022aB00b0F541666e8c4d"
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/sharpei/15.webp",
+        "SharPei",
+        "",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05925.webp",
         "The Ra8bitsNFT Series",
         "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/kallies/5-Princess-Kallie.webp",
+        "Kallies NFT World",
+        "artist/0x4Bde39352B2204C653F24c611C7C7db5Cc5C1070"
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/fractal-art/Vermeer-Girl-with-a-Pearl-Earring.webp",
+        "Fractal Art",
+        "artist/0x24B5BF0aE8F4EeC63549B413F3De903C64B2e101",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02550.webp",
@@ -92,9 +137,24 @@ export const nftSlider: SliderModel[] = [
         "artist/0x66A7B9f608378e59105022aB00b0F541666e8c4d"
     ),
     new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/sharpei/1.webp",
+        "SharPei",
+        "",
+    ),
+    new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05918.webp",
         "The Ra8bitsNFT Series",
         "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/kallies/8-Party-Kitties.webp",
+        "Kallies NFT World",
+        "artist/0x4Bde39352B2204C653F24c611C7C7db5Cc5C1070"
+    ),
+    new SliderModel(
+        "assets/media/images/moonbox/landing/nfts/fractal-art/Warhol-Marilyn-Monroe.webp",
+        "Fractal Art",
+        "artist/0x24B5BF0aE8F4EeC63549B413F3De903C64B2e101",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02559.webp",
