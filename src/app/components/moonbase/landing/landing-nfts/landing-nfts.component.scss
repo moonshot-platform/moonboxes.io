@@ -58,8 +58,9 @@ p.slider-name {
         display: flex;
         height: 100%;
         width: 100%;
-        align-self: center;
-        object-fit: contain;
+        max-height: 250px;
+        max-width: 250px;
+        object-fit: cover;
     }
 }
 
@@ -152,7 +153,29 @@ p.slider-name {
     display: flex;
 }
 
-@media only screen and (max-width: $sm) {}
+@media only screen and (max-width: $sm) {
+    .nft-image-container {
+        max-width: 140px !important;
+        max-height: 140px !important;
+        img {
+            object-fit: cover;
+            max-width: 140px !important;
+            max-height: 140px !important;
+        }
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+    .nft-image-container {
+        max-width: 200px;
+        max-height: 200px;
+        img {
+            object-fit: cover;
+            max-width: 200px;
+            max-height: 200px;
+        }
+    }
+}
 
 @media only screen and (max-width: 810px) {
     section.landing-nfts {
