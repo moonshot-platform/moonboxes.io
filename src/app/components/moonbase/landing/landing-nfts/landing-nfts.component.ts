@@ -47,22 +47,15 @@ export class LandingNftsComponent implements OnInit {
       stretch: 0,
     },
     breakpoints: {
-      700: {
-        slidesPerView: 3,
+      801: {
+        slidesPerView: 3
       },
-      600: {
-        slidesPerView: 3,
+      400: {
+        slidesPerView: 1.7
       },
-      500: {
-        slidesPerView: 2.4,
-      },
-      300: {
-        slidesPerView: 1.5,
-      },
-      200: {
-        slidesPerView: 1.5,
+      100: {
+        slidesPerView: 1.3
       }
-
     }
 
   };

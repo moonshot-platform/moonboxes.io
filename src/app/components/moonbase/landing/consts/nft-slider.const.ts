@@ -33,7 +33,7 @@ export const nftSlider: SliderModel[] = [
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/236.webp",
-        "SharPei",
+        "Happy SharPei Yacht Club",
         "",
     ),
     new SliderModel(
@@ -58,7 +58,7 @@ export const nftSlider: SliderModel[] = [
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/170.webp",
-        "SharPei",
+        "Happy SharPei Yacht Club",
         "",
     ),
     new SliderModel(
@@ -83,7 +83,7 @@ export const nftSlider: SliderModel[] = [
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/40.webp",
-        "SharPei",
+        "Happy SharPei Yacht Club",
         "",
     ),
     new SliderModel(
@@ -108,7 +108,7 @@ export const nftSlider: SliderModel[] = [
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/15.webp",
-        "SharPei",
+        "Happy SharPei Yacht Club",
         "",
     ),
     new SliderModel(
@@ -138,7 +138,7 @@ export const nftSlider: SliderModel[] = [
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/1.webp",
-        "SharPei",
+        "Happy SharPei Yacht Club",
         "",
     ),
     new SliderModel(
