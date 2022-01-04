@@ -34,7 +34,7 @@ export const nftSlider: SliderModel[] = [
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/236.webp",
         "Happy SharPei Yacht Club",
-        "",
+        "artist/0x1Aa800bE7e9829DDF97C54EF750F5E42C2a6a884",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06106.webp",
@@ -59,7 +59,7 @@ export const nftSlider: SliderModel[] = [
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/170.webp",
         "Happy SharPei Yacht Club",
-        "",
+        "artist/0x1Aa800bE7e9829DDF97C54EF750F5E42C2a6a884",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06071.webp",
@@ -84,7 +84,7 @@ export const nftSlider: SliderModel[] = [
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/40.webp",
         "Happy SharPei Yacht Club",
-        "",
+        "artist/0x1Aa800bE7e9829DDF97C54EF750F5E42C2a6a884",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06045.webp",
@@ -109,7 +109,7 @@ export const nftSlider: SliderModel[] = [
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/15.webp",
         "Happy SharPei Yacht Club",
-        "",
+        "artist/0x1Aa800bE7e9829DDF97C54EF750F5E42C2a6a884",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05925.webp",
@@ -139,7 +139,7 @@ export const nftSlider: SliderModel[] = [
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/sharpei/1.webp",
         "Happy SharPei Yacht Club",
-        "",
+        "artist/0x1Aa800bE7e9829DDF97C54EF750F5E42C2a6a884",
     ),
     new SliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05918.webp",
