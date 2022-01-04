@@ -151,8 +151,8 @@ swiper {
         margin-top: 80px;
     }
     .nft-image-container {
-        max-height: 250px;
-        max-width: 250px;
+        max-height: 200px;
+        max-width: 200px;
     }
     section.landing-carousel {
         max-width: 200px !important;
@@ -209,8 +209,9 @@ swiper {
         }
     }
     .nft-image-container {
-        max-height: 250px;
-        max-width: 250px;
+        max-height: 200px;
+        max-width: 200px;
+        overflow: hidden;
     }
     section.landing-carousel {
         max-width: 200px !important;
