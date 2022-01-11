@@ -7,7 +7,7 @@
                     <ng-container *ngFor="let slide of slides; index as i">
                         <ng-template swiperSlide>
                             <div class="nft-image-container">
-                                <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                                <img src="{{getPreviewImageUrl(slide.logo_path)}}" alt="{{slide.nftId}}">
                             </div>
                         </ng-template>
                     </ng-container>
@@ -32,7 +32,7 @@
                     <ng-container *ngFor="let slide of slides; index as i">
                         <ng-template swiperSlide>
                             <div class="nft-image-container">
-                                <img src="{{slide.logo_path}}" alt="{{slide.nftId}}">
+                                <img src="{{getPreviewImageUrl(slide.logo_path)}}" alt="{{slide.nftId}}">
                             </div>
                         </ng-template>
                     </ng-container>
