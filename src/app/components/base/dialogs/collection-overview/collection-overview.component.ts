@@ -100,4 +100,8 @@ export class CollectionOverviewComponent implements OnInit {
     return `from ${item['minPrice']}`;
   }
 
+  getPreviewImageUrl(url: string): string {
+    return url.slice(0, 36) + 'previews/' + url.slice(36, -3) + 'webp';
+  }
+
 }
