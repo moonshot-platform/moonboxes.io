@@ -9,7 +9,6 @@ export class LandingSliderProvider {
 
     private liveCollectionList: any[] = [];
     private allNftImages: LandingSliderModel[] = [];
-    private areImagesReady: boolean = false;
 
     private subjectLandingSlider = new Subject<LandingSliderModel[]>();
 

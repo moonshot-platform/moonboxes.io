@@ -25,7 +25,7 @@ export class LandingIntroComponent implements OnInit {
       delay: 2500,
       disableOnInteraction: false,
       stopOnLastSlide: false,
-      pauseOnMouseEnter: true,
+      pauseOnMouseEnter: false,
     },
     speed: 3000,
     freeMode: {
