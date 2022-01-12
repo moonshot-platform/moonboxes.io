@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import SwiperCore, { EffectCoverflow, Swiper, Autoplay } from 'swiper';
 import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
-import { SliderModel } from '../models/slider.model';
+
 import { nftSlider } from '../consts/nft-slider.const';
 import { debug } from 'console';
+import { LandingSliderModel } from 'src/app/models/landing-slider.model';
+import { LandingSliderProvider } from 'src/app/services/providers/landing-slider.provider';
 SwiperCore.use([EffectCoverflow]);
 SwiperCore.use([Autoplay]);
 
@@ -16,7 +18,7 @@ SwiperCore.use([Autoplay]);
 export class LandingNftsComponent implements OnInit {
 
 
-  slides: SliderModel[] = nftSlider;
+  slides: LandingSliderModel[] = nftSlider;
 
   initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
   sliderIndex = this.initialSlideStartIndex;
@@ -60,9 +62,16 @@ export class LandingNftsComponent implements OnInit {
 
   };
 
-  constructor() { }
+  constructor(private landingSliderProvider: LandingSliderProvider) {
+  }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.slides = this.landingSliderProvider.getAllNftImages();
+
+    this.landingSliderProvider.onChange().subscribe((list) => {
+      this.slides = list;
+    });
+  }
 
   onIndexChange(event: any): void {
     this.currentSliderName = this.slides[event.realIndex].name;
