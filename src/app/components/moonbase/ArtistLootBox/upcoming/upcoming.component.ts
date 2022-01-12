@@ -90,8 +90,6 @@ export class UpcomingComponent implements OnInit {
     this.location.go(`/${categoryName}`);
   }
 
-
-
   async getConnectedAccount() {
     this.walletConnectService.getData().subscribe((data) => {
       this.data = data;
