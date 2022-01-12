@@ -4,7 +4,6 @@ import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 
 import { nftSlider } from '../consts/nft-slider.const';
-import { debug } from 'console';
 import { LandingSliderModel } from 'src/app/models/landing-slider.model';
 import { LandingSliderProvider } from 'src/app/services/providers/landing-slider.provider';
 SwiperCore.use([EffectCoverflow]);
@@ -18,11 +17,11 @@ SwiperCore.use([Autoplay]);
 export class LandingNftsComponent implements OnInit {
 
 
-  slides: LandingSliderModel[] = nftSlider;
+  slides: LandingSliderModel[] = [];
 
   initialSlideStartIndex = Math.floor((this.slides.length - 1) / 2);
   sliderIndex = this.initialSlideStartIndex;
-  currentSliderName = this.slides[this.sliderIndex].name;
+  currentSliderName = this.slides[this.sliderIndex]?.name ?? '';
 
   config: SwiperOptions = {
     slidesPerView: 3,
@@ -74,7 +73,7 @@ export class LandingNftsComponent implements OnInit {
   }
 
   onIndexChange(event: any): void {
-    this.currentSliderName = this.slides[event.realIndex].name;
+    this.currentSliderName = this.slides[event.realIndex]?.name ?? '';
   }
 
   scrollToElement(page: string, fragment: string): void {

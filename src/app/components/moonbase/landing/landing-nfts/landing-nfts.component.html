@@ -1,16 +1,19 @@
 <section id="landing-nfts" class="landing-nfts">
     <!-- This is the 3D Owl Carousel -->
     <section class="landing-carousel">
-        <swiper [config]="config" (activeIndexChange)="onIndexChange($event)" (slideChange)="onIndexChange($event)" (realIndexChange)="onIndexChange($event)">
+        <swiper *ngIf="slides.length !== 0" [config]="config" (activeIndexChange)="onIndexChange($event)" (slideChange)="onIndexChange($event)" (realIndexChange)="onIndexChange($event)">
             <ng-container *ngFor="let slide of slides; index as i">
                 <ng-template swiperSlide>
                     <div class="nft-image-container" [routerLink]="['/'+slide.url]" routerLinkActive="router-link-active">
-
                         <img src="{{slide.img}}" alt="{{slide.name}}">
                     </div>
                 </ng-template>
             </ng-container>
         </swiper>
+        <div *ngIf="slides.length === 0" class="flex flex-center" style="max-width: 770px; width: 100vw;">
+            <img class="flex mx-auto" style="margin-bottom: 40px;" src="assets/media/videos/Loading.gif" alt="">
+        </div>
+
     </section>
     <p class="slider-name">{{currentSliderName}}</p>
 

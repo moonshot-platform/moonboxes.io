@@ -24,7 +24,7 @@ export class LandingSliderProvider {
         return this.subjectLandingSlider.asObservable();
     }
 
-    getAllNftImages = (): LandingSliderModel[] => this.allNftImages.length === 0 ? nftSlider : this.allNftImages;
+    getAllNftImages = (): LandingSliderModel[] => this.allNftImages;
 
     async getLiveCollectionsAddresses(): Promise<any> {
 
@@ -33,20 +33,21 @@ export class LandingSliderProvider {
 
         for (let i = 0; i < this.liveCollectionList.length; i++) {
 
-            await this.httpService.getRandomCollectionImageListFromArtist(this.liveCollectionList[i].walletAddress).then((res) => {
+            await this.httpService.getRandomCollectionImageListFromArtist(this.liveCollectionList[i].walletAddress)
+                .then((res) => {
 
-                for (let j = 0; j < 5; j++) {
-                    if (res.data[j] !== undefined)
-                        this.allNftImages.push(
-                            new LandingSliderModel(
-                                this.getPreviewImageUrl(res.data[j].logo_path),
-                                res.artistData.collectionName,
-                                "artist/" + this.liveCollectionList[i].walletAddress
-                            )
-                        );
-                }
+                    for (let j = 0; j < 5; j++) {
+                        if (res.data[j] !== undefined)
+                            this.allNftImages.push(
+                                new LandingSliderModel(
+                                    this.getPreviewImageUrl(res.data[j].logo_path),
+                                    res.artistData.collectionName,
+                                    "artist/" + this.liveCollectionList[i].walletAddress
+                                )
+                            );
+                    }
 
-            });
+                });
         }
 
         this.onSave(this.allNftImages);

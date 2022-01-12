@@ -15,7 +15,7 @@ SwiperCore.use([Autoplay]);
 })
 export class LandingIntroComponent implements OnInit {
 
-  slides: LandingSliderModel[] = nftSlider;
+  slides: LandingSliderModel[] = [];
 
   config: SwiperOptions = {
     slidesPerView: 1,
@@ -53,7 +53,6 @@ export class LandingIntroComponent implements OnInit {
       this.slides = list;
     });
   }
-
 
   scrollToElement(page: string, fragment: string): void {
     const element = document.querySelector(`#${fragment}`)
