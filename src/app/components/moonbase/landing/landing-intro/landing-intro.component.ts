@@ -4,7 +4,8 @@ import { SwiperOptions } from 'swiper/types/swiper-options';
 import 'swiper/scss';
 import 'swiper/scss/autoplay';
 import { nftSlider } from '../consts/nft-slider.const';
-import { SliderModel } from '../models/slider.model';
+import { LandingSliderModel } from 'src/app/models/landing-slider.model';
+import { LandingSliderProvider } from 'src/app/services/providers/landing-slider.provider';
 SwiperCore.use([EffectFade]);
 SwiperCore.use([Autoplay]);
 @Component({
@@ -14,7 +15,7 @@ SwiperCore.use([Autoplay]);
 })
 export class LandingIntroComponent implements OnInit {
 
-  slides: SliderModel[] = nftSlider;
+  slides: LandingSliderModel[] = [];
 
   config: SwiperOptions = {
     slidesPerView: 1,
@@ -24,7 +25,7 @@ export class LandingIntroComponent implements OnInit {
       delay: 2500,
       disableOnInteraction: false,
       stopOnLastSlide: false,
-      pauseOnMouseEnter: true,
+      pauseOnMouseEnter: false,
     },
     speed: 3000,
     freeMode: {
@@ -41,11 +42,16 @@ export class LandingIntroComponent implements OnInit {
     },
   };
 
-  constructor() {
+  constructor(private landingSliderProvider: LandingSliderProvider) {
+
   }
 
   ngOnInit(): void {
+    this.slides = this.landingSliderProvider.getAllNftImages();
 
+    this.landingSliderProvider.onChange().subscribe((list) => {
+      this.slides = list;
+    });
   }
 
   scrollToElement(page: string, fragment: string): void {

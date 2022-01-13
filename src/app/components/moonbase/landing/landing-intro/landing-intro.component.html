@@ -1,7 +1,7 @@
 <section class="landing-intro">
     <div class="landing-into-nft-image-container-mobile">
         <section class="landing-carousel">
-            <swiper [config]="config">
+            <swiper *ngIf="slides.length !== 0" [config]="config">
                 <ng-container *ngFor="let slide of slides; index as i">
                     <ng-template swiperSlide>
                         <div class="nft-image-container">
@@ -10,8 +10,10 @@
                     </ng-template>
                 </ng-container>
             </swiper>
+            <img class="flex mx-auto" style="margin-bottom: 80px;" *ngIf="slides.length === 0" src="assets/media/videos/Loading.gif" alt="">
         </section>
     </div>
+
     <div class="info">
         <div class="line-container ">
             <div class="line flex1"></div>
@@ -41,7 +43,7 @@
 
     <div class="landing-into-nft-image-container">
         <section class="landing-carousel">
-            <swiper [config]="config">
+            <swiper *ngIf="slides.length !== 0" [config]="config">
                 <ng-container *ngFor="let slide of slides; index as i">
                     <ng-template swiperSlide>
                         <div class="nft-image-container">
@@ -50,6 +52,7 @@
                     </ng-template>
                 </ng-container>
             </swiper>
+            <img class="flex mx-auto" style="margin-left: 80px;" *ngIf="slides.length === 0" src="assets/media/videos/Loading.gif" alt="">
         </section>
     </div>
 </section>
