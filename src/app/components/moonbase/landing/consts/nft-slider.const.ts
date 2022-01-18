@@ -5,7 +5,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06271.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02374.webp",
@@ -20,7 +20,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06108.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/females/character-02384.webp",
@@ -40,7 +40,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06106.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/fractal-art/Da-Vinci-Mona-Lisa.webp",
@@ -65,7 +65,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06071.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/fractal-art/Hokusai-The-Great-Wave-off-Kanagawa.webp",
@@ -90,7 +90,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-06045.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/fractal-art/Liechtenstein-Girl-with-Hair-Ribbon.webp",
@@ -115,7 +115,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05925.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/kallies/5-Princess-Kallie.webp",
@@ -145,7 +145,7 @@ export const nftSlider: LandingSliderModel[] = [
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/males/character-05918.webp",
         "The Ra8bitsNFT Series",
-        "artist/0x4b656fAB214D2e493534764E4074E2881A7A5f16",
+        "recent",
     ),
     new LandingSliderModel(
         "assets/media/images/moonbox/landing/nfts/kallies/8-Party-Kitties.webp",

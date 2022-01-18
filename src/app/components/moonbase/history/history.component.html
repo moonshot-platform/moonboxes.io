@@ -1,86 +1,83 @@
 <section class="scroller">
-  <div *ngIf="!historyData" class="flex-center main-message-container w-100 h-100 text-center pa20">
-    {{mainMessage}}
-    <div *ngIf="mainMessage === messages.IDLE && isConnected; else loggedOut">
-      <img class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+    <div *ngIf="!historyData" class="flex-center main-message-container w-100 h-100 text-center pa20">
+        {{mainMessage}}
+        <div *ngIf="mainMessage === messages.IDLE && isConnected; else loggedOut">
+            <img class="absolute-center" src="assets/media/videos/Loading.gif" alt="loading" />
+        </div>
+        
+        <ng-template #loggedOut>
+            <p class="absolute-center fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
+        </ng-template>
     </div>
 
-    <ng-template #loggedOut>
-      <p class="mt50 fade-in-delayed pointer" (click)="openDialog()">Please connect your wallet</p>
-    </ng-template>
-  </div>
+    <div *ngIf="historyData !== null" class="mt50 flex-center flex-col mb-auto">
 
-  <div *ngIf="historyData" class="flex flex-col mb-auto">
-    <div class="flex flex-col w100 flex-center">
-      <div class="tabs-container flex flex-xs-col  mt70">
-        <a class="tab" [ngClass]="getButtonType(tabsCategory.UNBOXINGS)"
-          (click)="changeTab(tabsCategory.UNBOXINGS)">Unboxings</a>
-        <a class="tab" [ngClass]="getButtonType(tabsCategory.TRANSFERS)"
-          (click)="changeTab(tabsCategory.TRANSFERS)">Transfers</a>
+      <div class="tabs-container flex justify-space-around pb50">
+          <a class="tab" [ngClass]="getButtonType(tabsCategory.UNBOXINGS)" (click)="changeTab(tabsCategory.UNBOXINGS)">Unboxings</a>
+          <a class="tab outlined-button" [ngClass]="getButtonType(tabsCategory.TRANSFERS)" (click)="changeTab(tabsCategory.TRANSFERS)">Transfers</a>
       </div>
-    </div>
 
-    <div *ngIf="historyData && currentCategory === tabsCategory.UNBOXINGS"
-      class="pt-5 h-100 flex-space-between align-items-center">
-      <div class="flex1 flex-column flex-center">
-        <div class="table-responsive">
-          <table class="table mb20">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Tier</th>
-                <th>Quantity</th>
-                <!-- <th>Verified seed</th> -->
-                <th>Claimed</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: page }; let i=index">
-                <td>{{item.DateNFT}}</td>
-                <td>{{item.BetTier}}</td>
-                <td class="text-center">{{item.nftData.length}}</td>
-                <!-- <td>14849534</td> -->
-                <td>
-                  <button class="button" (click)="onClaimNFT(item,i)" *ngIf="!item.isClaimed">Claim</button>
-                  <p class="success" *ngIf="item.isClaimed">Claimed</p>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-controls class="my-pagination" (pageChange)="page = $event" [maxSize]="maxSize">
-          </pagination-controls>
+      <div *ngIf="historyData && currentCategory === tabsCategory.UNBOXINGS" class="h-100 flex-space-between align-items-center">
+        <div class="flex1 flex-column flex-center">
+          <div class="table-responsive">
+            <table class="table mb20">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Tier</th>
+                  <th>Quantity</th>
+                  <!-- <th>Verified seed</th> -->
+                  <th>Claimed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: page }; let i=index">
+                  <td>{{item.DateNFT}}</td>
+                  <td>{{item.BetTier}}</td>
+                  <td class="text-center">{{item.nftData.length}}</td>
+                  <!-- <td>14849534</td> -->
+                  <td>
+                    <button class="button" (click)="onClaimNFT(item,i)" *ngIf="!item.isClaimed">Claim</button>
+                    <p class="success" *ngIf="item.isClaimed">Claimed</p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls class="my-pagination" (pageChange)="page = $event" [maxSize]="maxSize">
+            </pagination-controls>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div *ngIf="historyData && currentCategory === tabsCategory.TRANSFERS"
-      class="pt-5 h-100 flex-space-between align-items-center">
-      <div class="flex1 flex-column flex-center">
-        <div class="table-responsive">
-          <table class="table mb20">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>NFT ID</th>
-                <th>Transaction</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: page }; let i=index">
-                <td>{{item.DateNFT}}</td>
-                <td class="text-center">{{item.id}}</td>
-                <td>
-                  <a class="outlined-button" href="{{'https://bscscan.com/tx/'+item.transactionHash}}"
-                    target="__blank">BSC Scan</a>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <pagination-controls class="my-pagination" (pageChange)="page = $event" [maxSize]="maxSize">
-          </pagination-controls>
+      <div *ngIf="historyData && currentCategory === tabsCategory.TRANSFERS" class="h-100 flex-space-between align-items-center">
+        <div class="flex1 flex-column flex-center">
+          <div class="table-responsive">
+            <table class="table mb20">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>NFT ID</th>
+                  <th>Transaction</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of historyData | paginate: { itemsPerPage: 5, currentPage: page }; let i=index">
+                  <td>{{item.DateNFT}}</td>
+                  <td class="text-center">{{item.id}}</td>
+                  <td>
+                    <a class="outlined-button" href="{{'https://bscscan.com/tx/'+item.transactionHash}}"
+                      target="__blank">BSC Scan</a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <pagination-controls class="my-pagination" (pageChange)="page = $event" [maxSize]="maxSize">
+            </pagination-controls>
+          </div>
         </div>
       </div>
+
+      <p *ngIf="historyData.length === 0" class="absolute-center">No history data found</p>
     </div>
-  </div>
 
 </section>

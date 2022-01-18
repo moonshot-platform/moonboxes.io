@@ -1,4 +1,9 @@
 @import "includes";
+
+.scroller {
+  margin-top: 140px;
+}
+
 table {
     border: 0;
     border-collapse: separate;
@@ -43,16 +48,15 @@ tbody td {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.tabs-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    >.tab {
-        margin: 10px 5px;
-    }
+.tabs-container > .tab {
+    margin-right: 10px;
 }
 
-.mb-auto {
-    margin-bottom: auto;
+@media only screen and (max-width: $md-header) {
+
+  .scroller {
+    max-height: calc( 100vh - 110px );
+  }
 }
 
 @media only screen and (max-width: $md-header) {

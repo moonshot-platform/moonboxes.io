@@ -15,7 +15,7 @@ enum TABS_CATEGORY {
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
-  styleUrls: ['./history.component.scss', './../moonbase.component.scss', './../intro/intro.component.scss']
+  styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent implements OnInit {
 
@@ -47,24 +47,29 @@ export class HistoryComponent implements OnInit {
       this.isConnected = data !== null;
     });
 
-    this.walletConnectService.getData().subscribe((data: any) => {
-      if (data) {
-        if (data.address != this.address) {
+    this.walletConnectService.getData().subscribe( ( data: any ) => {
+      if( data ) {
+        if( data.address !== this.address ){
           this.address = data.address;
           this.getBidHistory();
         }
-      } else
-        this.toastrService.error("Please connect your wallet");
+      } else {
+        this.toastrService.error( "Please connect your wallet" );
+      }
     });
   }
 
   getBidHistory() {
-    this.httpApiService.getUserBetData(this.address).subscribe((response: any) => {
-      if (response.isSuccess) {
-        this.historyData = response.data;
-        console.log(response.data);
+    this.httpApiService.getUserBetData( this.address ).subscribe( (response: any) => {
+      if ( response.isSuccess ) {
+        // console.log(response);
+
+        if( response.status !== 204 && response.status !== 400 )
+          this.historyData = response.data;
+        else
+          this.historyData = []
       } else
-        this.toastrService.error("Could not fetch History data");
+        this.toastrService.error( "Could not fetch History data" );
     });
   }
 
