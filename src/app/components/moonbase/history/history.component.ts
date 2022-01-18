@@ -7,6 +7,11 @@ import { ModalForClaimComponent } from './modal-for-claim/modal-for-claim.compon
 import { MESSAGES } from 'src/app/messages.enum';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 
+enum TABS_CATEGORY {
+  UNBOXINGS = 0,
+  TRANSFERS = 1,
+}
+
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -18,7 +23,9 @@ export class HistoryComponent implements OnInit {
 
   readonly messages = MESSAGES;
   mainMessage: string = MESSAGES.IDLE;
-  
+
+  public tabsCategory = TABS_CATEGORY;
+
   address: string = null;
   historyData: any = null;
 
@@ -26,59 +33,69 @@ export class HistoryComponent implements OnInit {
   maxSize: number = 9;
 
   isConnected = false;
-  
+  currentCategory: number = TABS_CATEGORY.UNBOXINGS;
+
   constructor(
-    public toastrService: ToastrService, 
-    public httpApiService: HttpApiService, 
+    public toastrService: ToastrService,
+    public httpApiService: HttpApiService,
     public walletConnectService: WalletConnectService,
     public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
-    this.walletConnectService.init().then( ( data: string ) => {
+    this.walletConnectService.init().then((data: string) => {
       this.isConnected = data !== null;
     });
 
-    this.walletConnectService.getData().subscribe( ( data: any ) => {
-      if( data ) {
-        if(data.address!=this.address){
-        this.address = data.address;
-        this.getBidHistory();
+    this.walletConnectService.getData().subscribe((data: any) => {
+      if (data) {
+        if (data.address != this.address) {
+          this.address = data.address;
+          this.getBidHistory();
         }
       } else
-        this.toastrService.error( "Please connect your wallet" );
+        this.toastrService.error("Please connect your wallet");
     });
   }
 
   getBidHistory() {
-    this.httpApiService.getUserBetData( this.address ).subscribe( (response: any) => {
-      if ( response.isSuccess )
+    this.httpApiService.getUserBetData(this.address).subscribe((response: any) => {
+      if (response.isSuccess) {
         this.historyData = response.data;
-      else
-        this.toastrService.error( "Could not fetch History data" );
+        console.log(response.data);
+      } else
+        this.toastrService.error("Could not fetch History data");
     });
   }
 
-  onClaimNFT( data: any, index: number ) {
-    this.dialog.open( ModalForClaimComponent, {
+  onClaimNFT(data: any, index: number) {
+    this.dialog.open(ModalForClaimComponent, {
       width: 'auto',
       disableClose: true,
       data: {
         nftDetails: data,
         userAddress: this.address
       }
-    }).afterClosed().subscribe( result => {
+    }).afterClosed().subscribe(result => {
       this.historyData[index].isClaimed = result;
-    } );
+    });
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
+    let dialogRef = this.dialog.open(WalletConnectComponent, { width: 'auto' });
 
-    dialogRef.afterClosed().subscribe( (_) => {
+    dialogRef.afterClosed().subscribe((_) => {
       this.walletConnectService.getData().subscribe((data) => {
         this.isConnected = data.address !== undefined;
       })
     });
+  }
+
+  getButtonType(tabButton: TABS_CATEGORY) {
+    return this.currentCategory === tabButton ? 'button' : 'outlined-button';
+  }
+
+  changeTab(tabIndex: TABS_CATEGORY) {
+    this.currentCategory = tabIndex;
   }
 }
