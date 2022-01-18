@@ -372,6 +372,10 @@ tbody td {
 }
 
 @media only screen and (max-width: $md-header) {
+    .custom-scroller {
+        height: calc( 100vh - 110px);
+    }
+
     .table-responsive {
         display: block;
         width: 100%;
@@ -379,16 +383,16 @@ tbody td {
         -webkit-overflow-scrolling: touch;
         -ms-overflow-style: -ms-autohiding-scrollbar;
     }
+
     .outer-box {
         padding: 0;
         margin-top: 1rem;
         max-width: calc(100% - 20px);
         margin-left: auto;
         margin-right: auto;
-        >div {
-            padding: 1rem;
-        }
+        > div { padding: 1rem; }
     }
+
     #attribute-info>div {
         align-items: center;
         flex-direction: column;
@@ -397,6 +401,12 @@ tbody td {
             margin-left: initial;
             margin-top: 30px;
         }
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+    .address-container {
+        margin-top: -30px;
     }
 }
 
@@ -418,12 +428,6 @@ tbody td {
     }
 }
 
-@media only screen and (max-width: $md-header) {
-    .address-container {
-        margin-top: -30px;
-    }
-}
-
 @media only screen and (max-width: 700px) {
     .box {
         width: calc( 100% / 2)
@@ -431,6 +435,7 @@ tbody td {
 }
 
 @media only screen and (max-width: 460px) {
+
     .box {
         width: calc( 100%)
     }

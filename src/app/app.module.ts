@@ -19,6 +19,7 @@ import { ItemOverviewComponent } from './components/base/dialogs/item-overview/i
 import { CollectionOverviewComponent } from './components/base/dialogs/collection-overview/collection-overview.component';
 import { SwiperModule } from 'swiper/angular';
 import { CollectionOverviewModule } from './components/base/dialogs/collection-overview/collection-overview.module';
+import { LandingSliderProvider } from './services/providers/landing-slider.provider';
 
 
 @Injectable()
@@ -58,7 +59,8 @@ export class HammerConfig extends HammerGestureConfig {
     useClass: HammerConfig,
   },
     LocalStorageService,
-    UserDetailsProvider
+    UserDetailsProvider,
+    LandingSliderProvider
   ],
   bootstrap: [AppComponent],
   exports: [

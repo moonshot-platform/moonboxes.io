@@ -17,13 +17,15 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
     this.route.data.subscribe(data => {
       const scrollTo = data?.['scroll'];
-      if ( scrollTo !== undefined ) {
+      if (scrollTo !== undefined) {
         smoothscroll.polyfill();
         const element = document.querySelector(`#${scrollTo}`)
         if (element) setTimeout(() => element.scrollIntoView({ behavior: 'smooth', block: 'start' }), 500);
       }
     });
+
   }
 }
