@@ -29,21 +29,22 @@ export class LandingSliderProvider {
     async getLiveCollectionsAddresses(): Promise<any> {
 
         const response = await this.httpService.getLiveCollectionsBanner();
+
         this.liveCollectionList = response.data.live_data_array;
-        console.log(this.liveCollectionList);
+        this.liveCollectionList = this.liveCollectionList.concat(response.data.recent_data_array)
+        this.liveCollectionList.concat(...response.data.recent_data_array);
 
         for (let i = 0; i < this.liveCollectionList.length; i++) {
 
             await this.httpService.getRandomCollectionImageListFromArtist(this.liveCollectionList[i].walletAddress)
                 .then((res) => {
-
                     for (let j = 0; j < 5; j++) {
                         if (res.data[j] !== undefined)
                             this.allNftImages.push(
                                 new LandingSliderModel(
                                     this.getPreviewImageUrl(res.data[j].logo_path),
                                     res.artistData.collectionName,
-                                    "artist/" + this.liveCollectionList[i].walletAddress
+                                    i < response.data.live_data_array.length ? "artist/" + this.liveCollectionList[i].walletAddress : "recent"
                                 )
                             );
                     }
