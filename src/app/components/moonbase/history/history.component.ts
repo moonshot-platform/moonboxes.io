@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { ToastrService } from 'ngx-toastr';
@@ -35,6 +35,8 @@ export class HistoryComponent implements OnInit {
   isConnected = false;
   currentCategory: number = TABS_CATEGORY.UNBOXINGS;
 
+  public innerWidth: any;
+
   constructor(
     public toastrService: ToastrService,
     public httpApiService: HttpApiService,
@@ -43,33 +45,40 @@ export class HistoryComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.innerWidth = window.innerWidth;
+
     this.walletConnectService.init().then((data: string) => {
       this.isConnected = data !== null;
     });
 
-    this.walletConnectService.getData().subscribe( ( data: any ) => {
-      if( data ) {
-        if( data.address !== this.address ){
+    this.walletConnectService.getData().subscribe((data: any) => {
+      if (data) {
+        if (data.address !== this.address) {
           this.address = data.address;
           this.getBidHistory();
         }
       } else {
-        this.toastrService.error( "Please connect your wallet" );
+        this.toastrService.error("Please connect your wallet");
       }
     });
   }
 
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.innerWidth = window.innerWidth;
+  }
+
   getBidHistory() {
-    this.httpApiService.getUserBetData( this.address ).subscribe( (response: any) => {
-      if ( response.isSuccess ) {
+    this.httpApiService.getUserBetData(this.address).subscribe((response: any) => {
+      if (response.isSuccess) {
         // console.log(response);
 
-        if( response.status !== 204 && response.status !== 400 )
+        if (response.status !== 204 && response.status !== 400)
           this.historyData = response.data;
         else
           this.historyData = []
       } else
-        this.toastrService.error( "Could not fetch History data" );
+        this.toastrService.error("Could not fetch History data");
     });
   }
 

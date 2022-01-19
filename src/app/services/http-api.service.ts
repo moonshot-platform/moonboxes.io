@@ -108,7 +108,7 @@ export class HttpApiService {
   }
 
   getLiveCollectionsBanner(): Promise<any> {
-    let NSFW: boolean = false;
+    let NSFW: boolean = true;
     let walletAddress: string = '';
     const params = { NSFW, walletAddress };
     const url = `${baseURL}allArtistBanners`;
