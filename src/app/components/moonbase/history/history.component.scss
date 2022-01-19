@@ -1,7 +1,6 @@
 @import "includes";
-
 .scroller {
-  margin-top: 140px;
+    margin-top: 140px;
 }
 
 table {
@@ -48,19 +47,34 @@ tbody td {
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
-.tabs-container > .tab {
+.tabs-container>.tab {
     margin-right: 10px;
 }
 
-@media only screen and (max-width: $md-header) {
+.p-10 {
+    padding: 10px
+}
 
-  .scroller {
-    max-height: calc( 100vh - 110px );
-  }
+@media only screen and (max-width: $md-header) {
+    .scroller {
+        max-height: calc( 100vh - 110px);
+    }
 }
 
 @media only screen and (max-width: $md-header) {
     .res-table {
         display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .claim-button {
+        min-width: 0px !important;
+    }
+    thead tr th {
+        padding-right: 0px;
+    }
+    .tab-button {
+        min-width: 100px !important;
     }
 }

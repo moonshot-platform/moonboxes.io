@@ -30,6 +30,7 @@ export class LandingSliderProvider {
 
         const response = await this.httpService.getLiveCollectionsBanner();
         this.liveCollectionList = response.data.live_data_array;
+        console.log(this.liveCollectionList);
 
         for (let i = 0; i < this.liveCollectionList.length; i++) {
 
