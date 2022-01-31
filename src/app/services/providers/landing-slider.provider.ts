@@ -40,7 +40,7 @@ export class LandingSliderProvider {
                 .then((res) => {
                     for (let j = 0; j < 5; j++) {
                         if (res.data[j] !== undefined)
-                            if (!res.data[j].logo_path.contains('.mp4') && !res.data[j].logo_path.contains('.gif'))
+                            if (!res.data[j].logo_path.includes('.mp4') && !res.data[j].logo_path.includes('.gif'))
                                 this.allNftImages.push(
                                     new LandingSliderModel(
                                         this.getPreviewImageUrl(res.data[j].logo_path),
