@@ -108,7 +108,6 @@ export class UpcomingComponent implements OnInit {
       this.data = data;
       this.address = data.address;
     });
-
     this.getAllCollections();
   }
 

@@ -21,7 +21,9 @@ export class TransferComponent {
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService) { }
 
-  async transfer(userAddress: any) {
+  async transfer(userAddress: any, ArtistNFTAddress: any) {
+    debugger
+
     if (undefined === userAddress || userAddress == "") {
       this.httpApi.showToastr("You must fill in an address", false);
       return false;
@@ -40,8 +42,7 @@ export class TransferComponent {
     try {
 
       this.btnText = "Waiting for confirmation";
-
-      var transferTxn = await this.walletConnectService.safeTransfer(this.data.walletAddress, userAddress, this.data.details.nftId);
+      var transferTxn = await this.walletConnectService.safeTransfer(this.data.walletAddress, userAddress, this.data.details.nftId, ArtistNFTAddress);
 
       this.httpApi.transferNft({
         fromAddress: this.data.walletAddress,
