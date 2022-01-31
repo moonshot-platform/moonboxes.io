@@ -24,6 +24,13 @@ body {
     color: $font-color-base;
 }
 
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50% );
+}
+
 .orbitron {
     font-family: $secondary-font;
     font-weight: $black;
@@ -207,6 +214,10 @@ ul {
 
 .mb150 {
     margin-bottom: 150px;
+}
+
+.mb-auto {
+    margin-bottom: auto;
 }
 
 .ml10 {

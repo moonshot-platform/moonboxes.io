@@ -25,10 +25,7 @@ export class InventoryComponent implements OnInit {
 
   data: any;
   inventoryList: any;
-
   base64Image: any;
-  
-  lootBoxDetails = [];
   NFTDetails: any;
   
   NSFWToggleState = false;
@@ -56,30 +53,31 @@ export class InventoryComponent implements OnInit {
     });
       
     this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => {
-      this.isConnected = state
+      this.isConnected = state;
     } );
       
     this.walletConnectService.getData().subscribe((data) => {
-      if(this.data===undefined ||  this.data.address!=data.address){
+      if( this.data === undefined || this.data.address != data.address ) {
       this.data = data ?? {};
 
-      if( Object.keys(this.data).length > 0 ) {
+      if( Object.keys(this.data).length > 0 )
         this.getUserData();
-      } else {
+      else
         this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
-      }
     }
     });
   }
 
   getUserData() {
-    this.httpApi.getUserInventory({
+    const data = {
       userAddress: this.data.address,
-      nsfwstatus: true
-    }).then((response: any) => {
+      NSFW: true
+    };
+    
+    this.httpApi.getUserInventory(data).then((response: any) => {
       const {isSuccess, status} = response;
 
-      if (isSuccess && status === 200) {
+      if (isSuccess && (status === 200 || status === 204)) {
         this.inventoryList = response.data.data ?? [];
         this.mainMessage = this.inventoryList.length == 0 ? MESSAGES.EMPTY_WALLET : null;
       } else {

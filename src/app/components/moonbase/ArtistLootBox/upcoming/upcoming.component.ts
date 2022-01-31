@@ -14,6 +14,19 @@ enum DROPS_CATEGORY {
   UPCOMING = 2
 }
 
+const applicationData = {
+  "url": "http://forms.gle/2YkZHLdYKGseBCURA",
+  "ArtistName": "by YOU",
+  "description": "",
+  "NSFW": false,
+  "revealDate": "Application form",
+  "supply": '- ',
+  "TotalMaxSupply": ' -',
+  "minPrice": '-',
+  "filePath": "assets/media/images/apply-banner.png",
+  "name": "Awesome NFT Collection"
+}
+
 @Component({
   selector: 'app-upcoming',
   templateUrl: './upcoming.component.html',
@@ -23,7 +36,7 @@ export class UpcomingComponent implements OnInit {
   static readonly routeName: string = 'upcoming';
 
   public dropsCategory = DROPS_CATEGORY;
-  list = [[/* RECENT */], [/* LIVE */], [/* RECENT */]];
+  list = null;
   currentCategory: number;
 
   NSFWToggleState = false;
@@ -90,13 +103,10 @@ export class UpcomingComponent implements OnInit {
     this.location.go(`/${categoryName}`);
   }
 
-
-
   async getConnectedAccount() {
     this.walletConnectService.getData().subscribe((data) => {
       this.data = data;
       this.address = data.address;
-      this.getAllCollections();
     });
     this.getAllCollections();
   }
@@ -111,27 +121,23 @@ export class UpcomingComponent implements OnInit {
 
   async getAllCollections() {
     this.httpService.getAllCollections(this.NSFWToggleState, this.address).subscribe((response) => {
-      this.list[DROPS_CATEGORY.LIVE] = response.data.live_data_array;
-      this.list[DROPS_CATEGORY.RECENT] = response.data.recent_data_array;
-    });
+      if( response.isSuccess && response.status === 200 || response.status === 204 ) {
 
-    this.httpService.getUpcomingArtistCollections(this.NSFWToggleState, this.address).subscribe((response) => {
-      this.list[DROPS_CATEGORY.UPCOMING] = response.data;
+        let tempList = [[/* RECENT */], [/* LIVE */], [/* RECENT */]];
 
-      this.list[DROPS_CATEGORY.UPCOMING].push(
-        {
-          "url": "http://forms.gle/2YkZHLdYKGseBCURA",
-          "ArtistName": "by YOU",
-          "description": "sadasd asdasd asdsdf",
-          "NSFW": false,
-          "revealDate": "Application form",
-          "supply": '- ',
-          "TotalMaxSupply": ' -',
-          "minPrice": '-',
-          "filePath": "assets/media/images/apply-banner.png",
-          "name": "Awesome NFT Collection"
-        }
-      );
+        tempList[DROPS_CATEGORY.LIVE] = response.data.live_data_array;
+        tempList[DROPS_CATEGORY.RECENT] = response.data.recent_data_array;
+
+        this.httpService.getUpcomingArtistCollections(this.NSFWToggleState, this.address).subscribe((response) => {
+      
+          if( response.isSuccess && response.status === 200 || response.status === 204 ) {
+            tempList[DROPS_CATEGORY.UPCOMING] = response.data;
+            tempList[DROPS_CATEGORY.UPCOMING].push( applicationData );
+          }
+    
+          this.list = tempList;
+        });
+      }
     });
   }
 

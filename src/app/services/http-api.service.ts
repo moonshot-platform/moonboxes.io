@@ -108,6 +108,15 @@ export class HttpApiService {
     return this.httpClient.get(url, { headers: this.headers, params });
   }
 
+  getLiveCollectionsBanner(): Promise<any> {
+    let NSFW: boolean = true;
+    let walletAddress: string = '';
+    const params = { NSFW, walletAddress };
+    const url = `${baseURL}allArtistBanners`;
+
+    return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
+  }
+
   getArtistMoonboxData(artistWalletAddress: string, userAddress: string): Observable<ArtistMoonbox> {
     const params = { artistWalletAddress, userAddress };
     const url = `${baseURL}getArtistMoonboxData`;

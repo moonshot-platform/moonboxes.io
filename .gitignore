@@ -3,6 +3,7 @@
 *.log
 node_modules
 .idea
+.firebase
 .settings/
 *.swo
 *.swp
