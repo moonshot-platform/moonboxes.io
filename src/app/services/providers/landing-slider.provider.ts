@@ -40,13 +40,14 @@ export class LandingSliderProvider {
                 .then((res) => {
                     for (let j = 0; j < 5; j++) {
                         if (res.data[j] !== undefined)
-                            this.allNftImages.push(
-                                new LandingSliderModel(
-                                    this.getPreviewImageUrl(res.data[j].logo_path),
-                                    res.artistData.collectionName,
-                                    i < response.data.live_data_array.length ? "artist/" + this.liveCollectionList[i].walletAddress : "recent"
-                                )
-                            );
+                            if (!res.data[j].logo_path.contains('.mp4') && !res.data[j].logo_path.contains('.gif'))
+                                this.allNftImages.push(
+                                    new LandingSliderModel(
+                                        this.getPreviewImageUrl(res.data[j].logo_path),
+                                        res.artistData.collectionName,
+                                        i < response.data.live_data_array.length ? "artist/" + this.liveCollectionList[i].walletAddress : "recent"
+                                    )
+                                );
                     }
 
                 });
