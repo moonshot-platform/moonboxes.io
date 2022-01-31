@@ -28,9 +28,9 @@ const providerOptions = {
   rpc: {
     56: providerMainNetURL,
     97: providerTestNetURL,
- },
- network: NETWORK,
- chainId: providerChainID,
+  },
+  network: NETWORK,
+  chainId: providerChainID,
 };
 
 const provider = new WalletConnectProvider(providerOptions);
@@ -57,13 +57,13 @@ export class WalletConnectService {
   SilverContract: any;
   LootboxContract: any;
   NFTContract: any;
-  artistLootBoxContract : any;
+  artistLootBoxContract: any;
 
   constructor(
-    private windowRef: WindowRefService, 
+    private windowRef: WindowRefService,
     private toastrService: ToastrService,
     private localStorageService: LocalStorageService
-  ) {}
+  ) { }
 
   updateData(state: any) {
     this.tokenomicsData = state;
@@ -77,7 +77,7 @@ export class WalletConnectService {
   async init(): Promise<string> {
     const wallet = this.localStorageService.getWallet();
 
-    switch( wallet ) {
+    switch (wallet) {
       case 1:
         await this.connectToWallet(wallet);
         break;
@@ -89,33 +89,33 @@ export class WalletConnectService {
     return this.localStorageService.getAddress();
   }
 
-  convertBalance( balance: number ): string {
+  convertBalance(balance: number): string {
     balance = balance / 1e9;
     balance = Math.trunc(balance);
 
     return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  async connectToWallet( origin = 0 ) {
+  async connectToWallet(origin = 0) {
     const window = this.windowRef.nativeWindow.ethereum;
 
     try {
-      if ( typeof window !== 'undefined' && typeof window !== undefined ) {
+      if (typeof window !== 'undefined' && typeof window !== undefined) {
         await this.windowRef.nativeWindow.ethereum.request({ method: this.ETH_REQUEST_ACCOUNTS });
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
-        
+
         let currentNetwork = await this.provider.getNetwork();
-        if(currentNetwork.chainId != providerChainID ) {
-          this.toastrService.error( 'You are on the wrong network' );
+        if (currentNetwork.chainId != providerChainID) {
+          this.toastrService.error('You are on the wrong network');
           throw 'Wrong network';
         }
-        
+
         await this.getAccountAddress();
         this.localStorageService.setWallet(1);
         // Subscribe to accounts change
-        
-        this.windowRef.nativeWindow.ethereum.on( this.ACCOUNTS_CHANGED, async (accounts: string[]) => {
-          if(accounts.length == 0) { 
+
+        this.windowRef.nativeWindow.ethereum.on(this.ACCOUNTS_CHANGED, async (accounts: string[]) => {
+          if (accounts.length == 0) {
             // MetaMask is locked or the user has not connected any accounts
             this.setWalletDisconnected();
           } else {
@@ -124,55 +124,55 @@ export class WalletConnectService {
         });
 
         // Subscribe to session disconnection
-        this.windowRef.nativeWindow.ethereum.on( this.CHAIN_CHANGED, async (code: number, reason: string) => {
+        this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
           this.setWalletState(true);
         });
 
         // Subscribe to session disconnection
-        this.windowRef.nativeWindow.ethereum.on( this.DISCONNECT, (code: number, reason: string) => {
-          if( provider.close ) provider.close();
+        this.windowRef.nativeWindow.ethereum.on(this.DISCONNECT, (code: number, reason: string) => {
+          if (provider.close) provider.close();
           this.setWalletDisconnected();
         });
-        
+
         this.setWalletState(true);
 
-        if( origin == 0 ) location.reload();
-       
+        if (origin == 0) location.reload();
+
       }
-    } catch(e) {
+    } catch (e) {
       this.setWalletDisconnected();
     }
 
   }
 
-  async connectToWalletConnect( origin = 0 ) {    
-    
+  async connectToWalletConnect(origin = 0) {
+
     try {
       this.provider = new ethers.providers.Web3Provider(provider);
       await provider.enable();
-      
+
       await this.getAccountAddress();
       this.localStorageService.setWallet(2);
 
       // Subscribe to accounts change
-      provider.on( this.ACCOUNTS_CHANGED, (accounts: string[]) => this.connectToWalletConnect() );
+      provider.on(this.ACCOUNTS_CHANGED, (accounts: string[]) => this.connectToWalletConnect());
 
       // Subscribe to session disconnect
-      provider.on( this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected() );
+      provider.on(this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected());
 
       // Subscribe to session disconnection
-      provider.on( this.CHAIN_CHANGED, (code: number, reason: string) => {
+      provider.on(this.CHAIN_CHANGED, (code: number, reason: string) => {
         this.connectToWalletConnect();
         this.setWalletDisconnected();
       });
 
       this.setWalletState(true);
 
-      if( origin === 0 ) location.reload();
+      if (origin === 0) location.reload();
     }
 
-    catch(e) {
+    catch (e) {
       this.setWalletDisconnected();
       location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it
     }
@@ -183,15 +183,15 @@ export class WalletConnectService {
     const address = await this.signer.getAddress();
     const network = await this.provider.getNetwork();
 
-    this.localStorageService.setAddress( address );
+    this.localStorageService.setAddress(address);
 
     if (network.chainId == environment.chainId) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);
-      this.artistLootBoxContract = new ethers.Contract(ArtistNFTAddress,ArtistNFTAbi,this.signer);
+      this.artistLootBoxContract = new ethers.Contract(ArtistNFTAddress, ArtistNFTAbi, this.signer);
     }
-    
+
     const data = {
       'provider': this.provider,
       'signer': this.signer,
@@ -213,17 +213,17 @@ export class WalletConnectService {
   async getDetailsMoonboxlimit(isArtist = false) {
     const promise = new Promise((resolve, reject) => {
       try {
-        if( isArtist ) {
+        if (isArtist) {
           this.artistLootBoxContract.getMoonShootLimit()
-            .then( (transactionHash: any) => resolve(transactionHash) );
+            .then((transactionHash: any) => resolve(transactionHash));
         } else {
           this.LootboxContract.getMoonShootLimit()
-            .then( (transactionHash: any) => resolve(transactionHash) );
+            .then((transactionHash: any) => resolve(transactionHash));
         }
       } catch (e) {
         reject(false);
       }
-    } );
+    });
 
     return promise;
   }
@@ -232,11 +232,11 @@ export class WalletConnectService {
     const promise = new Promise((resolve, reject) => {
       try {
         this.LootboxContract.lootboxPaymentToken(lootBoxId)
-          .then( (transactionHash: any) => resolve(transactionHash) )
+          .then((transactionHash: any) => resolve(transactionHash))
       } catch (e) {
         reject(false);
       }
-    } );
+    });
 
     return promise;
   }
@@ -250,95 +250,94 @@ export class WalletConnectService {
 
         this.SilverContract.allowance(userAddress, LootboxAddress)
           .then(async (allowanceAmount: string) => {
-            if(allowanceAmount>=params2)
-              resolve( { hash: '', status: true, allowance: true } );
+            if (allowanceAmount >= params2)
+              resolve({ hash: '', status: true, allowance: true });
             else
-              resolve( {hash: '', status: true, allowance: false} );
-          } );
-        
+              resolve({ hash: '', status: true, allowance: false });
+          });
+
       } catch (e) {
-        reject( { hash: '', status: false } );
-      }
-    } );
-
-    return promise;
-  }
-
-  async approveSilverToken(lootBoxId: any, noOfBets: number, userAddress: string)
-  {
-    const lootboxPrice = await this.getDetailsMoonboxPrice();
-    const params = ( noOfBets * Number(lootboxPrice) * 1e9 ).toString();
-
-    const promise = new Promise( async (resolve, reject) => {
-      try {
-        const tx = await this.SilverContract.approve( LootboxAddress, (params) );
-        resolve( { hash:tx, status:true, allowance:false } );
-      } catch (e) {
-        reject( { hash: '', status: false } );
-      }
-    } );
-
-    return promise;
-  }
-
-  async getUserBalance( userAddress: string ): Promise<number> {
-    return Number( await this.SilverContract.balanceOf(userAddress) );
-  }
-
-  async getTransactionHashForBetSubmit( lootBoxId: any, seed: string, noOfBets: number, userAddress: string ) {
-    let status: any = await this.getTransactionHashForAllowance( lootBoxId, noOfBets, userAddress );
-
-    if( !status.allowance ) {  
-      await status.hash.wait(1);
-      status = await this.redeemBulkTransaction( lootBoxId, seed, noOfBets, userAddress );
-    } else if( status.status ) {
-      status = await this.redeemBulkTransaction( lootBoxId, seed, noOfBets, userAddress );
-    }
-
-    return status;
-  }
-
-  redeemBulkTransaction( lootBoxId: any, price: any, noOfBets: number, userAddress: string ) {
-    
-    const promise = new Promise( ( resolve, reject ) => {
-      try {
-        this.LootboxContract.submitBet( lootBoxId, price, noOfBets, { value:( price*noOfBets ).toString() } )
-          .then( ( transactionHash: any ) => {
-            resolve( { hash: transactionHash.hash, status: true } );
-          }).catch( (e: any) => {
-            reject({ hash: e, status: false });
-          })
-      } catch (e) {
-        console.log(e);
-        reject( { hash: '', status: false } );
+        reject({ hash: '', status: false });
       }
     });
 
     return promise;
   }
 
-  async getRedeemBulk( id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string ) {
+  async approveSilverToken(lootBoxId: any, noOfBets: number, userAddress: string) {
+    const lootboxPrice = await this.getDetailsMoonboxPrice();
+    const params = (noOfBets * Number(lootboxPrice) * 1e9).toString();
+
+    const promise = new Promise(async (resolve, reject) => {
+      try {
+        const tx = await this.SilverContract.approve(LootboxAddress, (params));
+        resolve({ hash: tx, status: true, allowance: false });
+      } catch (e) {
+        reject({ hash: '', status: false });
+      }
+    });
+
+    return promise;
+  }
+
+  async getUserBalance(userAddress: string): Promise<number> {
+    return Number(await this.SilverContract.balanceOf(userAddress));
+  }
+
+  async getTransactionHashForBetSubmit(lootBoxId: any, seed: string, noOfBets: number, userAddress: string) {
+    let status: any = await this.getTransactionHashForAllowance(lootBoxId, noOfBets, userAddress);
+
+    if (!status.allowance) {
+      await status.hash.wait(1);
+      status = await this.redeemBulkTransaction(lootBoxId, seed, noOfBets, userAddress);
+    } else if (status.status) {
+      status = await this.redeemBulkTransaction(lootBoxId, seed, noOfBets, userAddress);
+    }
+
+    return status;
+  }
+
+  redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
+
+    const promise = new Promise((resolve, reject) => {
+      try {
+        this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() })
+          .then((transactionHash: any) => {
+            resolve({ hash: transactionHash.hash, status: true });
+          }).catch((e: any) => {
+            reject({ hash: e, status: false });
+          })
+      } catch (e) {
+        console.log(e);
+        reject({ hash: '', status: false });
+      }
+    });
+
+    return promise;
+  }
+
+  async getRedeemBulk(id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string, nftAddress: any) {
     const promise = new Promise((resolve, reject) => {
       const spliSign = ethers.utils.splitSignature(signature);
       debugger
-      if( isArtist ){
+      if (isArtist) {
         try {
-          this.artistLootBoxContract.redeemBulk( NFTAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s )
-            .then( (transactionHash: any) => 
+          this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
+            .then((transactionHash: any) =>
               resolve({ hash: transactionHash.hash, status: true })
-            ).catch( (e: any) => {
-              reject( { hash: e, status: false } );
+            ).catch((e: any) => {
+              reject({ hash: e, status: false });
             });
         } catch (e) {
           console.log(e);
-          reject( { hash: '', status: false } );
+          reject({ hash: '', status: false });
         }
       } else {
         try {
-          this.LootboxContract.redeemBulk( NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s )
-            .then( ( transactionHash: any ) => {
+          this.LootboxContract.redeemBulk(NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s)
+            .then((transactionHash: any) => {
               resolve({ hash: transactionHash.hash, status: true });
-            }).catch( (e: any) => {
+            }).catch((e: any) => {
               reject({ hash: e, status: false });
             });
         }
@@ -347,42 +346,41 @@ export class WalletConnectService {
           reject({ hash: '', status: false });
         }
       }
-    } );
-    
+    });
+
     // address nftAsset, uint256[] calldata id, uint256[] calldata nftAmount, uint256 bet, uint8 v, bytes32 r, bytes32 s
     return promise;
   }
 
-  
 
-/** Artist  **/
-async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, artistAddress: string, signature: any, betlimit: number, tokenAddress : string ) {
-    let params: any = ethers.utils.parseEther( price.toString() );
-    const spliSign = ethers.utils.splitSignature( signature );
-    let callValue:string = "0" ;
-    if(tokenAddress=='0x0000000000000000000000000000000000000000'){
-      callValue = ( params * noOfBets ).toString();
+
+  /** Artist  **/
+  async redeemBulkTransactionArtist(lootBoxId: any, noOfBets: any, price: any, artistAddress: string, signature: any, betlimit: number, tokenAddress: string) {
+    let params: any = ethers.utils.parseEther(price.toString());
+    const spliSign = ethers.utils.splitSignature(signature);
+    let callValue: string = "0";
+    if (tokenAddress == '0x0000000000000000000000000000000000000000') {
+      callValue = (params * noOfBets).toString();
     }
-    else
-    {
-      let contract  = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
+    else {
+      let contract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
       let decimals = await contract.decimals();
-      params =((10**decimals)*price).toString();
+      params = ((10 ** decimals) * price).toString();
     }
 
-    const promise = new Promise( ( resolve, reject ) => {
+    const promise = new Promise((resolve, reject) => {
       try {
-       
-        this.artistLootBoxContract.submitBet( lootBoxId, params, artistAddress, noOfBets, betlimit,tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
-            value : callValue
-          }
-        ).then( ( transactionHash: any ) => {
-          resolve( { hash: transactionHash.hash, status: true } );
-        }).catch( (e: any) => {
-          reject( { hash: e, status: false } );
+
+        this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+          value: callValue
+        }
+        ).then((transactionHash: any) => {
+          resolve({ hash: transactionHash.hash, status: true });
+        }).catch((e: any) => {
+          reject({ hash: e, status: false });
         });
       } catch (e) {
-        reject( { hash: '', status: false } );
+        reject({ hash: '', status: false });
       }
     });
 
@@ -391,19 +389,19 @@ async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, ar
 
 
   /** Artist  **/
-  async claimRewardTransaction( junkAmount: any, nftId: any, nftAmount: any, betId: any, seed: string, signHash: any ) {
+  async claimRewardTransaction(junkAmount: any, nftId: any, nftAmount: any, betId: any, seed: string, signHash: any) {
     const spliSign = ethers.utils.splitSignature(signHash);
     const params: any = (junkAmount.toString());
 
-    const promise = new Promise( async (resolve, reject) => {
+    const promise = new Promise(async (resolve, reject) => {
       try {
-        const txn = await this.LootboxContract.claimReward( params, NFTAddress, nftId, nftAmount, betId, spliSign.v, spliSign.r, spliSign.s )
-        .catch( (e: any) => {
-          reject( { hash: e, status: false } );
-        });
-        resolve( { hash: txn, status: true } );
+        const txn = await this.LootboxContract.claimReward(params, NFTAddress, nftId, nftAmount, betId, spliSign.v, spliSign.r, spliSign.s)
+          .catch((e: any) => {
+            reject({ hash: e, status: false });
+          });
+        resolve({ hash: txn, status: true });
       } catch (e) {
-        reject( { hash: '', status: false } );
+        reject({ hash: '', status: false });
       }
     });
 
@@ -411,20 +409,22 @@ async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, ar
   }
 
 
-  async isApproved( address: string ) {
-    return await this.NFTContract.isApprovedForAll( address, address );
+  async isApproved(address: string) {
+    return await this.NFTContract.isApprovedForAll(address, address);
   }
 
-  async setApproval( address: string ) {
-    return await this.NFTContract.setApprovalForAll( address, true );
+  async setApproval(address: string) {
+    return await this.NFTContract.setApprovalForAll(address, true);
   }
 
-  async safeTransfer( address: string,toAddress: string, nftId: any ) {
-    return await this.NFTContract.safeTransferFrom( address, toAddress, nftId, 1, '0x00' );
+  async safeTransfer(address: string, toAddress: string, nftId: any, ArtistNFTAddress: any) {
+    let NFTContract = new ethers.Contract(ArtistNFTAddress, NFTAbi, this.signer);
+
+    return await NFTContract.safeTransferFrom(address, toAddress, nftId, 1, '0x00');
   }
 
-  setWalletState( connected: boolean ) {
-    this.connectedStateSubject.next( connected );
+  setWalletState(connected: boolean) {
+    this.connectedStateSubject.next(connected);
     return this.isConnected;
   }
 
@@ -445,22 +445,22 @@ async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, ar
 
 
   //Token based payments
-  async checkAllowance(tokenAddress:any,amount:any) {
+  async checkAllowance(tokenAddress: any, amount: any) {
     let tokenContract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
     debugger
     let decimals = await tokenContract.decimals();
     var promise = new Promise((resolve, reject) => {
       try {
-    const params2 =(10**decimals)*amount;
-     tokenContract.allowance(this.account, ArtistNFTAddress)
-      .then(async function (allowanceAmount:any) {
-        if(allowanceAmount>=params2){
-          resolve({ hash: "", status: true,allowance:true });
-        }
-        else{
-          resolve({hash:"",status:true,allowance:false})
-        }
-        })
+        const params2 = (10 ** decimals) * amount;
+        tokenContract.allowance(this.account, ArtistNFTAddress)
+          .then(async function (allowanceAmount: any) {
+            if (allowanceAmount >= params2) {
+              resolve({ hash: "", status: true, allowance: true });
+            }
+            else {
+              resolve({ hash: "", status: true, allowance: false })
+            }
+          })
       }
       catch (e) {
         reject({ hash: e, status: false });
@@ -469,21 +469,20 @@ async redeemBulkTransactionArtist( lootBoxId: any, noOfBets: any, price: any, ar
     return promise
   }
 
-  async approveToken(amount:any,tokenAddress:any)
-  {
+  async approveToken(amount: any, tokenAddress: any) {
     let tokenContract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
     let decimals = await tokenContract.decimals();
-    const params2 =(10**decimals)*amount;
+    const params2 = (10 ** decimals) * amount;
 
     var promise = new Promise(async (resolve, reject) => {
       try {
-        let tx =await tokenContract.approve(ArtistNFTAddress, (params2).toString())
-         
-          
-          resolve({hash:tx,status:true,allowance:false})     
+        let tx = await tokenContract.approve(ArtistNFTAddress, (params2).toString())
+
+
+        resolve({ hash: tx, status: true, allowance: false })
       }
       catch (e) {
-        
+
         reject({ hash: e, status: false });
       }
     });
