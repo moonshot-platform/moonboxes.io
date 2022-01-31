@@ -255,7 +255,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
     this.invisible = true;
     this.fadeOut = true;
-
+    debugger
     let dialogRef = this.dialog.open(ModalForTransactionComponent, {
       width: 'auto',
       disableClose: true,
@@ -265,14 +265,15 @@ export class ArtistMoonboxComponent implements OnInit {
         data: this.data,
         index: index,
         balance: this.balance,
-        isArtistLootBox: this.artistDetails.walletAddress==environment.ownerAddress ? false : true,
+        isArtistLootBox: this.artistDetails.walletAddress == environment.ownerAddress ? false : true,
         artistDetails: {
           lootBoxId: this.supplyDetails[index].id,
           price: this.supplyDetails[index].price,
           address: this.artistDetails.walletAddress,
           signature: this.supplyDetails[index].signature,
           limit: this.supplyDetails[index].limitPerTxn,
-          tokenAddress : this.supplyDetails[index].tokenAddress
+          tokenAddress: this.supplyDetails[index].tokenAddress,
+          ArtistNFTAddress: this.artistDetails.ArtistNFTAddress
         }
       },
       panelClass: 'custom-modalbox'
