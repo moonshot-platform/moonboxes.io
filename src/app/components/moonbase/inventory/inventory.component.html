@@ -2,11 +2,11 @@
     <div *ngIf="!inventoryList" class="flex-center main-message-container w-100 h-100 text-center pa20">
         {{mainMessage}}
         <div *ngIf="mainMessage === messages.IDLE && isConnected; else loggedOut">
-            <img class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
+            <img class="absolute-center" src="assets/media/videos/Loading.gif" alt="loading" />
         </div>
 
         <ng-template #loggedOut>
-            <p class="mt50 fade-in-delayed pointer" (click)="openWalletDialog()">Please connect your wallet</p>
+            <p class="absolute-center fade-in-delayed pointer" (click)="openWalletDialog()">Please connect your wallet</p>
         </ng-template>
     </div>
 
@@ -41,5 +41,8 @@
                 </div>
             </div>
         </ng-container>
+
+        
+        <p *ngIf="inventoryList && inventoryList.length === 0" class="absolute-center">No inventory data found</p>
     </div>
 </section>

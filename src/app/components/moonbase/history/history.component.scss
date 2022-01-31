@@ -1,53 +1,80 @@
 @import "includes";
+.scroller {
+    margin-top: 140px;
+}
 
 table {
-  border: 0;
-  border-collapse: separate;
-  border-spacing: 0 5px;
-
-  button {
-    border: 2px solid #d5a642;
-  }
-
-  .button.success {
-    background-color: transparent;
-    border-color: #d5a642 !important;
-    color: #d5a642;
-  }
+    border: 0;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    button {
+        border: 2px solid #d5a642;
+    }
+    .button.success {
+        background-color: transparent;
+        border-color: #d5a642 !important;
+        color: #d5a642;
+    }
 }
 
 thead tr th {
-  border-bottom: 3px solid #d5a642;
-  border-collapse: separate;
-  border-spacing: 5px 5px;
-  padding-bottom: 1rem;
-  padding-right: 1rem;
+    border-bottom: 3px solid #d5a642;
+    border-collapse: separate;
+    border-spacing: 5px 5px;
+    padding-bottom: 1rem;
+    padding-right: 1rem;
 }
 
 tbody td:nth-child(4) {
-  text-align: center;
+    text-align: center;
 }
 
 tbody td {
-  padding: 0.5rem;
-  overflow: hidden;
-  white-space: nowrap;
+    padding: 0.5rem;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .res-table {
-  max-width: calc(100% - 40px);
+    max-width: calc(100% - 40px);
 }
 
 .table-responsive {
-  display: block;
-  width: 100%;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: -ms-autohiding-scrollbar;
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.tabs-container>.tab {
+    margin-right: 10px;
+}
+
+.p-10 {
+    padding: 10px
 }
 
 @media only screen and (max-width: $md-header) {
-  .res-table {
-    display: block;
-  }
+    .scroller {
+        max-height: calc( 100vh - 110px);
+    }
+}
+
+@media only screen and (max-width: $md-header) {
+    .res-table {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .claim-button {
+        min-width: 0px !important;
+    }
+    thead tr th {
+        padding-right: 0px;
+    }
+    .tab-button {
+        min-width: 100px !important;
+    }
 }
