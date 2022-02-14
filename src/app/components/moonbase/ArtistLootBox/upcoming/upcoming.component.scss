@@ -1,366 +1,397 @@
 @import "includes";
+
 section.upcoming-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 770px;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 50px;
-    padding-top: 180px;
-    overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-width: 770px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 50px;
+  padding-top: 180px;
+  overflow: hidden;
 }
 
 .main-message-container {
-    position: fixed;
-    z-index: 1300;
+  position: fixed;
+  z-index: 1300;
 }
 
 .social-icons-container>li {
-    @extend %flex-center;
-    margin-top: 20px;
-    a {
-        display: flex;
-        background: #d5a642;
-        border-radius: 50px;
-        width: fit-content;
-        padding: 15px;
-        &:hover {
-            background-color: white;
-        }
+  @extend %flex-center;
+  margin-top: 20px;
+
+  a {
+    display: flex;
+    background: #d5a642;
+    border-radius: 50px;
+    width: fit-content;
+    padding: 15px;
+
+    &:hover {
+      background-color: white;
     }
-    img {
-        width: 30px;
-        height: 30px;
-        border: none;
-    }
+  }
+
+  img {
+    width: 30px;
+    height: 30px;
+    border: none;
+  }
 }
 
 .tabs-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    >.tab {
-        margin: 10px 5px;
-    }
+  flex-wrap: wrap;
+  justify-content: center;
+
+  >.tab {
+    margin: 10px 5px;
+  }
 }
 
 .scroller {
-    max-height: calc(100vh - 100px) !important;
-    max-width: initial !important;
-    >div {
-        width: 100%;
-        padding-top: 4rem;
-        padding-bottom: 4rem;
-    }
+  max-height: calc(100vh - 100px) !important;
+  max-width: initial !important;
+  margin-top: 70px !important;
+
+  >div {
+    width: 100%;
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+  }
 }
 
 .p-3 {
-    padding: 1rem;
+  padding: 1rem;
 }
 
 .inner img.square-box {
-    border-radius: 0 !important;
-    border: none !important;
-    padding: 0 !important;
-    width: 100%;
-    object-fit: cover;
+  border-radius: 0 !important;
+  border: none !important;
+  padding: 0 !important;
+  width: 100%;
+  object-fit: cover;
 }
 
 .scroller>.desktop-only.h-100 {
-    align-self: flex-start;
+  align-self: flex-start;
 }
 
 .nft_img {
-    padding: 0;
-    background: #090d16;
-    border-radius: 4px;
-    width: 100%;
-    justify-content: center;
-    position: relative;
-    border: 2px solid #d5a642;
-    &:hover {
-        border-color: white;
-    }
+  padding: 0;
+  background: #090d16;
+  border-radius: 4px;
+  width: 100%;
+  justify-content: center;
+  position: relative;
+  border: 2px solid #d5a642;
+
+  &:hover {
+    border-color: white;
+  }
 }
 
 .upcoming {
-    padding: 0 1rem;
-    justify-content: center;
+  padding: 0 1rem;
+  justify-content: center;
 }
 
 .box {
-    width: calc( 100% / 5 );
-    max-width: 500px;
+  width: calc(100% / 5);
+  max-width: 500px;
 }
 
 .upcoming .full_banner {
-    width: 100%;
-    max-width: 300px;
-    overflow: hidden;
+  width: 100%;
+  max-width: 300px;
+  overflow: hidden;
 }
 
 .collection-info {
-    width: 100%;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+
+  >.collection-inner {
+    @extend %flex-center;
+    @extend %max-width-center;
+    align-items: flex-start;
+    border: 1px solid;
     padding: 1rem;
     box-sizing: border-box;
-    >.collection-inner {
-        @extend %flex-center;
-        @extend %max-width-center;
-        align-items: flex-start;
-        border: 1px solid;
-        padding: 1rem;
-        box-sizing: border-box;
-    }
+  }
 }
 
 .res-box {
-    position: relative;
-    width: 100%;
-    // border: 1px solid $primary;
-    background-size: cover !important;
-    &:nth-child(4n) {
-        margin-right: 0;
+  position: relative;
+  width: 100%;
+  // border: 1px solid $primary;
+  background-size: cover !important;
+
+  &:nth-child(4n) {
+    margin-right: 0;
+  }
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 60%;
+    /* initial ratio of 1:1*/
+  }
+
+  >.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    >img {
+      width: 100%;
     }
-    &:before {
-        content: "";
-        display: block;
-        padding-top: 60%;
-        /* initial ratio of 1:1*/
-    }
-    >.content {
-        position: absolute;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        >img {
-            width: 100%;
-        }
-    }
+  }
 }
 
 .w100 {
-    width: 100%;
+  width: 100%;
 }
 
 .align-self {
-    align-self: flex-start
+  align-self: flex-start
 }
 
 .flex-wrap {
-    flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .border-top-bottom {
-    border-top: 1px solid #d5a642;
-    border-bottom: 1px solid #d5a642;
+  border-top: 1px solid #d5a642;
+  border-bottom: 1px solid #d5a642;
 }
 
 .outer-box {
-    border: 1px solid;
-    padding: 1rem;
-    width: calc(100% - 2rem);
-    margin-left: 1rem;
-    margin-right: 1rem;
-    margin-bottom: 2rem;
-    padding: 1rem;
-    justify-content: flex-start;
-    // position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+  border: 1px solid;
+  padding: 1rem;
+  width: calc(100% - 2rem);
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  justify-content: flex-start;
+  // position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
 }
 
 .upcoming-img {
-    width: 100%;
-    height: 100%;
-    background-position: center !important;
+  width: 100%;
+  height: 100%;
+  background-position: center !important;
 }
 
 .collection-info-img {
-    width: 100% !important;
-    height: auto !important;
-    max-height: 360px !important;
-    max-width: 360px !important;
-    border-radius: 0 !important;
-    border: 1px solid !important;
-    padding: 5px;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 360px !important;
+  max-width: 360px !important;
+  border-radius: 0 !important;
+  border: 1px solid !important;
+  padding: 5px;
 }
 
 .px-3 {
-    padding-left: 1rem;
-    padding-right: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .inner .outer-box img,
 .inner .outer-box video {
-    height: 350px !important;
-    width: 350px !important;
-    border-radius: 0 !important;
+  height: 350px !important;
+  width: 350px !important;
+  border-radius: 0 !important;
 }
 
 .border-bottom {
-    border-bottom: 2px solid #d5a642;
+  border-bottom: 2px solid #d5a642;
 }
 
 .mb20.mr20.text-inherit.button {
-    border: 1px solid #d5a642;
-    &:hover {
-        border-color: white;
-    }
+  border: 1px solid #d5a642;
+
+  &:hover {
+    border-color: white;
+  }
 }
 
 .disabled-button {
-    color: gray !important;
-    border-color: gray !important;
+  color: gray !important;
+  border-color: gray !important;
 }
 
 .full-div {
-    flex: 0 0 100%;
-    display: flex;
-    flex-flow: wrap;
-    justify-content: center;
-    .word-break {
-        word-break: break-word;
-    }
+  flex: 0 0 100%;
+  display: flex;
+  flex-flow: wrap;
+  justify-content: center;
+
+  .word-break {
+    word-break: break-word;
+  }
 }
 
 textarea {
-    width: 100%;
-    height: 300px;
-    background-color: transparent;
-    border: 1px solid $primary;
-    color: white;
-    padding: 10px;
-    box-sizing: border-box;
-    resize: none;
+  width: 100%;
+  height: 300px;
+  background-color: transparent;
+  border: 1px solid $primary;
+  color: white;
+  padding: 10px;
+  box-sizing: border-box;
+  resize: none;
 }
 
 .close-tooltip {
-    display: none !important;
+  display: none !important;
 }
 
 .desktop-md-block {
-    display: block !important;
+  display: block !important;
 }
 
 .d-md-none {
-    display: none !important;
+  display: none !important;
 }
 
 .coundown-button {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  .tooltip {
+    display: none;
+    position: absolute;
+    top: -10px;
+    width: calc(100% - 40px);
+    left: 15px;
+    padding: 20px 20px;
+    color: white;
+    background-color: black;
     justify-content: center;
-    align-items: center;
-    position: relative;
-    .tooltip {
-        display: none;
-        position: absolute;
-        top: -10px;
-        width: calc(100% - 40px);
-        left: 15px;
-        padding: 20px 20px;
-        color: white;
-        background-color: black;
-        justify-content: center;
-        align-content: center;
-        box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
-        border-radius: 8px;
-        &.reveal {
-            display: flex !important;
-        }
-        >i::after {
-            content: "";
-            position: absolute;
-            width: 15px;
-            height: 15px;
-            left: 50%;
-            transform: translate(-50%, 180%) rotate( 45deg) scaleY(-1);
-            background-color: black;
-            box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
-        }
+    align-content: center;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+
+    &.reveal {
+      display: flex !important;
     }
-    img {
-        height: 25px;
-        width: 25px;
-        margin-right: 20px;
+
+    >i::after {
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      left: 50%;
+      transform: translate(-50%, 180%) rotate(45deg) scaleY(-1);
+      background-color: black;
+      box-shadow: 0 1px 8px rgb(0 0 0 / 50%);
     }
-    &.default-cursor:hover {
-        background-color: $primary;
-        cursor: default;
-    }
+  }
+
+  img {
+    height: 25px;
+    width: 25px;
+    margin-right: 20px;
+  }
+
+  &.default-cursor:hover {
+    background-color: $primary;
+    cursor: default;
+  }
 }
 
 @media only screen and (max-width: $md) {
-    .scroller>div {
-        align-self: flex-start;
-        padding-top: 4rem;
+  .scroller>div {
+    align-self: flex-start;
+    padding-top: 4rem;
+  }
+
+  .collection-info>.collection-inner {
+    flex-direction: column;
+
+    >.left {
+      display: none;
     }
-    .collection-info>.collection-inner {
-        flex-direction: column;
-        >.left {
-            display: none;
-        }
-    }
-    .grid-4 {
-        flex-basis: 100%;
-    }
-    .d-block {
-        display: block;
-    }
-    .full-div>div {
-        max-width: 600px;
-    }
+  }
+
+  .grid-4 {
+    flex-basis: 100%;
+  }
+
+  .d-block {
+    display: block;
+  }
+
+  .full-div>div {
+    max-width: 600px;
+  }
 }
 
 @media only screen and (max-width: $sm) {
-    .desktop-md-block {
-        width: 100%;
-        margin-top: 20px;
+  .desktop-md-block {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .social-icons-container {
+    justify-content: flex-start;
+
+    >li {
+      width: calc(100%/3 - (20px/3));
+      margin-right: 10px;
+
+      &:nth-child(3n+3) {
+        margin-right: 0;
+      }
     }
-    .social-icons-container {
-        justify-content: flex-start;
-        >li {
-            width: calc(100%/3 - (20px/3));
-            margin-right: 10px;
-            &:nth-child(3n+3) {
-                margin-right: 0;
-            }
-        }
+  }
+
+  .image-bb {
+    width: calc(100% / 3);
+
+    &:nth-child(3n+1) {
+      justify-content: flex-start;
     }
-    .image-bb {
-        width: calc(100% / 3);
-        &:nth-child(3n+1) {
-            justify-content: flex-start;
-        }
-        &:nth-child(3n+3) {
-            justify-content: flex-end;
-        }
+
+    &:nth-child(3n+3) {
+      justify-content: flex-end;
     }
+  }
 }
 
 @media only screen and (max-width: 1800px) {
-    .box {
-        width: calc( 100% / 4)
-    }
+  .box {
+    width: calc(100% / 4)
+  }
 }
 
 @media only screen and (max-width: 1540px) {
-    .box {
-        width: calc( 100% / 3)
-    }
+  .box {
+    width: calc(100% / 3)
+  }
 }
 
 @media only screen and (max-width: 1180px) {
-    .box {
-        width: calc( 100% / 2)
-    }
+  .box {
+    width: calc(100% / 2)
+  }
 }
 
 @media only screen and (max-width: 710px) {
 
-    .box {
-        width: calc( 100%)
-    }
+  .box {
+    width: calc(100%)
+  }
 }

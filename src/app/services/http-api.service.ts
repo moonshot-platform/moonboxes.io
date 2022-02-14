@@ -31,7 +31,7 @@ export class HttpApiService {
   headers = new HttpHeaders()
     .set('Content-Type', 'application/json')
     .set('APPKEY', 'mTb+T!5!crBEQEL2!$PJ9&JSjeT3M6Hs*RytA-eaDSBS5UU@8-fCJHu6F?kp@s+JTu2-_-V8L#?5')
-    .set('blockchainId', '56');
+    .set('blockchainId', `${environment.chainId}`);
   vendor: any;
 
   constructor(
