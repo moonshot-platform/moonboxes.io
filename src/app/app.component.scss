@@ -1,22 +1,22 @@
 @import "includes";
 
 section.frame {
-    flex: 1;
-    z-index: 1;
+  flex: 1;
+  z-index: 1;
+  position: relative;
+  height: $full;
+
+  .inner {
+    width: 100%;
+    height: calc(100% - 96px);
+    border: 48px solid;
     position: relative;
-    height: $full;
+  }
 
-    .inner {
-        width: 100%;
-        height: calc(100% - 96px);
-        border: 48px solid;
-        position: relative;
-    }
-
-    app-sidebar {
-        width: 74px;
-        height: 100%;
-    }
+  app-sidebar {
+    width: 74px;
+    height: 100%;
+  }
 }
 
 .left-corner {
@@ -28,6 +28,7 @@ section.frame {
   border: none;
   left: -1px;
   bottom: -1px;
+  z-index: 1000;
 }
 
 .right-corner {
@@ -39,6 +40,7 @@ section.frame {
   border: none;
   right: -1px;
   bottom: -1px;
+  z-index: 1000;
 }
 
 .text-inherit {
