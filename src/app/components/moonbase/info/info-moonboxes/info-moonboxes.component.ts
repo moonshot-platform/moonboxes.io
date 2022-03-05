@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
+import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 
 @Component({
   selector: 'app-info-moonboxes',
@@ -7,6 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoMoonboxesComponent implements OnInit {
 
+  private userData: any;
+
+  bnbCountFromInput: number = 1;
+  isConnected: boolean = false;
+  isInProcess: boolean = false;
+
+  buttonName = '';
 
   boxes: any[] = [
     {
@@ -34,9 +44,55 @@ export class InfoMoonboxesComponent implements OnInit {
   boxForMobile: any = this.boxes[this.boxIndex];
 
 
-  constructor() { }
+  constructor(
+    private walletConnectService: WalletConnectService,
+    private dialog: MatDialog
+  ) {
+    this.walletConnectService.init().then((data: any) => {
+      this.isConnected = data !== undefined;
+      this.walletConnectService.setWalletState(this.isConnected);
+      // console.log('CONSTRUCTOR: ' + this.isConnected);
+
+      this.updateButtonName();
+    });
+
+    this.updateButtonName();
+  }
 
   ngOnInit(): void {
+  }
+
+  updateButtonName() {
+    if (!this.isConnected) {
+      this.buttonName = 'Connect Wallet';
+    } else {
+      this.buttonName = 'Market Buy';
+    }
+  }
+
+  openWalletConnectionDialog(): void {
+    let dialogRef = this.dialog.open(
+      WalletConnectComponent,
+      { width: 'auto' }
+    );
+
+    dialogRef.afterClosed().subscribe(result => { });
+  }
+
+  async buyMSHOTWithBNB() {
+    if (this.isConnected) {
+      this.isInProcess = true;
+
+      // await this.walletConnectService.addMoonshotTokentToWalletAsset();
+
+      await this.walletConnectService.buyMSHOT(
+        Number(this.bnbCountFromInput) <= 0 ? 0.001 : Number(this.bnbCountFromInput)
+      );
+
+      this.isInProcess = false;
+    } else {
+      this.openWalletConnectionDialog();
+    }
   }
 
   nextBox(): void {
