@@ -6,6 +6,8 @@ import WalletConnectProvider from '@walletconnect/web3-provider';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from './local-storage.service';
+import Web3 from 'web3';
+import Web3Modal from "web3modal";
 
 export const SilverAddress = environment.silverAddress;
 export const LootboxAddress = environment.lootboxAddress;
@@ -23,6 +25,9 @@ const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 
 const NETWORK = 'binance';
 
+import mshotTokenAbi from './../../assets/abis/mshot.token.abi.json';
+import buyMshotTokenAbi from './../../assets/abis/buy-moonshot-token.abi.json';
+
 //  Create WlletConnect Provider
 const providerOptions = {
   rpc: {
@@ -32,6 +37,27 @@ const providerOptions = {
   network: NETWORK,
   chainId: providerChainID,
 };
+
+const providerOptionsForMSHOT = {
+  walletconnect: {
+    package: WalletConnectProvider,
+    rpc: {
+      1: providerMainNetURL,
+      56: providerMainNetURL,
+      97: providerTestNetURL,
+    },
+    network: NETWORK,
+    chainId: providerChainID,
+  }
+};
+
+
+const web3Modal = new Web3Modal({
+  theme: "dark",
+  cacheProvider: false, // optional
+  providerOptions: providerOptionsForMSHOT, // required
+  disableInjectedProvider: false
+});
 
 const provider = new WalletConnectProvider(providerOptions);
 
@@ -487,6 +513,35 @@ export class WalletConnectService {
       }
     });
     return promise
+  }
+
+
+  async buyMSHOT(bnbValue: number) {
+    try {
+
+      // if (this.localStorageService.getTokenAdding() === false) {
+      //   let hasAdded = await this.addTokenMSHOTv2ToWalletAsset();
+      //   console.log(hasAdded);
+      // }
+
+      let web3 = new Web3(await web3Modal.connect());
+      const buyContract = new web3.eth.Contract(
+        buyMshotTokenAbi as any,
+        "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e"
+      );
+
+      const buyOperation = await buyContract.methods.buyTokenWithBNB();
+      let tx = await buyOperation.send(
+        {
+          from: this.account,
+          value: web3.utils.toWei(`${bnbValue}`, "ether")
+        }
+      );
+      // console.log("transaction: ", tx);
+      this.toastrService.success('You bought MSHOT successfully!');
+    } catch (error) {
+      this.toastrService.error('Operation Failed!')
+    }
   }
 
 }
