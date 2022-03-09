@@ -154,7 +154,7 @@ section.info-moonboxes {
       min-width: 170px;
       width: 100%;
       font-size: 16px;
-      height: 40px;
+      height: 51px;
       padding: 0px 15px;
       display: flex;
       flex-direction: column;
@@ -162,10 +162,7 @@ section.info-moonboxes {
       align-items: center;
       font-size: 16px;
       font-weight: bold;
-      font-stretch: normal;
-      font-style: normal;
       line-height: 1.69;
-      letter-spacing: normal;
       text-align: center;
     }
   }
@@ -286,6 +283,8 @@ input[type=number] {
 }
 
 .tooltip {
+  position: relative;
+
   .button {
     margin-bottom: -1px !important;
     margin-right: -1px !important;
@@ -294,7 +293,7 @@ input[type=number] {
 
 .tooltip .bottom {
   width: 240px;
-  transform: translate(-8.4%, 0%) scaleY(1);
+  // transform: translate(-8.4%, 0%) scaleY(1);
   padding: 20px 20px;
   color: white;
   background-color: black;
@@ -302,7 +301,7 @@ input[type=number] {
   font-size: 13px;
   border-radius: 8px;
   position: absolute;
-  z-index: 99999999;
+  z-index: -1;
   box-sizing: border-box;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
   visibility: visible;
@@ -323,6 +322,8 @@ input[type=number] {
   -o-transition-delay: .3s;
   transition: .3s all;
   transition-delay: .3s;
+  top: 50px;
+  right: -20px;
 
   .row {
     display: flex;
@@ -365,6 +366,7 @@ input[type=number] {
   -ms-transition-delay: 0s;
   -o-transition-delay: 0s;
   transition-delay: 0s;
+  z-index: 99999999;
 }
 
 .tooltip .bottom i {
@@ -424,11 +426,25 @@ input[type=number] {
 
   .tier-table {
     max-width: 100%;
-    // .table-columns-titles {
-    //     .pr {
-    //         padding-right: 0px;
-    //     }
-    // }
+  }
+
+  .other-buy-buttons {
+
+    .outlined-button {
+      min-width: 100px !important;
+    }
+  }
+
+  .tooltip .bottom {
+    right: 0px;
+
+    i {
+      margin-left: 0px;
+    }
+  }
+
+  .landing {
+    height: auto !important;
   }
 }
 
