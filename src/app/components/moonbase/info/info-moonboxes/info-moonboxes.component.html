@@ -148,7 +148,8 @@
           <input type="number" name="buy" id="buy" [(ngModel)]="bnbCountFromInput">
 
           <div class="tooltip">
-            <a [ngClass]="{'loading': isInProcess}" (click)="!isInProcess ? buyMSHOTWithBNB() : null" class="button">
+            <a [ngClass]="{'loading': isInProcess}" (click)="!isInProcess ? buyMSHOTWithBNB() : null" class="button"
+              [ngClass]="{'connect-wallet-text': buttonName == 'Connect Wallet'}">
               {{isInProcess ? '' :buttonName}}
               <img *ngIf="isInProcess" src="assets/media/videos/Loading_yellowBG.gif" class="loader-img">
             </a>

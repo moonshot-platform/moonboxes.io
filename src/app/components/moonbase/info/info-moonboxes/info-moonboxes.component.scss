@@ -428,12 +428,6 @@ input[type=number] {
     max-width: 100%;
   }
 
-  .other-buy-buttons {
-
-    .outlined-button {
-      min-width: 100px !important;
-    }
-  }
 
   .tooltip .bottom {
     right: 0px;
@@ -446,6 +440,11 @@ input[type=number] {
   .landing {
     height: auto !important;
   }
+
+  .connect-wallet-text {
+    font-size: 13px;
+    height: 50px;
+  }
 }
 
 @media only screen and (max-width: 810px) {
@@ -454,6 +453,14 @@ input[type=number] {
     max-width: 500px;
     width: calc(100vw - 40px);
   }
+
+  .other-buy-buttons {
+
+    .outlined-button {
+      min-width: 100px !important;
+    }
+  }
+
 
   .all-boxes {
     display: none;
@@ -477,16 +484,19 @@ input[type=number] {
     flex-direction: column;
     max-width: 400px;
     width: 100%;
-
-    .description-container {
-      border-top: none;
-      max-width: 400px;
-    }
-
-    .heading-container {
-      max-width: 400px;
-    }
+    margin-left: auto;
+    margin-right: auto;
   }
+
+  .description-container {
+    border-top: none;
+    max-width: 400px;
+  }
+
+  .heading-container {
+    max-width: 400px;
+  }
+
 
   .round-mini-button {
     width: 40px;
