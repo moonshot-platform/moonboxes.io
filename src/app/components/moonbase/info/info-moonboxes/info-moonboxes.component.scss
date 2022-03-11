@@ -398,9 +398,11 @@ input[type=number] {
   align-items: center;
   width: 100%;
   margin-top: 20px;
+  column-gap: 20px;
 
   .outlined-button {
-    min-width: 170px !important;
+    min-width: 0px;
+    width: 100%;
   }
 }
 
@@ -454,12 +456,12 @@ input[type=number] {
     width: calc(100vw - 40px);
   }
 
-  .other-buy-buttons {
+  // .other-buy-buttons {
 
-    .outlined-button {
-      min-width: 100px !important;
-    }
-  }
+  //   .outlined-button {
+  //     min-width: 150px !important;
+  //   }
+  // }
 
 
   .all-boxes {
@@ -542,5 +544,13 @@ input[type=number] {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+  }
+
+  .bitmart-button {
+    min-width: 110px !important;
+  }
+
+  .pancakeswap-button {
+    min-width: 160px !important;
   }
 }
