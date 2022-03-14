@@ -47,8 +47,8 @@ export class HistoryComponent implements OnInit {
   ngOnInit(): void {
     this.innerWidth = window.innerWidth;
 
-    this.walletConnectService.init().then((data: string) => {
-      this.isConnected = data !== null;
+    this.walletConnectService.init().then((data: boolean) => {
+      this.isConnected = data;
     });
 
     this.walletConnectService.getData().subscribe((data: any) => {

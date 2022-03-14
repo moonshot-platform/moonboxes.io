@@ -100,7 +100,7 @@ export class WalletConnectService {
     return this.data.asObservable();
   }
 
-  async init(): Promise<string> {
+  async init(): Promise<boolean> {
     const wallet = this.localStorageService.getWallet();
 
     switch (wallet) {
@@ -112,7 +112,10 @@ export class WalletConnectService {
         break;
     }
 
-    return this.localStorageService.getAddress();
+    // await this.localStorageService.getAddress();
+
+    await this.getAccountAddress();
+    return wallet != undefined || this.account != undefined;
   }
 
   convertBalance(balance: number): string {
@@ -133,6 +136,8 @@ export class WalletConnectService {
         let currentNetwork = await this.provider.getNetwork();
         if (currentNetwork.chainId != providerChainID) {
           this.toastrService.error('You are on the wrong network');
+
+          this.setWalletState(false);
           throw 'Wrong network';
         }
 
@@ -144,6 +149,7 @@ export class WalletConnectService {
           if (accounts.length == 0) {
             // MetaMask is locked or the user has not connected any accounts
             this.setWalletDisconnected();
+            this.toastrService.info('Wallet disconnected!');
           } else {
             await this.connectToWallet();
           }
@@ -152,6 +158,7 @@ export class WalletConnectService {
         // Subscribe to session disconnection
         this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
+          this.toastrService.info('You have changed the chain!');
           this.setWalletState(true);
         });
 
@@ -163,7 +170,7 @@ export class WalletConnectService {
 
         this.setWalletState(true);
 
-        if (origin == 0) location.reload();
+        // if (origin == 0) location.reload();
 
       }
     } catch (e) {
@@ -229,6 +236,9 @@ export class WalletConnectService {
     }
 
     this.account = address;
+    if (data.address !== undefined)
+      this.setWalletState(true);
+
     this.updateData(data);
   }
 
@@ -464,6 +474,7 @@ export class WalletConnectService {
 
   setWalletDisconnected() {
     this.isConnected = false;
+    this.setWalletState(this.isConnected);
     this.account = '';
     this.localStorageService.removeWallet();
   }

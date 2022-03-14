@@ -48,8 +48,10 @@ export class InfoMoonboxesComponent implements OnInit {
     private walletConnectService: WalletConnectService,
     private dialog: MatDialog
   ) {
-    this.walletConnectService.init().then((data: any) => {
-      this.isConnected = data !== undefined;
+    this.walletConnectService.init().then((data: boolean) => {
+      this.isConnected = data;
+      // console.log(data);
+
       this.walletConnectService.setWalletState(this.isConnected);
       // console.log('CONSTRUCTOR: ' + this.isConnected);
 
@@ -60,6 +62,23 @@ export class InfoMoonboxesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.walletConnectService.onWalletStateChanged().subscribe((state: boolean) => {
+      this.isConnected = state;
+      this.updateButtonName();
+    });
+
+    this.walletConnectService.getData().subscribe((data: any) => {
+      this.userData = data;
+      if (data !== undefined && data.address != undefined) {
+        this.isConnected = true;
+        this.walletConnectService.setWalletState(true);
+        // console.log('ON GET DATA: ' + this.isConnected);
+      } else {
+        this.isConnected = false;
+        this.walletConnectService.setWalletState(false);
+      }
+      this.updateButtonName();
+    });
   }
 
   updateButtonName() {
