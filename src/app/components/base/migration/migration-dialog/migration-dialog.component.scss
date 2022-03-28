@@ -54,7 +54,7 @@
 }
 
 p.warning-title {
-  font-size: 34px;
+  font-size: 33px;
   font-weight: 900;
   margin-bottom: 10px;
 }
@@ -78,9 +78,17 @@ p.warning-title {
   }
 
   p.warning-title {
-    font-size: 24px;
+    font-size: 23px;
     font-weight: 900;
     margin-bottom: 10px;
     margin-right: auto;
   }
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0px !important;
+}
+
+.scroller {
+  max-height: calc(100vh - 50px) !important;
 }
