@@ -22,6 +22,7 @@ const silverTokenAbi = require('./../../assets/abis/silverTokenAbi.json');
 const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
+const buyContractAddress = environment.buyContractAddress;
 
 const NETWORK = 'binance';
 
@@ -538,7 +539,7 @@ export class WalletConnectService {
       let web3 = new Web3(await web3Modal.connect());
       const buyContract = new web3.eth.Contract(
         buyMshotTokenAbi as any,
-        "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e"
+        buyContractAddress
       );
 
       const buyOperation = await buyContract.methods.buyTokenWithBNB();
