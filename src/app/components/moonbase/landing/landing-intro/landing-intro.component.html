@@ -1,58 +1,62 @@
 <section class="landing-intro">
-    <div class="landing-into-nft-image-container-mobile">
-        <section class="landing-carousel">
-            <swiper *ngIf="slides.length !== 0" [config]="config">
-                <ng-container *ngFor="let slide of slides; index as i">
-                    <ng-template swiperSlide>
-                        <div class="nft-image-container">
-                            <img src="{{slide.img}}" alt="{{slide.name}}">
-                        </div>
-                    </ng-template>
-                </ng-container>
-            </swiper>
-            <img class="flex mx-auto" style="margin-bottom: 80px;" *ngIf="slides.length === 0" src="assets/media/videos/Loading.gif" alt="">
-        </section>
+  <div class="landing-into-nft-image-container-mobile">
+    <section class="landing-carousel">
+      <swiper *ngIf="slides.length !== 0" [config]="config">
+        <ng-container *ngFor="let slide of slides; index as i">
+          <ng-template swiperSlide>
+            <div class="nft-image-container">
+              <img src="{{slide.img}}" alt="{{slide.name}}">
+            </div>
+          </ng-template>
+        </ng-container>
+      </swiper>
+      <img class="flex mx-auto" style="margin-bottom: 80px;" *ngIf="slides.length === 0"
+        src="assets/media/videos/Loading.gif" alt="">
+    </section>
+  </div>
+
+  <div class="info">
+    <div class="line-container ">
+      <div class="line flex1"></div>
+      <div class="empty flex1"></div>
     </div>
-
-    <div class="info">
-        <div class="line-container ">
-            <div class="line flex1"></div>
-            <div class="empty flex1"></div>
-        </div>
-        <div class="top futuristic-container bottom-only">
-            <p class="p-white-span-primary p34 orbitron info-title">Buy MoonBoxes<br><span>and expand your <br class="break-line">NFT collection</span></p>
-        </div>
-        <div class="bottom flex pv20">
-            <div class="flex2  bottom-only no-padding mr10">
-                <p class="mb20  info-text">Buying MoonBoxes is a fun and unique way to acquire NFTs to build your collection. Only available on <a href="http://moonboxes.io/">MoonBoxes.io</a>, built on the Binance Smart Chain.</p>
-            </div>
-
-        </div>
-        <div class="buttons-container">
-            <div class="buy-moonshot-button">
-                <a [routerLink]="['/live']" class="button">Buy a MoonBox</a>
-            </div>
-            <div class="arrow-down">
-                <div class="round-mini-button" (click)="scrollToElement('', 'landing-nfts')">
-                    <mat-icon fontSet="material-icons" class="color-primary">arrow_downward</mat-icon>
-                </div>
-            </div>
-        </div>
+    <div class="top futuristic-container bottom-only">
+      <p class="p-white-span-primary p34 orbitron info-title">Buy MoonBoxes<br><span>and expand your <br
+            class="break-line">NFT collection</span></p>
+    </div>
+    <div class="bottom flex pv20">
+      <div class="flex2  bottom-only no-padding mr10">
+        <p class="mb20  info-text">Buying MoonBoxes is a unique way to acquire NFTs and build your collection. It is
+          built on the Binance Smart Chain and only available on <a href="http://moonboxes.io/">MoonBoxes.io</a></p>
+      </div>
 
     </div>
-
-    <div class="landing-into-nft-image-container">
-        <section class="landing-carousel">
-            <swiper *ngIf="slides.length !== 0" [config]="config">
-                <ng-container *ngFor="let slide of slides; index as i">
-                    <ng-template swiperSlide>
-                        <div class="nft-image-container">
-                            <img src="{{slide.img}}" alt="{{slide.name}}">
-                        </div>
-                    </ng-template>
-                </ng-container>
-            </swiper>
-            <img class="flex mx-auto" style="margin-left: 80px;" *ngIf="slides.length === 0" src="assets/media/videos/Loading.gif" alt="">
-        </section>
+    <div class="buttons-container">
+      <div class="buy-moonshot-button">
+        <a [routerLink]="['/live']" class="button">Buy a MoonBox</a>
+      </div>
+      <div class="arrow-down">
+        <div class="round-mini-button" (click)="scrollToElement('', 'landing-nfts')">
+          <mat-icon fontSet="material-icons" class="color-primary">arrow_downward</mat-icon>
+        </div>
+      </div>
     </div>
+
+  </div>
+
+  <div class="landing-into-nft-image-container">
+    <section class="landing-carousel">
+      <swiper *ngIf="slides.length !== 0" [config]="config">
+        <ng-container *ngFor="let slide of slides; index as i">
+          <ng-template swiperSlide>
+            <div class="nft-image-container">
+              <img src="{{slide.img}}" alt="{{slide.name}}">
+            </div>
+          </ng-template>
+        </ng-container>
+      </swiper>
+      <img class="flex mx-auto" style="margin-left: 80px;" *ngIf="slides.length === 0"
+        src="assets/media/videos/Loading.gif" alt="">
+    </section>
+  </div>
 </section>
