@@ -36,6 +36,8 @@ export class HistoryComponent implements OnInit {
   currentCategory: number = TABS_CATEGORY.UNBOXINGS;
 
   public innerWidth: any;
+  buyHistoryData: any;
+  transferHistoryData: any;
 
   constructor(
     public toastrService: ToastrService,
@@ -74,7 +76,11 @@ export class HistoryComponent implements OnInit {
         // console.log(response);
 
         if (response.status !== 204 && response.status !== 400)
+        {
           this.historyData = response.data;
+          this.buyHistoryData = this.historyData.filter(t => t.isTransfer == 0);
+          this.transferHistoryData = this.historyData.filter(t => t.isTransfer == 1);
+          }
         else
           this.historyData = []
       } else
