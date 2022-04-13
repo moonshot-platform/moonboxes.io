@@ -7,7 +7,7 @@ import { MoonbaseComponent } from './moonbase.component';
 import { NavModule } from './nav/nav.module';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NgParticlesModule } from 'ng-particles';
+// import { NgParticlesModule } from 'ng-particles';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
@@ -42,6 +42,7 @@ import { JoinApplicationComponent } from './join-application/join-application.co
     MoonbaseComponent,
     IntroComponent,
     PrizePoolComponent,
+    CountdownTimerComponent,
     HistoryComponent,
     InventoryComponent,
     FooterCountComponent,
@@ -63,7 +64,6 @@ import { JoinApplicationComponent } from './join-application/join-application.co
   imports: [
     MatIconModule,
     CommonModule,
-    NgParticlesModule,
     MoonbaseRoutingModule,
     NavModule,
     FormsModule,
