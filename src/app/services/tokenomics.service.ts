@@ -58,12 +58,11 @@ export class TokenomicsService {
         var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
         var web3 = new Web3( web3Provider );
     
-        var panCakeRouter = new web3.eth.Contract(pancakeABI as any, 
-          this.oldPancakeAddress ? "0x05fF2B0DB69458A0750badebc4f9e13aDd608C7F" : "0x10ED43C718714eb63d5aA57B78B54704E256024E");
-        var ssRouter = new web3.eth.Contract(ssABI as any, "0xd27D3F7f329D93d897612E413F207A4dbe8bF799");
+        var panCakeRouter = new web3.eth.Contract(pancakeABI as any,  "0x10ED43C718714eb63d5aA57B78B54704E256024E");
+        var ssRouter = new web3.eth.Contract(ssABI as any, "0x5298AD82dD7C83eEaA31DDa9DEB4307664C60534");
     
         const WBNB = "0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c";
-        const MOON = "0xd27D3F7f329D93d897612E413F207A4dbe8bF799";
+        const MOON = "0x5298AD82dD7C83eEaA31DDa9DEB4307664C60534";
         const BUSD = "0xe9e7cea3dedca5984780bafc599bd69add087d56";
         
         const amount = web3.utils.toWei("1");
