@@ -38,6 +38,7 @@
         <ul class="menubar flex">
             <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'" [routerLink]="[item.path]">{{item.name}}</a></li>
             <!-- <a [routerLink]="['']">Jim</a> -->
+            <li class="network" (click)="network()">{{this.chainName}}</li>
         </ul>
         <div class="block flex-center nsfw-and-close-container">
             <ui-switch *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'" defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10"></ui-switch>

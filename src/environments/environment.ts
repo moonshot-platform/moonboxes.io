@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  chainId: 97,
+  chainId: [97, 80001, 1281],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "http://codetentacles-006-site31.htempurl.com/api/",

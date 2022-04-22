@@ -1,0 +1,19 @@
+<section class="multi-chain">
+  <div class="upper-container">
+      <p>Switch to:</p>
+      <svg width="27" height="27" xmlns="http://www.w3.org/2000/svg"
+          class="interactable wrapped">
+          <path
+              d="M13.98 12.814 26.353.439l.707.707-12.375 12.375 12.375 12.374-.707.707-12.375-12.374L1.605 26.602l-.707-.707 12.374-12.374L.898 1.146 1.605.44l12.374 12.375Z"
+              fill="#d5a642"></path>
+      </svg>
+  </div>
+
+  <ul class="chain-list">
+      <li *ngFor="let chain of chains;let i=index" (click)="changeChain(chainConfigs[chain].config,i)"
+          [ngClass]="{'disabled': chainConfigs[chain].config === undefined}">
+          <img src="{{chainConfigs[chain].icon}}" alt="">
+          <p>{{chainConfigs[chain].name}}</p>
+      </li>
+  </ul>
+</section>

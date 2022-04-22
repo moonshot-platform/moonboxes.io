@@ -62,6 +62,17 @@ section.navigation {
   }
 }
 
+.network {
+  color: #000;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: center;
+  &:hover {
+    color: #ffffff;
+  }
+}
+
 .logo-container {
   // width: 270px;
   border-top: 6px solid $primary;

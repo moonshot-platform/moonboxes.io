@@ -60,13 +60,15 @@ const web3Modal = new Web3Modal({
   disableInjectedProvider: false
 });
 
-const provider = new WalletConnectProvider(providerOptions);
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class WalletConnectService {
+
+  chainId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private selectedChainId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   private readonly ACCOUNTS_CHANGED: string = 'accountsChanged';
   private readonly CHAIN_CHANGED: string = 'chainChanged';
@@ -103,7 +105,7 @@ export class WalletConnectService {
 
   async init(): Promise<boolean> {
     const wallet = this.localStorageService.getWallet();
-
+    debugger
     switch (wallet) {
       case 1:
         await this.connectToWallet(wallet);
@@ -128,14 +130,15 @@ export class WalletConnectService {
 
   async connectToWallet(origin = 0) {
     const window = this.windowRef.nativeWindow.ethereum;
-
+    var chainId = await this.chainId.value;
+    debugger
     try {
       if (typeof window !== 'undefined' && typeof window !== undefined) {
         await this.windowRef.nativeWindow.ethereum.request({ method: this.ETH_REQUEST_ACCOUNTS });
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
 
         let currentNetwork = await this.provider.getNetwork();
-        if (currentNetwork.chainId != providerChainID) {
+        if (currentNetwork.chainId != providerChainID[chainId]) {
           this.toastrService.error('You are on the wrong network');
 
           this.setWalletState(false);
@@ -165,7 +168,7 @@ export class WalletConnectService {
 
         // Subscribe to session disconnection
         this.windowRef.nativeWindow.ethereum.on(this.DISCONNECT, (code: number, reason: string) => {
-          if (provider.close) provider.close();
+          // if (provider.close) provider.close();
           this.setWalletDisconnected();
         });
 
@@ -182,7 +185,10 @@ export class WalletConnectService {
 
   async connectToWalletConnect(origin = 0) {
 
+    const provider = new WalletConnectProvider(providerOptions[this.chainId.value]);
+
     try {
+      
       this.provider = new ethers.providers.Web3Provider(provider);
       await provider.enable();
 
@@ -216,10 +222,12 @@ export class WalletConnectService {
     this.signer = this.provider.getSigner();
     const address = await this.signer.getAddress();
     const network = await this.provider.getNetwork();
+    var chainId = await this.chainId.value;
 
     this.localStorageService.setAddress(address);
-
-    if (network.chainId == environment.chainId) {
+    this.updateSelectedChainId(network.chainId);
+    debugger
+    if (network.chainId == environment.chainId[chainId]) {
       this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
       this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);
@@ -424,6 +432,25 @@ export class WalletConnectService {
     return promise;
   }
 
+  updateChainId(data: number): void {
+    console.log(data);
+    localStorage.setItem('manual_chainId', data.toString());
+    console.log(localStorage);
+    this.chainId.next(data);
+  }
+
+  getChainId(): Observable<number> {
+    return this.chainId;
+  }
+
+  updateSelectedChainId(data: number): void {
+    localStorage.setItem('chainId', data.toString());
+    this.selectedChainId.next(data);
+  }
+
+  getSelectedChainId(): Observable<number> {
+    return this.selectedChainId;
+  }
 
   /** Artist  **/
   async claimRewardTransaction(junkAmount: any, nftId: any, nftAmount: any, betId: any, seed: string, signHash: any) {

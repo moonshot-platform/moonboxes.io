@@ -8,11 +8,14 @@ import { TokenomicsService } from 'src/app/services/tokenomics.service';
 import { MoonbaseComponent } from '../moonbase.component';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { NetworkComponent } from '../../base/wallet/connect/network/network.component';
+import { CHAIN_CONFIGS } from '../../base/wallet/connect/constants/blockchain.configs';
+import { ErrorDialogComponent } from '../../base/wallet/connect/error-dialog/error-dialog.component';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.scss']
+  styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
   data: any;
@@ -22,6 +25,9 @@ export class NavComponent implements OnInit {
   isNSFWStatus = false;
   menuItem = false;
   public isTooltipActive = true;
+  chainName: any;
+  selectedChainId: number = 0;
+  ChainId: number = 0;
 
   public navItems: any[] = [
     // {
@@ -30,48 +36,49 @@ export class NavComponent implements OnInit {
     // },
   ];
 
-
   public navSubItems: any[] = [
     {
-      'icon': 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
-      'alt': 'return back',
-      'tooltip': 'Back',
-      'click': () => { },
-      'routerLink': null, // [''],
-      'route': '/'
+      icon: 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
+      alt: 'return back',
+      tooltip: 'Back',
+      click: () => {},
+      routerLink: null, // [''],
+      route: '/',
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/Menu_drops_black.svg',
-      'alt': 'drops',
-      'tooltip': 'This is an overview of all NFT drops, here you will be able to see recent, live and upcoming NFT drops.',
-      'click': null,
-      'routerLink': ['/live'],
-      'route': '/live'
+      icon: 'assets/media/icons/moonbase/nav/Menu_drops_black.svg',
+      alt: 'drops',
+      tooltip:
+        'This is an overview of all NFT drops, here you will be able to see recent, live and upcoming NFT drops.',
+      click: null,
+      routerLink: ['/live'],
+      route: '/live',
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
-      'alt': 'inventory',
-      'tooltip': 'This is your wallet inventory. An overview of all NFTs you received out of the MoonBoxes.',
-      'click': null,
-      'routerLink': ['/inventory'],
-      'route': '/inventory'
+      icon: 'assets/media/icons/moonbase/nav/Menu_inventory_black.svg',
+      alt: 'inventory',
+      tooltip:
+        'This is your wallet inventory. An overview of all NFTs you received out of the MoonBoxes.',
+      click: null,
+      routerLink: ['/inventory'],
+      route: '/inventory',
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/Menu_history_black.svg',
-      'alt': 'history',
-      'tooltip': 'This is your history. An overview of your MoonBox NFT claims.',
-      'click': null,
-      'routerLink': ['/history'],
-      'route': '/history'
+      icon: 'assets/media/icons/moonbase/nav/Menu_history_black.svg',
+      alt: 'history',
+      tooltip: 'This is your history. An overview of your MoonBox NFT claims.',
+      click: null,
+      routerLink: ['/history'],
+      route: '/history',
     },
     {
-      'icon': 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
-      'alt': 'info',
-      'tooltip': 'Here you can find more information about the MoonBoxes tiers.',
-      'click': null,
-      'routerLink': ['/info'],
-      'route': '/info'
-    }
+      icon: 'assets/media/icons/moonbase/nav/Menu_info_black.svg',
+      alt: 'info',
+      tooltip: 'Here you can find more information about the MoonBoxes tiers.',
+      click: null,
+      routerLink: ['/info'],
+      route: '/info',
+    },
   ];
 
   public open = false;
@@ -83,12 +90,18 @@ export class NavComponent implements OnInit {
     private localStorage: LocalStorageService,
     public router: Router,
     private location: Location
-  ) { }
+  ) {}
 
   ngOnInit(): void {
+    this.walletConnectService.init();
     this.getNSFWStatus();
-    
-    
+    this.walletConnectService.getSelectedChainId().subscribe((response) => {
+      this.selectedChainId = response;
+      
+      console.log(this.selectedChainId);
+      this.checkNetwork();
+    });
+
     this.walletConnectService.getData().subscribe((data) => {
       if (data !== undefined && data.address != undefined) {
         this.data = data;
@@ -96,9 +109,8 @@ export class NavComponent implements OnInit {
         if (this.data.networkId.chainId == environment.chainId) {
           this.getMoonShootBalance();
         }
-      }
-      else {
-        this.balance = "Awaiting Connection";
+      } else {
+        this.balance = 'Awaiting Connection';
       }
     });
   }
@@ -108,13 +120,14 @@ export class NavComponent implements OnInit {
       width: 'auto',
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-    });
+    dialogRef.afterClosed().subscribe((result) => {});
   }
 
   async getMoonShootBalance() {
-    const balance = Number( await this.walletConnectService.getUserBalance(this.data.address) );
-    this.balance = this.walletConnectService.convertBalance( balance );
+    const balance = Number(
+      await this.walletConnectService.getUserBalance(this.data.address)
+    );
+    this.balance = this.walletConnectService.convertBalance(balance);
   }
 
   menuopen() {
@@ -138,12 +151,44 @@ export class NavComponent implements OnInit {
     this.closeMenu();
   }
 
-  changeNSFWStatus( state: boolean ) {
-    this.localStorage.setNSFW( state );
+  changeNSFWStatus(state: boolean) {
+    this.localStorage.setNSFW(state);
   }
 
   getNSFWStatus() {
     this.isNSFWStatus = this.localStorage.getNSFW();
   }
 
+  network() {
+    let dialogRef = this.dialog.open(NetworkComponent, {
+      width: '100%',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
+
+  changeAccountDetected(accounts: any) {
+    this.walletConnectService.getSelectedChainId().subscribe((response) => {
+      this.selectedChainId = response;
+      debugger
+      this.checkNetwork();
+    });
+  }
+
+  checkNetwork() {
+    console.log(this.selectedChainId);
+    if (this.selectedChainId > 0) {
+      this.chainName = CHAIN_CONFIGS[this.selectedChainId].name;
+      if (environment.chainId.indexOf(this.selectedChainId) == -1) {
+        this.openerr(1);
+      }
+    }
+  }
+
+  openerr(err: number) {
+    let dialogRef = this.dialog.open(ErrorDialogComponent, {
+      data: err,
+      disableClose: true,
+    });
+  }
 }
