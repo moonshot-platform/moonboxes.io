@@ -1,100 +1,152 @@
 <section class="navigation">
-    <div class="bottom-container flex-center">
-        <div class="inner">
-            <div class="deeper flex1 no-padding">
-                <ul class="sub-menu justify-around">
-                    <li *ngFor="let item of navSubItems">
-                        <div class="tooltip">
-                            <ng-container *ngIf="item.click == null; then itemWithRoute else itemWithClick"></ng-container>
-                            <ng-template #itemWithRoute>
-                                <img class="nav-bar-sub-item" src="{{item.icon}}" [ngClass]="{'active-icon': this.router.url == '/' ? false : item.route.includes(this.router.url)}" [routerLink]="item.routerLink" routerLinkActive="router-link-active">
-                            </ng-template>
-                            <ng-template #itemWithClick>
-                                <img class="nav-bar-sub-item" (click)="goBack()" src="{{item.icon}}">
-                            </ng-template>
-                            <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}" (mouseleave)="this.isTooltipActive = true">
-                                <div class="row">
-                                    <img class="close-button" (click)="closeTooltip()" src="assets/media/icons/moonbase/nav/close.svg">
-                                    <p>{{item.tooltip}}</p>
-                                </div>
-                                <i></i>
-                            </div>
-                        </div>
-                    </li>
-                </ul>
+  <div class="bottom-container flex-center">
+    <div class="inner">
+      <div class="deeper flex1 no-padding">
+        <ul class="sub-menu justify-around">
+          <li *ngFor="let item of navSubItems">
+            <div class="tooltip">
+              <ng-container *ngIf="item.click == null; then itemWithRoute else itemWithClick"></ng-container>
+              <ng-template #itemWithRoute>
+                <img class="nav-bar-sub-item" src="{{ item.icon }}"
+                  [ngClass]="{'active-icon': this.router.url == '/' ? false : item.route.includes(this.router.url)}"
+                  [routerLink]="item.routerLink" routerLinkActive="router-link-active">
+              </ng-template>
+              <ng-template #itemWithClick>
+                <img class="nav-bar-sub-item" (click)="goBack()" src="{{ item.icon }}">
+              </ng-template>
+              <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}"
+                (mouseleave)="this.isTooltipActive = true">
+                <div class="row">
+                  <img class="close-button" (click)="closeTooltip()" src="assets/media/icons/moonbase/nav/close.svg">
+                  <p>{{ item.tooltip }}</p>
+                </div>
+                <i></i>
+              </div>
             </div>
-        </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <nav class="flex-space-between">
+    <div class="logo-container flex border-0">
+      <a class="flex-center" [routerLink]="['']">
+        <!-- <img class="logo" src="assets/media/images/logo.png" alt="moonshot logo"> -->
+        <svg style="height: 40px; width:200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1782.14 174.96">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: #fff;
+              }
+
+            </style>
+          </defs>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <path class="cls-1"
+                d="M24.12,209V34H63l59.29,70.71L181.34,34h39.12V209H182.55V91.61l-60.26,71.93L61.78,91.85V209Z"
+                transform="translate(-24.12 -34.02)" />
+              <path class="cls-1"
+                d="M285.1,209a36.09,36.09,0,0,1-36-36V70A34.65,34.65,0,0,1,259.7,44.59,34.62,34.62,0,0,1,285.1,34h103A34.74,34.74,0,0,1,413.4,44.59,34.42,34.42,0,0,1,424.09,70V173a36.3,36.3,0,0,1-36,36Zm9.72-37.91h91.12V71.93H286.8v99.14Z"
+                transform="translate(-24.12 -34.02)" />
+              <path class="cls-1"
+                d="M486.3,209a36.09,36.09,0,0,1-36-36V70a34.62,34.62,0,0,1,10.57-25.39A34.6,34.6,0,0,1,486.3,34h103A34.74,34.74,0,0,1,614.6,44.59,34.43,34.43,0,0,1,625.3,70V173a36.32,36.32,0,0,1-36,36ZM496,171.07h91.12V71.93H488v99.14Z"
+                transform="translate(-24.12 -34.02)" />
+              <path class="cls-1" d="M652,209V34H690.9l97.93,116.64V34H827V209H788.1L689.69,91.85V209Z"
+                transform="translate(-24.12 -34.02)" />
+              <path
+                d="M854.92,209V34H991a31.51,31.51,0,0,1,31.59,31.59v35.72a33.73,33.73,0,0,1-.6,6.32,20.11,20.11,0,0,1-2.07,5.83,69.33,69.33,0,0,1,7.41,12.76,30.32,30.32,0,0,1,2.55,12v39.12a30.29,30.29,0,0,1-9.35,22.36A30.88,30.88,0,0,1,998.05,209Zm35.24-102.3h97.2q5.34,0,7-1.83t1.7-7.16V69.25q0-5.34-1.7-7.16t-7-1.83h-97.2c-3.57,0-5.95.61-7.17,1.83s-1.82,3.6-1.82,7.16V97.69q0,5.34,1.82,7.16C884.21,106.07,886.59,106.68,890.16,106.68Zm0,76.06H994.41q5.58,0,7.29-1.83t1.7-7.16V141.91q0-5.34-1.7-7.17t-7.29-1.82H890.16c-3.57,0-5.95.61-7.17,1.82s-1.82,3.61-1.82,7.17v31.84q0,5.34,1.82,7.16C884.21,182.13,886.59,182.74,890.16,182.74Z"
+                transform="translate(-24.12 -34.02)" />
+              <path
+                d="M1087.47,209a31.53,31.53,0,0,1-31.59-31.59V65.61A31.53,31.53,0,0,1,1087.47,34h111.78a30.6,30.6,0,0,1,22.24,9.23,30.29,30.29,0,0,1,9.35,22.36V177.39a30.29,30.29,0,0,1-9.35,22.36,30.6,30.6,0,0,1-22.24,9.23Zm3.65-26.24h104.24q5.6,0,7.29-1.83c1.14-1.21,1.7-3.6,1.7-7.16V69.25c0-3.56-.56-6-1.7-7.16s-3.56-1.83-7.29-1.83H1091.12q-5.36,0-7.17,1.83c-1.22,1.21-1.82,3.6-1.82,7.16v104.5c0,3.56.6,5.95,1.82,7.16S1087.55,182.74,1091.12,182.74Z"
+                transform="translate(-24.12 -34.02)" />
+              <path
+                d="M1246.39,209v-4.86l69.5-82.62-69.5-82.62V34h30.38l56.37,66.83L1389.28,34h30.37v4.86l-69.5,82.62,69.74,82.62V209h-30.61l-56.38-66.83L1276.77,209Z"
+                transform="translate(-24.12 -34.02)" />
+              <path d="M1446.62,209V34H1607V60.26H1473.11v48.12h107.65v26.24H1473.11v48.12H1607V209Z"
+                transform="translate(-24.12 -34.02)" />
+              <path
+                d="M1662.89,209a31.53,31.53,0,0,1-31.59-31.59V167.18h26.24v6.57q0,5.34,1.83,7.16t7.17,1.83H1771q5.34,0,7-1.83t1.7-7.16V143.61q0-5.58-1.7-7.29t-7-1.7H1662.89A31.53,31.53,0,0,1,1631.3,103V65.61A31.53,31.53,0,0,1,1662.89,34h111.78a31.51,31.51,0,0,1,31.59,31.59V75.82h-26.49V69.25q0-5.34-1.7-7.16t-7-1.83H1666.54q-5.36,0-7.17,1.83t-1.83,7.16V99.39q0,5.6,1.83,7.29t7.17,1.7h108.13A31.51,31.51,0,0,1,1806.26,140v37.42A31.51,31.51,0,0,1,1774.67,209Z"
+                transform="translate(-24.12 -34.02)" />
+            </g>
+          </g>
+        </svg>
+      </a>
     </div>
 
-    <nav class="flex-space-between">
-        <div class="logo-container flex border-0">
-            <a class="flex-center" [routerLink]="['']">
-                <!-- <img class="logo" src="assets/media/images/logo.png" alt="moonshot logo"> -->
-                <svg style="height: 40px; width:200px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1782.14 174.96"><defs><style>.cls-1{fill:#fff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path class="cls-1" d="M24.12,209V34H63l59.29,70.71L181.34,34h39.12V209H182.55V91.61l-60.26,71.93L61.78,91.85V209Z" transform="translate(-24.12 -34.02)"/><path class="cls-1" d="M285.1,209a36.09,36.09,0,0,1-36-36V70A34.65,34.65,0,0,1,259.7,44.59,34.62,34.62,0,0,1,285.1,34h103A34.74,34.74,0,0,1,413.4,44.59,34.42,34.42,0,0,1,424.09,70V173a36.3,36.3,0,0,1-36,36Zm9.72-37.91h91.12V71.93H286.8v99.14Z" transform="translate(-24.12 -34.02)"/><path class="cls-1" d="M486.3,209a36.09,36.09,0,0,1-36-36V70a34.62,34.62,0,0,1,10.57-25.39A34.6,34.6,0,0,1,486.3,34h103A34.74,34.74,0,0,1,614.6,44.59,34.43,34.43,0,0,1,625.3,70V173a36.32,36.32,0,0,1-36,36ZM496,171.07h91.12V71.93H488v99.14Z" transform="translate(-24.12 -34.02)"/><path class="cls-1" d="M652,209V34H690.9l97.93,116.64V34H827V209H788.1L689.69,91.85V209Z" transform="translate(-24.12 -34.02)"/><path d="M854.92,209V34H991a31.51,31.51,0,0,1,31.59,31.59v35.72a33.73,33.73,0,0,1-.6,6.32,20.11,20.11,0,0,1-2.07,5.83,69.33,69.33,0,0,1,7.41,12.76,30.32,30.32,0,0,1,2.55,12v39.12a30.29,30.29,0,0,1-9.35,22.36A30.88,30.88,0,0,1,998.05,209Zm35.24-102.3h97.2q5.34,0,7-1.83t1.7-7.16V69.25q0-5.34-1.7-7.16t-7-1.83h-97.2c-3.57,0-5.95.61-7.17,1.83s-1.82,3.6-1.82,7.16V97.69q0,5.34,1.82,7.16C884.21,106.07,886.59,106.68,890.16,106.68Zm0,76.06H994.41q5.58,0,7.29-1.83t1.7-7.16V141.91q0-5.34-1.7-7.17t-7.29-1.82H890.16c-3.57,0-5.95.61-7.17,1.82s-1.82,3.61-1.82,7.17v31.84q0,5.34,1.82,7.16C884.21,182.13,886.59,182.74,890.16,182.74Z" transform="translate(-24.12 -34.02)"/><path d="M1087.47,209a31.53,31.53,0,0,1-31.59-31.59V65.61A31.53,31.53,0,0,1,1087.47,34h111.78a30.6,30.6,0,0,1,22.24,9.23,30.29,30.29,0,0,1,9.35,22.36V177.39a30.29,30.29,0,0,1-9.35,22.36,30.6,30.6,0,0,1-22.24,9.23Zm3.65-26.24h104.24q5.6,0,7.29-1.83c1.14-1.21,1.7-3.6,1.7-7.16V69.25c0-3.56-.56-6-1.7-7.16s-3.56-1.83-7.29-1.83H1091.12q-5.36,0-7.17,1.83c-1.22,1.21-1.82,3.6-1.82,7.16v104.5c0,3.56.6,5.95,1.82,7.16S1087.55,182.74,1091.12,182.74Z" transform="translate(-24.12 -34.02)"/><path d="M1246.39,209v-4.86l69.5-82.62-69.5-82.62V34h30.38l56.37,66.83L1389.28,34h30.37v4.86l-69.5,82.62,69.74,82.62V209h-30.61l-56.38-66.83L1276.77,209Z" transform="translate(-24.12 -34.02)"/><path d="M1446.62,209V34H1607V60.26H1473.11v48.12h107.65v26.24H1473.11v48.12H1607V209Z" transform="translate(-24.12 -34.02)"/><path d="M1662.89,209a31.53,31.53,0,0,1-31.59-31.59V167.18h26.24v6.57q0,5.34,1.83,7.16t7.17,1.83H1771q5.34,0,7-1.83t1.7-7.16V143.61q0-5.58-1.7-7.29t-7-1.7H1662.89A31.53,31.53,0,0,1,1631.3,103V65.61A31.53,31.53,0,0,1,1662.89,34h111.78a31.51,31.51,0,0,1,31.59,31.59V75.82h-26.49V69.25q0-5.34-1.7-7.16t-7-1.83H1666.54q-5.36,0-7.17,1.83t-1.83,7.16V99.39q0,5.6,1.83,7.29t7.17,1.7h108.13A31.51,31.51,0,0,1,1806.26,140v37.42A31.51,31.51,0,0,1,1774.67,209Z" transform="translate(-24.12 -34.02)"/></g></g></svg>
-            </a>
+
+    <ul class="menubar flex">
+      <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'"
+          [routerLink]="[item.path]">{{ item.name }}</a></li>
+      <!-- <a [routerLink]="['']">Jim</a> -->
+      <li class="network" (click)="network()">{{ this.chainName }}</li>
+    </ul>
+    <div class="block flex-center nsfw-and-close-container">
+      <ui-switch
+        *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'"
+        defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10">
+      </ui-switch>
+      <span
+        *ngIf="router.url === '/upcoming'|| router.url === '/inventory' || router.url === '/live' || router.url === '/recent'"
+        class="mr20 text-dark">NSFW</span>
+      <div class="tooltip">
+        <a href="https://project-moonshot.me">
+          <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+              <path
+                d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z"
+                id="Combined-Shape" fill="#000000"></path>
+            </g>
+          </svg>
+        </a>
+        <div class="bottom">
+          <div class="row">
+            <p>Back to Moonshot</p>
+          </div>
+          <i></i>
         </div>
+      </div>
+    </div>
+  </nav>
 
 
-        <ul class="menubar flex">
-            <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'" [routerLink]="[item.path]">{{item.name}}</a></li>
-            <!-- <a [routerLink]="['']">Jim</a> -->
-            <li class="network" (click)="network()">{{this.chainName}}</li>
-        </ul>
-        <div class="block flex-center nsfw-and-close-container">
-            <ui-switch *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'" defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10"></ui-switch>
-            <span *ngIf="router.url === '/upcoming'|| router.url === '/inventory' || router.url === '/live' || router.url === '/recent'" class="mr20 text-dark">NSFW</span>
-            <div class="tooltip">
-                <a href="https://project-moonshot.me">
-                    <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                        <path d="M13.9791847,12.8137085 L26.3535534,0.439339828 L27.0606602,1.14644661 L14.6862915,13.5208153 L27.0606602,25.895184 L26.3535534,26.6022907 L13.9791847,14.2279221 L1.60481605,26.6022907 L0.897709268,25.895184 L13.2720779,13.5208153 L0.897709268,1.14644661 L1.60481605,0.439339828 L13.9791847,12.8137085 Z" id="Combined-Shape" fill="#000000"></path>
-                        </g>
-                    </svg>
-                </a>
-                <div class="bottom">
-                    <div class="row">
-                        <p>Back to Moonshot</p>
-                    </div>
-                    <i></i>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
-    <section class="mobile-only footer_menu tab-only navigation bottom-footer">
-        <!-- <div class="flex1 no-padding shape_down_box">
+  <section class="mobile-only footer_menu tab-only navigation bottom-footer">
+    <!-- <div class="flex1 no-padding shape_down_box">
             <p class="p12 mt-15"><span>Moonshot Balance</span></p>
-            <p><strong class="p14">{{balanceOfMoon}}</strong></p>
+            <p><strong class="p14">{{ balanceOfMoon }}</strong></p>
         </div> -->
 
-        <div class="res_menu flex1">
+    <div class="res_menu flex1">
 
-            <ul class="box">
-                <ng-container *ngIf="menuItem ; then doNotShowMenuIcon else showMenuIcon">
-                </ng-container>
-                <ng-template #doNotShowMenuIcon>
-                    <li class="close-menu">
-                        <img src="assets/media/icons/close_bottom-menu_mobile.svg" (click)="closeMenu()">
-                    </li>
-                </ng-template>
-                <ng-template #showMenuIcon>
-                    <li class="hamburger-menu" (click)="menuopen()">
-                        <svg width="20px" height="26px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
-                <title>Combined Shape</title>
-                <desc>Created with Sketch.</desc>
-                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                  <path d="M0,0 L32,0 L32,3 L0,3 L0,0 Z M0,11 L32,11 L32,14 L0,14 L0,11 Z M0,22 L32,22 L32,25 L0,25 L0,22 Z"
-                    id="Combined-Shape" fill="#D5A642"></path>
-                </g>
-              </svg>
-                    </li>
-                </ng-template>
+      <ul class="box">
+        <ng-container *ngIf="menuItem ; then doNotShowMenuIcon else showMenuIcon">
+        </ng-container>
+        <ng-template #doNotShowMenuIcon>
+          <li class="close-menu">
+            <img src="assets/media/icons/close_bottom-menu_mobile.svg" (click)="closeMenu()">
+          </li>
+        </ng-template>
+        <ng-template #showMenuIcon>
+          <li class="hamburger-menu" (click)="menuopen()">
+            <svg width="20px" height="26px" viewBox="0 0 32 25" version="1.1" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink">
+              <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+              <title>Combined Shape</title>
+              <desc>Created with Sketch.</desc>
+              <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <path
+                  d="M0,0 L32,0 L32,3 L0,3 L0,0 Z M0,11 L32,11 L32,14 L0,14 L0,11 Z M0,22 L32,22 L32,25 L0,25 L0,22 Z"
+                  id="Combined-Shape" fill="#D5A642"></path>
+              </g>
+            </svg>
+          </li>
+        </ng-template>
 
 
 
-                <!-- <li>
+        <!-- <li>
                     <a href="javascript:void(0)" (click)="closeMenu()">
                         <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
               <title _ngcontent-jde-c121="">Combined Shape</title>
@@ -107,15 +159,19 @@
             </svg>
                     </a>
                 </li> -->
-                <li>
-                    <div *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'" class="block flex-center">
-                        <ui-switch defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10"></ui-switch>
-                        <span class="mr20 text-dark">NSFW</span>
-                    </div>
-                </li>
-                <li>
-                    <div (click)="openDialog()" class="wallet_block flex-center">
-                        <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 64 64" xml:space="preserve" style="enable-background: new 0 0 64 64;">
+        <li>
+          <div
+            *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'"
+            class="block flex-center">
+            <ui-switch defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)"
+              class="mr10"></ui-switch>
+            <span class="mr20 text-dark">NSFW</span>
+          </div>
+        </li>
+        <li>
+          <div (click)="openDialog()" class="wallet_block flex-center">
+            <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px" y="0px" viewBox="0 0 64 64" xml:space="preserve" style="enable-background: new 0 0 64 64;">
               <g _ngcontent-jde-c123="">
                 <path
                   d="M18.7,12.8c-3.3,0-5.9,2.7-5.9,5.9v26.7c0,3.3,2.7,5.9,5.9,5.9h26.7c1.4,0,2.6-1.2,2.6-2.6v-6.8h3.3V31.4h-3.3v-6.8
@@ -125,25 +181,25 @@
                 </path>
               </g>
             </svg>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </section>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
 
-    <section class="mobile-only moonbox-menu" *ngIf="menuItem">
-        <div class="inner menu-item">
+  <section class="mobile-only moonbox-menu" *ngIf="menuItem">
+    <div class="inner menu-item">
 
-            <div class="no-padding balance-moonshot">
-                <p class="moonshot-text"><span>MOONSHOT BALANCE</span></p>
-                <p><strong class="balance-text">{{balance}}</strong></p>
-            </div>
+      <div class="no-padding balance-moonshot">
+        <p class="moonshot-text"><span>MOONSHOT BALANCE</span></p>
+        <p><strong class="balance-text">{{ balance }}</strong></p>
+      </div>
 
-            <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+      <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
         true}" [routerLink]="['']" (click)="closeMenu()">MoonBoxes</a>
-            <div class="divider mb20"></div>
-            <a class="p17 mb20" (click)="toggleTokenomics()">Tokenomics</a>
-        </div>
-    </section>
+      <div class="divider mb20"></div>
+      <a class="p17 mb20" (click)="toggleTokenomics()">Tokenomics</a>
+    </div>
+  </section>
 </section>

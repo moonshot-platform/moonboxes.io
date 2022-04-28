@@ -18,6 +18,9 @@ export const environment = {
   buyContractAddress: "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e",// for moonshot v2
   tokenContractAddress: "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e",// for moonshot v2
 
+  configFile: 'testnet',
+
+
   // lootboxAddress: "0xeA2c12cb5f65832dc68E694C3894001ba353aBDf",
   // artistNFTAddress: "0xF21Ae2f6469B4a38F49d98173f218d77165C9b2f",
 };

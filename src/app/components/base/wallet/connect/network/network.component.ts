@@ -26,10 +26,15 @@ export class NetworkComponent implements OnInit {
     this.chains = environment.chainId
   }
 
-  async changeChain(config: any,index:any) {
+  async changeChain(config: any, index: any) {
+
     if (config !== undefined)
       await this.windowRef.nativeWindow.ethereum.request(config);
-      this.walletconnect.updateChainId(index);
+    this.walletconnect.updateChainId(this.chains[index]);
+    this.parentDialogRef.close();
+  }
+
+  closeDialog() {
     this.parentDialogRef.close();
   }
 

@@ -25,6 +25,7 @@ const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
 const buyContractAddress = environment.buyContractAddress;
 
 const NETWORK = 'binance';
+const config = require('./../../assets/configFiles/configFile.json');
 
 import mshotTokenAbi from './../../assets/abis/mshot.token.abi.json';
 import buyMshotTokenAbi from './../../assets/abis/buy-moonshot-token.abi.json';
@@ -87,6 +88,8 @@ export class WalletConnectService {
   LootboxContract: any;
   NFTContract: any;
   artistLootBoxContract: any;
+  artistLootBoxContractGet: any;
+  LootBoxContractGet: any;
 
   constructor(
     private windowRef: WindowRefService,
@@ -105,7 +108,6 @@ export class WalletConnectService {
 
   async init(): Promise<boolean> {
     const wallet = this.localStorageService.getWallet();
-    debugger
     switch (wallet) {
       case 1:
         await this.connectToWallet(wallet);
@@ -116,8 +118,17 @@ export class WalletConnectService {
     }
 
     // await this.localStorageService.getAddress();
+    var web3Provider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545/');
+    var web3 = new Web3(web3Provider);
+    this.SilverContract = new web3.eth.Contract(silverTokenAbi, SilverAddress);
+
+    this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
+    this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, config[environment.configFile][0].lootBoxAddress);
+    console.log(config[environment.configFile][0].lootBoxAddress)
+
 
     await this.getAccountAddress();
+
     return wallet != undefined || this.account != undefined;
   }
 
@@ -131,18 +142,19 @@ export class WalletConnectService {
   async connectToWallet(origin = 0) {
     const window = this.windowRef.nativeWindow.ethereum;
     var chainId = await this.chainId.value;
-    debugger
+
+
     try {
       if (typeof window !== 'undefined' && typeof window !== undefined) {
         await this.windowRef.nativeWindow.ethereum.request({ method: this.ETH_REQUEST_ACCOUNTS });
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
 
         let currentNetwork = await this.provider.getNetwork();
-        if (currentNetwork.chainId != providerChainID[chainId]) {
-          this.toastrService.error('You are on the wrong network');
 
-          this.setWalletState(false);
-          throw 'Wrong network';
+        if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
+          this.toastrService.error('You are on the wrong network');
+          // this.setWalletState(false);
+          // throw 'Wrong network';
         }
 
         await this.getAccountAddress();
@@ -163,6 +175,8 @@ export class WalletConnectService {
         this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
           this.toastrService.info('You have changed the chain!');
+          this.updateSelectedChainId(Number(code));
+          location.reload();
           this.setWalletState(true);
         });
 
@@ -177,10 +191,9 @@ export class WalletConnectService {
         // if (origin == 0) location.reload();
 
       }
-    } catch (e) {
+    } catch (e: any) {
       this.setWalletDisconnected();
     }
-
   }
 
   async connectToWalletConnect(origin = 0) {
@@ -188,7 +201,7 @@ export class WalletConnectService {
     const provider = new WalletConnectProvider(providerOptions[this.chainId.value]);
 
     try {
-      
+
       this.provider = new ethers.providers.Web3Provider(provider);
       await provider.enable();
 
@@ -212,7 +225,7 @@ export class WalletConnectService {
       if (origin === 0) location.reload();
     }
 
-    catch (e) {
+    catch (e: any) {
       this.setWalletDisconnected();
       location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it
     }
@@ -226,12 +239,14 @@ export class WalletConnectService {
 
     this.localStorageService.setAddress(address);
     this.updateSelectedChainId(network.chainId);
-    debugger
-    if (network.chainId == environment.chainId[chainId]) {
-      this.SilverContract = new ethers.Contract(SilverAddress, silverTokenAbi, this.signer);
-      this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
+
+    if (network.chainId == chainId) {
+      if ((network.chainId == 56 || network.chainId == 97)) {
+        this.LootboxContract = new ethers.Contract(LootboxAddress, lootBoxAbi, this.signer);
+      }
       this.NFTContract = new ethers.Contract(NFTAddress, NFTAbi, this.signer);
-      this.artistLootBoxContract = new ethers.Contract(ArtistNFTAddress, ArtistNFTAbi, this.signer);
+      let index = environment.chainId.indexOf(chainId ?? 56);
+      this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
     }
 
     const data = {
@@ -258,12 +273,17 @@ export class WalletConnectService {
   async getDetailsMoonboxlimit(isArtist = false) {
     const promise = new Promise((resolve, reject) => {
       try {
+
         if (isArtist) {
-          this.artistLootBoxContract.getMoonShootLimit()
+          this.artistLootBoxContractGet.methods.getMoonShootLimit().call()
             .then((transactionHash: any) => resolve(transactionHash));
         } else {
-          this.LootboxContract.getMoonShootLimit()
-            .then((transactionHash: any) => resolve(transactionHash));
+
+          this.LootBoxContractGet.methods.getMoonShootLimit().call()
+            .then((transactionHash: any) => {
+              resolve(transactionHash)
+            }
+            );
         }
       } catch (e) {
         reject(false);
@@ -293,7 +313,7 @@ export class WalletConnectService {
       try {
         const params2 = (noOfBets * Number(lootboxPrice) * 1e9).toString();
 
-        this.SilverContract.allowance(userAddress, LootboxAddress)
+        this.SilverContract.methods.allowance(userAddress, LootboxAddress).call()
           .then(async (allowanceAmount: string) => {
             if (allowanceAmount >= params2)
               resolve({ hash: '', status: true, allowance: true });
@@ -315,18 +335,17 @@ export class WalletConnectService {
 
     const promise = new Promise(async (resolve, reject) => {
       try {
-        const tx = await this.SilverContract.approve(LootboxAddress, (params));
+        const tx = await this.SilverContract.methods.approve(LootboxAddress, (params)).call();
         resolve({ hash: tx, status: true, allowance: false });
-      } catch (e) {
+      } catch (e: any) {
         reject({ hash: '', status: false });
       }
     });
-
     return promise;
   }
 
   async getUserBalance(userAddress: string): Promise<number> {
-    return Number(await this.SilverContract.balanceOf(userAddress));
+    return Number(await this.SilverContract?.methods.balanceOf(userAddress).call());
   }
 
   async getTransactionHashForBetSubmit(lootBoxId: any, seed: string, noOfBets: number, userAddress: string) {
@@ -364,7 +383,6 @@ export class WalletConnectService {
   async getRedeemBulk(id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string, nftAddress: any) {
     const promise = new Promise((resolve, reject) => {
       const spliSign = ethers.utils.splitSignature(signature);
-      debugger
       if (isArtist) {
         try {
           this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
@@ -437,6 +455,7 @@ export class WalletConnectService {
     localStorage.setItem('manual_chainId', data.toString());
     console.log(localStorage);
     this.chainId.next(data);
+
   }
 
   getChainId(): Observable<number> {
@@ -512,7 +531,6 @@ export class WalletConnectService {
   //Token based payments
   async checkAllowance(tokenAddress: any, amount: any) {
     let tokenContract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
-    debugger
     let decimals = await tokenContract.decimals();
     var promise = new Promise((resolve, reject) => {
       try {

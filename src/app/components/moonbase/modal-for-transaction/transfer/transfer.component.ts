@@ -22,8 +22,6 @@ export class TransferComponent {
     private httpApi: HttpApiService) { }
 
   async transfer(userAddress: any, ArtistNFTAddress: any) {
-    debugger
-
     if (undefined === userAddress || userAddress == "") {
       this.httpApi.showToastr("You must fill in an address", false);
       return false;

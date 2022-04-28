@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  chainId : [56,80001,1281],
+  chainId: [56, 80001, 1281],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "https://moonboxes.io/api/api/",
@@ -13,6 +13,8 @@ export const environment = {
   artistNFTAddress: "0xE93ddAA2d56F1DAF39177fe875698A147bC94f69",  // New contract address for moonshot v2
   buyContractAddress: "0x8862B7F7486763E83C3AC628e51De211EB3f70a5",// for moonshot v2
   tokenContractAddress: "0x5298AD82dD7C83eEaA31DDa9DEB4307664C60534",// for moonshot v2
+
+  configFile: 'mainet',
 
   // lootboxAddress: "0x83350dB1Ab42c8ac82FAf74FdA7C0160919d2a40",
   // artistNFTAddress: "0xa8e67efd3DDAD234947d8BC80F36aa8F9eb35dF0", // old address

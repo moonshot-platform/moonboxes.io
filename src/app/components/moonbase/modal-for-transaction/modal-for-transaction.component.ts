@@ -180,7 +180,6 @@ export class ModalForTransactionComponent implements OnInit {
 
 
   async submitBetForArtist() {
-
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {

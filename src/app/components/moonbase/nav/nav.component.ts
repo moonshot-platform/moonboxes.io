@@ -41,7 +41,7 @@ export class NavComponent implements OnInit {
       icon: 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
       alt: 'return back',
       tooltip: 'Back',
-      click: () => {},
+      click: () => { },
       routerLink: null, // [''],
       route: '/',
     },
@@ -90,21 +90,30 @@ export class NavComponent implements OnInit {
     private localStorage: LocalStorageService,
     public router: Router,
     private location: Location
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.walletConnectService.init();
+    this.walletConnectService.updateChainId(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
+    console.log(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
     this.getNSFWStatus();
     this.walletConnectService.getSelectedChainId().subscribe((response) => {
       this.selectedChainId = response;
-      
+
       console.log(this.selectedChainId);
+      this.checkNetwork();
+    });
+
+    this.walletConnectService.getChainId().subscribe((response) => {
+      this.ChainId = response;
+
       this.checkNetwork();
     });
 
     this.walletConnectService.getData().subscribe((data) => {
       if (data !== undefined && data.address != undefined) {
         this.data = data;
+        this.checkNetwork();
         this.isConnected = true;
         if (this.data.networkId.chainId == environment.chainId) {
           this.getMoonShootBalance();
@@ -120,7 +129,7 @@ export class NavComponent implements OnInit {
       width: 'auto',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => { });
   }
 
   async getMoonShootBalance() {
@@ -164,25 +173,28 @@ export class NavComponent implements OnInit {
       width: '100%',
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => { });
   }
 
   changeAccountDetected(accounts: any) {
     this.walletConnectService.getSelectedChainId().subscribe((response) => {
       this.selectedChainId = response;
-      debugger
       this.checkNetwork();
     });
+
   }
 
   checkNetwork() {
-    console.log(this.selectedChainId);
-    if (this.selectedChainId > 0) {
-      this.chainName = CHAIN_CONFIGS[this.selectedChainId].name;
-      if (environment.chainId.indexOf(this.selectedChainId) == -1) {
-        this.openerr(1);
-      }
+
+
+
+    this.chainName = CHAIN_CONFIGS[this.ChainId].name;
+
+    if (environment.chainId.indexOf(this.selectedChainId) == -1) {
+
+      // this.openerr(1);
     }
+
   }
 
   openerr(err: number) {
