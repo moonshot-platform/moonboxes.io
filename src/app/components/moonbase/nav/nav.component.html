@@ -80,7 +80,9 @@
       <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'"
           [routerLink]="[item.path]">{{ item.name }}</a></li>
       <!-- <a [routerLink]="['']">Jim</a> -->
-      <li class="network" (click)="network()">{{ this.chainName }}</li>
+      <div *ngIf="!showMultiChainDialog">
+        <li class="network" (click)="network()">{{ this.chainName }}</li>
+      </div>
     </ul>
     <div class="block flex-center nsfw-and-close-container">
       <ui-switch

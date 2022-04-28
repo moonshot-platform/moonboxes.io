@@ -153,8 +153,8 @@ export class WalletConnectService {
 
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
           this.toastrService.error('You are on the wrong network');
-          // this.setWalletState(false);
-          // throw 'Wrong network';
+          this.setWalletState(false);
+          throw 'Wrong network';
         }
 
         await this.getAccountAddress();

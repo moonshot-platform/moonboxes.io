@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
 import { Location } from '@angular/common';
 import { environment } from 'src/environments/environment';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
@@ -19,7 +19,7 @@ import { ErrorDialogComponent } from '../../base/wallet/connect/error-dialog/err
 })
 export class NavComponent implements OnInit {
   data: any;
-  isConnected: boolean = false;
+  isConnected: boolean = true;
   balance: any = 0;
   moonCountData: any;
   isNSFWStatus = false;
@@ -28,7 +28,7 @@ export class NavComponent implements OnInit {
   chainName: any;
   selectedChainId: number = 0;
   ChainId: number = 0;
-
+  event$
   public navItems: any[] = [
     // {
     //   'name': 'MoonBoxes',
@@ -82,6 +82,7 @@ export class NavComponent implements OnInit {
   ];
 
   public open = false;
+  showMultiChainDialog: boolean = true;
 
   constructor(
     public dialog: MatDialog,
@@ -89,8 +90,13 @@ export class NavComponent implements OnInit {
     private tokenomicsService: TokenomicsService,
     private localStorage: LocalStorageService,
     public router: Router,
-    private location: Location
-  ) { }
+    private location: Location,
+
+  ) {
+    this.event$ = location.onUrlChange((val) => {
+      this.isMultiChain();
+    })
+  }
 
   ngOnInit(): void {
     this.walletConnectService.init();
@@ -99,8 +105,7 @@ export class NavComponent implements OnInit {
     this.getNSFWStatus();
     this.walletConnectService.getSelectedChainId().subscribe((response) => {
       this.selectedChainId = response;
-
-      console.log(this.selectedChainId);
+      this.isMultiChain();
       this.checkNetwork();
     });
 
@@ -181,20 +186,13 @@ export class NavComponent implements OnInit {
       this.selectedChainId = response;
       this.checkNetwork();
     });
-
   }
 
   checkNetwork() {
-
-
-
     this.chainName = CHAIN_CONFIGS[this.ChainId].name;
-
     if (environment.chainId.indexOf(this.selectedChainId) == -1) {
-
       // this.openerr(1);
     }
-
   }
 
   openerr(err: number) {
@@ -202,5 +200,14 @@ export class NavComponent implements OnInit {
       data: err,
       disableClose: true,
     });
+  }
+
+  isMultiChain() {
+    if (this.router.url === '/live' || this.router.url === '/inventory' || this.router.url === '/history') {
+      this.showMultiChainDialog = false;
+    }
+    else {
+      this.showMultiChainDialog = true;
+    }
   }
 }
