@@ -90,6 +90,7 @@ export class WalletConnectService {
   artistLootBoxContract: any;
   artistLootBoxContractGet: any;
   LootBoxContractGet: any;
+  ChainId: number = 0;
 
   constructor(
     private windowRef: WindowRefService,
@@ -152,10 +153,19 @@ export class WalletConnectService {
         let currentNetwork = await this.provider.getNetwork();
 
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
-          this.toastrService.error('You are on the wrong network');
+          this.toastrService.error('You are on the wrong network1');
           this.setWalletState(false);
           throw 'Wrong network';
         }
+        else {
+          this.getChainId().subscribe((response) => {
+            this.ChainId = response;
+          });
+          if (this.ChainId != currentNetwork.chainId) {
+            this.toastrService.error('You are on the wrong network');
+          }
+        }
+
 
         await this.getAccountAddress();
         this.localStorageService.setWallet(1);
@@ -385,6 +395,7 @@ export class WalletConnectService {
       const spliSign = ethers.utils.splitSignature(signature);
       if (isArtist) {
         try {
+          debugger
           this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
             .then((transactionHash: any) =>
               resolve({ hash: transactionHash.hash, status: true })

@@ -11,6 +11,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { NetworkComponent } from '../../base/wallet/connect/network/network.component';
 import { CHAIN_CONFIGS } from '../../base/wallet/connect/constants/blockchain.configs';
 import { ErrorDialogComponent } from '../../base/wallet/connect/error-dialog/error-dialog.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-nav',
@@ -89,6 +90,7 @@ export class NavComponent implements OnInit {
     private walletConnectService: WalletConnectService,
     private tokenomicsService: TokenomicsService,
     private localStorage: LocalStorageService,
+    private toastrService: ToastrService,
     public router: Router,
     private location: Location,
 
@@ -106,7 +108,7 @@ export class NavComponent implements OnInit {
     this.walletConnectService.getSelectedChainId().subscribe((response) => {
       this.selectedChainId = response;
       this.isMultiChain();
-      this.checkNetwork();
+      // this.checkNetwork();
     });
 
     this.walletConnectService.getChainId().subscribe((response) => {
@@ -118,7 +120,7 @@ export class NavComponent implements OnInit {
     this.walletConnectService.getData().subscribe((data) => {
       if (data !== undefined && data.address != undefined) {
         this.data = data;
-        this.checkNetwork();
+        // this.checkNetwork();
         this.isConnected = true;
         if (this.data.networkId.chainId == environment.chainId) {
           this.getMoonShootBalance();
