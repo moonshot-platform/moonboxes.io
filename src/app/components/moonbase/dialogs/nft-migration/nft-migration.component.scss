@@ -1,0 +1,156 @@
+@import "includes";
+
+.img-small {
+  width: 70px;
+  height: 70px;
+}
+
+.connect_popup {
+  background: #090d16;
+  border-top: 6px solid #d5a642;
+}
+
+.border-thick:hover {
+  border-bottom: 4px solid #d5a642;
+}
+
+.border-thick {
+  cursor: pointer;
+  border-bottom: 4px solid transparent;
+}
+
+.flex-xs-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 660px;
+  padding: 40px;
+
+  .buttons-container {
+    //margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    margin-top: 30px;
+
+    .outlined-button {
+      min-width: 140px !important;
+    }
+
+    .button {
+      margin-left: 20px;
+      min-width: 170px !important;
+    }
+  }
+}
+
+.desc {
+  color: $primary;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  margin-right: auto;
+}
+
+p.warning-title {
+  font-size: 33px;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: $md) {
+  .flex-xs-col {
+    padding: 25px;
+
+    .buttons-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      row-gap: 30px;
+
+      .outlined-button,
+      .button {
+        min-width: 100% !important;
+        margin-left: 0px;
+      }
+    }
+  }
+
+  p.warning-title {
+    font-size: 23px;
+    font-weight: 900;
+    margin-bottom: 10px;
+    margin-right: auto;
+  }
+}
+
+::ng-deep.mat-dialog-container {
+  padding: 0px !important;
+}
+.label-color{
+  color: white;
+  width: 50%;
+}
+
+.scroller {
+  max-height: calc(100vh - 50px) !important;
+}
+.example-input-label,
+.example-add-tab-button,
+.example-delete-tab-button {
+  margin: 8px;
+}
+
+.mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+  display: flex;
+}
+.mat-tab-header-pagination-chevron {
+  border-color: rgb(229 0 0 / 87%);
+}
+.width-100{
+  width: 100%;
+}
+.width-25{
+  width: 22%;
+}
+.padding-15{
+  padding: 15px;
+}
+.oweflow-1{
+  overflow-y: auto;
+  height: 300px;
+}
+
+.mr-10{
+  margin: 10px 10px 10px 10px;
+}
+
+//------------------------------scroll bar css------------------------------//
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #090d16; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #090d16; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+//------------------------------scroll bar css------------------------------//
+.btn-right{
+  text-align: -webkit-right ;
+}
+.wrap-flex{
+  display: flex;
+    flex-flow: wrap;
+}

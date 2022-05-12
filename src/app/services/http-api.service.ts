@@ -181,4 +181,17 @@ export class HttpApiService {
   getMessage(): Observable<any> {
     return this.subject.asObservable();
   }
+
+
+  getRequest(urlLink) {
+    const url = `${baseURL}${urlLink}`;
+    return this.httpClient.get(url, { headers: this.headers });
+  }
+
+  postRequest(link: any, body: any): Observable<any> {
+    let url = `${baseURL}${link}`;
+    return this.httpClient.post(url, body, { headers: this.headers });
+  }
+
+
 }

@@ -4,12 +4,10 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
-import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
-import { Observable, Observer } from 'rxjs';
 import { MESSAGES } from 'src/app/messages.enum';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 import { ItemOverviewComponent } from '../../base/dialogs/item-overview/item-overview.component';
+import { NftMigrationComponent } from '../dialogs/nft-migration/nft-migration.component';
 
 @Component({
   selector: 'app-inventory',
@@ -30,9 +28,11 @@ export class InventoryComponent implements OnInit {
 
   NSFWToggleState = false;
   isConnected = false;
-
+  tabs :any = [];
   selectedIndex: number;
-
+  nftMigrationDialogRef :any;
+  IsNftMigrated :boolean=false;
+  userAddress :any ;
   constructor(
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService,
@@ -43,6 +43,7 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.NSFWToggleState = this.localStorage.getNSFW();
+    this.userAddress = this.localStorage.get('address');
 
     this.localStorage.whenNSFWToggled().subscribe((NSFWToggleState) => {
       this.NSFWToggleState = NSFWToggleState;
@@ -66,6 +67,8 @@ export class InventoryComponent implements OnInit {
           this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
       }
     });
+    this.getUserData01();
+   
   }
 
   getUserData() {
@@ -189,4 +192,50 @@ export class InventoryComponent implements OnInit {
     this.dialog.open(ItemOverviewComponent, { width: '100%', maxWidth: '1000px', data: item });
   }
 
+
+
+  openNftMigrationDialog(){
+    
+  this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
+    width: '800px',
+    data: {data:this.tabs},
+  });
+  }
+  
+
+
+  getUserData01(){
+    let url ="userDataCount?userAddress="+this.userAddress;
+    this.httpApi.getRequest(url).subscribe(async (res:any)=>{
+      if(res.status==200){
+        this.IsNftMigrated = res.IsNftMigrated;
+        if(!this.IsNftMigrated){
+          this.toastrService.success("minted");
+          await this.getBannetUser()
+          this.openNftMigrationDialog();
+        }
+      }
+    },(err:any)=>{
+      this.toastrService.error("something went wrong with user data count");
+    })
+  }
+
+  getBannetUser(){
+   let promis = new Promise((resolve,reject)=>{
+    let url ="userDataBanner?userAddress="+this.userAddress;
+   this.httpApi.getRequest(url).subscribe((res:any)=>{
+     if(res.status == 200){
+       this.tabs = res.data.data;
+       resolve(this.tabs)
+     }
+     else{
+ 
+     }
+   },(err:any)=>{
+    reject(err);
+   })
+   });
+
+   return promis;
+  }
 }
