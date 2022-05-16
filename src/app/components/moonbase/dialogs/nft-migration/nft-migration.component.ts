@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
@@ -20,6 +21,7 @@ export class NftMigrationComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private httpapiservice: HttpApiService,
     private localstorage: LocalStorageService,
+    private toastrService: ToastrService,
     private walletConnectService: WalletConnectService,
   ) { }
 
@@ -31,16 +33,23 @@ export class NftMigrationComponent implements OnInit {
 
 
   async migrate() {
-    var txStatus: any;
-    debugger
-    if (!await this.walletConnectService.isApprovedMigration(this.userAddress)) {
-      let tx = await this.walletConnectService.setApprovalMigration();
-      await tx.wait(3);
+    try {
+
+      var txStatus: any;
+      if (!await this.walletConnectService.isApprovedMigration(this.userAddress)) {
+        let tx = await this.walletConnectService.setApprovalMigration();
+        await tx.wait(3);
+      }
+      txStatus = await this.walletConnectService.migrateNft(this.tabs.ArtistNFTAddressArray, this.tabs.nftIdArray, this.tabs.amountArray, this.tabs.Signature);
+      if (txStatus.status) {
+        //api call
+      }
+
+    } catch (e: any) {
+      console.log(e);
+      this.toastrService.error(e.hash.message);
     }
-    txStatus = await this.walletConnectService.migrateNft(this.tabs.ArtistNFTAddressArray, this.tabs.nftIdArray, this.tabs.amountArray, this.tabs.Signature);
-
   }
-
   closeDialog() {
     this.dialogRef.close();
   }

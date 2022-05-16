@@ -20,7 +20,7 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.openDialog();
+    // this.openDialog();
     this.route.data.subscribe(data => {
       const scrollTo = data?.['scroll'];
       if (scrollTo !== undefined) {

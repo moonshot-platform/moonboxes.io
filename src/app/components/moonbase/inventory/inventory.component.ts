@@ -51,6 +51,7 @@ export class InventoryComponent implements OnInit {
 
     this.walletConnectService.init().then((data: boolean) => {
       this.isConnected = data;
+      this.getUserData01();
     });
 
     this.walletConnectService.onWalletStateChanged().subscribe((state: boolean) => {
@@ -66,8 +67,8 @@ export class InventoryComponent implements OnInit {
         else
           this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
       }
+
     });
-    this.getUserData01();
 
   }
 

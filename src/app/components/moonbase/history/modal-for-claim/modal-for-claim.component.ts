@@ -28,7 +28,6 @@ export class ModalForClaimComponent implements OnInit {
   }
 
   async claim() {
-    debugger
     var nftSupply = [];
     var nftIds = [];
     var sign;
