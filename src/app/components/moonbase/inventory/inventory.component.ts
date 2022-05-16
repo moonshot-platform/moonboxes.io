@@ -28,11 +28,11 @@ export class InventoryComponent implements OnInit {
 
   NSFWToggleState = false;
   isConnected = false;
-  tabs :any = [];
+  tabs: any = [];
   selectedIndex: number;
-  nftMigrationDialogRef :any;
-  IsNftMigrated :boolean=false;
-  userAddress :any ;
+  nftMigrationDialogRef: any;
+  IsNftMigrated: boolean = false;
+  userAddress: any;
   constructor(
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService,
@@ -68,7 +68,7 @@ export class InventoryComponent implements OnInit {
       }
     });
     this.getUserData01();
-   
+
   }
 
   getUserData() {
@@ -194,48 +194,48 @@ export class InventoryComponent implements OnInit {
 
 
 
-  openNftMigrationDialog(){
-    
-  this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
-    width: '800px',
-    data: {data:this.tabs},
-  });
+  openNftMigrationDialog() {
+
+    this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
+      width: '800px',
+      data: { data: this.tabs },
+    });
   }
-  
 
 
-  getUserData01(){
-    let url ="userDataCount?userAddress="+this.userAddress;
-    this.httpApi.getRequest(url).subscribe(async (res:any)=>{
-      if(res.status==200){
+
+  getUserData01() {
+    let url = "userDataCount?userAddress=" + this.userAddress;
+    this.httpApi.getRequest(url).subscribe(async (res: any) => {
+      if (res.status == 200) {
         this.IsNftMigrated = res.IsNftMigrated;
-        if(!this.IsNftMigrated){
-          this.toastrService.success("minted");
-          await this.getBannetUser()
+        if (!this.IsNftMigrated) {
+          // this.toastrService.success("minted");
+          await this.getBannerUser()
           this.openNftMigrationDialog();
         }
       }
-    },(err:any)=>{
+    }, (err: any) => {
       this.toastrService.error("something went wrong with user data count");
     })
   }
 
-  getBannetUser(){
-   let promis = new Promise((resolve,reject)=>{
-    let url ="userDataBanner?userAddress="+this.userAddress;
-   this.httpApi.getRequest(url).subscribe((res:any)=>{
-     if(res.status == 200){
-       this.tabs = res.data.data;
-       resolve(this.tabs)
-     }
-     else{
- 
-     }
-   },(err:any)=>{
-    reject(err);
-   })
-   });
+  getBannerUser() {
+    let promis = new Promise((resolve, reject) => {
+      let url = "userSwappingData?userAddress=" + this.userAddress;
+      this.httpApi.getRequest(url).subscribe((res: any) => {
+        if (res.status == 200) {
+          this.tabs = res.data;
+          resolve(this.tabs)
+        }
+        else {
 
-   return promis;
+        }
+      }, (err: any) => {
+        reject(err);
+      })
+    });
+
+    return promis;
   }
 }

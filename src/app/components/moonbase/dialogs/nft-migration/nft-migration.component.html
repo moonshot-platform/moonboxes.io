@@ -1,13 +1,21 @@
 <section class="connect_popup padding-15 oweflow-1">
-    <div class="wrap-flex">
-        <div class="width-25 mr-10" *ngFor="let tab of tabs; let index = index">
-            <div> <img src="{{tab.logo_path}}" height="100" width="100" alt=""></div>
-            <div class="label-color">
-                {{tab.nft_name}}
-            </div>
+  <div class="wrap-flex pb20">
+    <p class="p-white-span-primary orbitron warning-title">
+      ⚠️MoonBoxes Migration
+    </p>
+    <p class="p-white-span-primary orbitron mb20"> MoonBoxes was upgraded with multi chain support. Please upgrade your
+      NFTs
+    </p>
+    <div class="flex-wrap grid-gap">
+      <div class="box" *ngFor="let tab of tabs?.data; let index = index">
+        <div> <img src="{{ tab.logo_path }}" height="100" alt=""></div>
+        <div class="label-color">
+          {{ tab.nft_name }}
         </div>
+      </div>
     </div>
-    <div class="btn-right">
-        <button type="button" class="button" (click)="migrate()">Migration</button>
-    </div>
+  </div>
+  <div class="btn-right">
+    <button type="button" class="button mx-auto montserrat" (click)="migrate()">Upgrade</button>
+  </div>
 </section>

@@ -11,7 +11,7 @@ export const environment = {
   ownerAddress: "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC",
 
   silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
-  NFTAddress: "0x68bac4a2fe7aA005Bc370da6139Dac6F2EFDB39C",
+  NFTAddress: "0x62f19a620583995B4704df40BEC41924b677CAfB",
 
   lootboxAddress: "0x017792D0692591FF66686092293295ef245deD3b",     // New contract address for moonshot v2
   artistNFTAddress: "0x207A130458CCCe36816688C0eF3bDfA3f5ef0353",  // New contract address for moonshot v2
