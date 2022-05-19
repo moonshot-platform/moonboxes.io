@@ -19,7 +19,7 @@ export class NftMigrationComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<NftMigrationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private httpapiservice: HttpApiService,
+    private httpApi: HttpApiService,
     private localstorage: LocalStorageService,
     private toastrService: ToastrService,
     private walletConnectService: WalletConnectService,
@@ -40,14 +40,26 @@ export class NftMigrationComponent implements OnInit {
         let tx = await this.walletConnectService.setApprovalMigration();
         await tx.wait(3);
       }
+      debugger
       txStatus = await this.walletConnectService.migrateNft(this.tabs.ArtistNFTAddressArray, this.tabs.nftIdArray, this.tabs.amountArray, this.tabs.Signature);
       if (txStatus.status) {
-        //api call
+        debugger
+        let url = "userDataSwapUpdate";
+        this.httpApi.postRequest(url, { nftId: this.tabs.nftIdArray, newContractAddress: this.tabs.ArtistNFTAddressArray }).subscribe(async (res: any) => {
+          if (res.status == 200 && res.isSuccess) {
+            this.toastrService.success(res.data.message);
+          }
+          else {
+            this.toastrService.error(res.data.message);
+          }
+        }, (err: any) => {
+          this.toastrService.error("something went wrong");
+        })
       }
 
     } catch (e: any) {
       console.log(e);
-      this.toastrService.error(e.hash.message);
+      this.toastrService.error(e.hash.data.message);
     }
   }
   closeDialog() {

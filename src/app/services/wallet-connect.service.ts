@@ -400,6 +400,7 @@ export class WalletConnectService {
       const spliSign = ethers.utils.splitSignature(signature);
       if (isArtist) {
         try {
+          debugger
           this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
             .then((transactionHash: any) =>
               resolve({ hash: transactionHash.hash, status: true })
