@@ -34,7 +34,7 @@ export const CHAIN_CONFIGS: any = {
   },
   "1287": {
     "name": "Moonbase Alpha",
-    "icon": "assets/images/blockchain/MOVR.webp",
+    "icon": "assets/media/images/blockchain/MOVR.webp",
     "config": {
       method: 'wallet_addEthereumChain',
       params: [{
@@ -44,8 +44,25 @@ export const CHAIN_CONFIGS: any = {
           symbol: 'DEV',
           decimals: 18,
         },
-        rpcUrls: ['https://rpc-mumbai.maticvigil.com'],
+        rpcUrls: ['https://rpc.api.moonbase.moonbeam.network'],
         blockExplorerUrls: ['https://moonbase.moonscan.io/']
+      }],
+    }
+  },
+  "80001": {
+    "name": "Mumbai Testnet",
+    "icon": "assets/media/images/blockchain/mumbai.webp",
+    "config": {
+      method: 'wallet_addEthereumChain',
+      params: [{
+        chainId: '0x13881',
+        chainName: 'Mumbai Testnet',
+        nativeCurrency: {
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+        rpcUrls: ['https://matic-mumbai.chainstacklabs.com'],
+        blockExplorerUrls: ['https://polygonscan.com/']
       }],
     }
   }
