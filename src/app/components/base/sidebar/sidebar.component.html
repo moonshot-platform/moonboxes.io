@@ -1,6 +1,9 @@
 <section class="sidebar">
   <div (click)="openDialog()" class="wallet-button block flex-center">
-    <img src="assets/media/icons/wallet.svg" alt="wallet">
+    <video class="wallet" loop muted autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true"
+      poster="assets/media/videos/animated-wallet-icon.gif">
+      <source src="assets/media/videos/animated-wallet-icon.webm" type="video/webm">
+    </video>
   </div>
   <ul>
     <li>
