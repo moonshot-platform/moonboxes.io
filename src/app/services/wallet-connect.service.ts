@@ -222,9 +222,12 @@ export class WalletConnectService {
       provider.on(this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected());
 
       // Subscribe to session disconnection
-      provider.on(this.CHAIN_CHANGED, (code: number, reason: string) => {
+      provider.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
         this.connectToWalletConnect();
         this.setWalletDisconnected();
+
+        let currentNetwork = await this.getNetworkChainId();
+        this.updateSelectedChainId(environment.chainId.indexOf(currentNetwork as number));
       });
 
       this.setWalletState(true);
@@ -276,6 +279,13 @@ export class WalletConnectService {
 
   async getDetailsMoonboxPrice() {
     return await this.LootboxContract.moonboxPrice();
+  }
+
+  async getNetworkChainId() {
+    if (this.account == undefined)
+      return environment.chainId;
+    let provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum)
+    return (await provider.getNetwork()).chainId;
   }
 
   async getDetailsMoonboxlimit(isArtist = false) {

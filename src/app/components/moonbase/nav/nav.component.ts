@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Router, NavigationStart, Event as NavigationEvent } from '@angular/router';
@@ -12,6 +12,7 @@ import { NetworkComponent } from '../../base/wallet/connect/network/network.comp
 import { CHAIN_CONFIGS } from '../../base/wallet/connect/constants/blockchain.configs';
 import { ErrorDialogComponent } from '../../base/wallet/connect/error-dialog/error-dialog.component';
 import { ToastrService } from 'ngx-toastr';
+import { WindowRefService } from 'src/app/services/window-ref.service';
 
 @Component({
   selector: 'app-nav',
@@ -36,6 +37,9 @@ export class NavComponent implements OnInit {
     //   'path': ''
     // },
   ];
+  chains: any[] = environment.chainId;
+  chainConfigs = CHAIN_CONFIGS;
+  currentChainId: number = 0;
 
   public navSubItems: any[] = [
     {
@@ -93,20 +97,32 @@ export class NavComponent implements OnInit {
     private toastrService: ToastrService,
     public router: Router,
     private location: Location,
+    private windowRef: WindowRefService,
 
   ) {
     this.event$ = location.onUrlChange((val) => {
       this.isMultiChain();
     })
+
+
+    // console.log(this.currentChainId);
+    // console.log(this.chains);
+
+    // console.log(this.chains[this.currentChainId] != undefined);
+
   }
 
   ngOnInit(): void {
     this.walletConnectService.init();
     this.walletConnectService.updateChainId(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
     console.log(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
+
     this.getNSFWStatus();
+
     this.walletConnectService.getSelectedChainId().subscribe((response) => {
       this.selectedChainId = response;
+      this.currentChainId = response;
+
       this.isMultiChain();
       // this.checkNetwork();
     });
@@ -129,6 +145,7 @@ export class NavComponent implements OnInit {
         this.balance = 'Awaiting Connection';
       }
     });
+
   }
 
   openDialog(): void {
@@ -184,8 +201,14 @@ export class NavComponent implements OnInit {
   }
 
   changeAccountDetected(accounts: any) {
-    this.walletConnectService.getSelectedChainId().subscribe((response) => {
+    this.walletConnectService.getSelectedChainId().subscribe(async (response) => {
       this.selectedChainId = response;
+      this.currentChainId = response;
+
+      let currentNetworkID = await this.walletConnectService.getNetworkChainId();
+      if (this.chains[response] != currentNetworkID)
+        this.currentChainId = response;
+
       this.checkNetwork();
     });
   }
@@ -210,6 +233,44 @@ export class NavComponent implements OnInit {
     }
     else {
       this.showMultiChainDialog = true;
+    }
+  }
+
+  async toggleChainDropdown() {
+    document?.getElementById("myDropdown")?.classList.toggle("show");
+
+    let currentNetworkID = await this.walletConnectService.getNetworkChainId();
+    if (this.chains[this.currentChainId] != currentNetworkID)
+      this.currentChainId = this.chains.indexOf(currentNetworkID);
+  }
+
+
+  @HostListener('document:click', ['$event'])
+  onMouseEnter(event: any) {
+    if (!document.getElementById('dropdwonButton').contains(event.target)) {
+      var dropdowns = document.getElementsByClassName('dropdown-content');
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+  async changeChain(config: any, index: any) {
+
+    if (config !== undefined) {
+      try {
+        await this.windowRef.nativeWindow.ethereum.request(config);
+
+        this.walletConnectService.updateChainId(this.chains[index]);
+
+      } catch (error) {
+
+        console.log(error);
+      }
     }
   }
 }
