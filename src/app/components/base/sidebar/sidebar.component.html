@@ -1,17 +1,17 @@
 <section class="sidebar">
-    <div (click)="openDialog()" class="wallet-button block flex-center">
-        <img src="assets/media/icons/wallet.svg" alt="wallet">
-    </div>
-    <ul>
-        <li>
-            <a href="#" [routerLink]="['/moonbase']">MoonBoxes</a>
-        </li>
-        <li>
-            <p (click)="toggleTokenomicsView()">Tokenomics</p>
-        </li>
-    </ul>
+  <div (click)="openDialog()" class="wallet-button block flex-center">
+    <img src="assets/media/icons/wallet.svg" alt="wallet">
+  </div>
+  <ul>
+    <li>
+      <a href="https://project-moonshot.me">Moonshot</a>
+    </li>
+    <li>
+      <p (click)="toggleTokenomicsView()">Tokenomics</p>
+    </li>
+  </ul>
 </section>
 
 <section class="tokenomics" *ngIf="active">
-    <app-tokenomics></app-tokenomics>
+  <app-tokenomics></app-tokenomics>
 </section>
