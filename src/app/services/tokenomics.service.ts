@@ -65,7 +65,8 @@ export class TokenomicsService {
     const totalSupply = await ssRouter.methods.totalSupply().call();
     const deadBalance = await ssRouter.methods.balanceOf("0x000000000000000000000000000000000000dead").call();
     const vestedBalance = await ssRouter.methods.balanceOf("0x02b2106e64d63d1dd3d4d6ec26bfa795193c9807").call();
-
+    const v1Distribution = await ssRouter.methods.balanceOf("0x02b2106e64d63d1dd3d4d6ec26bfa795193c9807").call();
+    // console.log("v1Distribution :" + v1Distribution);
 
     const totalSupplyBN = web3.utils.toBN(totalSupply);
     const deadSupplyBN = web3.utils.toBN(deadBalance);
@@ -93,7 +94,8 @@ export class TokenomicsService {
           'marketcap': this.formatAmount(Math.round(circ / oneBNB * myJson.price)),
           'priceFor1mMoonshot': priceFor1BNB,
           'priceForMoonshot': priceFor1ss,
-          'unclaimedMoonshot': this.formatAmount(vestedBalance)
+          'unclaimedMoonshot': this.formatAmount(vestedBalance),
+          'v1Distirubition': this.formatAmount(v1Distribution)
         }
 
 
