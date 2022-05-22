@@ -41,8 +41,14 @@ section.navigation {
     cursor: pointer;
 
     &:hover {
-      filter: brightness(0) invert(1);
+      // filter: brightness(0) invert(1);
+      border-color: white;
     }
+  }
+
+
+  .active {
+    border-color: white;
   }
 }
 
@@ -464,7 +470,7 @@ nav {
   display: none;
   position: absolute;
   background-color: black;
-  min-width: 160px;
+  min-width: 110px;
   width: max-content;
   cursor: pointer;
   max-width: 250px;
@@ -599,6 +605,11 @@ nav {
 
   .mt-15 {
     margin-top: 15px;
+  }
+
+  .dropdown-content {
+    right: 30px;
+    bottom: 40px;
   }
 }
 

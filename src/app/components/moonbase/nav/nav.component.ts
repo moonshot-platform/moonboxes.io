@@ -40,6 +40,7 @@ export class NavComponent implements OnInit {
   chains: any[] = environment.chainId;
   chainConfigs = CHAIN_CONFIGS;
   currentChainId: number = 0;
+  isMultiChainDropdownActive: boolean = false;
 
   public navSubItems: any[] = [
     {
@@ -238,6 +239,7 @@ export class NavComponent implements OnInit {
 
   async toggleChainDropdown() {
     document?.getElementById("myDropdown")?.classList.toggle("show");
+    this.isMultiChainDropdownActive = !this.isMultiChainDropdownActive;
 
     let currentNetworkID = await this.walletConnectService.getNetworkChainId();
     if (this.chains[this.currentChainId] != currentNetworkID)
@@ -254,6 +256,7 @@ export class NavComponent implements OnInit {
         var openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
+          this.isMultiChainDropdownActive = false;
         }
       }
     }
@@ -266,10 +269,13 @@ export class NavComponent implements OnInit {
         await this.windowRef.nativeWindow.ethereum.request(config);
 
         this.walletConnectService.updateChainId(this.chains[index]);
+        this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK")
 
       } catch (error) {
 
         console.log(error);
+
+        this.toastrService.error("You selected an unsupported Network!\n" + error.message, "NETWORK")
       }
     }
   }

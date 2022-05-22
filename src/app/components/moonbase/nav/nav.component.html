@@ -25,9 +25,8 @@
             </div>
           </li>
           <li>
-
-
             <img id="dropdwonButton" class="nav-bar-sub-item chain-button"
+              [ngStyle]="{'background-color': chainConfigs[chains[currentChainId] ?? 97].bg}"
               src="{{ chainConfigs[chains[currentChainId] ?? 97].icon  }}" (click)="toggleChainDropdown()">
             <div id="myDropdown" class="dropdown-content">
               <a *ngFor="let chain of chains;let i=index" (click)="changeChain(chainConfigs[chain].config,i)"
@@ -42,7 +41,7 @@
     </div>
   </div>
 
-  <nav class="flex-space-between">
+  <nav class="flex-space-between" style="margin-bottom: 0.9rem;">
     <div class="logo-container flex border-0">
       <a class="flex-center" [routerLink]="['']">
         <!-- <img class="logo" src="assets/media/images/logo.png" alt="moonshot logo"> -->
