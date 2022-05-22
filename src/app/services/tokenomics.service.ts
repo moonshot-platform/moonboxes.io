@@ -46,15 +46,6 @@ export class TokenomicsService {
     }
   }
 
-  changePancakeRouter(): number {
-    this.oldPancakeAddress = !this.oldPancakeAddress;
-
-    clearInterval(this.interval);
-    this.init();
-
-    return this.oldPancakeAddress ? 1 : 2;
-  }
-
   async getTokenomicsData() {
     var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed1.binance.org:443');
     var web3 = new Web3(web3Provider);
@@ -73,10 +64,14 @@ export class TokenomicsService {
 
     const totalSupply = await ssRouter.methods.totalSupply().call();
     const deadBalance = await ssRouter.methods.balanceOf("0x000000000000000000000000000000000000dead").call();
+    const vestedBalance = await ssRouter.methods.balanceOf("0x02b2106e64d63d1dd3d4d6ec26bfa795193c9807").call();
+
+
     const totalSupplyBN = web3.utils.toBN(totalSupply);
     const deadSupplyBN = web3.utils.toBN(deadBalance);
+    const vestedBalanceBN = web3.utils.toBN(vestedBalance);
 
-    const circSupply = totalSupplyBN.sub(deadSupplyBN);
+    const circSupply = totalSupplyBN.sub(deadSupplyBN).sub(vestedBalanceBN);
 
     const circ = Math.round(Number(web3.utils.fromWei(circSupply.toString(), 'nanoether')));
     const dead = Math.round(Number(web3.utils.fromWei(deadBalance, 'nanoether')));
@@ -98,6 +93,7 @@ export class TokenomicsService {
           'marketcap': this.formatAmount(Math.round(circ / oneBNB * myJson.price)),
           'priceFor1mMoonshot': priceFor1BNB,
           'priceForMoonshot': priceFor1ss,
+          'unclaimedMoonshot': this.formatAmount(vestedBalance)
         }
 
 
