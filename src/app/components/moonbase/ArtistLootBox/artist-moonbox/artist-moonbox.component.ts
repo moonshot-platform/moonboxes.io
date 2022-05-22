@@ -134,6 +134,7 @@ export class ArtistMoonboxComponent implements OnInit {
       "tooltipText": "You need 250,000,000,000 Moonshot tokens to open a Diamond MoonBox."
     },
   ];
+  chainId: number;
 
   constructor(
     public walletConnectService: WalletConnectService,
@@ -158,7 +159,7 @@ export class ArtistMoonboxComponent implements OnInit {
         return;
       }
 
-      if (data.networkId.chainId != environment.chainId) {
+      if (environment.chainId.indexOf(data.networkId.chainId) == -1) {
         this.mainMessage = MESSAGES.UNABLE_TO_CONNECT;
         return;
       }
@@ -166,26 +167,36 @@ export class ArtistMoonboxComponent implements OnInit {
       this.data = data;
     });
 
-    this.userProvider.onReceive().subscribe((userData: UserDetailsModel) => {
-      this.balance = userData.balance;
-
-      this.getMaxSupply();
-      this.getMoonboxTierLimits();
+    this.walletConnectService.getChainId().subscribe((data) => {
+      this.chainId = data;
     });
+    this.userProvider.onReceive().subscribe((userData: any) => {
+      this.balance = userData.balance;
+      this.getMaxSupply();
+
+      this.getMoonboxTierLimits();
+    }, (error) => { console.log(error); });
 
     if (!this.isConnected) this.getMaxSupply();
   }
 
   hasEnoughMoonshots(index: number) {
-    if (this.balance != null && this.moonBoxLimitDetails != null)
+
+    if (this.balance != null && this.moonBoxLimitDetails != null) {
       return (Number(this.balance) >= Number(this.moonBoxLimitDetails[index]));
+    }
 
     return false;
   }
 
   async getMoonboxTierLimits() {
-    if (this.balance >= 0)
+
+    if (this.balance >= 0) {
+
       this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
+
+    }
+
   }
 
   onIncreaseSupplyInterestAmount(index: number) {
@@ -246,16 +257,15 @@ export class ArtistMoonboxComponent implements OnInit {
       return false;
     }
 
-    if (!this.hasEnoughMoonshots(index)) {
-      this.httpApi.showToastr('You are not eligible for this Tier', false);
-      return false;
-    }
+    // if (!this.hasEnoughMoonshots(index)) {
 
-    if (this.supplyDetails[index]?.isUpcoming) return false;
+    //   this.httpApi.showToastr('You are not eligible for this Tier', false);
+    //   return false;
+    // }
 
+    // if (this.supplyDetails[index]?.isUpcoming) return false;
     this.invisible = true;
     this.fadeOut = true;
-    debugger
     let dialogRef = this.dialog.open(ModalForTransactionComponent, {
       width: 'auto',
       disableClose: true,

@@ -1,0 +1,30 @@
+{
+  "testnet": [
+    {
+      "chainId": "97",
+      "artistLootBoxAddress": "0x207A130458CCCe36816688C0eF3bDfA3f5ef0353"
+    },
+    {
+      "chainId": "80001",
+      "artistLootBoxAddress": "0x972b6fCf74103Bea3C142c79bFdcb1DF942bAd06"
+    },
+    {
+      "chainId": "1287",
+      "artistLootBoxAddress": "0x9D1D1C7bD75F0C8aBcCF488566E6458596d6471D"
+    }
+  ],
+  "mainnet": [
+    {
+      "chainId": "56",
+      "artistLootBoxAddress": "0x9D1D1C7bD75F0C8aBcCF488566E6458596d6471D"
+    },
+    {
+      "chainId": "80001",
+      "artistLootBoxAddress": "0x9D1D1C7bD75F0C8aBcCF488566E6458596d6471D"
+    },
+    {
+      "chainId": "1281",
+      "artistLootBoxAddress": "0x9D1D1C7bD75F0C8aBcCF488566E6458596d6471D"
+    }
+  ]
+}
