@@ -142,6 +142,7 @@ export class ModalForTransactionComponent implements OnInit {
 
     var txStatus: any;
     try {
+      debugger
       txStatus = await this.walletConnectService.getRedeemBulk(nftIds, nftSupply, nftDetails.betId, sign, nftDetails.isArtist, nftDetails.artistAddress, this.data.artistDetails.ArtistNFTAddress);
     }
     catch (e) {

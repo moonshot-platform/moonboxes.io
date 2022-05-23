@@ -150,7 +150,7 @@ export class WalletConnectService {
         let currentNetwork = await this.provider.getNetwork();
 
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
-          this.toastrService.error('You are on the wrong network1');
+          this.toastrService.error('You are on the wrong network');
           this.setWalletState(false);
           throw 'Wrong network';
         }
@@ -403,6 +403,7 @@ export class WalletConnectService {
       const spliSign = ethers.utils.splitSignature(signature);
       if (isArtist) {
         try {
+          debugger
           this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
             .then((transactionHash: any) =>
               resolve({ hash: transactionHash.hash, status: true })
