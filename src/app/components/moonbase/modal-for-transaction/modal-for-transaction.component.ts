@@ -63,7 +63,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   async submitBet() {
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
-
+    debugger
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
@@ -183,6 +183,7 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
+      debugger
       if (this.data.artistDetails.tokenAddress != '0x0000000000000000000000000000000000000000') {
         let allowance: any = await this.walletConnectService.checkAllowance(this.data.artistDetails.tokenAddress, this.data.artistDetails.price);
         if (allowance.status && !allowance.allowance) {

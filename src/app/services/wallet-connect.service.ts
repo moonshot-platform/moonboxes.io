@@ -440,6 +440,7 @@ export class WalletConnectService {
     let params: any = ethers.utils.parseEther(price.toString());
     const spliSign = ethers.utils.splitSignature(signature);
     let callValue: string = "0";
+    let gas = 0;
     if (tokenAddress == '0x0000000000000000000000000000000000000000') {
       callValue = (params * noOfBets).toString();
     }
@@ -447,6 +448,15 @@ export class WalletConnectService {
       let contract = new ethers.Contract(tokenAddress, silverTokenAbi, this.signer);
       let decimals = await contract.decimals();
       params = ((10 ** decimals) * price).toString();
+    }
+    try {
+      gas = await this.artistLootBoxContract.estimateGas.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+        value: callValue
+      }
+      )
+      debugger
+    } catch (e) {
+      gas = 1000000;
     }
 
     const promise = new Promise((resolve, reject) => {
