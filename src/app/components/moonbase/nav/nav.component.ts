@@ -269,8 +269,8 @@ export class NavComponent implements OnInit {
         await this.windowRef.nativeWindow.ethereum.request(config);
 
         this.walletConnectService.updateChainId(this.chains[index]);
-        this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK")
-
+        this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK");
+        window.location.reload();
       } catch (error) {
 
         console.log(error);

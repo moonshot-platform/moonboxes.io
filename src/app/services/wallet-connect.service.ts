@@ -379,59 +379,50 @@ export class WalletConnectService {
     return status;
   }
 
-  redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
+  async redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
 
-    const promise = new Promise((resolve, reject) => {
-      try {
-        this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() })
-          .then((transactionHash: any) => {
-            resolve({ hash: transactionHash.hash, status: true });
-          }).catch((e: any) => {
-            reject({ hash: e, status: false });
-          })
-      } catch (e) {
-        console.log(e);
-        reject({ hash: '', status: false });
-      }
-    });
 
-    return promise;
+    try {
+      let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() });
+      return { hash: txn.hash, status: true };
+
+    } catch (e) {
+      console.log(e);
+      return { hash: '', status: false };
+    }
+
   }
 
   async getRedeemBulk(id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string, nftAddress: any) {
-    const promise = new Promise((resolve, reject) => {
-      const spliSign = ethers.utils.splitSignature(signature);
-      if (isArtist) {
-        try {
-          debugger
-          this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
-            .then((transactionHash: any) =>
-              resolve({ hash: transactionHash.hash, status: true })
-            ).catch((e: any) => {
-              reject({ hash: e, status: false });
-            });
-        } catch (e) {
-          console.log(e);
-          reject({ hash: '', status: false });
-        }
-      } else {
-        try {
-          this.LootboxContract.redeemBulk(environment.NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s)
-            .then((transactionHash: any) => {
-              resolve({ hash: transactionHash.hash, status: true });
-            }).catch((e: any) => {
-              reject({ hash: e, status: false });
-            });
-        }
-        catch (e) {
-          console.log(e);
-          reject({ hash: '', status: false });
-        }
+
+    const spliSign = ethers.utils.splitSignature(signature);
+    if (isArtist) {
+      try {
+
+        let txn: any = await this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
+        await txn.wait(1)
+        return { hash: txn.hash, status: true };
+
+      } catch (e) {
+        console.log(e);
+        return { hash: '', status: false };
       }
-    });
+    } else {
+      try {
+        let txn: any = await this.LootboxContract.redeemBulk(environment.NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s)
+        await txn.wait(1)
+        return { hash: txn.hash, status: true };
+
+      }
+      catch (e) {
+        console.log(e);
+        return { hash: '', status: false };
+      }
+    }
+
 
     // address nftAsset, uint256[] calldata id, uint256[] calldata nftAmount, uint256 bet, uint8 v, bytes32 r, bytes32 s
-    return promise;
+
   }
 
 
@@ -460,23 +451,19 @@ export class WalletConnectService {
       gas = 1000000;
     }
 
-    const promise = new Promise((resolve, reject) => {
-      try {
+    try {
+      let txn: any = await this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+        value: callValue
+      });
+      await txn.wait(1);
+      return { hash: txn.hash, status: true };
 
-        this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
-          value: callValue
-        }
-        ).then((transactionHash: any) => {
-          resolve({ hash: transactionHash.hash, status: true });
-        }).catch((e: any) => {
-          reject({ hash: e, status: false });
-        });
-      } catch (e) {
-        reject({ hash: '', status: false });
-      }
-    });
+    } catch (e) {
+      return { hash: '', status: false };
+    }
 
-    return promise;
+    return { hash: '', status: false };
+
   }
 
   updateChainId(data: number): void {
