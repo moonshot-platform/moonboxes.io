@@ -388,7 +388,7 @@ export class WalletConnectService {
 
     } catch (e) {
       console.log(e);
-      return { hash: '', status: false };
+      return { hash: '', status: false, error: e };
     }
 
   }
@@ -416,7 +416,7 @@ export class WalletConnectService {
       }
       catch (e) {
         console.log(e);
-        return { hash: '', status: false };
+        return { hash: '', status: false, error: e };
       }
     }
 
@@ -459,10 +459,9 @@ export class WalletConnectService {
       return { hash: txn.hash, status: true };
 
     } catch (e) {
-      return { hash: '', status: false };
+      return { hash: '', status: false, error: e };
     }
 
-    return { hash: '', status: false };
 
   }
 
