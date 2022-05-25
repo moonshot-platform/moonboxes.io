@@ -150,7 +150,7 @@ export class WalletConnectService {
         let currentNetwork = await this.provider.getNetwork();
 
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
-          this.toastrService.error('You are on the wrong network1');
+          this.toastrService.error('You are on the wrong network');
           this.setWalletState(false);
           throw 'Wrong network';
         }
@@ -379,58 +379,50 @@ export class WalletConnectService {
     return status;
   }
 
-  redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
+  async redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
 
-    const promise = new Promise((resolve, reject) => {
-      try {
-        this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() })
-          .then((transactionHash: any) => {
-            resolve({ hash: transactionHash.hash, status: true });
-          }).catch((e: any) => {
-            reject({ hash: e, status: false });
-          })
-      } catch (e) {
-        console.log(e);
-        reject({ hash: '', status: false });
-      }
-    });
 
-    return promise;
+    try {
+      let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() });
+      return { hash: txn.hash, status: true };
+
+    } catch (e) {
+      console.log(e);
+      return { hash: '', status: false, error: e };
+    }
+
   }
 
   async getRedeemBulk(id: any, nftAmount: any, bet: number, signature: any, isArtist: boolean, artistAddress: string, nftAddress: any) {
-    const promise = new Promise((resolve, reject) => {
-      const spliSign = ethers.utils.splitSignature(signature);
-      if (isArtist) {
-        try {
-          this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
-            .then((transactionHash: any) =>
-              resolve({ hash: transactionHash.hash, status: true })
-            ).catch((e: any) => {
-              reject({ hash: e, status: false });
-            });
-        } catch (e) {
-          console.log(e);
-          reject({ hash: '', status: false });
-        }
-      } else {
-        try {
-          this.LootboxContract.redeemBulk(environment.NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s)
-            .then((transactionHash: any) => {
-              resolve({ hash: transactionHash.hash, status: true });
-            }).catch((e: any) => {
-              reject({ hash: e, status: false });
-            });
-        }
-        catch (e) {
-          console.log(e);
-          reject({ hash: '', status: false });
-        }
+
+    const spliSign = ethers.utils.splitSignature(signature);
+    if (isArtist) {
+      try {
+
+        let txn: any = await this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
+        await txn.wait(1)
+        return { hash: txn.hash, status: true };
+
+      } catch (e) {
+        console.log(e);
+        return { hash: '', status: false };
       }
-    });
+    } else {
+      try {
+        let txn: any = await this.LootboxContract.redeemBulk(environment.NFTAddress, id, nftAmount, bet, spliSign.v, spliSign.r, spliSign.s)
+        await txn.wait(1)
+        return { hash: txn.hash, status: true };
+
+      }
+      catch (e) {
+        console.log(e);
+        return { hash: '', status: false, error: e };
+      }
+    }
+
 
     // address nftAsset, uint256[] calldata id, uint256[] calldata nftAmount, uint256 bet, uint8 v, bytes32 r, bytes32 s
-    return promise;
+
   }
 
 
@@ -440,6 +432,7 @@ export class WalletConnectService {
     let params: any = ethers.utils.parseEther(price.toString());
     const spliSign = ethers.utils.splitSignature(signature);
     let callValue: string = "0";
+    let gas = 0;
     if (tokenAddress == '0x0000000000000000000000000000000000000000') {
       callValue = (params * noOfBets).toString();
     }
@@ -448,24 +441,28 @@ export class WalletConnectService {
       let decimals = await contract.decimals();
       params = ((10 ** decimals) * price).toString();
     }
-
-    const promise = new Promise((resolve, reject) => {
-      try {
-
-        this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
-          value: callValue
-        }
-        ).then((transactionHash: any) => {
-          resolve({ hash: transactionHash.hash, status: true });
-        }).catch((e: any) => {
-          reject({ hash: e, status: false });
-        });
-      } catch (e) {
-        reject({ hash: '', status: false });
+    try {
+      gas = await this.artistLootBoxContract.estimateGas.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+        value: callValue
       }
-    });
+      )
+      debugger
+    } catch (e) {
+      gas = 1000000;
+    }
 
-    return promise;
+    try {
+      let txn: any = await this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
+        value: callValue
+      });
+      await txn.wait(1);
+      return { hash: txn.hash, status: true };
+
+    } catch (e) {
+      return { hash: '', status: false, error: e };
+    }
+
+
   }
 
   updateChainId(data: number): void {

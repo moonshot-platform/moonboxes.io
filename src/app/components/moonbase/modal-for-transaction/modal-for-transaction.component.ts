@@ -63,7 +63,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   async submitBet() {
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
-
+    debugger
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
@@ -103,6 +103,13 @@ export class ModalForTransactionComponent implements OnInit {
     }
     else {
       this.closeDialog()
+      if (transactionDetails.error.code == 4001)
+        this.httpApi.showToastr(transactionDetails.error.message, false);
+      else if (transactionDetails.error?.data)
+        this.httpApi.showToastr(transactionDetails.error?.data?.message, false);
+      else if (transactionDetails.error?.error)
+        this.httpApi.showToastr(transactionDetails.error?.error?.message, false);
+      return false;
     }
 
     return false;
@@ -142,6 +149,7 @@ export class ModalForTransactionComponent implements OnInit {
 
     var txStatus: any;
     try {
+      debugger
       txStatus = await this.walletConnectService.getRedeemBulk(nftIds, nftSupply, nftDetails.betId, sign, nftDetails.isArtist, nftDetails.artistAddress, this.data.artistDetails.ArtistNFTAddress);
     }
     catch (e) {
@@ -175,6 +183,17 @@ export class ModalForTransactionComponent implements OnInit {
         }
       })
     }
+    else {
+      debugger
+      this.closeDialog();
+      if (txStatus.hash.code == 4001)
+        this.httpApi.showToastr(txStatus.hash.message, false);
+      else if (txStatus.hash?.data)
+        this.httpApi.showToastr(txStatus.hash?.data?.message, false);
+      else if (txStatus.hash?.error)
+        this.httpApi.showToastr(txStatus.hash?.error?.message, false);
+      return false;
+    }
     return false;
   }
 
@@ -183,6 +202,7 @@ export class ModalForTransactionComponent implements OnInit {
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
+      debugger
       if (this.data.artistDetails.tokenAddress != '0x0000000000000000000000000000000000000000') {
         let allowance: any = await this.walletConnectService.checkAllowance(this.data.artistDetails.tokenAddress, this.data.artistDetails.price);
         if (allowance.status && !allowance.allowance) {
@@ -204,6 +224,7 @@ export class ModalForTransactionComponent implements OnInit {
     }
     catch (e) {
       this.closeDialog()
+      debugger
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
       else if (e.hash?.data)
@@ -233,6 +254,17 @@ export class ModalForTransactionComponent implements OnInit {
           this.httpApi.showToastr(response.data.message, false)
         }
       });
+    }
+    else {
+      this.closeDialog()
+      debugger
+      if (transactionDetails.error.code == 4001)
+        this.httpApi.showToastr(transactionDetails.error.message, false);
+      else if (transactionDetails.error?.data)
+        this.httpApi.showToastr(transactionDetails.error?.data?.message, false);
+      else if (transactionDetails.error?.error)
+        this.httpApi.showToastr(transactionDetails.error?.error?.message, false);
+      return false;
     }
 
     return false;

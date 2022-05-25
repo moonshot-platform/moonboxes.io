@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  chainId: [56, 80001, 1287],
+  chainId: [97, 80001, 1287],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "http://codetentacles-006-site31.htempurl.com/api/",
@@ -12,7 +12,7 @@ export const environment = {
 
   silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
   NFTAddress: "0x386ce3FeFa0ddBA12A8Ce8337529ebb0Fd6AD7ee",
-  ArtistMoonBoxNftSwap: "0x4cbd04a30E4BBb3088B6e575f2D3320BfcCF644e",
+  ArtistMoonBoxNftSwap: "0xC49b8409dA4163d1f869AFa26dc56fBD0260C05f",
 
   lootBoxAddress: "0x017792D0692591FF66686092293295ef245deD3b",     // New contract address for moonshot v2
   artistNFTAddress: "0x207A130458CCCe36816688C0eF3bDfA3f5ef0353",  // New contract address for moonshot v2
