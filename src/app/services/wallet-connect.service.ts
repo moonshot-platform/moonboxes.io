@@ -106,6 +106,23 @@ export class WalletConnectService {
   }
 
   async init(): Promise<boolean> {
+
+    try {
+      // await this.localStorageService.getAddress();
+      var web3Provider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545/');
+      var web3 = new Web3(web3Provider);
+      this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.silverAddress);
+      this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
+      this.swapContract = new web3.eth.Contract(swapContractAbi, config[environment.configFile][0].ArtistMoonBoxNftSwap);
+      //MultiChain contracts
+      this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
+
+    }
+    catch (e) {
+      console.log(e)
+    }
+
+
     const wallet = this.localStorageService.getWallet();
     switch (wallet) {
       case 1:
@@ -116,14 +133,6 @@ export class WalletConnectService {
         break;
     }
 
-    // await this.localStorageService.getAddress();
-    var web3Provider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545/');
-    var web3 = new Web3(web3Provider);
-    this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.silverAddress);
-    this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
-    this.swapContract = new web3.eth.Contract(swapContractAbi, environment.ArtistMoonBoxNftSwap);
-    //MultiChain contracts
-    this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
 
     await this.getAccountAddress();
 
@@ -251,12 +260,12 @@ export class WalletConnectService {
     this.updateSelectedChainId(network.chainId);
 
     if (network.chainId == chainId) {
+      let index = environment.chainId.indexOf(chainId ?? 56);
       if ((network.chainId == 56 || network.chainId == 97)) {
         this.LootboxContract = new ethers.Contract(environment.lootBoxAddress, lootBoxAbi, this.signer);
+        this.swapContract = new ethers.Contract(config[environment.configFile][index].ArtistMoonBoxNftSwap, swapContractAbi, this.signer);
       }
-      let index = environment.chainId.indexOf(chainId ?? 56);
       this.NFTContract = new ethers.Contract(environment.NFTAddress, NFTAbi, this.signer);
-      this.swapContract = new ethers.Contract(environment.ArtistMoonBoxNftSwap, swapContractAbi, this.signer);
       this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
     }
 
@@ -293,17 +302,21 @@ export class WalletConnectService {
       try {
 
         if (isArtist) {
-          this.artistLootBoxContractGet.methods.getMoonShootLimit().call()
-            .then((transactionHash: any) => resolve(transactionHash));
+          this.artistLootBoxContractGet.methods.getMoonShotLimit().call()
+            .then((transactionHash: any) =>
+              resolve(transactionHash)
+            );
         } else {
-
           this.LootBoxContractGet.methods.getMoonShootLimit().call()
             .then((transactionHash: any) => {
               resolve(transactionHash)
             }
             );
         }
+
+
       } catch (e) {
+        console.log(e);
         reject(false);
       }
     });
@@ -405,7 +418,7 @@ export class WalletConnectService {
 
       } catch (e) {
         console.log(e);
-        return { hash: '', status: false };
+        return { hash: '', status: false, error: e };
       }
     } else {
       try {
@@ -446,7 +459,6 @@ export class WalletConnectService {
         value: callValue
       }
       )
-      debugger
     } catch (e) {
       gas = 1000000;
     }
@@ -516,9 +528,16 @@ export class WalletConnectService {
   }
 
   async safeTransfer(address: string, toAddress: string, nftId: any, ArtistNFTAddress: any) {
-    let NFTContract = new ethers.Contract(ArtistNFTAddress, NFTAbi, this.signer);
+    try {
+      let NFTContract = new ethers.Contract(ArtistNFTAddress, NFTAbi, this.signer);
 
-    return await NFTContract.safeTransferFrom(address, toAddress, nftId, 1, '0x00');
+      let txn = await NFTContract.safeTransferFrom(address, toAddress, nftId, 1, '0x00');
+      await txn.wait(1)
+      return { hash: txn.hash, status: true }
+    } catch (e: any) {
+      return { error: e, status: false }
+    }
+
   }
 
   setWalletState(connected: boolean) {
@@ -620,7 +639,6 @@ export class WalletConnectService {
     const spliSign = ethers.utils.splitSignature(signature);
     const promise = new Promise((resolve, reject) => {
       try {
-        debugger
         this.swapContract.swap(newNftAsset, id, nftAmount, spliSign.v, spliSign.r, spliSign.s)
           .then((transactionHash: any) => {
             resolve({ hash: transactionHash.hash, status: true });
@@ -643,13 +661,13 @@ export class WalletConnectService {
   async isApprovedMigration(address: string) {
     var chainId = await this.chainId.value;
     let index = environment.chainId.indexOf(chainId ?? 56);
-    return await this.NFTContract.isApprovedForAll(address, environment.ArtistMoonBoxNftSwap);
+    return await this.NFTContract.isApprovedForAll(address, config[environment.configFile][index].ArtistMoonBoxNftSwap);
   }
 
   async setApprovalMigration() {
     var chainId = await this.chainId.value;
     let index = environment.chainId.indexOf(chainId ?? 56);
-    return await this.NFTContract.setApprovalForAll(environment.ArtistMoonBoxNftSwap, true);
+    return await this.NFTContract.setApprovalForAll(config[environment.configFile][index].ArtistMoonBoxNftSwap, true);
   }
 
 }

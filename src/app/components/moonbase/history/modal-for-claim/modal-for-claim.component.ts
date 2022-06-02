@@ -70,6 +70,14 @@ export class ModalForClaimComponent implements OnInit {
         }
       })
     } else {
+      this.closeDialog();
+      if (txStatus.error.code == 4001)
+        this.httpApi.showToastr(txStatus.error.message, false);
+      else if (txStatus.error?.data)
+        this.httpApi.showToastr(txStatus.error?.data?.message, false);
+      else if (txStatus.error?.error)
+        this.httpApi.showToastr(txStatus.error?.error?.message, false);
+      return false;
       console.error("error redeem");
     }
 
