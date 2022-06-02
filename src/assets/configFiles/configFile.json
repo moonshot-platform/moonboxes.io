@@ -23,11 +23,11 @@
       "ArtistMoonBoxNftSwap": "0xcaEb93AD7a16fE96c8e085223D497E5e55C62cE8"
     },
     {
-      "chainId": "80001",
+      "chainId": "137",
       "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
     },
     {
-      "chainId": "1281",
+      "chainId": "1285",
       "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
     }
   ]
