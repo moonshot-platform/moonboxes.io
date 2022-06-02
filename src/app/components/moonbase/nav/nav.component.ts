@@ -105,8 +105,6 @@ export class NavComponent implements OnInit {
       this.isMultiChain();
     })
 
-    this.controlTheCurrentChain();
-
 
     // console.log(this.currentChainId);
     // console.log(this.chains);
@@ -243,7 +241,9 @@ export class NavComponent implements OnInit {
     document?.getElementById("myDropdown")?.classList.toggle("show");
     this.isMultiChainDropdownActive = !this.isMultiChainDropdownActive;
 
-    await this.controlTheCurrentChain();
+    let currentNetworkID = await this.walletConnectService.getNetworkChainId();
+    if (this.chains[this.currentChainId] != currentNetworkID)
+      this.currentChainId = this.chains.indexOf(currentNetworkID);
   }
 
 
@@ -278,12 +278,5 @@ export class NavComponent implements OnInit {
         this.toastrService.error("You selected an unsupported Network!\n" + error.message, "NETWORK")
       }
     }
-  }
-
-  async controlTheCurrentChain() {
-    let currentNetworkID = await this.walletConnectService.getNetworkChainId();
-
-    if (this.chains[this.currentChainId] != currentNetworkID)
-      this.currentChainId = this.chains.indexOf(currentNetworkID);
   }
 }

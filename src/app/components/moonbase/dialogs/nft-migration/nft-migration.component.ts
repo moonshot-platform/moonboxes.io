@@ -40,10 +40,8 @@ export class NftMigrationComponent implements OnInit {
         let tx = await this.walletConnectService.setApprovalMigration();
         await tx.wait(3);
       }
-      debugger
       txStatus = await this.walletConnectService.migrateNft(this.tabs.ArtistNFTAddressArray, this.tabs.nftIdArray, this.tabs.amountArray, this.tabs.Signature);
       if (txStatus.status) {
-        debugger
         let url = "userDataSwapUpdate";
         this.httpApi.postRequest(url, { nftId: this.tabs.nftIdArray, newContractAddress: this.tabs.ArtistNFTAddressArray }).subscribe(async (res: any) => {
           if (res.status == 200 && res.isSuccess) {

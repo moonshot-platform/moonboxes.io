@@ -9,12 +9,11 @@ export const environment = {
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "http://codetentacles-006-site31.htempurl.com/api/",
   ownerAddress: "0x703632A0b52244fAbca04aaE138fA8EcaF72dCBC",
-
   silverAddress: "0x46192Bd44C9066D425375326808109C7d97a2181",
-  NFTAddress: "0x386ce3FeFa0ddBA12A8Ce8337529ebb0Fd6AD7ee",
-  ArtistMoonBoxNftSwap: "0xC49b8409dA4163d1f869AFa26dc56fBD0260C05f",
 
+  NFTAddress: "0x94f1f1B3038e11E07FbFcC82357F69691c40DF42",
   lootBoxAddress: "0x017792D0692591FF66686092293295ef245deD3b",     // New contract address for moonshot v2
+
   artistNFTAddress: "0x207A130458CCCe36816688C0eF3bDfA3f5ef0353",  // New contract address for moonshot v2
   buyContractAddress: "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e",// for moonshot v2
   tokenContractAddress: "0xF683a2eC04A493Fc4e0FD7C3e4178fB9cef7508e",// for moonshot v2
