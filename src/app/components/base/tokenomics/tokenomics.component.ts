@@ -11,7 +11,7 @@ export class TokenomicsComponent implements OnInit {
   public isOldPancakeRouter = true;
 
   data: any;
-  
+
   public list: any = [
     [
       {
@@ -26,6 +26,11 @@ export class TokenomicsComponent implements OnInit {
       },
       {
         key: "burned forever:",
+        val: "---",
+        shortVal: ""
+      },
+      {
+        key: "v1 distribution:",
         val: "---",
         shortVal: ""
       },
@@ -54,7 +59,7 @@ export class TokenomicsComponent implements OnInit {
     ]
   ]
 
-  constructor( private tokenomicsService: TokenomicsService ) {
+  constructor(private tokenomicsService: TokenomicsService) {
   }
 
   ngOnInit(): void {
@@ -71,18 +76,16 @@ export class TokenomicsComponent implements OnInit {
     });
   }
 
-  doChangePancakeRouter() {
-    this.tokenomicsService.changePancakeRouter();
-  }
-
   replaceData(): void {
+    if (this.data == undefined)
+      return
     this.list[0][1]['val'] = this.data['circulatingSupply'];
     this.list[0][2]['val'] = this.data['burnedAmount'];
+    this.list[0][3]['val'] = this.data['v1Distirubition'].substring(0, 19);
     this.list[1][0]['val'] = this.data['priceFor1BNB'];
-    this.list[1][0]['val'] = this.data['priceFor1BNB'];
-    this.list[1][1]['val'] = '$' + this.data['marketcap'].substring(0,13);
-    this.list[1][2]['val'] = '$' + this.data['priceFor1mMoonshot'].substring(0,13);
-    this.list[1][3]['val'] = '$' + this.data['priceForMoonshot'].substring(0,13);
+    this.list[1][1]['val'] = '$' + this.data['marketcap'].substring(0, 13);
+    this.list[1][2]['val'] = '$' + this.data['priceFor1mMoonshot'].substring(0, 13);
+    this.list[1][3]['val'] = '$' + this.data['priceForMoonshot'].substring(0, 13);
     this.isOldPancakeRouter = this.tokenomicsService.oldPancakeAddress;
   }
 

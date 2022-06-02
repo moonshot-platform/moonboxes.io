@@ -7,7 +7,7 @@ import { MoonbaseComponent } from './moonbase.component';
 import { NavModule } from './nav/nav.module';
 import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
-import { NgParticlesModule } from 'ng-particles';
+// import { NgParticlesModule } from 'ng-particles';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
 import { FormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
@@ -35,6 +35,8 @@ import { LandingNftsComponent } from './landing/landing-nfts/landing-nfts.compon
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.component';
 import { JoinApplicationComponent } from './join-application/join-application.component';
+import { NftMigrationComponent } from './dialogs/nft-migration/nft-migration.component';
+import { MaterialModule } from './material/material.module';
 
 
 @NgModule({
@@ -42,6 +44,7 @@ import { JoinApplicationComponent } from './join-application/join-application.co
     MoonbaseComponent,
     IntroComponent,
     PrizePoolComponent,
+    CountdownTimerComponent,
     HistoryComponent,
     InventoryComponent,
     FooterCountComponent,
@@ -59,11 +62,11 @@ import { JoinApplicationComponent } from './join-application/join-application.co
     LandingNftsComponent,
     InfoMoonboxesComponent,
     JoinApplicationComponent,
+    NftMigrationComponent,
   ],
   imports: [
     MatIconModule,
     CommonModule,
-    NgParticlesModule,
     MoonbaseRoutingModule,
     NavModule,
     FormsModule,
@@ -75,7 +78,8 @@ import { JoinApplicationComponent } from './join-application/join-application.co
     WalletConnectModule,
     SwiperModule,
     UiSwitchModule,
-    ClipboardModule
+    ClipboardModule,
+    MaterialModule
   ]
 })
 export class MoonbaseModule { }

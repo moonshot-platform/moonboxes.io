@@ -3,19 +3,20 @@ import { UserDetailsModel } from '../models/user-details.model';
 
 export class UserDetailsProvider {
 
-    private details: UserDetailsModel;
-    private subjectUser = new Subject<UserDetailsModel>();
+  private details: UserDetailsModel;
+  private subjectUser = new Subject<UserDetailsModel>();
 
-    onShare( data: UserDetailsModel ): void {
-        this.subjectUser.next( data );
-    }
+  onShare(data: UserDetailsModel): void {
+    console.log(data);
+    this.subjectUser.next(data);
+  }
 
-    onReceive(): Observable<UserDetailsModel> {
-        return this.subjectUser.asObservable();
-    }
+  onReceive(): Observable<UserDetailsModel> {
+    return this.subjectUser.asObservable();
+  }
 
-    onRequest() {
-        return this.details;
-    }
+  onRequest() {
+    return this.details;
+  }
 
 }

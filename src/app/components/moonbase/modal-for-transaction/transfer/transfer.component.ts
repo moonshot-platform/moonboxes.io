@@ -22,8 +22,6 @@ export class TransferComponent {
     private httpApi: HttpApiService) { }
 
   async transfer(userAddress: any, ArtistNFTAddress: any) {
-    debugger
-
     if (undefined === userAddress || userAddress == "") {
       this.httpApi.showToastr("You must fill in an address", false);
       return false;
@@ -43,22 +41,35 @@ export class TransferComponent {
 
       this.btnText = "Waiting for confirmation";
       var transferTxn = await this.walletConnectService.safeTransfer(this.data.walletAddress, userAddress, this.data.details.nftId, ArtistNFTAddress);
+      if (transferTxn.status) {
+        this.httpApi.transferNft({
+          fromAddress: this.data.walletAddress,
+          toAddress: userAddress,
+          nftId: this.data.details.nftId,
+          amount: 1,
+          transactionHash: transferTxn.hash
+        }).subscribe((response: any) => {
 
-      this.httpApi.transferNft({
-        fromAddress: this.data.walletAddress,
-        toAddress: userAddress,
-        nftId: this.data.details.nftId,
-        amount: 1,
-        transactionHash: transferTxn.hash
-      }).subscribe((response: any) => {
+          this.httpApi.showToastr(response.data.message, response.isSuccess);
 
-        this.httpApi.showToastr(response.data.message, response.isSuccess);
+          if (response.isSuccess) {
+            this.dialog.closeAll();
+            location.reload();
+          }
+        });
+      }
+      else {
+        this.btnText = "Transfer";
+        if (transferTxn.error.code == 4001)
+          this.httpApi.showToastr(transferTxn.error.message, false);
+        else if (transferTxn.error.data)
+          this.httpApi.showToastr(transferTxn.error.data?.message, false);
+        else if (transferTxn.error.error)
+          this.httpApi.showToastr(transferTxn.error.error?.message, false);
+        this.dialog.closeAll();
+        return false;
+      }
 
-        if (response.isSuccess) {
-          this.dialog.closeAll();
-          location.reload();
-        }
-      });
     }
     catch (e) {
       this.btnText = "Transfer";
