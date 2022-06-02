@@ -1,0 +1,34 @@
+{
+  "testnet": [
+    {
+      "chainId": "97",
+      "artistLootBoxAddress": "0x2f42D1aaD01429874096258c2983616195eDFE46",
+      "lootBoxAddress": "0x017792D0692591FF66686092293295ef245deD3b",
+      "ArtistMoonBoxNftSwap": "0xF08821acb2FBB234099c0282bD6ea18d877d287a"
+    },
+    {
+      "chainId": "80001",
+      "artistLootBoxAddress": "0xc61578657C226519bdf502Eee5fd87FFCA656383"
+    },
+    {
+      "chainId": "1287",
+      "artistLootBoxAddress": "0xbbfbCB282cE7427cDC45efd609175187AD3286C2"
+    }
+  ],
+  "mainnet": [
+    {
+      "chainId": "56",
+      "artistLootBoxAddress": "0xE93ddAA2d56F1DAF39177fe875698A147bC94f69",
+      "lootBoxAddress": "0x614A5DD989E5Fc086a0059D37F4EcDeaA6341216",
+      "ArtistMoonBoxNftSwap": "0xcaEb93AD7a16fE96c8e085223D497E5e55C62cE8"
+    },
+    {
+      "chainId": "137",
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
+    },
+    {
+      "chainId": "1285",
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
+    }
+  ]
+}

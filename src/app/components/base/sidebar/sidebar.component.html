@@ -1,17 +1,23 @@
 <section class="sidebar">
-    <div (click)="openDialog()" class="wallet-button block flex-center">
-        <img src="assets/media/icons/wallet.svg" alt="wallet">
-    </div>
-    <ul>
-        <li>
-            <a href="#" [routerLink]="['/moonbase']">MoonBoxes</a>
-        </li>
-        <li>
-            <p (click)="toggleTokenomicsView()">Tokenomics</p>
-        </li>
-    </ul>
+  <div (click)="openDialog()" class="wallet-button block flex-center">
+    <video class="wallet" loop muted autoplay playsinline oncanplay="this.play()" onloadedmetadata="this.muted = true"
+      poster="assets/media/videos/animated-wallet-icon.gif">
+      <source src="assets/media/videos/animated-wallet-icon.webm" type="video/webm">
+    </video>
+  </div>
+  <ul>
+    <li>
+      <a href="https://project-moonshot.me" target="_blank">Moonshot</a>
+    </li>
+    <li>
+      <a href="https://moonsea.io" target="_blank">MoonSea</a>
+    </li>
+    <li>
+      <p (click)="toggleTokenomicsView()">Tokenomics</p>
+    </li>
+  </ul>
 </section>
 
 <section class="tokenomics" *ngIf="active">
-    <app-tokenomics></app-tokenomics>
+  <app-tokenomics></app-tokenomics>
 </section>

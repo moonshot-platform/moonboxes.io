@@ -4,12 +4,10 @@ import { HttpApiService } from 'src/app/services/http-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { SocialShareComponent } from '../modal-for-transaction/social-share/social-share.component';
-import { TransferComponent } from '../modal-for-transaction/transfer/transfer.component';
-import { Observable, Observer } from 'rxjs';
 import { MESSAGES } from 'src/app/messages.enum';
 import { WalletConnectComponent } from '../../base/wallet/connect/connect.component';
 import { ItemOverviewComponent } from '../../base/dialogs/item-overview/item-overview.component';
+import { NftMigrationComponent } from '../dialogs/nft-migration/nft-migration.component';
 
 @Component({
   selector: 'app-inventory',
@@ -27,15 +25,17 @@ export class InventoryComponent implements OnInit {
   inventoryList: any;
   base64Image: any;
   NFTDetails: any;
-  
+
   NSFWToggleState = false;
   isConnected = false;
-
+  tabs: any = [];
   selectedIndex: number;
-
+  nftMigrationDialogRef: any;
+  IsNftMigrated: boolean = false;
+  userAddress: any;
   constructor(
     private walletConnectService: WalletConnectService,
-    private httpApi: HttpApiService, 
+    private httpApi: HttpApiService,
     private localStorage: LocalStorageService,
     private toastrService: ToastrService,
     public dialog: MatDialog
@@ -43,29 +43,33 @@ export class InventoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.NSFWToggleState = this.localStorage.getNSFW();
+    this.userAddress = this.localStorage.get('address');
 
-    this.localStorage.whenNSFWToggled().subscribe( (NSFWToggleState) => {
+    this.localStorage.whenNSFWToggled().subscribe((NSFWToggleState) => {
       this.NSFWToggleState = NSFWToggleState;
-    } );
-    
-    this.walletConnectService.init().then( ( data: string ) => {
-      this.isConnected = data !== null;
     });
-      
-    this.walletConnectService.onWalletStateChanged().subscribe( (state: boolean) => {
-      this.isConnected = state;
-    } );
-      
-    this.walletConnectService.getData().subscribe((data) => {
-      if( this.data === undefined || this.data.address != data.address ) {
-      this.data = data ?? {};
 
-      if( Object.keys(this.data).length > 0 )
-        this.getUserData();
-      else
-        this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
-    }
+    this.walletConnectService.init().then((data: boolean) => {
+      this.isConnected = data;
+      this.getUserData01();
     });
+
+    this.walletConnectService.onWalletStateChanged().subscribe((state: boolean) => {
+      this.isConnected = state;
+    });
+
+    this.walletConnectService.getData().subscribe((data) => {
+      if (this.data === undefined || this.data.address != data.address) {
+        this.data = data ?? {};
+
+        if (Object.keys(this.data).length > 0)
+          this.getUserData();
+        else
+          this.mainMessage = MESSAGES.NO_WALLET_DATA_FROM_SERVER;
+      }
+
+    });
+
   }
 
   getUserData() {
@@ -73,9 +77,9 @@ export class InventoryComponent implements OnInit {
       userAddress: this.data.address,
       NSFW: true
     };
-    
+
     this.httpApi.getUserInventory(data).then((response: any) => {
-      const {isSuccess, status} = response;
+      const { isSuccess, status } = response;
 
       if (isSuccess && (status === 200 || status === 204)) {
         this.inventoryList = response.data.data ?? [];
@@ -90,16 +94,16 @@ export class InventoryComponent implements OnInit {
 
     let tempIndex: number;
     item['properties'].forEach((property: any, i: number) => {
-      if( property.hasOwnProperty('key') ) {
-          if( property.key === 'Rarity Score' ) {
-            item['rarity'] = `Rarity score: ${property.value}`;
-            tempIndex = i;
-          }
+      if (property.hasOwnProperty('key')) {
+        if (property.key === 'Rarity Score') {
+          item['rarity'] = `Rarity score: ${property.value}`;
+          tempIndex = i;
+        }
       }
 
-      if( property.hasOwnProperty('probability') ) {
+      if (property.hasOwnProperty('probability')) {
         Object.defineProperty(
-          property, 'rarity', 
+          property, 'rarity',
           Object.getOwnPropertyDescriptor(property, 'probability')
         );
         delete property['probability'];
@@ -110,7 +114,7 @@ export class InventoryComponent implements OnInit {
 
     this.NFTDetails = item;
     this.selectedIndex = index;
-    
+
     setTimeout(() => {
       this.scrollToElement('', 'attribute-info');
     }, 100);
@@ -121,8 +125,8 @@ export class InventoryComponent implements OnInit {
   }
 
   fileTypeIsImage(url: string) {
-    if( !url ) return false;
-    
+    if (!url) return false;
+
     const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
     const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
@@ -135,9 +139,9 @@ export class InventoryComponent implements OnInit {
   }
 
   openWalletDialog(): void {
-    let dialogRef = this.dialog.open( WalletConnectComponent, { width: 'auto' } );
+    let dialogRef = this.dialog.open(WalletConnectComponent, { width: 'auto' });
 
-    dialogRef.afterClosed().subscribe( (_) => {
+    dialogRef.afterClosed().subscribe((_) => {
       this.walletConnectService.getData().subscribe((data) => {
         this.isConnected = data.address !== undefined;
       })
@@ -159,20 +163,20 @@ export class InventoryComponent implements OnInit {
     return item.title;
   }
 
-  viewDetails( item: any, index: number ): void {
+  viewDetails(item: any, index: number): void {
 
     let tempIndex: number;
     item['properties'].forEach((property: any, i: number) => {
-      if( property.hasOwnProperty('key') ) {
-          if( property.key === 'Rarity Score' ) {
-            item['rarity'] = `Rarity score: ${property.value}`;
-            tempIndex = i;
-          }
+      if (property.hasOwnProperty('key')) {
+        if (property.key === 'Rarity Score') {
+          item['rarity'] = `Rarity score: ${property.value}`;
+          tempIndex = i;
+        }
       }
 
-      if( property.hasOwnProperty('probability') ) {
+      if (property.hasOwnProperty('probability')) {
         Object.defineProperty(
-          property, 'rarity', 
+          property, 'rarity',
           Object.getOwnPropertyDescriptor(property, 'probability')
         );
         delete property['probability'];
@@ -186,7 +190,53 @@ export class InventoryComponent implements OnInit {
     this.NFTDetails = item;
     this.selectedIndex = index;
 
-    this.dialog.open(ItemOverviewComponent, { width: '100%', maxWidth: '1000px', data:item });
+    this.dialog.open(ItemOverviewComponent, { width: '100%', maxWidth: '1000px', data: item });
   }
 
+
+
+  openNftMigrationDialog() {
+
+    this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
+      width: '800px',
+      data: { data: this.tabs },
+    });
+  }
+
+
+
+  getUserData01() {
+    let url = "userDataCount?userAddress=" + this.userAddress;
+    this.httpApi.getRequest(url).subscribe(async (res: any) => {
+      if (res.status == 200) {
+        this.IsNftMigrated = res.IsNftMigrated;
+        if (!this.IsNftMigrated) {
+          // this.toastrService.success("minted");
+          await this.getBannerUser()
+          this.openNftMigrationDialog();
+        }
+      }
+    }, (err: any) => {
+      this.toastrService.error("something went wrong with user data count");
+    })
+  }
+
+  getBannerUser() {
+    let promis = new Promise((resolve, reject) => {
+      let url = "userSwappingData?userAddress=" + this.userAddress;
+      this.httpApi.getRequest(url).subscribe((res: any) => {
+        if (res.status == 200) {
+          this.tabs = res.data;
+          resolve(this.tabs)
+        }
+        else {
+
+        }
+      }, (err: any) => {
+        reject(err);
+      })
+    });
+
+    return promis;
+  }
 }

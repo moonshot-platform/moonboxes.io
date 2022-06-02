@@ -63,7 +63,6 @@ export class ModalForTransactionComponent implements OnInit {
 
   async submitBet() {
     var price: any = await this.walletConnectService.getDetailsMoonboxPrice();
-
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
@@ -103,6 +102,13 @@ export class ModalForTransactionComponent implements OnInit {
     }
     else {
       this.closeDialog()
+      if (transactionDetails.error.code == 4001)
+        this.httpApi.showToastr(transactionDetails.error.message, false);
+      else if (transactionDetails.error?.data)
+        this.httpApi.showToastr(transactionDetails.error?.data?.message, false);
+      else if (transactionDetails.error?.error)
+        this.httpApi.showToastr(transactionDetails.error?.error?.message, false);
+      return false;
     }
 
     return false;
@@ -175,12 +181,21 @@ export class ModalForTransactionComponent implements OnInit {
         }
       })
     }
+    else {
+      this.closeDialog();
+      if (txStatus.hash.code == 4001)
+        this.httpApi.showToastr(txStatus.hash.message, false);
+      else if (txStatus.hash?.data)
+        this.httpApi.showToastr(txStatus.hash?.data?.message, false);
+      else if (txStatus.hash?.error)
+        this.httpApi.showToastr(txStatus.hash?.error?.message, false);
+      return false;
+    }
     return false;
   }
 
 
   async submitBetForArtist() {
-
     this.btn1Text = "Waiting for transaction";
     var transactionDetails: any;
     try {
@@ -234,6 +249,16 @@ export class ModalForTransactionComponent implements OnInit {
           this.httpApi.showToastr(response.data.message, false)
         }
       });
+    }
+    else {
+      this.closeDialog()
+      if (transactionDetails.error.code == 4001)
+        this.httpApi.showToastr(transactionDetails.error.message, false);
+      else if (transactionDetails.error?.data)
+        this.httpApi.showToastr(transactionDetails.error?.data?.message, false);
+      else if (transactionDetails.error?.error)
+        this.httpApi.showToastr(transactionDetails.error?.error?.message, false);
+      return false;
     }
 
     return false;

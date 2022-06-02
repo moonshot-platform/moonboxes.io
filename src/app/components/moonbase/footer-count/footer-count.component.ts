@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UserDetailsProvider } from 'src/app/services/user-details.provider';
 import { UserDetailsModel } from 'src/app/models/user-details.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-footer-count',
@@ -16,7 +17,7 @@ export class FooterCountComponent implements OnInit {
   isConnected: boolean = false;
   balance: any = "-";
   moonCountData: any;
-  moonBoxLimitDetails: any;
+  moonBoxLimitDetails: any = [];
   eligibleTier = "-";
   messages: any[] = [];
   subscription: Subscription;
@@ -26,8 +27,9 @@ export class FooterCountComponent implements OnInit {
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService,
     private userProvider: UserDetailsProvider,
+    private localStorage: LocalStorageService
   ) {
-    this.userProvider.onShare( <UserDetailsModel>{} );
+    this.userProvider.onShare(<UserDetailsModel>{});
     this.subscription = this.httpApi.getMessage().subscribe(message => {
       this.bgChange = message.text;
     });
@@ -38,10 +40,10 @@ export class FooterCountComponent implements OnInit {
       if (data != undefined && data.address != undefined && this.data != data) {
         this.data = data;
         this.isConnected = true;
-
-        if (this.data.networkId.chainId == environment.chainId) {
-          this.getMoonShootBalance();
-        }
+        // this.localStorage.get();
+        // if (this.data.networkId.chainId == environment.chainId[0]) {
+        this.getMoonShootBalance();
+        // }
       }
     });
   }
@@ -53,10 +55,12 @@ export class FooterCountComponent implements OnInit {
       "Gold",
       "Diamond"
     ];
-    
+
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
-    for( let i = this.moonBoxLimitDetails.length - 1; i >= 0; i-- ) {
-      if( moonBalance >= Number(this.moonBoxLimitDetails[i]) ) {
+
+    for (let i = 3; i >= 0; i--) {
+
+      if (moonBalance >= Number(this.moonBoxLimitDetails[i])) {
         this.eligibleTier = tiers[i]
         break;
       }
@@ -64,17 +68,17 @@ export class FooterCountComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
-    const balance = await this.walletConnectService.getUserBalance( this.data.address );
-    
-    await this.getTier( balance );
+    const balance = await this.walletConnectService.getUserBalance(this.data.address);
+
+    await this.getTier(balance);
 
     this.moonCountData = (await this.httpApi.getMoonCount(this.data.address)).data;
-    
-    this.balance = this.walletConnectService.convertBalance( balance );
 
-    const userData = new UserDetailsModel( this.data.address, balance );
+    this.balance = this.walletConnectService.convertBalance(balance);
 
-    this.userProvider.onShare( userData );
+    const userData = new UserDetailsModel(this.data.address, balance);
+
+    this.userProvider.onShare(userData);
   }
 
   ngOnDestroy() {

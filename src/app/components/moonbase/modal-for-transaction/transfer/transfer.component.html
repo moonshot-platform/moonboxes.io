@@ -1,23 +1,24 @@
 <div class="modal-box">
-    <p class="warning">
-        Please make sure the destination address is on the same network (BSC BEP20)
-    </p>
+  <p class="warning">
+    Please make sure the destination address is on the same network
+  </p>
 
-    <div class="justify-space-between mb20">
-        <p class="p-white-span-primary mb20">Address :</p>
-        <input #toAddress type="text" class="outlined-button wp100" placeholder="enter your address" />
-        <p *ngIf="showError" class="p-white-span-primary mb20">Address is mandatory</p>
-    </div>
-    <div class="flex flex-wrap justify-space-between mb20">
-        <p class="p-white-span-primary">Token id :</p>
-        <p class="p-white-span-primary">{{ data.details.nftId }}</p>
-    </div>
-    <div class="flex flex-wrap justify-space-between mb20">
-        <p class="p-white-span-primary">Token Name :</p>
-        <p class="p-white-span-primary">{{ data.details.name }}</p>
-    </div>
+  <div class="justify-space-between mb20">
+    <p class="p-white-span-primary mb20">Address :</p>
+    <input #toAddress type="text" class="outlined-button wp100" placeholder="enter your address" />
+    <p *ngIf="showError" class="p-white-span-primary mb20">Address is mandatory</p>
+  </div>
+  <div class="flex flex-wrap justify-space-between mb20">
+    <p class="p-white-span-primary">Token id :</p>
+    <p class="p-white-span-primary">{{ data.details.nftId }}</p>
+  </div>
+  <div class="flex flex-wrap justify-space-between mb20">
+    <p class="p-white-span-primary">Token Name :</p>
+    <p class="p-white-span-primary">{{ data.details.name }}</p>
+  </div>
 
-    <div>
-        <a (click)="transfer(toAddress.value,data.details.ArtistNFTAddress)" class="button text-inherit mb20 ng-star-inserted">{{ btnText }}</a>
-    </div>
+  <div>
+    <a (click)="transfer(toAddress.value,data.details.ArtistNFTAddress)"
+      class="button text-inherit mb20 ng-star-inserted">{{ btnText }}</a>
+  </div>
 </div>
