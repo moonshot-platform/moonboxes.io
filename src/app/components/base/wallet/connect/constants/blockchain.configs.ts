@@ -14,7 +14,7 @@ export const CHAIN_CONFIGS: any = {
     "config": {
       method: 'wallet_addEthereumChain',
       params: [{
-        chainId: '1285',
+        chainId: '0x505',
         chainName: 'Moonriver',
         nativeCurrency: {
           symbol: 'BNB',
@@ -54,7 +54,7 @@ export const CHAIN_CONFIGS: any = {
     "config": {
       method: 'wallet_addEthereumChain',
       params: [{
-        chainId: '56',
+        chainId: '0x38',
         chainName: 'BSC',
         nativeCurrency: {
           symbol: 'BNB',
@@ -74,7 +74,7 @@ export const CHAIN_CONFIGS: any = {
     "config": {
       method: 'wallet_addEthereumChain',
       params: [{
-        chainId: '137',
+        chainId: '0x89',
         chainName: 'BSC Testnet',
         nativeCurrency: {
           symbol: 'MATIC',

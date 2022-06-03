@@ -27,7 +27,7 @@
           <li>
             <img id="dropdwonButton" class="nav-bar-sub-item chain-button"
               [ngStyle]="{'background-color': chainConfigs[chains[currentChainId] ?? 97].bg}"
-              src="{{ chainConfigs[chains[currentChainId] ?? 97].icon  }}" (click)="toggleChainDropdown()">
+              src="{{ chainConfigs[chains[currentChainId] ?? 97].icon }}" (click)="toggleChainDropdown()">
             <div id="myDropdown" class="dropdown-content">
               <a *ngFor="let chain of chains;let i=index" (click)="changeChain(chainConfigs[chain].config,i)"
                 [class.active]="currentChainId == i">

@@ -46,6 +46,7 @@ export class NftMigrationComponent implements OnInit {
         this.httpApi.postRequest(url, { nftId: this.tabs.nftIdArray, newContractAddress: this.tabs.ArtistNFTAddressArray }).subscribe(async (res: any) => {
           if (res.status == 200 && res.isSuccess) {
             this.toastrService.success(res.data.message);
+            this.closeDialog();
           }
           else {
             this.toastrService.error(res.data.message);
