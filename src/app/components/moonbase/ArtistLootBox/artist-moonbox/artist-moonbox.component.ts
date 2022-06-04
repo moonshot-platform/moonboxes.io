@@ -183,7 +183,7 @@ export class ArtistMoonboxComponent implements OnInit {
   hasEnoughMoonshots(index: number) {
 
     if (this.balance != null && this.moonBoxLimitDetails != null) {
-
+      console.log("sai")
       return (Number(this.balance) >= Number(this.moonBoxLimitDetails[index]));
     }
 

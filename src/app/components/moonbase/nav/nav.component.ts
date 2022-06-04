@@ -116,6 +116,8 @@ export class NavComponent implements OnInit {
   ngOnInit(): void {
     this.walletConnectService.init();
     this.walletConnectService.updateChainId(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
+    // this.walletConnectService.updateSelectedChainId(parseInt(localStorage.getItem('chainId') ?? "56"));
+
     console.log(parseInt(localStorage.getItem('manual_chainId') ?? "56"));
 
     this.getNSFWStatus();
@@ -202,7 +204,7 @@ export class NavComponent implements OnInit {
   }
 
   changeAccountDetected(accounts: any) {
-    this.walletConnectService.getSelectedChainId().subscribe(async (response) => {
+    this.walletConnectService.getChainId().subscribe(async (response) => {
       this.selectedChainId = response;
       this.currentChainId = response;
 
@@ -241,9 +243,7 @@ export class NavComponent implements OnInit {
     document?.getElementById("myDropdown")?.classList.toggle("show");
     this.isMultiChainDropdownActive = !this.isMultiChainDropdownActive;
 
-    let currentNetworkID = await this.walletConnectService.getNetworkChainId();
-    if (this.chains[this.currentChainId] != currentNetworkID)
-      this.currentChainId = this.chains.indexOf(currentNetworkID);
+
   }
 
 
@@ -270,6 +270,7 @@ export class NavComponent implements OnInit {
 
         this.walletConnectService.updateChainId(this.chains[index]);
         this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK");
+        debugger
         window.location.reload();
       } catch (error) {
 

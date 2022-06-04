@@ -191,6 +191,7 @@ export class WalletConnectService {
         this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
           this.toastrService.info('You have changed the chain!');
+          alert(code)
           this.updateSelectedChainId(Number(code));
           location.reload();
           this.setWalletState(true);
@@ -302,7 +303,7 @@ export class WalletConnectService {
       try {
 
         if (isArtist) {
-          this.artistLootBoxContractGet.methods.getMoonShotLimit().call()
+          this.artistLootBoxContractGet.methods.getMoonShootLimit().call()
             .then((transactionHash: any) =>
               resolve(transactionHash)
             );
@@ -482,7 +483,7 @@ export class WalletConnectService {
     localStorage.setItem('manual_chainId', data.toString());
     console.log(localStorage);
     this.chainId.next(data);
-
+    this.selectedChainId.next(data);
   }
 
   getChainId(): Observable<number> {

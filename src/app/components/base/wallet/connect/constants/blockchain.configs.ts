@@ -1,10 +1,10 @@
 export const CHAIN_CONFIGS: any = {
-  "1": {
-    "name": "Ethereum Mainnet",
-    "explorerLink": "https://bscscan.com/address/",
-    "icon": "assets/media/images/blockchain/eth.webp",
-    "bg": "black",
-  },
+  // "1": {
+  //   "name": "Ethereum Mainnet",
+  //   "explorerLink": "https://bscscan.com/address/",
+  //   "icon": "assets/media/images/blockchain/eth.webp",
+  //   "bg": "black",
+  // },
   "1285": {
     "name": "Moonriver Mainnet",
     "explorerLink": "https://moonriver.moonscan.io/address/",
@@ -69,13 +69,13 @@ export const CHAIN_CONFIGS: any = {
     "name": "Polygon Mainnet",
     "explorerLink": "https://polygonscan.com/address/",
     "icon": "assets/media/images/blockchain/polygon.svg",
-    "bg": "#6e56a4",
+    "bg": "black",
     "symbol": 'MATIC',
     "config": {
       method: 'wallet_addEthereumChain',
       params: [{
         chainId: '0x89',
-        chainName: 'BSC Testnet',
+        chainName: 'Polygon Mainnet',
         nativeCurrency: {
           symbol: 'MATIC',
           decimals: 18,
