@@ -12,7 +12,7 @@
                   [routerLink]="item.routerLink" routerLinkActive="router-link-active">
               </ng-template>
               <ng-template #itemWithClick>
-                <img class="nav-bar-sub-item" (click)="goBack()" src="{{ item.icon }}">
+                <img class="nav-bar-sub-item" (click)=item.click() src="{{ item.icon }}">
               </ng-template>
               <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}"
                 (mouseleave)="this.isTooltipActive = true">
@@ -103,8 +103,9 @@
 
 
     <ul class="menubar flex">
-      <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'"
-          [routerLink]="[item.path]">{{ item.name }}</a></li>
+      <li *ngFor="let item of navItems">
+        <a [class.pri-btn]="item?.class == 'pri'" [routerLink]="[item.path]">{{ item.name }}</a>
+      </li>
       <!-- <a [routerLink]="['']">Jim</a> -->
       <!-- <div *ngIf="!showMultiChainDialog">
         <li class="network" (click)="network()">{{ this.chainName }}</li>
@@ -187,7 +188,7 @@
             </svg>
                     </a>
                 </li> -->
-        <li>
+        <!-- <li>
           <div
             *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'"
             class="block flex-center">
@@ -195,7 +196,7 @@
               class="mr10"></ui-switch>
             <span class="mr20 text-dark">NSFW</span>
           </div>
-        </li>
+        </li> -->
         <li>
           <div (click)="openDialog()" class="wallet_block flex-center">
             <svg version="1.1" id="Laag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
