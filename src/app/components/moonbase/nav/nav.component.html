@@ -12,7 +12,7 @@
                   [routerLink]="item.routerLink" routerLinkActive="router-link-active">
               </ng-template>
               <ng-template #itemWithClick>
-                <img class="nav-bar-sub-item" (click)="goBack()" src="{{ item.icon }}">
+                <img class="nav-bar-sub-item" (click)=item.click() src="{{ item.icon }}">
               </ng-template>
               <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}"
                 (mouseleave)="this.isTooltipActive = true">
@@ -103,8 +103,9 @@
 
 
     <ul class="menubar flex">
-      <li *ngFor="let item of navItems"><a [class.pri-btn]="item?.class == 'pri'"
-          [routerLink]="[item.path]">{{ item.name }}</a></li>
+      <li *ngFor="let item of navItems">
+        <a [class.pri-btn]="item?.class == 'pri'" [routerLink]="[item.path]">{{ item.name }}</a>
+      </li>
       <!-- <a [routerLink]="['']">Jim</a> -->
       <!-- <div *ngIf="!showMultiChainDialog">
         <li class="network" (click)="network()">{{ this.chainName }}</li>
