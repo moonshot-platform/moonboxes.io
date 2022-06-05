@@ -21,7 +21,7 @@ import { WindowRefService } from 'src/app/services/window-ref.service';
 })
 export class NavComponent implements OnInit {
   data: any;
-  isConnected: boolean = true;
+  isConnected: boolean = false;
   balance: any = 0;
   moonCountData: any;
   isNSFWStatus = false;
@@ -41,6 +41,7 @@ export class NavComponent implements OnInit {
   chainConfigs = CHAIN_CONFIGS;
   currentChainId: number = 0;
   isMultiChainDropdownActive: boolean = false;
+  address: string = '';
 
   public navSubItems: any[] = [
     {
@@ -139,6 +140,7 @@ export class NavComponent implements OnInit {
     this.walletConnectService.getData().subscribe((data) => {
       if (data !== undefined && data.address != undefined) {
         this.data = data;
+        this.address = data.address;
         // this.checkNetwork();
         this.isConnected = true;
         if (this.data.networkId.chainId == environment.chainId) {
@@ -146,8 +148,13 @@ export class NavComponent implements OnInit {
         }
       } else {
         this.balance = 'Awaiting Connection';
+        this.isConnected = false;
       }
     });
+
+    this.walletConnectService.onWalletStateChanged().subscribe((state) => {
+      this.isConnected = state;
+    })
 
   }
 
@@ -242,10 +249,7 @@ export class NavComponent implements OnInit {
   async toggleChainDropdown() {
     document?.getElementById("myDropdown")?.classList.toggle("show");
     this.isMultiChainDropdownActive = !this.isMultiChainDropdownActive;
-
-
   }
-
 
   @HostListener('document:click', ['$event'])
   onMouseEnter(event: any) {
@@ -270,7 +274,7 @@ export class NavComponent implements OnInit {
 
         this.walletConnectService.updateChainId(this.chains[index]);
         this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK");
-        debugger
+        // debugger
         window.location.reload();
       } catch (error) {
 
