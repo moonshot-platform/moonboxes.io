@@ -37,7 +37,7 @@ export class HttpApiService {
     private httpClient: HttpClient,
     private toastrService: ToastrService
   ) {
-    debugger
+    // debugger
     this.chainId = localStorage.getItem('manual_chainId') ?? "56";
 
     this.headers = new HttpHeaders()
