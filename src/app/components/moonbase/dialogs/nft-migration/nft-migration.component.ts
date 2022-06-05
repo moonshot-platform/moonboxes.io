@@ -15,6 +15,9 @@ export class NftMigrationComponent implements OnInit {
   tabs: any = [];
   @ViewChild('tabGroup') tabGroup;
   userAddress: any;
+  swapCount: any;
+  nftCountToSwap: any;
+  IsNftMigrated: any;
 
   constructor(
     public dialogRef: MatDialogRef<NftMigrationComponent>,
@@ -28,6 +31,8 @@ export class NftMigrationComponent implements OnInit {
   ngOnInit(): void {
     this.userAddress = this.localstorage.get('address');
     this.tabs = this.data.data;
+    this.swapCount = this.data.swapCount;
+    this.nftCountToSwap = this.data.nftCountToSwap;
   }
 
 
@@ -46,7 +51,7 @@ export class NftMigrationComponent implements OnInit {
         this.httpApi.postRequest(url, { nftId: this.tabs.nftIdArray, newContractAddress: this.tabs.ArtistNFTAddressArray }).subscribe(async (res: any) => {
           if (res.status == 200 && res.isSuccess) {
             this.toastrService.success(res.data.message);
-            this.closeDialog();
+            this.isNftMigratedFunction();
           }
           else {
             this.toastrService.error(res.data.message);
@@ -63,5 +68,26 @@ export class NftMigrationComponent implements OnInit {
   }
   closeDialog() {
     this.dialogRef.close();
+  }
+
+
+  isNftMigratedFunction() {
+    let url = "userDataCount?userAddress=" + this.userAddress;
+    this.httpApi.getRequest(url).subscribe(async (res: any) => {
+      if (res.status == 200) {
+        this.IsNftMigrated = res.IsNftMigrated;
+        if (!this.IsNftMigrated) {
+          this.toastrService.success("More " + res.nftCountToSwap + " to upgrade");
+          window.location.reload();
+        }
+        else {
+          this.closeDialog();
+        }
+      }
+    }, (err: any) => {
+      console.log(err);
+      this.toastrService.error("something went wrong with user data count");
+      this.closeDialog();
+    })
   }
 }
