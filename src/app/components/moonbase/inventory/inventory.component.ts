@@ -33,6 +33,8 @@ export class InventoryComponent implements OnInit {
   nftMigrationDialogRef: any;
   IsNftMigrated: boolean = false;
   userAddress: any;
+  nftCountToSwap: any;
+  SwapNftCount: any;
   constructor(
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService,
@@ -199,7 +201,7 @@ export class InventoryComponent implements OnInit {
 
     this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
       width: '800px',
-      data: { data: this.tabs },
+      data: { data: this.tabs, swapCount: this.SwapNftCount, nftCountToSwap: this.nftCountToSwap },
     });
   }
 
@@ -212,6 +214,8 @@ export class InventoryComponent implements OnInit {
         this.IsNftMigrated = res.IsNftMigrated;
         if (!this.IsNftMigrated) {
           // this.toastrService.success("minted");
+          this.nftCountToSwap = res.nftCountToSwap;
+          this.SwapNftCount = res.SwapNftCount;
           await this.getBannerUser()
           this.openNftMigrationDialog();
         }

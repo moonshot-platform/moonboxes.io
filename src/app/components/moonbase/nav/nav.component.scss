@@ -625,8 +625,7 @@ section.moonbox-menu {
   max-width: 100%;
   z-index: 12000;
   margin-right: 0;
-  height: 100vh;
-  max-height: 250px;
+  height: min-content;
   overflow: auto;
 
   .inner {
@@ -665,6 +664,89 @@ section.moonbox-menu {
 
 .text-dark {
   color: #000;
+}
+
+.wallet-address {
+  display: flex;
+  justify-content: center;
+  color: black;
+
+  .address {
+    // display: flex;
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: 500;
+    font-size: 16px;
+    color: black;
+    border-bottom: 1px black solid;
+    // flex: 1;
+    text-align: end;
+    margin-top: auto;
+    max-width: 100%;
+    cursor: pointer;
+
+
+    :hover {
+      color: white;
+    }
+
+
+  }
+
+  &:hover {
+    span {
+      color: white !important;
+      border-bottom: 2px solid white;
+    }
+
+    svg>g>path {
+      fill: white;
+    }
+  }
+
+  svg {
+
+    width: 1.2em;
+    // margin-right: 0.8em;
+  }
+
+  svg>g>path {
+    fill: black;
+  }
+
+  span {
+    color: black;
+    border-bottom: 2px solid black;
+    cursor: pointer;
+  }
+}
+
+.mb25 {
+  margin-bottom: 25px;
+}
+
+
+.truncate-middle {
+  position: relative;
+  width: fit-content;
+  max-width: calc(80vw - 30px);
+  justify-self: flex-end;
+  display: inline-flex;
+  padding-right: 40px;
+}
+
+.truncate-middle>p {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.truncate-middle:after {
+  content: attr(data-truncate);
+  position: absolute;
+  left: calc(100% - 40px);
+  top: 0;
+  white-space: nowrap;
 }
 
 @media only screen and (max-width: $sm) {

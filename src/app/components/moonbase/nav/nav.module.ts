@@ -5,6 +5,7 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogModule } from '@angular/material/dialog';
 import { UiSwitchModule } from 'ngx-ui-switch';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 
@@ -17,11 +18,12 @@ import { UiSwitchModule } from 'ngx-ui-switch';
     AppRoutingModule,
     MatIconModule,
     MatDialogModule,
+    ClipboardModule,
     UiSwitchModule.forRoot({
       color: 'rgb(0, 189, 99)',
       switchColor: 'black',
       defaultBgColor: 'transparent',
-      defaultBoColor : 'black',
+      defaultBoColor: 'black',
     }),
   ],
   exports: [
