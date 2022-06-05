@@ -91,6 +91,26 @@ export class NavComponent implements OnInit {
   public open = false;
   showMultiChainDialog: boolean = true;
 
+  backButton: any = {
+    icon: 'assets/media/icons/moonbase/nav/Menu_return_black.svg',
+    alt: 'return back',
+    tooltip: 'Back',
+    click: () => this.goBack(),
+    routerLink: null, // [''],
+    route: '/',
+  };
+
+  homeButton: any = {
+    icon: 'assets/media/icons/moonbase/nav/Home.svg',
+    alt: 'return home',
+    tooltip: 'Home',
+    click: () => {
+      this.router.navigate(['/'], { replaceUrl: true })
+    },
+    routerLink: null,
+    route: '/',
+  };
+
   constructor(
     public dialog: MatDialog,
     private walletConnectService: WalletConnectService,
@@ -106,11 +126,7 @@ export class NavComponent implements OnInit {
       this.isMultiChain();
     })
 
-
-    // console.log(this.currentChainId);
-    // console.log(this.chains);
-
-    // console.log(this.chains[this.currentChainId] != undefined);
+    this.changeNavBarBackButton(window.innerWidth < 1148)
 
   }
 
@@ -263,6 +279,19 @@ export class NavComponent implements OnInit {
           this.isMultiChainDropdownActive = false;
         }
       }
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.changeNavBarBackButton(event.target.innerWidth < 1148)
+  }
+
+  changeNavBarBackButton(isMobile: boolean) {
+    if (isMobile) {
+      this.navSubItems[0] = this.homeButton;
+    } else {
+      this.navSubItems[0] = this.backButton;
     }
   }
 
