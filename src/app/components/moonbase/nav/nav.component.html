@@ -25,9 +25,20 @@
             </div>
           </li>
           <li>
-            <img id="dropdwonButton" class="nav-bar-sub-item chain-button"
-              [ngStyle]="{'background-color': chainConfigs[chains[currentChainId] ?? 97].bg}"
-              src="{{ chainConfigs[chains[currentChainId] ?? 97].icon  }}" (click)="toggleChainDropdown()">
+            <div class="tooltip">
+              <img id="dropdwonButton" class="nav-bar-sub-item chain-button"
+                [ngStyle]="{'background-color': chainConfigs[currentChainId>0 ? currentChainId : 56].bg}"
+                src="{{ chainConfigs[currentChainId>0 ? currentChainId : 56].icon }}" (click)="toggleChainDropdown()">
+
+              <div class="bottom" [ngClass]="{'close-tooltip': !this.isTooltipActive}"
+                (mouseleave)="this.isTooltipActive = true">
+                <div class="row">
+                  <img class="close-button" (click)="closeTooltip()" src="assets/media/icons/moonbase/nav/close.svg">
+                  <p>Select your Network</p>
+                </div>
+                <i></i>
+              </div>
+            </div>
             <div id="myDropdown" class="dropdown-content">
               <a *ngFor="let chain of chains;let i=index" (click)="changeChain(chainConfigs[chain].config,i)"
                 [class.active]="currentChainId == i">
@@ -100,13 +111,13 @@
       </div> -->
     </ul>
     <div class="block flex-center nsfw-and-close-container">
-      <ui-switch
+      <!-- <ui-switch
         *ngIf="router.url == '/upcoming'|| router.url == '/inventory' || router.url == '/live' || router.url == '/recent'"
         defaultBgColor="transparent" [checked]="isNSFWStatus" (change)="changeNSFWStatus($event)" class="mr10">
       </ui-switch>
       <span
         *ngIf="router.url === '/upcoming'|| router.url === '/inventory' || router.url === '/live' || router.url === '/recent'"
-        class="mr20 text-dark">NSFW</span>
+        class="mr20 text-dark">NSFW</span> -->
       <div class="tooltip">
         <a href="https://project-moonshot.me">
           <svg width="27px" height="27px" viewBox="0 0 27 27" version="1.1" xmlns="http://www.w3.org/2000/svg"
@@ -213,10 +224,29 @@
         <p><strong class="balance-text">{{ balance }}</strong></p>
       </div>
 
-      <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
+      <!-- <a class="p17 mb20" routerLinkActive="active-link" [routerLinkActiveOptions]="{exact:
         true}" [routerLink]="['']" (click)="closeMenu()">MoonBoxes</a>
-      <div class="divider mb20"></div>
+      <div class="divider mb20"></div> -->
+      <a class="p17 mb20" href="https://project-moonshot.me">Moonshot</a>
+      <div class="divider mb25"></div>
+      <a class="p17 mb20" href="https://www.moonsea.io" target="_blank">MoonSea</a>
+      <div class="divider mb25"></div>
       <a class="p17 mb20" (click)="toggleTokenomics()">Tokenomics</a>
+      <div *ngIf="isConnected" class="divider mb25"></div>
+      <div *ngIf="isConnected" class="wallet-address mb25" [cdkCopyToClipboard]=address>
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Laag_1"
+          x="0px" y="0px" viewBox="0 0 19.9 20" style="enable-background:new 0 0 19.9 20;" xml:space="preserve">
+          <g>
+            <path
+              d="M3,0.1c-1.7,0-3,1.4-3,3V17c0,1.7,1.4,3,3,3h13.8c0.7,0,1.3-0.6,1.3-1.3v-3.5h1.7V9.7h-1.7V6.2c0-0.7-0.6-1.3-1.3-1.3h-2.1   V1.3c0-0.7-0.6-1.3-1.3-1.3H3V0.1z M16.8,18.7H3c-1,0-1.8-0.8-1.8-1.8V5.7l0.6,0.3c0.4,0.2,0.8,0.3,1.2,0.3h13.8v3.5h-3.2   c-1.5,0-2.7,1.2-2.7,2.7c0,1.5,1.2,2.7,2.7,2.7h3.2L16.8,18.7L16.8,18.7z M18.6,13.9h-4.9c-0.8,0-1.4-0.6-1.4-1.4   c0-0.8,0.6-1.4,1.4-1.4h4.9C18.6,11,18.6,13.9,18.6,13.9z M13.4,4.9H3c-1,0-1.8-0.8-1.8-1.8S2.1,1.4,3,1.4h10.4   C13.4,1.4,13.4,4.9,13.4,4.9z" />
+          </g>
+        </svg>
+        <div class="address">
+          <div class="truncate-middle" [attr.data-truncate]='address.slice(-3)'>
+            <p>{{address.slice(0,-3)}}</p>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </section>

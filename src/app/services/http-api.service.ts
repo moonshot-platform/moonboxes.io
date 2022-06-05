@@ -37,7 +37,9 @@ export class HttpApiService {
     private httpClient: HttpClient,
     private toastrService: ToastrService
   ) {
-    this.chainId = localStorage.getItem('manual_chainId');
+    // debugger
+    this.chainId = localStorage.getItem('manual_chainId') ?? "56";
+
     this.headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('APPKEY', 'mTb+T!5!crBEQEL2!$PJ9&JSjeT3M6Hs*RytA-eaDSBS5UU@8-fCJHu6F?kp@s+JTu2-_-V8L#?5')

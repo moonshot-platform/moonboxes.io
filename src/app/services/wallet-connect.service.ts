@@ -109,7 +109,7 @@ export class WalletConnectService {
 
     try {
       // await this.localStorageService.getAddress();
-      var web3Provider = new Web3.providers.HttpProvider('https://data-seed-prebsc-1-s1.binance.org:8545/');
+      var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org');
       var web3 = new Web3(web3Provider);
       this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.silverAddress);
       this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
@@ -191,6 +191,7 @@ export class WalletConnectService {
         this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
           this.toastrService.info('You have changed the chain!');
+          alert(code)
           this.updateSelectedChainId(Number(code));
           location.reload();
           this.setWalletState(true);
@@ -302,7 +303,7 @@ export class WalletConnectService {
       try {
 
         if (isArtist) {
-          this.artistLootBoxContractGet.methods.getMoonShotLimit().call()
+          this.artistLootBoxContractGet.methods.getMoonShootLimit().call()
             .then((transactionHash: any) =>
               resolve(transactionHash)
             );
@@ -482,7 +483,7 @@ export class WalletConnectService {
     localStorage.setItem('manual_chainId', data.toString());
     console.log(localStorage);
     this.chainId.next(data);
-
+    this.selectedChainId.next(data);
   }
 
   getChainId(): Observable<number> {
