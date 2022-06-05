@@ -625,8 +625,7 @@ section.moonbox-menu {
   max-width: 100%;
   z-index: 12000;
   margin-right: 0;
-  height: 100vh;
-  max-height: 250px;
+  height: min-content;
   overflow: auto;
 
   .inner {
