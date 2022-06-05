@@ -77,7 +77,7 @@ export class NftMigrationComponent implements OnInit {
       if (res.status == 200) {
         this.IsNftMigrated = res.IsNftMigrated;
         if (!this.IsNftMigrated) {
-          this.toastrService.success("More " + res.nftCountToSwap + " to upgrade");
+          this.toastrService.success("There are " + res.nftCountToSwap + " NFTs left to Upgrade");
           window.location.reload();
         }
         else {
