@@ -40,16 +40,39 @@ section.navigation {
   img {
     cursor: pointer;
 
-    &:hover {
-      // filter: brightness(0) invert(1);
-      border-color: white;
-    }
+    // &:hover {
+    //   filter: brightness(0) invert(1);
+    //   border-color: white;
+    // }
   }
 
+  li>div>img:hover {
+    filter: brightness(0) invert(1);
+    border-color: white;
+  }
+
+  li:last-child>div>img:hover {
+    filter: brightness(1) invert(0) !important;
+  }
+
+  li:first-child,
+  li:last-child {
+    div>.bottom {
+      .row {
+        align-items: center;
+
+        img {
+          margin-top: auto;
+          margin-bottom: auto;
+        }
+      }
+    }
+  }
 
   .active {
     border-color: white;
   }
+
 }
 
 .nav-menu {
@@ -160,11 +183,6 @@ section.navigation {
   height: 36px;
   width: 36px;
   transform: scaleY(-1);
-
-  //margin-left: 45px;
-  &:last-child {
-    margin: 0px;
-  }
 }
 
 .tooltip .bottom {
