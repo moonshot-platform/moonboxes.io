@@ -29,6 +29,7 @@ export class Supply {
   tokenAddress: string;
   tokenName: string;
   ArtistNFTAddress: string;
+  isminted: boolean;
 
 
   public hasSupply() {

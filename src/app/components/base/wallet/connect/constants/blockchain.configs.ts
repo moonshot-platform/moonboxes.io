@@ -124,5 +124,31 @@ export const CHAIN_CONFIGS: any = {
         blockExplorerUrls: ['https://polygonscan.com/']
       }],
     }
+  } ,
+  "4": {
+    "name": "rinkeby Test Network",
+    "icon": "assets/media/images/blockchain/eth.webp",
+    "explorerLink": "https://rinkeby.etherscan.io/address/",
+    "bg": "white",
+    "symbol": 'ETH',
+    "config": {
+      method: 'wallet_switchEthereumChain',
+      params: [{
+        chainId: '0x4'
+      }],
+    }
+  },
+  "1": {
+    "name": "Ethereum",
+    "icon": "assets/media/images/blockchain/eth.webp",
+    "explorerLink": "https://mumbai.polygonscan.com/address/",
+    "bg": "white",
+    "symbol": 'ETH',
+    "config": {
+      method: 'wallet_switchEthereumChain',
+      params: [{
+        chainId: '0x1'
+      }],
+    }
   }
 }

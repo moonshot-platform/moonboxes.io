@@ -13,7 +13,11 @@
     {
       "chainId": "1287",
       "artistLootBoxAddress": "0xbbfbCB282cE7427cDC45efd609175187AD3286C2"
-    }
+    },
+    {
+      "chainId": "4",
+      "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C"
+  }
   ],
   "mainnet": [
     {
@@ -28,6 +32,10 @@
     },
     {
       "chainId": "1285",
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
+    },
+    {
+      "chainId": "1",
       "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
     }
   ]

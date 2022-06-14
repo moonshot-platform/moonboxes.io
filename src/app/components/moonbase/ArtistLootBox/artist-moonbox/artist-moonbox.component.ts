@@ -25,6 +25,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
   slides: any[] = [];
   artistData: any;
+  removeitemIndex:any[]=[];
 
   swiperConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -100,7 +101,7 @@ export class ArtistMoonboxComponent implements OnInit {
   readonly messages = MESSAGES;
   mainMessage: string = MESSAGES.IDLE;
 
-  readonly boxTypes = ['wood', 'silver', 'gold', 'diamond']
+  readonly boxTypes = ["wood", "silver", "gold", "diamond"]
 
   current = 0;
   supply: number[] = [];
@@ -183,7 +184,6 @@ export class ArtistMoonboxComponent implements OnInit {
   hasEnoughMoonshots(index: number) {
 
     if (this.balance != null && this.moonBoxLimitDetails != null) {
-      console.log("sai")
       return (Number(this.balance) >= Number(this.moonBoxLimitDetails[index]));
     }
 
@@ -233,13 +233,37 @@ export class ArtistMoonboxComponent implements OnInit {
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
         this.supplyDetails.forEach((item: Supply) => {
+          debugger
+          if(!item.isminted)
+          {
+            const index = this.boxTypes.findIndex(box =>box.toLocaleLowerCase() == item.type.toLocaleLowerCase());
+            this.removeitemIndex.push(index);
+            // this.removeitem(item.type);
+          }
           this.supply.push(item.hasSupply() ? 1 : 0);
         });
+        if(this.removeitemIndex.length>0)
+        {
+          // this.removeitemIndex.forEach((item: any) => {
+          this.removeitem(this.removeitemIndex);
+          // });
+        }
       } else {
         this.mainMessage = MESSAGES.NO_SUPPLY;
       }
     })
   }
+  removeitem(removeValFromIndex:any)
+{
+// this.boxTypes.splice(index, 1);
+// this.supplyDetails.splice(index, 1);
+debugger
+for (var i = removeValFromIndex.length -1; i >= 0; i--)
+{
+  this.boxTypes.splice(removeValFromIndex[i],1);
+  this.supplyDetails.splice(removeValFromIndex[i],1);
+}
+}
 
   buyMoonBase(index: number) {
     if (this.data === undefined || this.data.address === undefined)
