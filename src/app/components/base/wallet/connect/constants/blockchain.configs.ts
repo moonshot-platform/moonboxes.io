@@ -141,7 +141,7 @@ export const CHAIN_CONFIGS: any = {
   "1": {
     "name": "Ethereum",
     "icon": "assets/media/images/blockchain/eth.webp",
-    "explorerLink": "https://mumbai.polygonscan.com/address/",
+    "explorerLink": "https://etherscan.io/address/",
     "bg": "white",
     "symbol": 'ETH',
     "config": {

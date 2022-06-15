@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  chainId: [56, 137, 1285],
+  chainId: [56, 137, 1285,1],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "https://moonboxes.io/api/api/",
