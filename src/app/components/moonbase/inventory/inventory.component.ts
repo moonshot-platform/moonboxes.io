@@ -135,9 +135,12 @@ export class InventoryComponent implements OnInit {
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
 
-    if (images.includes(extension)) return true;
-
-    return false;
+    if (images.includes(extension)) {
+      return "true"
+    } else if (videos.includes(extension)) {
+      return false;
+    }
+    return true;
   }
 
   openWalletDialog(): void {

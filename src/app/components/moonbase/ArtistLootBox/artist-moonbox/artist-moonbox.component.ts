@@ -315,7 +315,12 @@ for (var i = removeValFromIndex.length -1; i >= 0; i--)
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.getMaxSupply();
+      this.userProvider.onReceive().subscribe((userData: any) => {
+        this.balance = userData.balance;
+        this.getMaxSupply();
+
+        this.getMoonboxTierLimits();
+      }, (error) => { console.log(error); });
       this.invisible = false;
       this.fadeOut = result;
       this.popupClosed = true;

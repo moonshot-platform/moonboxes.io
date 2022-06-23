@@ -305,7 +305,7 @@ export class ModalForTransactionComponent implements OnInit {
     } else if (videos.includes(extension)) {
       return false;
     }
-    return false;
+    return true;
   }
 
 

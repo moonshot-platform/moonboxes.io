@@ -25,16 +25,19 @@ export class ItemOverviewComponent implements OnInit {
 
   fileTypeIsImage(url: string) {
     if( !url ) return false;
-    
+
     const images = ['jpg', 'gif', 'png', 'jpeg', 'JPG', 'GIF', 'PNG', 'JPEG']
     const videos = ['mp4', '3gp', 'ogg', 'MP4', '3GP', 'OGG']
 
     const urltemp = new URL(url)
     const extension = urltemp.pathname.substring(urltemp.pathname.lastIndexOf('.') + 1)
 
-    if (images.includes(extension)) return true;
-
-    return false;
+    if (images.includes(extension)) {
+      return "true"
+    } else if (videos.includes(extension)) {
+      return false;
+    }
+    return true;
   }
 
   downloadImage(data: any) {

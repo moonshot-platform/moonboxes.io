@@ -8,8 +8,8 @@ export const CHAIN_CONFIGS: any = {
   "1285": {
     "name": "Moonriver Mainnet",
     "explorerLink": "https://moonriver.moonscan.io/address/",
-    "icon": "assets/media/images/blockchain/MOVR.webp",
-    "bg": "#6e56a4",
+    "icon": "assets/media/images/blockchain/MOVR.svg",
+    "bg": "black",
     "symbol": 'MOVR',
     "config": {
       method: 'wallet_addEthereumChain',
@@ -68,8 +68,8 @@ export const CHAIN_CONFIGS: any = {
   "137": {
     "name": "Polygon Mainnet",
     "explorerLink": "https://polygonscan.com/address/",
-    "icon": "assets/media/images/blockchain/polygon.svg",
-    "bg": "black",
+    "icon": "assets/media/images/blockchain/Polygon_Primary_Token.svg",
+    "bg": "#7b3fe4",
     "symbol": 'MATIC',
     "config": {
       method: 'wallet_addEthereumChain',
@@ -87,7 +87,7 @@ export const CHAIN_CONFIGS: any = {
   },
   "1287": {
     "name": "Moonbase Alpha",
-    "icon": "assets/media/images/blockchain/MOVR.webp",
+    "icon": "assets/media/images/blockchain/MOVR.svg",
     "explorerLink": "https://moonbase.moonscan.io/address/",
     "bg": "black",
     "symbol": 'DEV',
@@ -107,9 +107,9 @@ export const CHAIN_CONFIGS: any = {
   },
   "80001": {
     "name": "Mumbai Testnet",
-    "icon": "assets/media/images/blockchain/polygon.svg",
+    "icon": "assets/media/images/blockchain/Polygon_Primary_Token.svg",
     "explorerLink": "https://mumbai.polygonscan.com/address/",
-    "bg": "white",
+    "bg": "#7b3fe4",
     "symbol": 'MATIC',
     "config": {
       method: 'wallet_addEthereumChain',
@@ -127,7 +127,7 @@ export const CHAIN_CONFIGS: any = {
   } ,
   "4": {
     "name": "rinkeby Test Network",
-    "icon": "assets/media/images/blockchain/eth.webp",
+    "icon": "assets/media/images/blockchain/eth-diamond-purple.png",
     "explorerLink": "https://rinkeby.etherscan.io/address/",
     "bg": "white",
     "symbol": 'ETH',
@@ -139,7 +139,7 @@ export const CHAIN_CONFIGS: any = {
     }
   },
   "1": {
-    "name": "Ethereum",
+    "name": "Ethereum Mainnet",
     "icon": "assets/media/images/blockchain/eth.webp",
     "explorerLink": "https://etherscan.io/address/",
     "bg": "white",
