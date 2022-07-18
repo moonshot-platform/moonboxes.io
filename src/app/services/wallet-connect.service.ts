@@ -26,6 +26,7 @@ const config = require('./../../assets/configFiles/configFile.json');
 
 import mshotTokenAbi from './../../assets/abis/mshot.token.abi.json';
 import buyMshotTokenAbi from './../../assets/abis/buy-moonshot-token.abi.json';
+import { CHAIN_CONFIGS } from '../components/base/wallet/connect/constants/blockchain.configs';
 
 //  Create WlletConnect Provider
 const providerOptions = {
@@ -79,6 +80,7 @@ export class WalletConnectService {
   public oldPancakeAddress = true;
   private isConnected = false;
   private account = '';
+  chainConfigs = CHAIN_CONFIGS;
   provider: ethers.providers.Web3Provider;
   signer: ethers.providers.JsonRpcSigner;
   SilverContract: any;
@@ -111,7 +113,7 @@ export class WalletConnectService {
       // await this.localStorageService.getAddress();
       var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org');
       var web3 = new Web3(web3Provider);
-      this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.silverAddress);
+      this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.tokenContractAddress);
       this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
       this.swapContract = new web3.eth.Contract(swapContractAbi, config[environment.configFile][0].ArtistMoonBoxNftSwap);
       //MultiChain contracts
@@ -157,18 +159,18 @@ export class WalletConnectService {
         this.provider = new ethers.providers.Web3Provider(this.windowRef.nativeWindow.ethereum);
 
         let currentNetwork = await this.provider.getNetwork();
-
+        this.getChainId().subscribe((response) => {
+          this.ChainId = response;
+        });
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
-          this.toastrService.error('You are on the wrong network');
+          this.toastrService.error('You are on the wrong network please Connect with '+this.chainConfigs[this.ChainId]?.name ?? '');
           this.setWalletState(false);
           throw 'Wrong network';
         }
         else {
-          this.getChainId().subscribe((response) => {
-            this.ChainId = response;
-          });
+
           if (this.ChainId != currentNetwork.chainId) {
-            this.toastrService.error('You are on the wrong network');
+            this.toastrService.error('You are on the wrong network please Connect with '+this.chainConfigs[this.ChainId]?.name ?? '');
           }
         }
 
@@ -191,7 +193,7 @@ export class WalletConnectService {
         this.windowRef.nativeWindow.ethereum.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
           await this.connectToWallet();
           this.toastrService.info('You have changed the chain!');
-          alert(code)
+          // alert(code)
           this.updateSelectedChainId(Number(code));
           location.reload();
           this.setWalletState(true);
@@ -314,7 +316,6 @@ export class WalletConnectService {
             }
             );
         }
-
 
       } catch (e) {
         console.log(e);

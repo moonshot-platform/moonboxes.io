@@ -5,7 +5,7 @@ export const environment = {
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   baseURL: "https://moonboxes.io/api/api/",
   ownerAddress: "0x66A7B9f608378e59105022aB00b0F541666e8c4d",
-  silverAddress: "0xd27D3F7f329D93d897612E413F207A4dbe8bF799",
+  // silverAddress: "0xd27D3F7f329D93d897612E413F207A4dbe8bF799",
 
   NFTAddress: "0x82A3E038048CF02C19e60856564bE209899d4F12",
   lootBoxAddress: "0x614A5DD989E5Fc086a0059D37F4EcDeaA6341216", // New contract address for moonshot v2

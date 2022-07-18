@@ -101,6 +101,12 @@ section.upcoming-container {
   max-width: 500px;
 }
 
+@media only screen and (min-width: 1800px) {
+  .box {
+      width: calc( 100% / 4)
+  }
+}
+
 .upcoming .full_banner {
   width: 100%;
   max-width: 300px;

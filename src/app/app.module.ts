@@ -54,7 +54,7 @@ export class HammerConfig extends HammerGestureConfig {
     MatDialogModule,
     HttpClientModule,
     SwiperModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({timeOut: 10000}),
   ],
   providers: [{
     provide: HAMMER_GESTURE_CONFIG,

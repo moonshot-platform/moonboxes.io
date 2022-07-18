@@ -26,6 +26,7 @@ export class ArtistMoonboxComponent implements OnInit {
   slides: any[] = [];
   artistData: any;
   removeitemIndex:any[]=[];
+  isgetMaxSupplyCall=false;
 
   swiperConfig: SwiperOptions = {
     slidesPerView: 1,
@@ -184,6 +185,7 @@ export class ArtistMoonboxComponent implements OnInit {
   hasEnoughMoonshots(index: number) {
 
     if (this.balance != null && this.moonBoxLimitDetails != null) {
+
       return (Number(this.balance) >= Number(this.moonBoxLimitDetails[index]));
     }
 
@@ -194,8 +196,11 @@ export class ArtistMoonboxComponent implements OnInit {
 
     if (this.balance >= 0) {
 
-      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(true);
-
+      this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(this.artistDetails.walletAddress == environment.ownerAddress ? false : true);
+      // console.log(this.moonBoxLimitDetails.length)
+      for(let i=0;i<4;i++){
+          this.infoHoverList[i].tooltipText = "You need "+(this.moonBoxLimitDetails[i]/1e18).toLocaleString('en-us', {minimumFractionDigits: 0})+" Moonshot token\nto open a "+this.boxTypes[i]+" MoonBox.";
+      }
     }
 
   }
@@ -210,6 +215,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
   next(by: number) {
     const boxes = this.lootBoxDetails.length;
+    debugger
     this.current = (this.current + by) - boxes * Math.floor((this.current + by) / boxes);
   }
 
@@ -233,7 +239,6 @@ export class ArtistMoonboxComponent implements OnInit {
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
         this.supplyDetails.forEach((item: Supply) => {
-          debugger
           if(!item.isminted)
           {
             const index = this.boxTypes.findIndex(box =>box.toLocaleLowerCase() == item.type.toLocaleLowerCase());
@@ -245,7 +250,11 @@ export class ArtistMoonboxComponent implements OnInit {
         if(this.removeitemIndex.length>0)
         {
           // this.removeitemIndex.forEach((item: any) => {
-          this.removeitem(this.removeitemIndex);
+
+            if(!this.isgetMaxSupplyCall)
+            {
+              this.removeitem(this.removeitemIndex);
+            }
           // });
         }
       } else {
@@ -263,13 +272,20 @@ for (var i = removeValFromIndex.length -1; i >= 0; i--)
   this.boxTypes.splice(removeValFromIndex[i],1);
   this.supplyDetails.splice(removeValFromIndex[i],1);
 }
+this.isgetMaxSupplyCall=true;
 }
 
   buyMoonBase(index: number) {
-    if (this.data === undefined || this.data.address === undefined)
+    if(!this.hasEnoughMoonshots(index) || this.supply[index] === 0)
+    {
+      return false
+    }
+    else if (this.data === undefined || this.data.address === undefined)
       this.openDialog();
     else
       this.submitBetToContract(index);
+
+      return false;
   }
 
   async submitBetToContract(index: number) {

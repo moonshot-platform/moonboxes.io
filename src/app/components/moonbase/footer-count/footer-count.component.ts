@@ -57,7 +57,6 @@ export class FooterCountComponent implements OnInit {
     ];
 
     this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit();
-
     for (let i = 3; i >= 0; i--) {
 
       if (moonBalance >= Number(this.moonBoxLimitDetails[i])) {
