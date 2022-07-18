@@ -59,6 +59,9 @@ const web3Modal = new Web3Modal({
   disableInjectedProvider: false
 });
 
+// const provider = new WalletConnectProvider({
+//   infuraId: 'b0287acccb124ceb8306f3192f9e9c04',
+// });
 
 @Injectable({
   providedIn: 'root'
@@ -163,14 +166,14 @@ export class WalletConnectService {
           this.ChainId = response;
         });
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
-          this.toastrService.error('You are on the wrong network please Connect with '+this.chainConfigs[this.ChainId]?.name ?? '');
+          this.toastrService.error('You are on the wrong network please Connect with ' + this.chainConfigs[this.ChainId]?.name ?? '');
           this.setWalletState(false);
           throw 'Wrong network';
         }
         else {
 
           if (this.ChainId != currentNetwork.chainId) {
-            this.toastrService.error('You are on the wrong network please Connect with '+this.chainConfigs[this.ChainId]?.name ?? '');
+            this.toastrService.error('You are on the wrong network please Connect with ' + this.chainConfigs[this.ChainId]?.name ?? '');
           }
         }
 
@@ -216,40 +219,50 @@ export class WalletConnectService {
   }
 
   async connectToWalletConnect(origin = 0) {
-
-    const provider = new WalletConnectProvider(providerOptions[this.chainId.value]);
-
+    debugger
     try {
+      const provider = new WalletConnectProvider({
+        infuraId: 'b0287acccb124ceb8306f3192f9e9c04',
+      })
+      await provider
+      .enable()
+      .then(() => console.log('first call resolved'))
+      .catch(() => provider.disconnect());
+      try {
 
-      this.provider = new ethers.providers.Web3Provider(provider);
-      await provider.enable();
+        this.provider = new ethers.providers.Web3Provider(provider);
+        await provider.enable();
 
-      await this.getAccountAddress();
-      this.localStorageService.setWallet(2);
+        await this.getAccountAddress();
+        this.localStorageService.setWallet(2);
 
-      // Subscribe to accounts change
-      provider.on(this.ACCOUNTS_CHANGED, (accounts: string[]) => this.connectToWalletConnect());
+        // Subscribe to accounts change
+        provider.on(this.ACCOUNTS_CHANGED, (accounts: string[]) => this.connectToWalletConnect());
 
-      // Subscribe to session disconnect
-      provider.on(this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected());
+        // Subscribe to session disconnect
+        provider.on(this.DISCONNECT, (code: number, reason: string) => this.setWalletDisconnected());
 
-      // Subscribe to session disconnection
-      provider.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
-        this.connectToWalletConnect();
+        // Subscribe to session disconnection
+        provider.on(this.CHAIN_CHANGED, async (code: number, reason: string) => {
+          this.connectToWalletConnect();
+          this.setWalletDisconnected();
+
+          let currentNetwork = await this.getNetworkChainId();
+          this.updateSelectedChainId(environment.chainId.indexOf(currentNetwork as number));
+        });
+
+        this.setWalletState(true);
+
+        if (origin === 0) location.reload();
+      }
+
+      catch (e: any) {
         this.setWalletDisconnected();
+        location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it
+      }
+    } catch (error) {
+      console.log(error);
 
-        let currentNetwork = await this.getNetworkChainId();
-        this.updateSelectedChainId(environment.chainId.indexOf(currentNetwork as number));
-      });
-
-      this.setWalletState(true);
-
-      if (origin === 0) location.reload();
-    }
-
-    catch (e: any) {
-      this.setWalletDisconnected();
-      location.reload(); // FIXME: Without reloading the page, the WalletConnect modal does not open again after closing it
     }
   }
 
