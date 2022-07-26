@@ -44,6 +44,7 @@ export class ModalForClaimComponent implements OnInit {
       txStatus = await this.walletConnectService.getRedeemBulk(nftIds, nftSupply, this.data.nftDetails.betId, sign, this.data.nftDetails.isArtist, this.data.nftDetails.artistAddress, this.data.nftDetails.ArtistNFTAddress);
     }
     catch (e) {
+      debugger
       this.closeDialog();
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);

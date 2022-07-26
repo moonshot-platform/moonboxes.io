@@ -219,7 +219,6 @@ export class WalletConnectService {
   }
 
   async connectToWalletConnect(origin = 0) {
-    debugger
     try {
       const provider = new WalletConnectProvider({
         infuraId: 'b0287acccb124ceb8306f3192f9e9c04',

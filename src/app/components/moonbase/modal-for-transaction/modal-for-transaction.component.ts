@@ -219,13 +219,16 @@ export class ModalForTransactionComponent implements OnInit {
         );
     }
     catch (e) {
+      console.log(e);
       this.closeDialog()
-      if (e.hash.code == 4001)
+      if (e.hash?.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);
       else if (e.hash?.data)
         this.httpApi.showToastr(e.hash?.data?.message, false);
       else if (e.hash?.error)
         this.httpApi.showToastr(e.hash?.error?.message, false);
+        else
+        this.httpApi.showToastr(e, false);
       return false;
     }
 
