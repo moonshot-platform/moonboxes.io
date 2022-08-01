@@ -151,6 +151,12 @@ export class WalletConnectService {
     return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
+ async isValidAddress()
+  {
+    let address=await this.signer.getAddress();
+    return ethers.utils.isAddress(address);
+  }
+
   async connectToWallet(origin = 0) {
     const window = this.windowRef.nativeWindow.ethereum;
     var chainId = await this.chainId.value;
@@ -221,7 +227,12 @@ export class WalletConnectService {
   async connectToWalletConnect(origin = 0) {
     try {
       const provider = new WalletConnectProvider({
-        infuraId: 'b0287acccb124ceb8306f3192f9e9c04',
+        rpc: {
+          1: "https://eth-mainnet.public.blastapi.io",
+          56: "https://bsc-dataseed.binance.org",
+          137: "https://rpc-mainnet.matic.network",
+          1285: "https://rpc.api.moonriver.moonbeam.network",
+        },
       })
       await provider
       .enable()

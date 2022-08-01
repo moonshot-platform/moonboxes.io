@@ -3,6 +3,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { TransferComponent } from 'src/app/components/moonbase/modal-for-transaction/transfer/transfer.component';
 import { Observable, Observer } from 'rxjs';
 import { SocialShareComponent } from 'src/app/components/moonbase/modal-for-transaction/social-share/social-share.component';
+import { WalletConnectService } from 'src/app/services/wallet-connect.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-overview',
@@ -12,15 +14,32 @@ import { SocialShareComponent } from 'src/app/components/moonbase/modal-for-tran
 export class ItemOverviewComponent implements OnInit {
 
   item: any;
+  chainId: number;
+  moonseaChainId: number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
+    public walletConnectService: WalletConnectService,
   ) {
     this.item = data;
   }
 
   ngOnInit(): void {
+    this.walletConnectService.init();
+    this.walletConnectService.getChainId().subscribe((data) => {
+      this.chainId = data;
+      if (environment.chainId.indexOf(this.chainId) == -1) {
+        this.moonseaChainId=1;
+        debugger
+      }
+      else
+      {
+        let index = environment.chainId.indexOf(this.chainId);
+        this.moonseaChainId=environment.moonSeaChinIds[index];
+        debugger
+      }
+    });
   }
 
   fileTypeIsImage(url: string) {
@@ -112,6 +131,8 @@ export class ItemOverviewComponent implements OnInit {
   trackByFn(index, item) {
     return item.title;
   }
+
+
 
 }
 

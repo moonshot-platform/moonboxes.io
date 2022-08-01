@@ -69,6 +69,7 @@ export class ModalForTransactionComponent implements OnInit {
       transactionDetails = await this.walletConnectService.redeemBulkTransaction(this.data.index, price, this.data.inputNumber, this.data.data.address)
     }
     catch (e) {
+      console.log(e);
       this.closeDialog()
       if (e.hash.code == 4001)
         this.httpApi.showToastr(e.hash.message, false);

@@ -9,18 +9,18 @@
 
             <div class="input-container flex justify-space-between align-center">
                 <div class="tooltip">
-                    <p class="outlined-button sell-button">Sell</p>
-                    <div class="bottom">
+                    <a href="https://moonsea.io/details/{{item['ArtistNFTAddress']}}/{{ item['nftId'] }}/{{this.moonseaChainId}}" target="_blank" class="outlined-button transfer-button mr10">Sell</a>
+                    <!-- <div class="bottom">
                         <div class="row">
                             <p>Available soon</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
-                <a class="outlined-button transfer-button" (click)="openTransferDialog(item)">Transfer</a>
+                <a class="outlined-button transfer-button mr10" (click)="openTransferDialog(item)">Transfer</a>
 
                 <p (click)="downloadImage(item)">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="interactable" viewBox="0 0 49 49">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="interactable mr10" viewBox="0 0 49 49">
                         <path d="M24.5 0C11 0 0 11 0 24.5S11 49 24.5 49 49 38 49 24.5 38 0 24.5 0zM22 20.6V9.2h5v11.4h4.8l-7.3 9.2-7.3-9.2H22zm16.7 15.6H10.3v-10h4.3v6.3h19.7v-6.3h4.3v10z" fill="#D5A642"/>
                     </svg>
                 </p>
