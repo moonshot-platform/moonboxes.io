@@ -19,7 +19,7 @@
 
           <!-- link = start & end -->
           <ng-template #external>
-            <a href={{item.externalPath}} target="_blank">{{item.name}}</a>
+            <a href="{{item.externalPath}} " rel="noopener noreferrer" target="_blank">{{item.name}}</a>
           </ng-template>
 
           <ng-template #internal>
@@ -29,8 +29,8 @@
               (click)="scrollToElement(item.path, null)">{{item.name}}</p>
 
             <ng-container *ngIf="open; then mobile else desktop"></ng-container>
-            <!-- "open" variable for close or open the navbar for small screen . 
-                            Also "open" can useable "is it desktop or not". 
+            <!-- "open" variable for close or open the navbar for small screen .
+                            Also "open" can useable "is it desktop or not".
                             it used in if statement line 28 because of this.-->
             <!-- link = start & end -->
             <ng-template #mobile>
