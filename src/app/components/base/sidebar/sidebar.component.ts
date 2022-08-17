@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { TokenomicsService } from 'src/app/services/tokenomics.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
+import { DisconnectWalletComponent } from '../../moonbase/dialogs/disconnect-wallet/disconnect-wallet.component';
 import { WalletConnectComponent } from '../wallet/connect/connect.component';
 
 
@@ -49,15 +50,29 @@ export class SidebarComponent implements OnInit {
     debugger
 
   }
+  openDialogDisconnected(): void {
+
+        let dialogRef = this.dialog.open(DisconnectWalletComponent, {
+          width: 'auto',
+          // data: { name: this.name, animal: this.animal }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          // this.animal = result;
+        });
+
+
+    debugger
+
+  }
 
  async isConnected() {
     try{
       let isValidAddress=await this.walletConnectService.isValidAddress();
       console.log(isValidAddress);
       if(isValidAddress) {
-        this.walletConnectService.setWalletDisconnected();
-        window.location.reload();
 
+        this.openDialogDisconnected();
       }
       else{
         this.openDialog();

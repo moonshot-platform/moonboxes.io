@@ -37,6 +37,7 @@ import { InfoMoonboxesComponent } from './info/info-moonboxes/info-moonboxes.com
 import { JoinApplicationComponent } from './join-application/join-application.component';
 import { NftMigrationComponent } from './dialogs/nft-migration/nft-migration.component';
 import { MaterialModule } from './material/material.module';
+import { DisconnectWalletComponent } from './dialogs/disconnect-wallet/disconnect-wallet.component';
 
 
 @NgModule({
@@ -63,6 +64,7 @@ import { MaterialModule } from './material/material.module';
     InfoMoonboxesComponent,
     JoinApplicationComponent,
     NftMigrationComponent,
+    DisconnectWalletComponent,
   ],
   imports: [
     MatIconModule,
