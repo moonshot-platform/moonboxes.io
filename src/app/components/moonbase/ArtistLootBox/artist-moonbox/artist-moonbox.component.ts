@@ -153,6 +153,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
   ngOnInit(): void {
     this.walletConnectService.init();
+
     this.walletConnectService.onWalletStateChanged().subscribe((state: boolean) => this.isConnected = state);
     this.walletConnectService.getData().subscribe((data) => {
 
@@ -172,8 +173,11 @@ export class ArtistMoonboxComponent implements OnInit {
     this.walletConnectService.getChainId().subscribe((data) => {
       this.chainId = data;
     });
+
     this.userProvider.onReceive().subscribe((userData: any) => {
+
       this.balance = userData.balance;
+
       this.getMaxSupply();
 
       this.getMoonboxTierLimits();
@@ -185,7 +189,6 @@ export class ArtistMoonboxComponent implements OnInit {
   hasEnoughMoonshots(index: number) {
 
     if (this.balance != null && this.moonBoxLimitDetails != null) {
-
       return (Number(this.balance) >= Number(this.moonBoxLimitDetails[index]));
     }
 
@@ -193,7 +196,6 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   async getMoonboxTierLimits() {
-
     if (this.balance >= 0) {
 
       this.moonBoxLimitDetails = await this.walletConnectService.getDetailsMoonboxlimit(this.artistDetails.walletAddress == environment.ownerAddress ? false : true);
@@ -215,7 +217,6 @@ export class ArtistMoonboxComponent implements OnInit {
 
   next(by: number) {
     const boxes = this.lootBoxDetails.length;
-    debugger
     this.current = (this.current + by) - boxes * Math.floor((this.current + by) / boxes);
   }
 
@@ -231,6 +232,7 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   getMaxSupply() {
+
     this.httpApi.getArtistMoonboxData(
       this.activatedRoute.snapshot.params['artistAddress'],
       this.data?.address
@@ -266,7 +268,6 @@ export class ArtistMoonboxComponent implements OnInit {
 {
 // this.boxTypes.splice(index, 1);
 // this.supplyDetails.splice(index, 1);
-debugger
 for (var i = removeValFromIndex.length -1; i >= 0; i--)
 {
   this.boxTypes.splice(removeValFromIndex[i],1);

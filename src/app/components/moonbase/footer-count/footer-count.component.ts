@@ -67,6 +67,7 @@ export class FooterCountComponent implements OnInit {
   }
 
   async getMoonShootBalance() {
+
     const balance = await this.walletConnectService.getUserBalance(this.data.address);
 
     await this.getTier(balance);

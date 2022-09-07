@@ -114,13 +114,14 @@ export class WalletConnectService {
 
     try {
       // await this.localStorageService.getAddress();
-      var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org');
+      var web3Provider = new Web3.providers.HttpProvider(environment.providerURL);
       var web3 = new Web3(web3Provider);
       this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.tokenContractAddress);
       this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
       this.swapContract = new web3.eth.Contract(swapContractAbi, config[environment.configFile][0].ArtistMoonBoxNftSwap);
       //MultiChain contracts
       this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
+      debugger
 
     }
     catch (e) {
@@ -293,6 +294,7 @@ export class WalletConnectService {
       }
       this.NFTContract = new ethers.Contract(environment.NFTAddress, NFTAbi, this.signer);
       this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
+      debugger
     }
 
     const data = {
@@ -326,7 +328,6 @@ export class WalletConnectService {
   async getDetailsMoonboxlimit(isArtist = false) {
     const promise = new Promise((resolve, reject) => {
       try {
-
         if (isArtist) {
           this.artistLootBoxContractGet.methods.getMoonShootLimit().call()
             .then((transactionHash: any) =>
@@ -401,6 +402,7 @@ export class WalletConnectService {
   }
 
   async getUserBalance(userAddress: string): Promise<number> {
+
     return Number(await this.SilverContract?.methods.balanceOf(userAddress).call());
   }
 
@@ -418,10 +420,11 @@ export class WalletConnectService {
   }
 
   async redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
-
+debugger
 
     try {
-      let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString() });
+      debugger
+      let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString(),gasLimit:1000000000000000,gasPrice:110 });
       return { hash: txn.hash, status: true };
 
     } catch (e) {
@@ -436,7 +439,7 @@ export class WalletConnectService {
     const spliSign = ethers.utils.splitSignature(signature);
     if (isArtist) {
       try {
-
+debugger
         let txn: any = await this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
         await txn.wait(1)
         return { hash: txn.hash, status: true };
@@ -480,6 +483,7 @@ export class WalletConnectService {
       params = ((10 ** decimals) * price).toString();
     }
     try {
+      debugger
       gas = await this.artistLootBoxContract.estimateGas.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
         value: callValue
       }
@@ -489,8 +493,11 @@ export class WalletConnectService {
     }
 
     try {
+    debugger
       let txn: any = await this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
-        value: callValue
+        value: callValue,
+        // gasPrice: 100,
+        gasLimit: gas
       });
       await txn.wait(1);
       return { hash: txn.hash, status: true };

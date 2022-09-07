@@ -4,6 +4,7 @@ export const environment = {
   moonSeaChinIds: [1, 3, 4,2],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
+  providerURL: "https://bsc-dataseed1.binance.org",
   baseURL: "https://moonboxes.io/api/api/",
   ownerAddress: "0x66A7B9f608378e59105022aB00b0F541666e8c4d",
   // silverAddress: "0xd27D3F7f329D93d897612E413F207A4dbe8bF799",
