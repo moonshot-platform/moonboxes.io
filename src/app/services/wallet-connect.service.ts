@@ -316,6 +316,11 @@ export class WalletConnectService {
     return await this.LootboxContract.moonboxPrice();
   }
 
+
+  
+
+
+
   async getNetworkChainId() {
     if (this.account == undefined)
       return environment.chainId;

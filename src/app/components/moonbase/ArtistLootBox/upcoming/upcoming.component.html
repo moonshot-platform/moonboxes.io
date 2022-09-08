@@ -62,6 +62,11 @@
                                         <p>{{item.revealDate}}</p>
                                     </a>
 
+                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()">
+                                        Add user
+                                    </a>
+
+
                                     <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist',item.walletAddress]">Buy MoonBoxes</a>
                                     <a [class.disabled]="item.revealDate === 'Application form'" class="outlined-button mb20 text-inherit" (click)="viewDetails(item)">Collection info</a>
                                 </div>

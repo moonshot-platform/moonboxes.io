@@ -1,0 +1,90 @@
+<!-- <div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="needs-validation" [formGroup]="addArtistForm" (ngSubmit)="onSubmit()" #ff="ngForm">
+                        <div class="row g-3">
+
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="validationCustom01">Name</label>
+                                <input class="form-control" id="validationCustom01" type="text" value="Mark"
+                                    formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+                                    required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="validationCustom01">User Name</label>
+                                <input class="form-control" id="validationCustom01" type="text" value="Mark"
+                                    formControlName="userName"
+                                    [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="validationCustom01">Address</label>
+                                <input class="form-control" id="validationCustom01" type="text" value="Mark"
+                                    formControlName="walletAddress"
+                                    [ngClass]="{ 'is-invalid': submitted && f.walletAddress.errors }" required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label" for="validationCustom01">Collection Name</label>
+                                <input class="form-control" id="validationCustom01" type="text" value="Mark"
+                                    formControlName="collectionName"
+                                    [ngClass]="{ 'is-invalid': submitted && f.collectionName.errors }" required>
+                                <div class="valid-feedback">Looks good!</div>
+                            </div>
+
+                            <div class="col-md-12 mb-3 pb-5">
+                                <button *ngIf="!transactionInitiated" class="btn btn-primary"
+                                    type="submit">Submit</button>
+                                <button *ngIf="transactionInitiated" type="button"
+                                    class="btn btn-primary">Initiated...</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="ede2">
+    <div>Add User</div>
+    <div>
+        <form  [formGroup]="addArtistForm" (ngSubmit)="onSubmit()" #ff="ngForm">
+            <div>
+                <div>
+                    Name
+                </div>
+                <div>
+                    <input type="text"  formControlName="name">
+                </div>
+                <div>
+                    User Name
+                </div>
+                <div>
+                    <input type="text" formControlName="userName">
+                </div>
+                <div>
+                    address
+                </div>
+                <div>
+                    <input type="text" formControlName="walletAddress">
+                </div>
+                <div>
+                    Collection Name
+                </div>
+                <div>
+                    <input type="text" formControlName="collectionName">
+                </div>
+            </div>
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>

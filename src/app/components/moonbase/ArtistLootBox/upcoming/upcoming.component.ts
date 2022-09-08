@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
+import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 
 enum DROPS_CATEGORY {
   RECENT = 0,
@@ -204,4 +205,11 @@ export class UpcomingComponent implements OnInit {
     this.slides = res.data;
     this.artistData = res.artistData;
   });
+
+
+  openDialoagOfAddUser(){
+    this.dialog.open(AddUserDialogComponent,{width:'500px'}).afterClosed().subscribe({
+      next:(res:any)=>{}
+    })
+  }
 }

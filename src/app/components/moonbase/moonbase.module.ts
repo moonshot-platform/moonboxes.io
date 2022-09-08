@@ -9,7 +9,7 @@ import { IntroComponent } from './intro/intro.component';
 import { MatIconModule } from '@angular/material/icon';
 // import { NgParticlesModule } from 'ng-particles';
 import { PrizePoolComponent } from './prize-pool/prize-pool.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HistoryComponent } from './history/history.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { InventoryComponent } from './inventory/inventory.component';
@@ -38,6 +38,7 @@ import { JoinApplicationComponent } from './join-application/join-application.co
 import { NftMigrationComponent } from './dialogs/nft-migration/nft-migration.component';
 import { MaterialModule } from './material/material.module';
 import { DisconnectWalletComponent } from './dialogs/disconnect-wallet/disconnect-wallet.component';
+import { AddUserDialogComponent } from './ArtistLootBox/add-user-dialog/add-user-dialog.component';
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { DisconnectWalletComponent } from './dialogs/disconnect-wallet/disconnec
     JoinApplicationComponent,
     NftMigrationComponent,
     DisconnectWalletComponent,
+    AddUserDialogComponent,
   ],
   imports: [
     MatIconModule,
@@ -73,6 +75,7 @@ import { DisconnectWalletComponent } from './dialogs/disconnect-wallet/disconnec
     NavModule,
     FormsModule,
     NgxPaginationModule,
+    ReactiveFormsModule,
     AngularCountdownDateTimeModule,
     ShareButtonsModule,
     ShareIconsModule,

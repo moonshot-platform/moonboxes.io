@@ -165,6 +165,17 @@ export class HttpApiService {
     return this.httpClient.post(url, data, { headers: this.headers });
   }
 
+
+  isUserAdded(data: any): Observable<any> {
+    return this.httpClient.post(baseURL + 'isUserAdded', data, { headers: this.headers });
+
+  }
+
+  addArtist(data: any): Observable<any> {
+    return this.httpClient.post(baseURL + 'addUser', data, { headers: this.headers });
+
+  }
+
   showToastr(message: string, isSuccess: boolean): void {
     if (isSuccess)
       this.toastrService.success(message);
