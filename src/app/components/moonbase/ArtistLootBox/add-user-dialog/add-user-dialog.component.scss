@@ -2,3 +2,50 @@
     background: white;
     padding: 10px;
 }
+.addusermodal{
+    background: #090d16;
+    border-top: 6px solid #d5a642;
+}
+.labelname {
+    color: #bdb7b7;
+    font-size: 12px;
+}
+.subbutton{
+    padding: 0.9375rem 1.25rem;
+    box-sizing: border-box;
+    display: block;
+    background-color: #d5a642;
+    height: -moz-fit-content;
+    height: fit-content;
+    min-width: 200px;
+    border-radius: 25px;
+    color: black;
+    font-weight: 700;
+    text-align: center;
+    cursor: pointer;
+    text-decoration: none;
+    text-transform: capitalize;
+    margin: auto;
+}
+.subbutton:hover{
+    background: white;
+    color: #090d16;
+}
+.contentcolor{
+    background: black;
+    border-bottom: 1px solid #ffbf36;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    color: white;
+}
+.contentcolor:focus{
+    border: 1px solid #d5a64242;
+    box-shadow: none;
+}
+.headfont{
+    font-size: 24px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+}
