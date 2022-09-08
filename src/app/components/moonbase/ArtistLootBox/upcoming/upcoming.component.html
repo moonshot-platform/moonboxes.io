@@ -58,12 +58,13 @@
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
-                                    <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
+                                    <!-- <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
                                         <img src="assets/media/images/form.svg" alt="coundown-button">
                                         <p>{{item.revealDate}}</p>
-                                    </a>
+                                    </a> -->
 
-                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()">
+                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()"
+                                    *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'">
                                         Add user
                                     </a>
 

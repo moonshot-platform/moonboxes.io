@@ -40,7 +40,7 @@
 <div class="ede2 addusermodal p-5">
     <h4 class="headfont">Add User</h4>
     <div>
-      <form [formGroup]="addArtistForm" (ngSubmit)="onSubmit()" #ff="ngForm">
+      <form [formGroup]="addArtistForm" (ngSubmit)="formRef.valid && onSubmit()" #formRef="ngForm">
         <div>
           <div>
               
@@ -54,6 +54,9 @@
               aria-describedby="textHelp"
               formControlName="name"
             />
+            <div *ngIf="f.name.invalid && (f.name.touched || formRef.submitted)">
+                <span class="text-danger" *ngIf="f.name.errors?.required">Name required</span>
+            </div>
           </div>
           <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label labelname">User Name</label>
@@ -64,6 +67,9 @@
                 aria-describedby="textHelp"
                 formControlName="userName"
               />
+              <div *ngIf="f.userName.invalid && (f.userName.touched || formRef.submitted)">
+                <span class="text-danger" *ngIf="f.userName.errors?.required">User Name required</span>
+            </div>
             </div>
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label labelname">Wallet Address</label>
@@ -74,6 +80,9 @@
                 aria-describedby="textHelp"
                 formControlName="walletAddress"
               />
+              <div *ngIf="f.walletAddress.invalid && (f.walletAddress.touched || formRef.submitted)">
+                <span class="text-danger" *ngIf="f.walletAddress.errors?.required">Wallet Address required</span>
+            </div>
             </div>
           
             <div class="mb-3">
@@ -85,6 +94,9 @@
                 aria-describedby="textHelp"
                 formControlName="collectionName"
               />
+              <div *ngIf="f.collectionName.invalid && (f.collectionName.touched || formRef.submitted)">
+                <span class="text-danger" *ngIf="f.collectionName.errors?.required">Collection Name required</span>
+            </div>
             </div>
           
           
