@@ -54,6 +54,7 @@
             />
             <div *ngIf="f.walletAddress.invalid && (f.walletAddress.touched || formRef.submitted)">
               <span class="text-danger" *ngIf="f.walletAddress.errors?.required">Wallet Address required</span>
+              <span class="text-danger" *ngIf="f.walletAddress.errors?.incorrect">Wallet Address is wrong</span>
           </div>
           </div>
         

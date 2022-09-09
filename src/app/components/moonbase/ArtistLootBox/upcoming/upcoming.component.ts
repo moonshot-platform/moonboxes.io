@@ -8,6 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
+import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 
 enum DROPS_CATEGORY {
   RECENT = 0,
@@ -208,8 +209,14 @@ export class UpcomingComponent implements OnInit {
 
 
   openDialoagOfAddUser(){
-    this.dialog.open(AddUserDialogComponent,{width:'500px'}).afterClosed().subscribe({
-      next:(res:any)=>{}
-    })
+    let wallet =  this.localStorage.getWallet();
+    if(wallet == 1){
+      this.dialog.open(AddUserDialogComponent,{width:'500px'}).afterClosed().subscribe({
+        next:(res:any)=>{}
+      })
+    }else{
+      this.dialog.open(WalletConnectComponent,{width: 'auto'})
+    }
+   
   }
 }

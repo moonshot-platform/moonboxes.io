@@ -63,9 +63,10 @@
                                         <p>{{item.revealDate}}</p>
                                     </a> -->
 
-                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()"
+                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()" rel="noopener noreferrer"
                                     *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'">
-                                        Add user
+                                    <img src="assets/media/images/form.svg" alt="coundown-button">
+                                    Application form
                                     </a>
 
 

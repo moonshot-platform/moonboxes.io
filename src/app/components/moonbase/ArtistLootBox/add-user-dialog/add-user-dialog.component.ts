@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ethers } from 'ethers';
+import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 import { DeployContractService } from 'src/app/services/deploy-contract.service';
 import { HttpApiService } from 'src/app/services/http-api.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 
 @Component({
@@ -14,7 +17,8 @@ export class AddUserDialogComponent implements OnInit {
   addArtistForm: FormGroup ;
   submitted: boolean = false;
   transactionInitiated: boolean = false;
-  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>,private fb:FormBuilder,private apiService:HttpApiService, private contractService:WalletConnectService,private deployContract:DeployContractService) { }
+  constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>,private fb:FormBuilder,private apiService:HttpApiService, private contractService:WalletConnectService,private deployContract:DeployContractService,
+    private localStorageService:LocalStorageService,private matDialog:MatDialog) { }
 
   ngOnInit(): void {
     this.addArtistForm = this.fb.group({
@@ -24,38 +28,66 @@ export class AddUserDialogComponent implements OnInit {
       walletAddress: ['', Validators.compose([Validators.required])],
       collectionName: ['', Validators.compose([Validators.required])]
     });
+
+    this.addArtistForm.controls.walletAddress.valueChanges.subscribe({
+      next:(res:any)=>{
+        if(res.length > 0){
+          this.checkValidAddress(res);
+        }
+        
+      }
+    })
+
   }
+
+
+
+  checkValidAddress(address:any){
+   console.log(ethers.utils.isAddress(address));
+   console.log(address);
+   
+   if(ethers.utils.isAddress(address)){
+    this.addArtistForm.controls.walletAddress.setErrors(null);
+   }else{
+    this.addArtistForm.controls.walletAddress.setErrors({incorrect:true});
+   }
+   
+  }
+
+
+
 
   get f() {
     return this.addArtistForm.controls;
   }
 
   onSubmit(){
-    var data = {
-      walletAddress: this.addArtistForm.controls.walletAddress.value,
-    }
-    console.log(this.addArtistForm.value);
-
-
-    this.apiService.isUserAdded(data).subscribe(
-      (response: any) => {
-        if (response.status == 200 && response.isSuccess) {
-          this.apiService.showToastr(response.data.message, false);
+      var data = {
+        walletAddress: this.addArtistForm.controls.walletAddress.value,
+      }
+      console.log(this.addArtistForm.value);
+  
+      this.apiService.isUserAdded(data).subscribe(
+        (response: any) => {
+          if (response.status == 200 && response.isSuccess) {
+            this.apiService.showToastr(response.data.message, false);
+            this.transactionInitiated = false;
+            this.submitted = false;
+          }
+          else {
+            this.isValidData();
+          }
+  
+  
+        }, (error) => {
+          console.log(error);
+          this.apiService.showToastr('something went wrong', false);
           this.transactionInitiated = false;
           this.submitted = false;
-        }
-        else {
-          this.isValidData();
-        }
+        });
+      
+   
 
-
-      }, (error) => {
-        console.log(error);
-        this.apiService.showToastr('something went wrong', false);
-        this.transactionInitiated = false;
-        this.submitted = false;
-      });
-    
   }
 
 
