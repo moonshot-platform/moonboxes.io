@@ -5,10 +5,13 @@
 .addusermodal{
     background: #090d16;
     border-top: 6px solid #d5a642;
+    padding: 30px;
 }
 .labelname {
     color: #bdb7b7;
     font-size: 12px;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 .subbutton{
     padding: 0.9375rem 1.25rem;
@@ -38,6 +41,8 @@
     border-left: 0;
     border-right: 0;
     color: white;
+    height: 33px;
+    border-radius: 4px;
 }
 .contentcolor:focus{
     border: 1px solid #d5a64242;
@@ -48,4 +53,15 @@
     font-weight: 600;
     color: white;
     text-align: center;
+}
+
+.dgridsys{
+    display: grid;
+}
+.buttonspace {
+    margin: 25px;
+}
+span.text-danger {
+    color: #f93f3f;
+    font-size: 12px;
 }

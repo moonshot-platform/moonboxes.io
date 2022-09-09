@@ -1,110 +1,69 @@
-<!-- 
-
-<div class="ede2">
-    <div>Add User</div>
-    <div>
-        <form  [formGroup]="addArtistForm" (ngSubmit)="onSubmit()" #ff="ngForm">
-            <div>
-                <div>
-                    Name
-                </div>
-                <div>
-                    <input type="text"  formControlName="name">
-                </div>
-                <div>
-                    User Name
-                </div>
-                <div>
-                    <input type="text" formControlName="userName">
-                </div>
-                <div>
-                    address
-                </div>
-                <div>
-                    <input type="text" formControlName="walletAddress">
-                </div>
-                <div>
-                    Collection Name
-                </div>
-                <div>
-                    <input type="text" formControlName="collectionName">
-                </div>
-            </div>
-            <div>
-                <button type="submit">Submit</button>
-            </div>
-        </form>
-    </div>
-</div> -->
-
-<div class="ede2 addusermodal p-5">
-    <h4 class="headfont">Sign up</h4>
-    <div>
-      <form [formGroup]="addArtistForm" (ngSubmit)="formRef.valid && onSubmit()" #formRef="ngForm">
-        <div>
-          <div>
-              
+<div class="ede2 addusermodal">
+  <h4 class="headfont">Sign up</h4>
+  <div>
+    <form [formGroup]="addArtistForm" (ngSubmit)="formRef.valid && onSubmit()" #formRef="ngForm">
+      <div>
+        
+        <div class="mb-3 dgridsys">
+          <label for="exampleInputEmail1" class=" labelname">Name</label>
+          <input
+            type="text"
+            class=" contentcolor"
+            id="text"
+            aria-describedby="textHelp"
+            formControlName="name"
+          />
+          <div *ngIf="f.name.invalid && (f.name.touched || formRef.submitted)">
+              <span class="text-danger" *ngIf="f.name.errors?.required">Name required</span>
           </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label labelname">Name</label>
+        </div>
+        <div class="mb-3 dgridsys ">
+            <label for="exampleInputEmail1" class=" labelname">User Name</label>
             <input
               type="text"
-              class="form-control contentcolor"
+              class=" contentcolor"
               id="text"
               aria-describedby="textHelp"
-              formControlName="name"
+              formControlName="userName"
             />
-            <div *ngIf="f.name.invalid && (f.name.touched || formRef.submitted)">
-                <span class="text-danger" *ngIf="f.name.errors?.required">Name required</span>
-            </div>
+            <div *ngIf="f.userName.invalid && (f.userName.touched || formRef.submitted)">
+              <span class="text-danger" *ngIf="f.userName.errors?.required">User Name required</span>
           </div>
-          <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label labelname">User Name</label>
-              <input
-                type="text"
-                class="form-control contentcolor"
-                id="text"
-                aria-describedby="textHelp"
-                formControlName="userName"
-              />
-              <div *ngIf="f.userName.invalid && (f.userName.touched || formRef.submitted)">
-                <span class="text-danger" *ngIf="f.userName.errors?.required">User Name required</span>
-            </div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label labelname">Wallet Address</label>
-              <input
-                type="text" 
-                class="form-control contentcolor"
-                id="text"
-                aria-describedby="textHelp"
-                formControlName="walletAddress"
-              />
-              <div *ngIf="f.walletAddress.invalid && (f.walletAddress.touched || formRef.submitted)">
-                <span class="text-danger" *ngIf="f.walletAddress.errors?.required">Wallet Address required</span>
-            </div>
-            </div>
-          
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label labelname">Collection Name</label>
-              <input
-                type="text"
-                class="form-control contentcolor"
-                id="text"
-                aria-describedby="textHelp"
-                formControlName="collectionName"
-              />
-              <div *ngIf="f.collectionName.invalid && (f.collectionName.touched || formRef.submitted)">
-                <span class="text-danger" *ngIf="f.collectionName.errors?.required">Collection Name required</span>
-            </div>
-            </div>
-          
-          
-          
-        </div>
-        <div class="pt-4">
-          <button type="submit" class="btn subbutton">Submit</button>
-        </div>
-      </form>
-    </div>
+          </div>
+          <div class="mb-3 dgridsys">
+            <label for="exampleInputEmail1" class=" labelname">Wallet Address</label>
+            <input
+              type="text" 
+              class=" contentcolor"
+              id="text"
+              aria-describedby="textHelp"
+              formControlName="walletAddress"
+            />
+            <div *ngIf="f.walletAddress.invalid && (f.walletAddress.touched || formRef.submitted)">
+              <span class="text-danger" *ngIf="f.walletAddress.errors?.required">Wallet Address required</span>
+          </div>
+          </div>
+        
+          <div class="mb-3 dgridsys">
+            <label for="exampleInputEmail1" class=" labelname">Collection Name</label>
+            <input
+              type="text"
+              class=" contentcolor"
+              id="text"
+              aria-describedby="textHelp"
+              formControlName="collectionName"
+            />
+            <div *ngIf="f.collectionName.invalid && (f.collectionName.touched || formRef.submitted)">
+              <span class="text-danger" *ngIf="f.collectionName.errors?.required">Collection Name required</span>
+          </div>
+          </div>
+        
+        
+        
+      </div>
+      <div class="buttonspace">
+        <button type="submit" class="btn subbutton">Submit</button>
+      </div>
+    </form>
   </div>
+</div>
