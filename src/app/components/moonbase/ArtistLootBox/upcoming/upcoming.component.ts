@@ -211,7 +211,7 @@ export class UpcomingComponent implements OnInit {
   openDialoagOfAddUser(){
     let wallet =  this.localStorage.getWallet();
     if(wallet == 1){
-      this.dialog.open(AddUserDialogComponent,{width:'500px'}).afterClosed().subscribe({
+      this.dialog.open(AddUserDialogComponent,{width:'500px',disableClose:true}).afterClosed().subscribe({
         next:(res:any)=>{}
       })
     }else{

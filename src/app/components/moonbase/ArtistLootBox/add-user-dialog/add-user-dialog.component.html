@@ -30,19 +30,7 @@
               <span class="text-danger" *ngIf="f.userName.errors?.required">User Name required</span>
           </div>
           </div>
-          <div class="mb-3 dgridsys ">
-            <label for="exampleInputEmail1" class=" labelname">Symbol</label>
-            <input
-              type="text"
-              class=" contentcolor"
-              id="text"
-              aria-describedby="textHelp"
-              formControlName="symbol"
-            />
-            <div *ngIf="f.symbol.invalid && (f.symbol.touched || formRef.submitted)">
-              <span class="text-danger" *ngIf="f.symbol.errors?.required">Symbol required</span>
-          </div>
-          </div>
+          
           <div class="mb-3 dgridsys">
             <label for="exampleInputEmail1" class=" labelname">Wallet Address</label>
             <input
@@ -72,11 +60,24 @@
           </div>
           </div>
         
-        
+          <div class="mb-3 dgridsys ">
+            <label for="exampleInputEmail1" class=" labelname">Collection Symbol</label>
+            <input
+              type="text"
+              class=" contentcolor"
+              id="text"
+              aria-describedby="textHelp"
+              formControlName="symbol"
+            />
+            <div *ngIf="f.symbol.invalid && (f.symbol.touched || formRef.submitted)">
+              <span class="text-danger" *ngIf="f.symbol.errors?.required">Symbol required</span>
+          </div>
+          </div>
         
       </div>
       <div class="buttonspace">
-        <button type="submit" class="btn subbutton">Submit</button>
+        <button type="submit" *ngIf="!transactionInitiated" class="btn subbutton">Submit</button>
+        <button *ngIf="transactionInitiated" class="btn subbutton" type="button">Initiated...</button>
       </div>
     </form>
   </div>

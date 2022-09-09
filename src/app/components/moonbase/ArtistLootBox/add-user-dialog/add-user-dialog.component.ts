@@ -43,8 +43,6 @@ export class AddUserDialogComponent implements OnInit {
 
 
   checkValidAddress(address:any){
-   console.log(ethers.utils.isAddress(address));
-   console.log(address);
    
    if(ethers.utils.isAddress(address)){
     this.addArtistForm.controls.walletAddress.setErrors(null);
@@ -62,6 +60,7 @@ export class AddUserDialogComponent implements OnInit {
   }
 
   onSubmit(){
+    this.transactionInitiated = true;
       var data = {
         walletAddress: this.addArtistForm.controls.walletAddress.value,
       }
