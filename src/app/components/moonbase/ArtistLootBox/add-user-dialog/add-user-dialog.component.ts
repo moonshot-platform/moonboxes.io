@@ -19,6 +19,7 @@ export class AddUserDialogComponent implements OnInit {
   ngOnInit(): void {
     this.addArtistForm = this.fb.group({
       name: ['', Validators.compose([Validators.required])],
+      symbol:['', Validators.compose([Validators.required])],
       userName: ['', Validators.compose([Validators.required])],
       walletAddress: ['', Validators.compose([Validators.required])],
       collectionName: ['', Validators.compose([Validators.required])]
@@ -61,7 +62,7 @@ export class AddUserDialogComponent implements OnInit {
   async isValidData() {
     var deployStatus: any;
     this.transactionInitiated = true;
-    deployStatus = await this.deployContract.deploy(this.contractService, this.addArtistForm.controls.walletAddress.value, this.addArtistForm.controls.collectionName.value);
+    deployStatus = await this.deployContract.deploy(this.contractService, this.addArtistForm.controls.walletAddress.value, this.addArtistForm.controls.collectionName.value,this.addArtistForm.controls.symbol.value);
     if (deployStatus.status) {
       this.getTransactionStatus(deployStatus.deployedAddress);
     }
