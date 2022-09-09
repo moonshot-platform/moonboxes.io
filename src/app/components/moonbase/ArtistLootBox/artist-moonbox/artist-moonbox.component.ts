@@ -276,6 +276,7 @@ this.isgetMaxSupplyCall=true;
 }
 
   buyMoonBase(index: number) {
+
     if(!this.hasEnoughMoonshots(index) || this.supply[index] === 0)
     {
       return false
