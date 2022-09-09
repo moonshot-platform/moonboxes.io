@@ -17,7 +17,11 @@
     {
       "chainId": "4",
       "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C"
-  }
+    },
+    {
+      "chainId":"568",
+      "artistLootBoxAddress":"0xb462FaCA710eD4eBe7bcd4861bFa3E2454B122C2"
+    }
   ],
   "mainnet": [
     {
@@ -37,6 +41,10 @@
     {
       "chainId": "1",
       "artistLootBoxAddress": "0x91c455D8922Ff222B9C0E8871183f477Fe9776DE"
+    },
+    {
+      "chainId": "200",
+      "artistLootBoxAddress": ""
     }
   ]
 }
