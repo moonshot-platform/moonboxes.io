@@ -114,14 +114,14 @@ export class WalletConnectService {
 
     try {
       // await this.localStorageService.getAddress();
-      var web3Provider = new Web3.providers.HttpProvider('https://bsc-dataseed.binance.org');
+      var web3Provider = new Web3.providers.HttpProvider(environment.providerTestNetURL);
       var web3 = new Web3(web3Provider);
       this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.tokenContractAddress);
       this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
       this.swapContract = new web3.eth.Contract(swapContractAbi, config[environment.configFile][0].ArtistMoonBoxNftSwap);
       //MultiChain contracts
       this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
-
+      debugger
     }
     catch (e) {
       console.log(e)
