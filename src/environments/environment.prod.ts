@@ -18,6 +18,7 @@ export const environment = {
 
   configFile: 'mainnet',
 
+  adminPanelUrl : "http://codetentacles-006-site41.htempurl.com/"
   // lootBoxAddress: "0x83350dB1Ab42c8ac82FAf74FdA7C0160919d2a40",
   // artistNFTAddress: "0xa8e67efd3DDAD234947d8BC80F36aa8F9eb35dF0", // old address
   // artistNFTAddress: "0x494c08ec5e6f1b3f9c5e27a2f57665d45a39e12f",

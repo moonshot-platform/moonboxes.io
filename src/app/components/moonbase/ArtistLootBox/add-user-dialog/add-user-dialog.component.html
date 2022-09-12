@@ -84,6 +84,14 @@
   </div>
 </div>
 
-<div class="ede2 addusermodal" *ngIf="formType == 'step2'">
-  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, ducimus recusandae harum aut mollitia sint laudantium dignissimos perspiciatis officia. Eius.
+<div class="ede2 addusermodal text-center" *ngIf="formType == 'step2'">
+  <img src="../assets/gif/success.gif" style="width: 90%;
+  height: auto;" >
+  <div>
+    <p class="mb-3" style="color: #d5a642;" >User has successfully registered.</p>
+  </div>
+  <div class="d-flex" >
+    <button class="btn subbutton1" (click)="gotoAdminpanel()">Go to admin panel</button>
+    <button class="btn outlined-button1"type="button" (click)="closeModal()" >cancel</button>
+  </div>
 </div>

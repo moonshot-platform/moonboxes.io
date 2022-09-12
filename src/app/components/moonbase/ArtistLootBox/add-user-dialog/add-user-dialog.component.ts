@@ -7,6 +7,7 @@ import { DeployContractService } from 'src/app/services/deploy-contract.service'
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-user-dialog',
@@ -17,8 +18,7 @@ export class AddUserDialogComponent implements OnInit {
   addArtistForm: FormGroup;
   submitted: boolean = false;
   transactionInitiated: boolean = false;
-  // formType = 'step1';
-  formType = 'step2';
+  formType = 'step1';
   constructor(public dialogRef: MatDialogRef<AddUserDialogComponent>, private fb: FormBuilder, private apiService: HttpApiService, private contractService: WalletConnectService, private deployContract: DeployContractService,
     private localStorageService: LocalStorageService, private matDialog: MatDialog) { }
 
@@ -146,5 +146,9 @@ export class AddUserDialogComponent implements OnInit {
 
   closeModal() {
     this.dialogRef.close();
+  }
+
+  gotoAdminpanel(){
+    window.open(environment.adminPanelUrl,'_blank')
   }
 }

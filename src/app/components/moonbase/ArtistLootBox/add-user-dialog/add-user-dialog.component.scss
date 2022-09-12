@@ -30,6 +30,20 @@
     text-transform: capitalize;
     margin: auto;
 }
+.subbutton1{
+    padding: 0.9375rem 1.25rem;
+    
+    
+    background-color: #d5a642;
+   
+    height: fit-content;
+   
+    border-radius: 25px;
+    color: black;
+    font-weight: 700;
+   
+  
+}
 .subbutton:hover{
     background: white;
     color: #090d16;
@@ -64,4 +78,18 @@
 span.text-danger {
     color: #f93f3f;
     font-size: 12px;
+}
+.outlined-button1 {
+    padding: 0.7375rem 1.25rem;
+    border: 1px solid #d5a642;
+    min-width: 158px;
+    border-radius: 25px;
+    color: #d5a642;
+    font-weight: 700;
+    background-color: transparent;
+    font-size: 16px;
+    text-decoration: none;
+    text-align: center;
+    cursor: default;
+    margin: 12px;
 }
