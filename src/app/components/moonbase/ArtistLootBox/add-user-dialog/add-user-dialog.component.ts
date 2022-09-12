@@ -80,6 +80,9 @@ export class AddUserDialogComponent implements OnInit {
       this.transactionInitiated = false;
       this.formType = 'step2';
 
+    }else{
+      this.transactionInitiated = false;
+      this.apiService.showToastr('something went wrong', false);
     }
 
     // this.apiService.isUserAdded(data).subscribe(
