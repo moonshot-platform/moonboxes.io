@@ -38,6 +38,9 @@ export class AddUserDialogComponent implements OnInit {
       }
     })
 
+    this.addArtistForm.patchValue({
+      walletAddress:this.localStorageService.getAddress()
+    })
   }
 
 

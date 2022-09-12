@@ -39,6 +39,7 @@
               id="text"
               aria-describedby="textHelp"
               formControlName="walletAddress"
+              [attr.disabled]="true"
             />
             <div *ngIf="f.walletAddress.invalid && (f.walletAddress.touched || formRef.submitted)">
               <span class="text-danger" *ngIf="f.walletAddress.errors?.required">Wallet Address required</span>
