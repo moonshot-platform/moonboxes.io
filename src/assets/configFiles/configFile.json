@@ -4,23 +4,28 @@
       "chainId": "97",
       "artistLootBoxAddress": "0xe3D279f66776Efae7602D817f68015a0afA0Fd2E",
       "lootBoxAddress": "0x017792D0692591FF66686092293295ef245deD3b",
-      "ArtistMoonBoxNftSwap": "0xF08821acb2FBB234099c0282bD6ea18d877d287a"
+      "ArtistMoonBoxNftSwap": "0xF08821acb2FBB234099c0282bD6ea18d877d287a",
+      "RegisterMoonboxAddress":"0xBC772f5408aecEA5fB9c1fe54999A21d691ca7a2"
     },
     {
       "chainId": "80001",
-      "artistLootBoxAddress": "0xc61578657C226519bdf502Eee5fd87FFCA656383"
+      "artistLootBoxAddress": "0xc61578657C226519bdf502Eee5fd87FFCA656383",
+      "RegisterMoonboxAddress":"0xBC772f5408aecEA5fB9c1fe54999A21d691ca7a2"
     },
     {
       "chainId": "1287",
-      "artistLootBoxAddress": "0xbbfbCB282cE7427cDC45efd609175187AD3286C2"
+      "artistLootBoxAddress": "0xbbfbCB282cE7427cDC45efd609175187AD3286C2",
+      "RegisterMoonboxAddress":"0xBC772f5408aecEA5fB9c1fe54999A21d691ca7a2"
     },
     {
       "chainId": "4",
-      "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C"
+      "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C",
+      "RegisterMoonboxAddress":"0xBC772f5408aecEA5fB9c1fe54999A21d691ca7a2"
     },
     {
       "chainId":"568",
-      "artistLootBoxAddress":"0xb462FaCA710eD4eBe7bcd4861bFa3E2454B122C2"
+      "artistLootBoxAddress":"0xb462FaCA710eD4eBe7bcd4861bFa3E2454B122C2",
+      "RegisterMoonboxAddress":"0xBC772f5408aecEA5fB9c1fe54999A21d691ca7a2"
     }
   ],
   "mainnet": [
@@ -28,23 +33,28 @@
       "chainId": "56",
       "artistLootBoxAddress": "0xE93ddAA2d56F1DAF39177fe875698A147bC94f69",
       "lootBoxAddress": "0x614A5DD989E5Fc086a0059D37F4EcDeaA6341216",
-      "ArtistMoonBoxNftSwap": "0xcaEb93AD7a16fE96c8e085223D497E5e55C62cE8"
+      "ArtistMoonBoxNftSwap": "0xcaEb93AD7a16fE96c8e085223D497E5e55C62cE8",
+      "RegisterMoonboxAddress":""
     },
     {
       "chainId": "137",
-      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12",
+      "RegisterMoonboxAddress":""
     },
     {
       "chainId": "1285",
-      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12",
+      "RegisterMoonboxAddress":""
     },
     {
       "chainId": "1",
-      "artistLootBoxAddress": "0x91c455D8922Ff222B9C0E8871183f477Fe9776DE"
+      "artistLootBoxAddress": "0x91c455D8922Ff222B9C0E8871183f477Fe9776DE",
+      "RegisterMoonboxAddress":""
     },
     {
       "chainId": "200",
-      "artistLootBoxAddress": ""
+      "artistLootBoxAddress": "",
+      "RegisterMoonboxAddress":""
     }
   ]
 }

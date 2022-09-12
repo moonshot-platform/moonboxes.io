@@ -19,6 +19,7 @@ const lootBoxAbi = require('./../../assets/abis/lootBoxAbi.json');
 const swapContractAbi = require('./../../assets/abis/swapContractAbi.json');
 const NFTAbi = require('./../../assets/abis/NFTAbi.json');
 const ArtistNFTAbi = require('./../../assets/abis/ArtistNFTAbi.json');
+const registorAbi = require('../../assets/abis/registorAbi.json');
 const buyContractAddress = environment.buyContractAddress;
 
 const NETWORK = 'binance';
@@ -94,7 +95,7 @@ export class WalletConnectService {
   LootBoxContractGet: any;
   swapContract: any;
   ChainId: number = 0;
-
+  registorContractAddressObj :any;
   constructor(
     private windowRef: WindowRefService,
     private toastrService: ToastrService,
@@ -294,8 +295,12 @@ export class WalletConnectService {
       }
       this.NFTContract = new ethers.Contract(environment.NFTAddress, NFTAbi, this.signer);
       this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
+      this.registorContractAddressObj = new ethers.Contract(config[environment.configFile][index].RegisterMoonboxAddress,registorAbi,this.signer)
+   
       debugger
     }
+
+
 
     const data = {
       'provider': this.provider,
@@ -313,6 +318,19 @@ export class WalletConnectService {
 
     this.updateData(data);
   }
+
+
+  async registorCheck(data:{name:string,symbol:string,username:string}){
+    try {
+      let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,environment.lootBoxAddress,data.name,data.symbol,data.username )
+
+       return {status:true,hash:transaction};
+    } catch (error) {
+      return {status:false,hash:''};
+    }
+ 
+  }
+
 
   async getDetailsMoonboxPrice() {
     return await this.LootboxContract.moonboxPrice();

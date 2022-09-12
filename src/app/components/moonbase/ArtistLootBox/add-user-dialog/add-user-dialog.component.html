@@ -1,4 +1,4 @@
-<div class="ede2 addusermodal">
+<div class="ede2 addusermodal" *ngIf="formType == 'step1'">
   <h4 class="headfont">Sign up</h4>
   <div>
     <form [formGroup]="addArtistForm" (ngSubmit)="formRef.valid && onSubmit()" #formRef="ngForm">
@@ -82,4 +82,8 @@
       </div>
     </form>
   </div>
+</div>
+
+<div class="ede2 addusermodal" *ngIf="formType == 'step2'">
+  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, ducimus recusandae harum aut mollitia sint laudantium dignissimos perspiciatis officia. Eius.
 </div>
