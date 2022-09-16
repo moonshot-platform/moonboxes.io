@@ -28,6 +28,12 @@
             {
                 "indexed": false,
                 "internalType": "string",
+                "name": "artistName",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
                 "name": "_name",
                 "type": "string"
             },
@@ -90,6 +96,11 @@
                 "internalType": "address",
                 "name": "swapAddress",
                 "type": "address"
+            },
+            {
+                "internalType": "string",
+                "name": "artistName",
+                "type": "string"
             },
             {
                 "internalType": "string",

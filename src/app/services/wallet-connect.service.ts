@@ -320,9 +320,9 @@ export class WalletConnectService {
   }
 
 
-  async registorCheck(data:{name:string,symbol:string,username:string}){
+  async registorCheck(data:{name:string,symbol:string,username:string,collectionName:string}){
     try {
-      let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,environment.lootBoxAddress,data.name,data.symbol,data.username )
+      let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,environment.lootBoxAddress,data.name,data.collectionName,data.symbol,data.username )
        return {status:true,hash:transaction};
     } catch (error) {
       this.toastrService.error(error.message)
