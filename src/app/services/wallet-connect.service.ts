@@ -122,7 +122,7 @@ export class WalletConnectService {
       this.swapContract = new web3.eth.Contract(swapContractAbi, config[environment.configFile][0].ArtistMoonBoxNftSwap);
       //MultiChain contracts
       this.artistLootBoxContractGet = new web3.eth.Contract(ArtistNFTAbi, config[environment.configFile][0].artistLootBoxAddress);
-      debugger
+      
 
     }
     catch (e) {
@@ -323,9 +323,9 @@ export class WalletConnectService {
   async registorCheck(data:{name:string,symbol:string,username:string}){
     try {
       let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,environment.lootBoxAddress,data.name,data.symbol,data.username )
-
        return {status:true,hash:transaction};
     } catch (error) {
+      this.toastrService.error(error.message)
       return {status:false,hash:''};
     }
  

@@ -67,6 +67,7 @@
     font-weight: 600;
     color: white;
     text-align: center;
+    width: -webkit-fill-available;
 }
 
 .dgridsys{
@@ -92,4 +93,15 @@ span.text-danger {
     text-align: center;
     cursor: default;
     margin: 12px;
+}
+
+.croos{
+    height: 38px;
+    width: 38px;
+    /* background: antiquewhite; */
+    color: white;
+}
+
+.d-flex{
+    display: flex;
 }

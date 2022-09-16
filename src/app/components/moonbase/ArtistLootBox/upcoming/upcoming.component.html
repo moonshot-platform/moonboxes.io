@@ -27,7 +27,7 @@
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 
-                                <a *ngIf="item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="flex1 nft_img flex-center">
+                                <a *ngIf="item.revealDate === 'Application form'" rel="noopener noreferrer" (click)="openDialoagOfAddUser()" class="flex1 nft_img flex-center">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 

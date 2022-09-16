@@ -74,15 +74,16 @@ export class AddUserDialogComponent implements OnInit {
 
     let status;
     status = await this.contractService.registorCheck({ name: this.addArtistForm.value.name, symbol: this.addArtistForm.value.symbol, username: this.addArtistForm.value.userName });
-    await status.hash.wait(3);
-
+   
+    
     if (status.status) {
+      await status.hash.wait(3);
       this.transactionInitiated = false;
       this.formType = 'step2';
 
     }else{
       this.transactionInitiated = false;
-      this.apiService.showToastr('something went wrong', false);
+     
     }
 
     // this.apiService.isUserAdded(data).subscribe(
