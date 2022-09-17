@@ -10,7 +10,7 @@
     {
       "chainId": "80001",
       "artistLootBoxAddress": "0xc61578657C226519bdf502Eee5fd87FFCA656383",
-      "RegisterMoonboxAddress":""
+      "RegisterMoonboxAddress":"0x697F3b692f8C0fb9EB4F72847B2397bB1f65a5e1"
     },
     {
       "chainId": "1287",
@@ -20,12 +20,12 @@
     {
       "chainId": "4",
       "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C",
-      "RegisterMoonboxAddress":""
+      "RegisterMoonboxAddress":"0x8848a21EED89Dc3ef34fDE41B83C247EA0f3B3cc"
     },
     {
       "chainId":"568",
       "artistLootBoxAddress":"0xb462FaCA710eD4eBe7bcd4861bFa3E2454B122C2",
-      "RegisterMoonboxAddress":""
+      "RegisterMoonboxAddress":"0xE88ded40F1647235Ff07f539aEbDB5905c86DBe5"
     }
   ],
   "mainnet": [
