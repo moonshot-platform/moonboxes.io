@@ -103,3 +103,15 @@
     <button class="btn outlined-button1"type="button" (click)="closeModal()" >cancel</button>
   </div>
 </div>
+
+
+<div class="ede2 addusermodal text-center" *ngIf="formType == 'step3'">
+
+  <div>
+    <p class="mb-3" style="color: #d5a642;" >User has already registered.</p>
+  </div>
+  <div class="d-flex" >
+    <button class="btn subbutton1" (click)="gotoAdminpanel()">Go to admin panel</button>
+    <button class="btn outlined-button1"type="button" (click)="closeModal()" >cancel</button>
+  </div>
+</div>

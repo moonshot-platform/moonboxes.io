@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { rejects } from 'assert';
 import { ethers } from 'ethers';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
 import { DeployContractService } from 'src/app/services/deploy-contract.service';
@@ -66,29 +67,51 @@ export class AddUserDialogComponent implements OnInit {
 
   async onSubmit() {
     this.transactionInitiated = true;
-    var data = {
-      walletAddress: this.addArtistForm.controls.walletAddress.value,
-    }
-    console.log(this.addArtistForm.value);
+    let obj = { username: this.addArtistForm.value.userName, wallet_address: this.addArtistForm.value.walletAddress, blockchain_id: localStorage.getItem(this.localStorageService.chainId) }
 
 
-    let status;
-    status = await this.contractService.registorCheck({
-      name: this.addArtistForm.value.name, symbol: this.addArtistForm.value.symbol, username: this.addArtistForm.value.userName,
-      collectionName:  this.addArtistForm.value.collectionName
-    });
-   
-    
-    if (status.status) {
-      await status.hash.wait(3);
-      this.transactionInitiated = false;
-      this.formType = 'step2';
+    this.apiService.postRequest(`user_name_exist`, obj).subscribe({
+      next: async (res: any) => {
+        if (res.is_already_exist) {
+          this.formType = 'step3';
+        } else {
+          let status;
+          status = await this.contractService.registorCheck({
+            name: this.addArtistForm.value.name, symbol: this.addArtistForm.value.symbol, username: this.addArtistForm.value.userName,
+            collectionName: this.addArtistForm.value.collectionName
+          });
 
-    }else{
-      this.transactionInitiated = false;
-     
-    }
 
+          if (status.status) {
+            await status.hash.wait(3);
+            this.transactionInitiated = false;
+            this.formType = 'step2';
+
+          } else {
+            this.transactionInitiated = false;
+
+          }
+        }
+      },
+      error: (err: any) => {
+
+      }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////////////////////////
     // this.apiService.isUserAdded(data).subscribe(
     //   (response: any) => {
     //     if (response.status == 200 && response.isSuccess) {
@@ -155,7 +178,7 @@ export class AddUserDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  gotoAdminpanel(){
-    window.open(environment.adminPanelUrl,'_blank')
+  gotoAdminpanel() {
+    window.open(environment.adminPanelUrl, '_blank')
   }
 }

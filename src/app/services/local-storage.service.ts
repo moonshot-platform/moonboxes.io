@@ -5,6 +5,7 @@ export class LocalStorageService {
     public readonly NSFW_KEY: string = 'nsfw';
     public readonly WALLET_KEY: string = 'wallet';
     public readonly ADDRESS_KEY: string = 'address';
+    public readonly chainId: string = 'chainId';
 
     private subjectNSFW = new Subject<boolean>();
 
@@ -53,4 +54,6 @@ export class LocalStorageService {
         return localStorage.getItem( this.ADDRESS_KEY );
     }
 
+
+    
 }
