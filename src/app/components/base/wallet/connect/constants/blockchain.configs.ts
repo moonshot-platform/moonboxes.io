@@ -211,5 +211,27 @@ export const CHAIN_CONFIGS: any = {
       ],
     },
   },
+  '2000': {
+    name: 'Dogechain',
+    explorerLink: 'https://explorer.dogechain.dog/address/address/',
+    icon: 'assets/media/images/blockchain/dogecoin.svg',
+    bg: '#000',
+    symbol: 'dog',
+    config: {
+      method: 'wallet_addEthereumChain',
+      params: [
+        {
+          chainId: '0x7D0',
+          chainName: 'dogechain',
+          nativeCurrency: {
+            symbol: 'dog',
+            decimals: 18,
+          },
+          rpcUrls: ['https://rpc-us.dogechain.dog'],
+          blockExplorerUrls: ['https://explorer.dogechain.dog/'],
+        },
+      ],
+    },
+  }
 };
 

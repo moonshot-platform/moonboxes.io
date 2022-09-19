@@ -43,8 +43,8 @@
       "artistLootBoxAddress": "0x91c455D8922Ff222B9C0E8871183f477Fe9776DE"
     },
     {
-      "chainId": "200",
-      "artistLootBoxAddress": ""
+      "chainId": "2000",
+      "artistLootBoxAddress": "0x82A3E038048CF02C19e60856564bE209899d4F12"
     }
   ]
 }
