@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  chainId: [56, 137, 1285,1],
-  moonSeaChinIds: [1, 3, 4,2],
+  chainId: [56, 137, 1285,1,2000],
+  moonSeaChinIds: [1, 3, 4,2,5],
   providerTestNetURL: "https://data-seed-prebsc-1-s1.binance.org:8545/",
   providerMainNetURL: "https://bsc-dataseed1.binance.org",
   providerURL: "https://bsc-dataseed1.binance.org",
