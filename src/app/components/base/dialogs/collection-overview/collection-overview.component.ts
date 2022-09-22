@@ -101,7 +101,15 @@ export class CollectionOverviewComponent implements OnInit {
   }
 
   getPreviewImageUrl(url: string): string {
-    return url.slice(0, 36) + 'previews/' + url.slice(36, -3) + 'webp';
+    var ext =  url.split('.').pop();
+    if(ext.length>0)
+    {
+      return url.slice(0, 36) + 'previews/' + url.slice(36, -ext.length) + 'webp';
+    }
+    else{
+      return url.slice(0, 36) + 'previews/' + url.slice(36);
+    }
+
   }
 
 }
