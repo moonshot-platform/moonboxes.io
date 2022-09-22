@@ -5,27 +5,27 @@
       "artistLootBoxAddress": "0xe3D279f66776Efae7602D817f68015a0afA0Fd2E",
       "lootBoxAddress": "0x017792D0692591FF66686092293295ef245deD3b",
       "ArtistMoonBoxNftSwap": "0xF08821acb2FBB234099c0282bD6ea18d877d287a",
-      "RegisterMoonboxAddress":"0x4a1a25A6F100E53FEAaF6568098338811B264e5D"
+      "RegisterMoonboxAddress":"0x57b3F93E484DC718cF5F1C02b2da5F78714Cfb69"
     },
     {
       "chainId": "80001",
       "artistLootBoxAddress": "0xc61578657C226519bdf502Eee5fd87FFCA656383",
-      "RegisterMoonboxAddress":"0x697F3b692f8C0fb9EB4F72847B2397bB1f65a5e1"
+      "RegisterMoonboxAddress":"0x091AAB738cffA45669d9B263D42148aA09f8a7a2"
     },
     {
       "chainId": "1287",
       "artistLootBoxAddress": "0xbbfbCB282cE7427cDC45efd609175187AD3286C2",
-      "RegisterMoonboxAddress":""
+      "RegisterMoonboxAddress":"0xA31fE3c26a07a9e9D44A60D6Bc51ecC2731AbAAb"
     },
     {
       "chainId": "4",
       "artistLootBoxAddress": "0x83aF47E7A833503820554D30E060B59C7EB0353C",
-      "RegisterMoonboxAddress":"0x8848a21EED89Dc3ef34fDE41B83C247EA0f3B3cc"
+      "RegisterMoonboxAddress":"0xda917e05246dE23E5CEeBD3E0441067bf1A58c63"
     },
     {
       "chainId":"568",
       "artistLootBoxAddress":"0xb462FaCA710eD4eBe7bcd4861bFa3E2454B122C2",
-      "RegisterMoonboxAddress":"0xE88ded40F1647235Ff07f539aEbDB5905c86DBe5"
+      "RegisterMoonboxAddress":"0xA31fE3c26a07a9e9D44A60D6Bc51ecC2731AbAAb"
     }
   ],
   "mainnet": [
