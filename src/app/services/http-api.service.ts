@@ -119,7 +119,8 @@ export class HttpApiService {
     let NSFW: boolean = true;
     let walletAddress: string = '';
     const params = { NSFW, walletAddress };
-    const url = `${baseURL}allArtistBanners`;
+    // const url = `${baseURL}allArtistBanners`;
+    const url = `${baseURL}allArtistCollectionList`; // new api to get upcoming collection images
 
     return this.httpClient.get(url, { headers: this.headers, params }).toPromise();
   }
