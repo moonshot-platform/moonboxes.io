@@ -27,9 +27,12 @@
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
 
-                                <a *ngIf="item.revealDate === 'Application form'" rel="noopener noreferrer" (click)="openDialoagOfAddUser()" class="flex1 nft_img flex-center">
+                                <a *ngIf="item.revealDate === 'Application form'" rel="noopener noreferrer"  href="{{item.url}}" target="_blank" class="flex1 nft_img flex-center">
                                     <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
                                 </a>
+                                <!-- <a *ngIf="item.revealDate === 'Application form'" rel="noopener noreferrer" (click)="openDialoagOfAddUser()" class="flex1 nft_img flex-center">
+                                    <div class="relative res-box upcoming-img" [style.background]="'url('+item.filePath+')'"></div>
+                                </a> -->
 
                                 <div class="flex flex-col flex1 w100 mt10">
                                     <div class="text-center word-break">
@@ -58,16 +61,16 @@
                                         <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
                                     </div>
 
-                                    <!-- <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
+                                    <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
                                         <img src="assets/media/images/form.svg" alt="coundown-button">
                                         <p>{{item.revealDate}}</p>
-                                    </a> -->
+                                    </a>
 
-                                    <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()" rel="noopener noreferrer"
+                                    <!-- <a class="pointer button text-inherit mb20 coundown-button" (click)="openDialoagOfAddUser()" rel="noopener noreferrer"
                                     *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'">
                                     <img src="assets/media/images/form.svg" alt="coundown-button">
                                     Application form
-                                    </a>
+                                    </a> -->
 
 
                                     <a *ngIf="currentCategory === dropsCategory.LIVE" class="button text-inherit mb20" [routerLink]="['/artist',item.walletAddress]">Buy MoonBoxes</a>

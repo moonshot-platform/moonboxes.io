@@ -238,6 +238,7 @@ export class ArtistMoonboxComponent implements OnInit {
       this.data?.address
     ).subscribe((response: ArtistMoonbox) => {
       if (response.isSuccess) {
+        debugger
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
         this.supplyDetails.forEach((item: Supply) => {
@@ -309,7 +310,7 @@ this.isgetMaxSupplyCall=true;
     // if (this.supplyDetails[index]?.isUpcoming) return false;
     this.invisible = true;
     this.fadeOut = true;
-    let dialogRef = this.dialog.open(ModalForTransactionComponent, {
+    this.dialog.open(ModalForTransactionComponent, {
       width: 'auto',
       disableClose: true,
       data: {
@@ -330,24 +331,21 @@ this.isgetMaxSupplyCall=true;
         }
       },
       panelClass: 'custom-modalbox'
-    });
+    }).afterClosed().subscribe(result => {
 
-    dialogRef.afterClosed().subscribe(result => {
       this.userProvider.onReceive().subscribe((userData: any) => {
         this.balance = userData.balance;
         this.getMaxSupply();
         this.getMoonboxTierLimits();
         console.log(userData);
-        debugger
       }, (error) => {
-         console.log("========>",error); 
         });
       this.invisible = false;
       this.fadeOut = result;
       this.popupClosed = true;
       this.getMaxSupply();
       this.getMoonboxTierLimits();
-      debugger
+    
     }
    
     );
