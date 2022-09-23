@@ -336,13 +336,21 @@ this.isgetMaxSupplyCall=true;
       this.userProvider.onReceive().subscribe((userData: any) => {
         this.balance = userData.balance;
         this.getMaxSupply();
-
         this.getMoonboxTierLimits();
-      }, (error) => { console.log(error); });
+        console.log(userData);
+        debugger
+      }, (error) => {
+         console.log("========>",error); 
+        });
       this.invisible = false;
       this.fadeOut = result;
       this.popupClosed = true;
-    });
+      this.getMaxSupply();
+      this.getMoonboxTierLimits();
+      debugger
+    }
+   
+    );
 
 
     return true;
