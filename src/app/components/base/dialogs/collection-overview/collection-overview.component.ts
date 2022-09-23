@@ -119,6 +119,6 @@ export class CollectionOverviewComponent implements OnInit {
     else {
         return url.slice(0, 36) + 'previews/' + url.slice(36);
     }
-}
+  }
 
 }

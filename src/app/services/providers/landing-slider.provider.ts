@@ -58,24 +58,24 @@ export class LandingSliderProvider {
     }
 
     getPreviewImageUrl(url: string): string {
-        let reverse = url.split('').reverse().join('');
-        let slash = reverse.indexOf('/');
-        let dot = reverse.indexOf('.');
+      let reverse = url.split('').reverse().join('');
+      let slash = reverse.indexOf('/');
+      let dot = reverse.indexOf('.');
 
-        var ext = url.split('.').pop();
-        if (dot < slash) {
-            if (ext.length > 1) {
-                return url.slice(0, 36) + 'previews/' + url.slice(36, -ext.length) + 'webp';
+      var ext = url.split('.').pop();
+      if (dot < slash) {
+          if (ext.length > 1) {
+              return url.slice(0, 36) + 'previews/' + url.slice(36, -ext.length) + 'webp';
 
-            }
-            else {
-                return url.slice(0, 36) + 'previews/' + url.slice(36);
-            }
+          }
+          else {
+              return url.slice(0, 36) + 'previews/' + url.slice(36);
+          }
 
-        }
-        else {
-            return url.slice(0, 36) + 'previews/' + url.slice(36);
-        }
+      }
+      else {
+          return url.slice(0, 36) + 'previews/' + url.slice(36);
+      }
     }
 
     shuffleList(list: any[]): any[] {
