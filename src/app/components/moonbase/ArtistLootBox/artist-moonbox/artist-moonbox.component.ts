@@ -238,7 +238,7 @@ export class ArtistMoonboxComponent implements OnInit {
       this.data?.address
     ).subscribe((response: ArtistMoonbox) => {
       if (response.isSuccess) {
-        debugger
+        //debugger
         this.artistDetails = response;
         this.supplyDetails = this.artistDetails.data;
         this.supplyDetails.forEach((item: Supply) => {

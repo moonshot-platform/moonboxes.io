@@ -297,7 +297,7 @@ export class WalletConnectService {
       this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
       this.registorContractAddressObj = new ethers.Contract(config[environment.configFile][index].RegisterMoonboxAddress,registorAbi,this.signer)
    
-      debugger
+      //debugger
     }
 
 
@@ -443,10 +443,10 @@ export class WalletConnectService {
   }
 
   async redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
-debugger
+//debugger
 
     try {
-      debugger
+      //debugger
       let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString(),gasLimit:1000000000000000,gasPrice:110 });
       return { hash: txn.hash, status: true };
 
@@ -462,7 +462,7 @@ debugger
     const spliSign = ethers.utils.splitSignature(signature);
     if (isArtist) {
       try {
-debugger
+//debugger
         let txn: any = await this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
         await txn.wait(1)
         return { hash: txn.hash, status: true };
@@ -506,7 +506,7 @@ debugger
       params = ((10 ** decimals) * price).toString();
     }
     try {
-      debugger
+      //debugger
       gas = await this.artistLootBoxContract.estimateGas.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
         value: callValue
       }
@@ -516,7 +516,7 @@ debugger
     }
 
     try {
-    debugger
+    //debugger
       let txn: any = await this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
         value: callValue,
         // gasPrice: 100,

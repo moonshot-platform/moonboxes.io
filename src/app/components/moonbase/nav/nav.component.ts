@@ -303,7 +303,7 @@ export class NavComponent implements OnInit {
 
         this.walletConnectService.updateChainId(this.chains[index]);
         this.toastrService.success(`You are connected to the ${this.chainConfigs[this.chains[index] ?? 97].name}`, "NETWORK");
-        // debugger
+        // //debugger
         window.location.reload();
       } catch (error) {
 

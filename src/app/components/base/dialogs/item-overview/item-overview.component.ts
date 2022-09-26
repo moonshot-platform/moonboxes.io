@@ -31,13 +31,13 @@ export class ItemOverviewComponent implements OnInit {
       this.chainId = data;
       if (environment.chainId.indexOf(this.chainId) == -1) {
         this.moonseaChainId=1;
-        debugger
+        //debugger
       }
       else
       {
         let index = environment.chainId.indexOf(this.chainId);
         this.moonseaChainId=environment.moonSeaChinIds[index];
-        debugger
+        //debugger
       }
     });
   }
