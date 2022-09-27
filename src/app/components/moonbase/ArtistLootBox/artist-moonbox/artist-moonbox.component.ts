@@ -148,12 +148,12 @@ export class ArtistMoonboxComponent implements OnInit {
   ) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
 
-    this.getSliderImages();
+    // this.getSliderImages();
   }
 
   ngOnInit(): void {
     this.walletConnectService.init();
-
+  
     this.walletConnectService.onWalletStateChanged().subscribe((state: boolean) => this.isConnected = state);
     this.walletConnectService.getData().subscribe((data) => {
 
@@ -177,13 +177,16 @@ export class ArtistMoonboxComponent implements OnInit {
     this.userProvider.onReceive().subscribe((userData: any) => {
 
       this.balance = userData.balance;
-
-      this.getMaxSupply();
+      
+    
 
       this.getMoonboxTierLimits();
     }, (error) => { console.log(error); });
 
-    if (!this.isConnected) this.getMaxSupply();
+    if (!this.isConnected){
+         
+      }
+      this.getMaxSupply();
   }
 
   hasEnoughMoonshots(index: number) {
@@ -232,7 +235,7 @@ export class ArtistMoonboxComponent implements OnInit {
   }
 
   getMaxSupply() {
-
+    
     this.httpApi.getArtistMoonboxData(
       this.activatedRoute.snapshot.params['artistAddress'],
       this.data?.address
@@ -347,6 +350,7 @@ this.isgetMaxSupplyCall=true;
       this.popupClosed = true;
       this.getMaxSupply();
       this.getMoonboxTierLimits();
+      this.walletConnectService.getAccountAddress();
     
     }
    
@@ -383,10 +387,11 @@ this.isgetMaxSupplyCall=true;
     );
   }
 
-  getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(
-    this.activatedRoute.snapshot.params['artistAddress']).then((res) => {
-      this.slides = res.data;
-      this.artistData = res.artistData;
-    });
+  // getSliderImages = () => this.httpApi.getRandomCollectionImageListFromArtist(
+  //   this.activatedRoute.snapshot.params['artistAddress']).then((res) => {
+  //     this.slides = res.data;
+  //     this.artistData = res.artistData;
+  //   });
 
 }
+

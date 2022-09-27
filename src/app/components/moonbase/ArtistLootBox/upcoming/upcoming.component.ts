@@ -136,7 +136,6 @@ export class UpcomingComponent implements OnInit {
             tempList[DROPS_CATEGORY.UPCOMING] = response.data;
             tempList[DROPS_CATEGORY.UPCOMING].push( applicationData );
           }
-        
           this.list = tempList;
         });
       }
