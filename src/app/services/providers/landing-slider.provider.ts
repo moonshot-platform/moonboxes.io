@@ -14,7 +14,6 @@ export class LandingSliderProvider {
 
     constructor(private httpService: HttpApiService) {
         this.getLiveCollectionsAddresses();
-        debugger
     }
 
     onSave(data: LandingSliderModel[]): void {
