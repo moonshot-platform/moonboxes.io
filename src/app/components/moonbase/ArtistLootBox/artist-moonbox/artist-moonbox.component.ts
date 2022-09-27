@@ -249,6 +249,8 @@ export class ArtistMoonboxComponent implements OnInit {
             // this.removeitem(item.type);
           }
           this.supply.push(item.hasSupply() ? 1 : 0);
+  
+
         });
         if(this.removeitemIndex.length>0)
         {

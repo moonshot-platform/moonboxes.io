@@ -46,8 +46,8 @@
                                         <div class="flex justify-space-between">
                                             <p class="color-primary mb10 mt10">Price</p>
                                             <!-- <p class="color-primary mb10 mt10">{{getMinPrice(item)}} {{item.tokenName}}</p> -->
-                                            <p class="color-primary mb10 mt10"*ngIf="item?.price">{{item?.price}}</p>
-                                            <p class="color-primary mb10 mt10" *ngIf="!item?.price">--</p>
+                                            <p class="color-primary mb10 mt10"*ngIf="item?.is_free_mint">#Free ({{item?.free_mint_user}}/{{item?.free_nft_quantity}})</p>
+                                            <p class="color-primary mb10 mt10" *ngIf="!item?.is_free_mint">{{getMinPrice(item)}} {{item.tokenName}}</p>
                                             
                                         </div>
                                         <div class="flex justify-space-between">
