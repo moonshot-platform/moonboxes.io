@@ -37,7 +37,7 @@ export class ModalForTransactionComponent implements OnInit {
   nftImgRevealed = [];
   messages: any[] = [];
   subscription: Subscription;
-  current = 0;
+  current = 1;
 
   constructor(private walletConnectService: WalletConnectService, public dialog: MatDialog, private httpApi: HttpApiService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
@@ -54,11 +54,13 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   next() {
-    this.current = this.current < this.nftImgRevealed.length - 1 ? this.current + 1 : 0;
+    debugger
+    this.current = this.current < this.nftImgRevealed.length - 1 ? this.current + 1 : 1;
   }
 
   prev() {
-    this.current = this.current > 0 ? this.current - 1 : this.nftImgRevealed.length - 1;
+    debugger
+    this.current = this.current > 1 ? this.current - 1 : this.nftImgRevealed.length - 1;
   }
 
   async submitBet() {
