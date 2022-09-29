@@ -337,7 +337,7 @@ this.isgetMaxSupplyCall=true;
       },
       panelClass: 'custom-modalbox'
     }).afterClosed().subscribe(result => {
-
+      debugger
       this.userProvider.onReceive().subscribe((userData: any) => {
         this.balance = userData.balance;
         this.getMaxSupply();

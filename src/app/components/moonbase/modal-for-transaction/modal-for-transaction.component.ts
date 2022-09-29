@@ -2,7 +2,7 @@ import { SocialShareComponent } from './social-share/social-share.component';
 import { Component, OnInit, Inject } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { HttpClient } from '@angular/common/http';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -37,10 +37,10 @@ export class ModalForTransactionComponent implements OnInit {
   nftImgRevealed = [];
   messages: any[] = [];
   subscription: Subscription;
-  current = 1;
+  current = 0;
 
   constructor(private walletConnectService: WalletConnectService, public dialog: MatDialog, private httpApi: HttpApiService,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any,private dialogRef:MatDialogRef<ModalForTransactionComponent>) {
 
   }
 
@@ -54,13 +54,11 @@ export class ModalForTransactionComponent implements OnInit {
   }
 
   next() {
-    debugger
-    this.current = this.current < this.nftImgRevealed.length - 1 ? this.current + 1 : 1;
+    this.current = this.current < this.nftImgRevealed.length - 1  ? this.current + 1 : 0;
   }
 
   prev() {
-    debugger
-    this.current = this.current > 1 ? this.current - 1 : this.nftImgRevealed.length - 1;
+    this.current = this.current > 0 ? this.current - 1 : this.nftImgRevealed.length - 1 ;
   }
 
   async submitBet() {
@@ -284,6 +282,7 @@ export class ModalForTransactionComponent implements OnInit {
 
   closeDialog() {
     this.httpApi.sendMessage(false);
+    this.dialogRef.close();
     this.dialog.closeAll();
   }
 
