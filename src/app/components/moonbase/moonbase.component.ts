@@ -14,9 +14,7 @@ export class MoonbaseComponent implements OnInit {
   static readonly routeName: string = '';
 
   constructor(
-    private httpApi: HttpApiService,
-    public landingProvider: LandingSliderProvider
-  ) {
+    private httpApi: HttpApiService) {
     this.subscription = this.httpApi.getMessage().subscribe(message => {
       this.bgChange = message.text;
     });
