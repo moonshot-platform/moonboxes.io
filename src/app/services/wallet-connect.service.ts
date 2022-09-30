@@ -73,6 +73,10 @@ export class WalletConnectService {
   chainId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   private selectedChainId: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  public $timerUp = new BehaviorSubject({});
+
+
+
   private readonly ACCOUNTS_CHANGED: string = 'accountsChanged';
   private readonly CHAIN_CHANGED: string = 'chainChanged';
   private readonly DISCONNECT: string = 'disconnect';

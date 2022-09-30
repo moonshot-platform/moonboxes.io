@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input ,Output ,EventEmitter} from '@angular/core';
 import { formatDate } from '@angular/common';
 
 import { interval, Subscription } from 'rxjs';
+import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 
 @Component({
   selector: 'app-countdown-timer',
@@ -12,8 +13,12 @@ export class CountdownTimerComponent implements OnInit {
   
   @Input() date: string;
 
-  public timer: string;
+  @Output() timerUp = new EventEmitter<any>();
+
+  public timer: any;
   private _interval: Subscription;
+
+  constructor(private walletConnectService:WalletConnectService){}
 
   ngOnDestroy() {
     this._interval.unsubscribe();
@@ -36,14 +41,17 @@ export class CountdownTimerComponent implements OnInit {
       const remainingTime = targetDateTime - now;
 
       // Time calculations for days, hours, minutes and seconds
-      const d = ('0' + Math.floor(remainingTime / (1000 * 60 * 60 * 24)) ).slice(-2);
-      const h = ('0' + Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ).slice(-2);
-      const m = ('0' + Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) ).slice(-2);
-      const s = ('0' + Math.floor((remainingTime % (1000 * 60)) / 1000) ).slice(-2);
+      const d :any = ('0' + Math.floor(remainingTime / (1000 * 60 * 60 * 24)) ).slice(-2);
+      const h :any = ('0' + Math.floor((remainingTime % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)) ).slice(-2);
+      const m :any = ('0' + Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60)) ).slice(-2);
+      const s :any = ('0' + Math.floor((remainingTime % (1000 * 60)) / 1000) ).slice(-2);
 
       this.timer = `${d} D : ${h} H : ${m} M : ${s} S`;
 
-      if ( remainingTime <= 0 ) this._interval.unsubscribe();
+      if ( d == 0 && h == 0 && m == 0 && s == 0){ 
+        this.timerUp.emit(true)
+        this._interval.unsubscribe()
+      }
     } );
   }
 

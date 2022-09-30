@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { HttpApiService } from 'src/app/services/http-api.service';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { Title } from '@angular/platform-browser';
 import { Location } from '@angular/common';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Route, Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
 import { CollectionOverviewComponent } from 'src/app/components/base/dialogs/collection-overview/collection-overview.component';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { WalletConnectComponent } from 'src/app/components/base/wallet/connect/connect.component';
-
+import { TimerPopUPComponent } from './timer-pop-up/timer-pop-up.component';
+import {Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 enum DROPS_CATEGORY {
   RECENT = 0,
   LIVE = 1,
@@ -34,13 +36,12 @@ const applicationData = {
   templateUrl: './upcoming.component.html',
   styleUrls: ['./upcoming.component.scss']
 })
-export class UpcomingComponent implements OnInit {
+export class UpcomingComponent implements OnInit,OnDestroy {
   static readonly routeName: string = 'upcoming';
 
   public dropsCategory = DROPS_CATEGORY;
   list = null;
   currentCategory: number;
-
   NSFWToggleState = false;
 
   lootBoxDetails = [];
@@ -64,8 +65,12 @@ export class UpcomingComponent implements OnInit {
     private title: Title,
     private location: Location,
     public dialog: MatDialog,
+    public router:Router
   ) {
     this.walletConnectService.init();
+    this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+  }
+  ngOnDestroy(): void {
   }
 
   ngOnInit(): void {
@@ -94,7 +99,18 @@ export class UpcomingComponent implements OnInit {
           break;
       }
     })
+
+  
+
   }
+
+  isTimerUp(event:any){
+    if(event){
+    this.dialog.open(TimerPopUPComponent)
+    }
+  }
+
+
 
   changeTab(tabIndex: DROPS_CATEGORY) {
     this.clearLootboxDetails();

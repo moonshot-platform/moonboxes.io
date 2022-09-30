@@ -61,7 +61,7 @@
                                             <div class="row">Available soon</div>
                                         </div>
                                         <img src="assets/media/icons/drops/coundown.svg" alt="coundown-button">
-                                        <app-countdown-timer [date]="item.revealDate"></app-countdown-timer>
+                                        <app-countdown-timer [date]="item.revealDate" (timerUp)="isTimerUp($event)"></app-countdown-timer>
                                     </div>
 
                                     <!-- <a *ngIf="currentCategory === dropsCategory.UPCOMING && item.revealDate === 'Application form'" rel="noopener noreferrer" href="{{item.url}}" target="_blank" class="pointer button text-inherit mb20 coundown-button">
