@@ -40,6 +40,7 @@ import { MaterialModule } from './material/material.module';
 import { DisconnectWalletComponent } from './dialogs/disconnect-wallet/disconnect-wallet.component';
 import { AddUserDialogComponent } from './ArtistLootBox/add-user-dialog/add-user-dialog.component';
 import { TimerPopUPComponent } from './ArtistLootBox/upcoming/timer-pop-up/timer-pop-up.component';
+import { ArtistMoonboxRouteComponent } from './artist-moonbox-route/artist-moonbox-route.component';
 
 
 @NgModule({
@@ -69,6 +70,7 @@ import { TimerPopUPComponent } from './ArtistLootBox/upcoming/timer-pop-up/timer
     DisconnectWalletComponent,
     AddUserDialogComponent,
     TimerPopUPComponent,
+    ArtistMoonboxRouteComponent,
   ],
   imports: [
     MatIconModule,

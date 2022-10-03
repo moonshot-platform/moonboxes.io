@@ -179,6 +179,7 @@ export class WalletConnectService {
         });
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
           this.toastrService.error('You are on the wrong network please Connect with ' + this.chainConfigs[this.ChainId]?.name ?? '');
+          console.warn('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
           this.setWalletState(false);
           throw 'Wrong network';
         }
@@ -186,6 +187,10 @@ export class WalletConnectService {
 
           if (this.ChainId != currentNetwork.chainId) {
             this.toastrService.error('You are on the wrong network please Connect with ' + this.chainConfigs[this.ChainId]?.name ?? '');
+          console.warn('PPPPPPPPPPPPPPPPPPPPPPPPPPPPP')
+           
+            this.setWalletDisconnected();
+            window.location.reload();
           }
         }
 
