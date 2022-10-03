@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
 @Component({
@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class TimerPopUPComponent implements OnInit {
 
-  constructor(private dialogRef:MatDialogRef<TimerPopUPComponent>,private router:Router) { }
+  constructor(private dialogRef:MatDialogRef<TimerPopUPComponent>,@Inject(MAT_DIALOG_DATA) public data:any,private router:Router) { }
 
   ngOnInit(): void {
   }

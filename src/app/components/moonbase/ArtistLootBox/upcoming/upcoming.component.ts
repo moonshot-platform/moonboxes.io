@@ -105,8 +105,8 @@ export class UpcomingComponent implements OnInit,OnDestroy {
   }
 
   isTimerUp(event:any){
-    if(event){
-    this.dialog.open(TimerPopUPComponent)
+    if(event.isShowPopUp){
+    this.dialog.open(TimerPopUPComponent,{data:event.nftDetails})
     }
   }
 

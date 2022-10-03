@@ -13,6 +13,8 @@ export class CountdownTimerComponent implements OnInit {
   
   @Input() date: string;
 
+  @Input() nftData:any={};
+
   @Output() timerUp = new EventEmitter<any>();
 
   public timer: any;
@@ -25,6 +27,7 @@ export class CountdownTimerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
 
     const date = new Date( `${this.date} UTC` ).toString();
     const format = 'yyyy/MM/dd HH:mm:ss';
@@ -49,7 +52,7 @@ export class CountdownTimerComponent implements OnInit {
       this.timer = `${d} D : ${h} H : ${m} M : ${s} S`;
 
       if ( d == 0 && h == 0 && m == 0 && s == 0){ 
-        this.timerUp.emit(true)
+        this.timerUp.emit({isShowPopUp:true,nftDetails:this.nftData})
         this._interval.unsubscribe()
       }
     } );

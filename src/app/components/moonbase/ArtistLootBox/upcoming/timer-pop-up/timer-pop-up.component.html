@@ -4,9 +4,9 @@
 
     </div>
 
-    <p class="timertext" >The collection is now available you can see it in live</p>
-    <div class="text-center" >
-        <button class="timerbutton " type="button" (click)="gotoLive()" >Goto Live</button>
-        <!-- <button type="button" >close</button> -->
+    <p class="timertext" >{{data.name | titlecase}} has just released! Let me take you there.</p>
+    <div class="yesNoButton" >
+        <button class="timerbutton " type="button" (click)="gotoLive()" >Yes</button>
+        <button class="timerbutton " type="button" (click)="closeModal()" >No</button>
     </div>
 </div>

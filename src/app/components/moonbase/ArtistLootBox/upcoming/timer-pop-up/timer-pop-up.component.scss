@@ -14,10 +14,17 @@
     padding: 9px;
     font-size: 15px;
     text-align: center;
-    margin-bottom: 30px;
+    border-radius: 25px;
+    width: 150px;
+    margin: 0 10px 30px 10px;
 }
 .svgposition{
     position: absolute;
     right: 11px;
     top: 10px;
+}
+.yesNoButton{
+    padding: 0 47px 0 47px;
+    display: flex;
+    justify-content: space-around;
 }
