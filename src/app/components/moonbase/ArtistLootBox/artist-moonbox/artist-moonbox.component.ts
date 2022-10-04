@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { WalletConnectService } from 'src/app/services/wallet-connect.service';
 import { MatDialog } from '@angular/material/dialog';
 import { HttpApiService } from 'src/app/services/http-api.service';
@@ -144,7 +144,8 @@ export class ArtistMoonboxComponent implements OnInit {
     public dialog: MatDialog,
     public httpApi: HttpApiService,
     private activatedRoute: ActivatedRoute,
-    private userProvider: UserDetailsProvider
+    private userProvider: UserDetailsProvider,
+    private changeDetectionRef : ChangeDetectorRef
   ) {
     this.lootBoxDetails = httpApi.lootBoxDetails;
 
@@ -252,8 +253,6 @@ export class ArtistMoonboxComponent implements OnInit {
             // this.removeitem(item.type);
           }
           this.supply.push(item.hasSupply() ? 1 : 0);
-  
-
         });
         if(this.removeitemIndex.length>0)
         {
@@ -269,6 +268,8 @@ export class ArtistMoonboxComponent implements OnInit {
         this.mainMessage = MESSAGES.NO_SUPPLY;
       }
     })
+
+    this.changeDetectionRef.detectChanges();
   }
   removeitem(removeValFromIndex:any)
 {
@@ -278,6 +279,7 @@ for (var i = removeValFromIndex.length -1; i >= 0; i--)
 {
   this.boxTypes.splice(removeValFromIndex[i],1);
   this.supplyDetails.splice(removeValFromIndex[i],1);
+  this.supply.splice(removeValFromIndex[i],1);
 }
 this.isgetMaxSupplyCall=true;
 }

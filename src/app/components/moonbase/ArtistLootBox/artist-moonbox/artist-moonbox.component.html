@@ -99,8 +99,9 @@
                 </svg>
               </button>
             </div>
+        
             <div class="soldout" *ngIf="supply[i] === 0">Sold Out</div>
-
+           
             <a class="buy_button outlined-button mb10 text-inherit"
               [class.disabled]="!hasEnoughMoonshots(i) || supply[i] === 0" (click)="buyMoonBase(i)"
               (mouseover)="infoHoverList[i].isHovered = true" (mouseleave)="infoHoverList[i].isHovered = false">Buy</a>
