@@ -1,11 +1,11 @@
 <section class="artist-moonbox scroller" [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
-  <div *ngIf="!supplyDetails && !test" class="flex-center main-message-container w-100 h-100 text-center pa20">
+  <div *ngIf="!supplyDetails && !pageLoader" class="flex-center main-message-container w-100 h-100 text-center pa20">
     {{ mainMessage }}
     <img *ngIf="mainMessage === messages.IDLE" class="flex" src="assets/media/videos/Loading.gif" alt="loading" />
   </div>
 
-  <div *ngIf="supplyDetails && test" class="inner s-100 justify-content-evenly flex-col pt-md-100"
+  <div *ngIf="supplyDetails && pageLoader" class="inner s-100 justify-content-evenly flex-col pt-md-100"
     [ngClass]="{'fadeout':fadeOut,'fade-in':popupClosed && !fadeOut}">
 
     <div class="flex w-100">

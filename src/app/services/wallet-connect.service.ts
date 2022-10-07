@@ -119,7 +119,7 @@ export class WalletConnectService {
 
     try {
       // await this.localStorageService.getAddress();
-      var web3Provider = new Web3.providers.HttpProvider(environment.providerTestNetURL);
+      var web3Provider = new Web3.providers.HttpProvider(environment.providerURL);
       var web3 = new Web3(web3Provider);
       this.SilverContract = new web3.eth.Contract(silverTokenAbi, environment.tokenContractAddress);
       this.LootBoxContractGet = new web3.eth.Contract(lootBoxAbi, environment.lootBoxAddress);
