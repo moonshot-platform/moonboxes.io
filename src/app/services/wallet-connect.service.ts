@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { WindowRefService } from './window-ref.service';
-import { ethers } from 'ethers';
+import { ethers, Wallet } from 'ethers';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 import { environment } from 'src/environments/environment';
 import { ToastrService } from 'ngx-toastr';
@@ -179,7 +179,6 @@ export class WalletConnectService {
         });
         if (providerChainID.indexOf(currentNetwork.chainId) === -1) {
           this.toastrService.error('You are on the wrong network please Connect with ' + this.chainConfigs[this.ChainId]?.name ?? '');
-          console.warn('QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ')
           this.setWalletState(false);
           throw 'Wrong network';
         }
@@ -288,17 +287,17 @@ export class WalletConnectService {
   }
 
   async getAccountAddress() {
-    this.signer = this.provider.getSigner();
-    const address = await this.signer.getAddress();
-    const network = await this.provider.getNetwork();
+    this.signer = this.provider?.getSigner();
+    const address = await this.signer?.getAddress();
+    const network = await this.provider?.getNetwork();
     var chainId = await this.chainId.value;
 
     this.localStorageService.setAddress(address);
-    this.updateSelectedChainId(network.chainId);
+    this.updateSelectedChainId(network?.chainId);
 
-    if (network.chainId == chainId) {
+    if (network?.chainId == chainId) {
       let index = environment.chainId.indexOf(chainId ?? 56);
-      if ((network.chainId == 56 || network.chainId == 97)) {
+      if ((network?.chainId == 56 || network?.chainId == 97)) {
         this.LootboxContract = new ethers.Contract(environment.lootBoxAddress, lootBoxAbi, this.signer);
         this.swapContract = new ethers.Contract(config[environment.configFile][index].ArtistMoonBoxNftSwap, swapContractAbi, this.signer);
       }
@@ -329,9 +328,9 @@ export class WalletConnectService {
   }
 
 
-  async registorCheck(data:{name:string,symbol:string,username:string,collectionName:string}){
+  async registorCheck(data:{name:string,symbol:string,username:string,collectionName:string,walletAddress:string}){
     try {
-      let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,environment.lootBoxAddress,data.name,data.collectionName,data.symbol,data.username )
+      let transaction = await this.registorContractAddressObj.register(environment.lootBoxAddress,data.name,data.collectionName,data.symbol,data.username,data.walletAddress)
        return {status:true,hash:transaction};
     } catch (error) {
       this.toastrService.error(error.message)
@@ -554,7 +553,7 @@ export class WalletConnectService {
   }
 
   updateSelectedChainId(data: number): void {
-    localStorage.setItem('chainId', data.toString());
+    localStorage.setItem('chainId', data?.toString());
     this.selectedChainId.next(data);
   }
 
