@@ -1,0 +1,22 @@
+[
+    {
+        "chainId": 97,
+        "link": "https://opensea.io/assets/bsc/"
+    },
+    {
+        "chainId": 80001,
+        "link": "https://opensea.io/assets/matic/"
+    },
+    {
+        "chainId": 1287,
+        "link": "https://moonsea.io/details/"
+    },
+    {
+        "chainId": 4,
+        "link": "https://moonsea.io/details/"
+    },
+    {
+        "chainId": 568,
+        "link": "https://moonsea.io/details/"
+    }
+]

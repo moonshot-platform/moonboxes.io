@@ -9,12 +9,8 @@
 
             <div class="input-container flex justify-space-between align-center">
                 <div class="tooltip">
-                    <a href="https://moonsea.io/details/{{item['ArtistNFTAddress']}}/{{ item['nftId'] }}/{{this.moonseaChainId}}" target="_blank" class="outlined-button transfer-button mr10">Sell</a>
-                    <!-- <div class="bottom">
-                        <div class="row">
-                            <p>Available soon</p>
-                        </div>
-                    </div> -->
+                    <!-- <a href="https://moonsea.io/details/{{item['ArtistNFTAddress']}}/{{ item['nftId'] }}/{{this.moonseaChainId}}" target="_blank" class="outlined-button transfer-button mr10">Sell</a> -->
+                    <a href="{{link}}"  target="_blank" class="outlined-button transfer-button mr10">sell</a>
                 </div>
 
                 <a class="outlined-button transfer-button mr10" (click)="openTransferDialog(item)">Transfer</a>

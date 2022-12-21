@@ -22,9 +22,6 @@ export const environment = {
 
   configFile: 'testnet',
   adminPanelUrl : "http://codetentacles-006-site41.htempurl.com/"
-
-  // lootboxAddress: "0xeA2c12cb5f65832dc68E694C3894001ba353aBDf",
-  // artistNFTAddress: "0xF21Ae2f6469B4a38F49d98173f218d77165C9b2f",
 };
 
 /*
