@@ -38,9 +38,9 @@ export class ItemOverviewComponent implements OnInit {
         }
       })
 
-      console.log(this.link);
+      // console.log(this.link);
 
-      debugger
+      // debugger
       
       if (environment.chainId.indexOf(this.chainId) == -1) {
         this.moonseaChainId=1;
