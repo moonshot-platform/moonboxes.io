@@ -8,7 +8,8 @@ import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from './local-storage.service';
 import Web3 from 'web3';
 import Web3Modal from "web3modal";
-
+const SID = require('@siddomains/sidjs').default      
+const SIDfunctions = require('@siddomains/sidjs')
 
 const providerMainNetURL = environment.providerMainNetURL;
 const providerTestNetURL = environment.providerTestNetURL;
@@ -326,6 +327,21 @@ export class WalletConnectService {
 
     this.updateData(data);
   }
+
+
+
+  sid :any; 
+
+  async spaceAddress(address:any) {
+    // const rpc = "https://data-seed-prebsc-1-s1.binance.org:8545/"  
+    let chainId = localStorage.getItem('chainId');
+    let rpc = this.chainConfigs[chainId].config.params[0].rpcUrls[0];
+    const provider = new Web3.providers.HttpProvider(rpc)
+    this.sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress(chainId) })
+     return await this.sid.getName(address);                                                                            
+  
+  } 
+
 
 
   async registorCheck(data:{name:string,symbol:string,username:string,collectionName:string,walletAddress:string}){

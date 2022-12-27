@@ -35,6 +35,7 @@ export class InventoryComponent implements OnInit {
   userAddress: any;
   nftCountToSwap: any;
   SwapNftCount: any;
+  addressName:any={};
   constructor(
     private walletConnectService: WalletConnectService,
     private httpApi: HttpApiService,
@@ -43,7 +44,7 @@ export class InventoryComponent implements OnInit {
     public dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.NSFWToggleState = this.localStorage.getNSFW();
     this.userAddress = this.localStorage.get('address');
 
@@ -60,9 +61,10 @@ export class InventoryComponent implements OnInit {
       this.isConnected = state;
     });
 
-    this.walletConnectService.getData().subscribe((data) => {
+    this.walletConnectService.getData().subscribe(async (data:any) => {
       if (this.data === undefined || this.data.address != data.address) {
         this.data = data ?? {};
+        this.addressName = await this.walletConnectService.spaceAddress(this.data?.address);
 
         if (Object.keys(this.data).length > 0)
           this.getUserData();
@@ -71,7 +73,7 @@ export class InventoryComponent implements OnInit {
       }
 
     });
-
+   
   }
 
   getUserData() {
