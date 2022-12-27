@@ -18,5 +18,25 @@
     {
         "chainId": 568,
         "link": "https://moonsea.io/details/"
+    },
+    {
+        "chainId": 56,
+        "link": "https://opensea.io/assets/bsc/"
+    },
+    {
+        "chainId": 137,
+        "link": "https://opensea.io/assets/matic/"
+    },
+    {
+        "chainId": 1285,
+        "link": "https://moonsea.io/details/"
+    },
+     {
+        "chainId": 1,
+        "link": "https://moonsea.io/details/"
+    },
+     {
+        "chainId": 2000,
+        "link": "https://moonsea.io/details/"
     }
 ]

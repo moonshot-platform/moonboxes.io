@@ -19,7 +19,7 @@ export class ItemOverviewComponent implements OnInit {
   moonseaChainId: number;
   openseaList :any[] = openseaLink;
   link :any='';
-  notAvailableNetworkonOpnenSea = [287,4,568]
+  notAvailableNetworkonOpnenSea = [287,4,568,1285,2000,1]
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialog: MatDialog,
