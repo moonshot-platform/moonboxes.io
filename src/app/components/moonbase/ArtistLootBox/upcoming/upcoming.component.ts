@@ -225,7 +225,7 @@ export class UpcomingComponent implements OnInit,OnDestroy {
 
   openDialoagOfAddUser(){
     let wallet =  this.localStorage.getWallet();
-    if(wallet == 1){
+    if(wallet == 1 || wallet == 2){
       this.dialog.open(AddUserDialogComponent,{width:'500px',disableClose:true}).afterClosed().subscribe({
         next:(res:any)=>{}
       })
