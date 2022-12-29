@@ -1,3 +1,5 @@
+import { utils } from "ethers";
+
 export const CHAIN_CONFIGS: any = {
   // "1": {
   //   "name": "Ethereum Mainnet",
@@ -138,16 +140,19 @@ export const CHAIN_CONFIGS: any = {
     },
   },
   '4': {
-    name: 'rinkeby Test Network',
+    name: 'Rinkeby',
     icon: 'assets/media/images/blockchain/eth-diamond-purple.png',
     explorerLink: 'https://rinkeby.etherscan.io/address/',
     bg: 'white',
     symbol: 'ETH',
     config: {
-      method: 'wallet_switchEthereumChain',
+      method: 'wallet_addEthereumChain',
       params: [
         {
-          chainId: '0x4',
+          chainId: utils.hexValue(4),
+          chainName: 'Rinkeby',
+          rpcUrls: ['https://rpc.ankr.com/eth_rinkeby'],
+          blockExplorerUrls: ['https://rinkeby.etherscan.io/'],
         },
       ],
     },
@@ -159,7 +164,7 @@ export const CHAIN_CONFIGS: any = {
     bg: 'white',
     symbol: 'ETH',
     config: {
-      method: 'wallet_switchEthereumChain',
+      method: 'wallet_addEthereumChain',//'wallet_switchEthereumChain',
       params: [
         {
           chainId: '0x1',
