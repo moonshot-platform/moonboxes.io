@@ -56,6 +56,7 @@ export class UpcomingComponent implements OnInit,OnDestroy {
   artistData: any;
 
   isCollectionDataLoading: boolean = false;
+  isShowPriceAvailability : boolean = true;
 
   constructor(
     private httpService: HttpApiService,
@@ -88,14 +89,17 @@ export class UpcomingComponent implements OnInit,OnDestroy {
         case 'recent':
           this.currentCategory = DROPS_CATEGORY.RECENT;
           this.title.setTitle('Moonbox drops - recent');
+          this.isShowPriceAvailability = false;
           break;
         case 'live':
           this.currentCategory = DROPS_CATEGORY.LIVE;
           this.title.setTitle('Moonbox drops - live');
+          this.isShowPriceAvailability = true;
           break;
         case 'upcoming':
           this.currentCategory = DROPS_CATEGORY.UPCOMING;
           this.title.setTitle('Moonbox drops - upcoming');
+          this.isShowPriceAvailability = true;
           break;
       }
     })
@@ -117,6 +121,7 @@ export class UpcomingComponent implements OnInit,OnDestroy {
     this.currentCategory = tabIndex;
 
     const categoryName = (Object.values(DROPS_CATEGORY)[tabIndex]).toString().toLowerCase();
+    categoryName == 'recent' ?  this.isShowPriceAvailability = false : this.isShowPriceAvailability = true;
     this.title.setTitle(`Moonbox drops - ${categoryName}`);
     this.location.go(`/${categoryName}`);
   }
