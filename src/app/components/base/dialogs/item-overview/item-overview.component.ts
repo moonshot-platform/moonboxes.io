@@ -40,17 +40,17 @@ export class ItemOverviewComponent implements OnInit {
 
       // console.log(this.link);
 
-      // debugger
+      // 
       
       if (environment.chainId.indexOf(this.chainId) == -1) {
         this.moonseaChainId=1;
-        //debugger
+        //
       }
       else
       {
         let index = environment.chainId.indexOf(this.chainId);
         this.moonseaChainId=environment.moonSeaChinIds[index];
-        //debugger
+        //
       }
     });
   }

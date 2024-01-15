@@ -32,7 +32,7 @@ export class DeployContractService {
         let abi = require('./../../assets/abis/lazy minting/bsc.json');
         let bytecode = require('./../../assets/contractBytecode/bsc.json');
         const factory = new ethers.ContractFactory(abi, bytecode, cs.signer)
-        //debugger
+        //
         const contract = await factory.deploy(walletAddress, this.nftArtistContract, this.ArtistMoonBoxNftSwap, collectionName, symbol);
         var deployAddress = await contract.deployed();
       }
@@ -40,7 +40,7 @@ export class DeployContractService {
         let abi = require('./../../assets/abis/lazy minting/other.json');
         let bytecode = require('./../../assets/contractBytecode/other.json');
         const factory = new ethers.ContractFactory(abi, bytecode, cs.signer)
-        //debugger
+        //
         const contract = await factory.deploy(walletAddress, this.nftArtistContract, collectionName, symbol);
         var deployAddress = await contract.deployed();
       }

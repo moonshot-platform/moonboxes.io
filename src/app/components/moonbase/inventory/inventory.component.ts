@@ -203,7 +203,7 @@ export class InventoryComponent implements OnInit {
 
 
   openNftMigrationDialog() {
-
+debugger
     this.nftMigrationDialogRef = this.dialog.open(NftMigrationComponent, {
       width: '800px',
       data: { data: this.tabs, swapCount: this.SwapNftCount, nftCountToSwap: this.nftCountToSwap },

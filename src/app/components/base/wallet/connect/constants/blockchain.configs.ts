@@ -89,7 +89,7 @@ export const CHAIN_CONFIGS: any = {
             symbol: 'MATIC',
             decimals: 18,
           },
-          rpcUrls: ['https://rpc-mainnet.matic.network'],
+          rpcUrls: ['https://polygon.llamarpc.com'],
           blockExplorerUrls: ['https://polygonscan.com/'],
         },
       ],

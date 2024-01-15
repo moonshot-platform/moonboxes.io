@@ -74,6 +74,7 @@ export class NftMigrationComponent implements OnInit {
   isNftMigratedFunction() {
     let url = "userDataCount?userAddress=" + this.userAddress;
     this.httpApi.getRequest(url).subscribe(async (res: any) => {
+      debugger
       if (res.status == 200) {
         this.IsNftMigrated = res.IsNftMigrated;
         if (!this.IsNftMigrated) {
