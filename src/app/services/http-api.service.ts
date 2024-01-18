@@ -37,7 +37,7 @@ export class HttpApiService {
     private httpClient: HttpClient,
     private toastrService: ToastrService
   ) {
-    // //debugger
+    // //
     this.chainId = localStorage.getItem('manual_chainId') ?? "56";
 
     this.headers = new HttpHeaders()
@@ -146,7 +146,7 @@ export class HttpApiService {
 
   getRandomCollectionImageListFromArtist(artistAddress: string): Promise<any> {
     const params = { artistAddress: artistAddress };
-    // debugger
+    // 
     const url = `${baseURL}randCollectionImageListArtist`;
 
     return this.httpClient.get(url, { headers: this.headers, params }).toPromise();

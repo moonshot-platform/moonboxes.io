@@ -253,12 +253,12 @@ export class ArtistMoonboxComponent implements OnInit {
            
           }
           this.supply.push(item.hasSupply() ? 1 : 0);
-          debugger
+          
 
         });
-       debugger
+       
         if (this.removeitemIndex.length > 0) {
-        debugger
+        
           if (!this.isgetMaxSupplyCall) {
             this.removeitem(this.removeitemIndex);
           }
@@ -273,7 +273,7 @@ export class ArtistMoonboxComponent implements OnInit {
 
 
   removeitem(removeValFromIndex: any) {
-   debugger
+   
     for (var i = removeValFromIndex.length - 1; i >= 0; i--) {
       this.boxTypes.splice(removeValFromIndex[i], 1);
       this.supplyDetails.splice(removeValFromIndex[i], 1);

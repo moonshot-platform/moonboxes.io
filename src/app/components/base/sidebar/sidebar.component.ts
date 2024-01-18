@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
         });
 
 
-    //debugger
+    //
 
   }
   openDialogDisconnected(): void {
@@ -62,7 +62,7 @@ export class SidebarComponent implements OnInit {
         });
 
 
-    //debugger
+    //
 
   }
 

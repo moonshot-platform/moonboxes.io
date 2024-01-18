@@ -241,7 +241,7 @@ export class WalletConnectService {
         rpc: {
           1: "https://eth-mainnet.public.blastapi.io",
           56: "https://bsc-dataseed.binance.org",
-          137: "https://rpc-mainnet.matic.network",
+          137: "https://polygon.llamarpc.com",
           1285: "https://rpc.api.moonriver.moonbeam.network",
         },
       })
@@ -306,7 +306,7 @@ export class WalletConnectService {
       this.artistLootBoxContract = new ethers.Contract(config[environment.configFile][index].artistLootBoxAddress, ArtistNFTAbi, this.signer);
       this.registorContractAddressObj = new ethers.Contract(config[environment.configFile][index].RegisterMoonboxAddress,registorAbi,this.signer)
    
-      //debugger
+      //
     }
 
 
@@ -337,7 +337,6 @@ export class WalletConnectService {
     let rpc = this.chainConfigs[chainId].config.params[0].rpcUrls[0];
     const provider = new Web3.providers.HttpProvider(rpc)
     this.sid = new SID({ provider, sidAddress: SIDfunctions.getSidAddress(chainId) })
-    debugger
      return await this.sid.getName(address);                                                                            
   
   } 
@@ -467,10 +466,10 @@ export class WalletConnectService {
   }
 
   async redeemBulkTransaction(lootBoxId: any, price: any, noOfBets: number, userAddress: string) {
-//debugger
+//
 
     try {
-      //debugger
+      //
       let txn: any = await this.LootboxContract.submitBet(lootBoxId, price, noOfBets, { value: (price * noOfBets).toString(),gasLimit:1000000000000000,gasPrice:110 });
       return { hash: txn.hash, status: true };
 
@@ -486,7 +485,7 @@ export class WalletConnectService {
     const spliSign = ethers.utils.splitSignature(signature);
     if (isArtist) {
       try {
-//debugger
+//
         let txn: any = await this.artistLootBoxContract.redeemBulk(nftAddress, id, nftAmount, artistAddress, bet, spliSign.v, spliSign.r, spliSign.s)
         await txn.wait(1)
         return { hash: txn.hash, status: true };
@@ -530,7 +529,7 @@ export class WalletConnectService {
       params = ((10 ** decimals) * price).toString();
     }
     try {
-      //debugger
+      //
       gas = await this.artistLootBoxContract.estimateGas.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
         value: callValue
       }
@@ -540,7 +539,7 @@ export class WalletConnectService {
     }
 
     try {
-    //debugger
+    //
       let txn: any = await this.artistLootBoxContract.submitBet(lootBoxId, params, artistAddress, noOfBets, betlimit, tokenAddress, spliSign.v, spliSign.r, spliSign.s, {
         value: callValue,
         // gasPrice: 100,
